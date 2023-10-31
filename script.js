@@ -11,6 +11,3 @@ searchBox.addEventListener('keydown', (e) => {
 window.onload = () => {
   document.getElementsByTagName('body')[0].removeAttribute('class')
 }
-
-# https://www.ecosia.org/search?q=${value}
-
