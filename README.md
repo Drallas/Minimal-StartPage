@@ -47,4 +47,4 @@ Searches go straight to the search engine you chose. The page only stores two se
 
 ## License
 
-See [LICENSE](LICENSE).
+Released under the [MIT License](LICENSE). Use, copy, modify and share it however you like. It comes without warranty, and the author is not liable for any damage.
