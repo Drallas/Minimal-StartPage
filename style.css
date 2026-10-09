@@ -1,0 +1,275 @@
+@font-face {
+  font-family: "Open Sans";
+  src: url("./assets/OpenSans-Regular.ttf") format("truetype");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-fg-1);
+  font-family: "Open Sans", system-ui, sans-serif;
+  transition: background-color .3s ease-out;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-border-hover);
+  outline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+#container {
+  position: relative;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.blob-a {
+  width: 900px;
+  height: 900px;
+  left: -320px;
+  top: -360px;
+  background: radial-gradient(circle, var(--color-blob-a) 0%, transparent 65%);
+}
+
+.blob-b {
+  width: 820px;
+  height: 820px;
+  right: -300px;
+  bottom: -340px;
+  background: radial-gradient(circle, var(--color-blob-b) 0%, transparent 65%);
+}
+
+/* Top bar: shortcut left, date and time centred, theme switch right. */
+.topbar {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  right: 24px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.topbar .icon-link,
+.modes button {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 6px;
+  color: var(--color-fg-2);
+  transition: color .2s ease-in-out;
+}
+
+.topbar .icon-link:hover,
+.topbar .icon-link:focus-visible,
+.modes button:hover,
+.modes button:focus-visible {
+  color: var(--color-fg-1);
+}
+
+.modes {
+  display: flex;
+  align-items: center;
+}
+
+.modes button[aria-pressed="true"] {
+  color: var(--color-fg-1);
+}
+
+#clock {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--color-fg-2);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Centred column: search field and shortcut row. */
+#main {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#main > * {
+  width: 100%;
+  max-width: 360px;
+}
+
+#main {
+  transform: translateY(-40px);
+}
+
+.searchbar {
+  position: relative;
+  display: block;
+}
+
+#search {
+  width: 100%;
+  height: 48px;
+  padding: 0 84px;
+  background: var(--color-field);
+  color: var(--color-fg-1);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  font: 400 15px "Open Sans", system-ui, sans-serif;
+  text-align: center;
+  transition: border-color .2s ease-in-out;
+}
+
+#search::placeholder {
+  color: var(--color-fg-2);
+}
+
+#search:focus {
+  outline: none;
+  border-color: var(--color-border-hover);
+}
+
+#engine {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-fg-2);
+  transition: color .2s ease-in-out, border-color .2s ease-in-out;
+}
+
+#engine:hover,
+#engine:focus-visible {
+  color: var(--color-fg-1);
+  border-color: var(--color-border-hover);
+}
+
+#engine svg {
+  display: block;
+}
+
+/* Submit button on the right: clearly clickable, with a hover state. */
+#go {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-fg-2);
+  border-radius: 0 12px 12px 0;
+  transition: color .2s ease-in-out;
+}
+
+/* Hover changes colour only, so the field's bottom border stays unbroken. */
+#go:hover,
+#go:focus-visible {
+  color: var(--color-fg-1);
+}
+
+.links {
+  margin-top: 28px;
+}
+
+/* Icons sit in a tight, centred group so the row reads as one unit. */
+.links ul {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  list-style: none;
+}
+
+.links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--color-fg-2);
+  transition: color .2s ease-in-out;
+}
+
+.links a:hover,
+.links a:focus-visible {
+  color: var(--color-fg-1);
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--color-fg-2);
+  opacity: .55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .topbar .icon-link,
+  .modes button,
+  #search,
+  #engine,
+  .links a {
+    transition: none;
+  }
+}

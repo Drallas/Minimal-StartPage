@@ -1,0 +1,39 @@
+/* Light palette is the default. Dark applies from the system setting unless
+   the user picks Light or Dark explicitly, which sets data-theme on <html>. */
+:root {
+  color-scheme: light;
+  --color-bg: #f2efe9;
+  --color-field: #fbfaf7;
+  --color-fg-1: #1b2330;
+  --color-fg-2: #6e6a64;
+  --color-border: #dcd5ca;
+  --color-border-hover: #9a9286;
+  --color-blob-a: #c7d8ee;
+  --color-blob-b: #f4cdb3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #111820;
+    --color-field: #0d1117;
+    --color-fg-1: #c9ced6;
+    --color-fg-2: #8b93a1;
+    --color-border: #2a3340;
+    --color-border-hover: #7a8496;
+    --color-blob-a: #23324a;
+    --color-blob-b: #2e2638;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #111820;
+  --color-field: #0d1117;
+  --color-fg-1: #c9ced6;
+  --color-fg-2: #8b93a1;
+  --color-border: #2a3340;
+  --color-border-hover: #7a8496;
+  --color-blob-a: #23324a;
+  --color-blob-b: #2e2638;
+}
