@@ -30,7 +30,7 @@
 ## Features
 
 - **Search.** Type a query and press Enter, or click the magnifier on the right of the search bar. An empty search shows a short hint instead of doing nothing.
-- **Search engine.** The icon on the left of the search bar shows the current engine (Kagi by default, or Brave, Google or DuckDuckGo). Click it to cycle to the next one. Your choice is remembered.
+- **Search engine.** The icon on the left of the search bar shows the current engine (DuckDuckGo by default, or Kagi, Brave or Google). Click it to cycle to the next one. Your choice is remembered.
 - **Theme.** Follows your system's light or dark setting by default. The icons in the top right switch to a fixed Light or Dark theme, and that choice is remembered too. Choose the monitor icon to go back to following the system.
 - **Clock.** The time sits above the search bar, with the date underneath.
 - **Quote of the day.** A short quote from a philosopher or teacher, chosen by the day of the year. It is shown in your browser's language (English, Dutch, German, French, Spanish or Chinese) and falls back to English.
