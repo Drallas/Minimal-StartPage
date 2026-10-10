@@ -534,7 +534,7 @@ html[data-wallpaper-on] .controls {
   -webkit-appearance: none;
   appearance: none;
   width: 72px;
-  height: 16px;
+  height: 22px;
   margin: 0;
   background: transparent;
   border: none;
@@ -547,13 +547,14 @@ html[data-wallpaper-on] .controls {
   border-radius: 1px;
 }
 
+/* The thumb is a 22 px target with a small visible dot, so a finger can grab it on a phone. */
 .hue::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 8px;
-  height: 8px;
-  margin-top: -3px;
+  width: 22px;
+  height: 22px;
+  margin-top: -10px;
   border-radius: 50%;
-  background: var(--color-fg-2);
+  background: radial-gradient(circle, var(--color-fg-2) 0 4px, transparent 4.5px);
   border: none;
 }
 
@@ -563,11 +564,11 @@ html[data-wallpaper-on] .controls {
 }
 
 .hue::-moz-range-thumb {
-  width: 8px;
-  height: 8px;
+  width: 22px;
+  height: 22px;
   border: none;
   border-radius: 50%;
-  background: var(--color-fg-2);
+  background: radial-gradient(circle, var(--color-fg-2) 0 4px, transparent 4.5px);
 }
 
 .controls {
