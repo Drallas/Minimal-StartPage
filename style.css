@@ -16,7 +16,7 @@ body {
 
 body {
   overflow: hidden;
-  background: var(--color-bg);
+  background: var(--color-page, var(--color-bg));
   color: var(--color-fg-1);
   font-family: "Open Sans", system-ui, sans-serif;
   transition: background-color .3s ease-out;
@@ -512,22 +512,22 @@ html[data-wallpaper-on] .modes button {
   color: var(--color-fg-1);
 }
 
-html[data-wallpaper-on] .controls {
-  opacity: .8;
-}
-
+/* The tint shows on the plain page (wallpaper off) with a little more colour than the veil over the photo. */
 :root[data-tint] {
   --color-bg: hsl(var(--hue) 22% 94%);
+  --color-page: hsl(var(--hue) 40% 92%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root[data-tint]:not([data-theme="light"]) {
     --color-bg: hsl(var(--hue) 24% 9%);
+    --color-page: hsl(var(--hue) 36% 12%);
   }
 }
 
 :root[data-theme="dark"][data-tint] {
   --color-bg: hsl(var(--hue) 24% 9%);
+  --color-page: hsl(var(--hue) 36% 12%);
 }
 
 .hue {
@@ -580,7 +580,7 @@ html[data-wallpaper-on] .controls {
   align-items: center;
   bottom: 28px;
   z-index: 1;
-  opacity: .3;
+  opacity: .8;
   transition: opacity .3s ease-in-out;
   /* The row spans the full width and would otherwise block the footer link. */
   pointer-events: none;
