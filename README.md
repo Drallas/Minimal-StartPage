@@ -38,7 +38,7 @@
 
 ## Features
 
-Everything is optional. The settings start with a choice of page: **Minimal** (search, clock, date and the links button), **Standard** (the default, with the Ask AI shortcuts and the wallpaper) or **Full** (everything, including the quote and the time zones). Each option can still be changed on its own. Weather and your IP address are never switched on by a preset, since they send data; switching either one on shows Custom.
+Everything is optional. The settings start with a choice of page: **Minimal** (search, clock, date and the links button), **Standard** (the default, with the Ask AI shortcuts and the wallpaper) or **Full** (everything, including the quote and the time zones). Each option can still be changed on its own. A preset never switches weather or your IP address on, since they send data. The IP address is off in Minimal and Standard; Full leaves it as you set it.
 
 - **Search.** Type a query and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.
 - **Clock.** The time sits above the search bar, with the date underneath. Click the time to cycle through 24-hour, 12-hour (AM/PM) and full time with seconds; the colons blink, unless your system asks for reduced motion. Hover over the time to see your time zone and its UTC offset.

@@ -860,24 +860,24 @@ settingsFields.askai.addEventListener('change', () => {
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
 // IP address are never changed by a preset, since they send data.
 const presets = {
-  minimal: { quote: false, links: true, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false, weather: false, showIp: false },
-  standard: { quote: false, links: true, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true, weather: false, showIp: false },
-  full: { quote: true, links: true, zones: true, askai: true, wallpaper: true, wallpaperButton: true, tint: true, weather: false, showIp: false },
+  minimal: { quote: false, links: true, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false, showIp: false },
+  standard: { quote: false, links: true, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true, showIp: false },
+  full: { quote: true, links: true, zones: true, askai: true, wallpaper: true, wallpaperButton: true, tint: true },
 }
-// Weather and the IP address send data, so they are never switched by a preset. Turning either on
-// moves the choices off every preset, which shows Custom.
-const currentState = () => ({ quote: quoteOn, links: linksOn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, weather: weatherOn, showIp: showIpOn })
-// The preset that matches the current choices, or none once a single option differs.
+// The IP display is off in Minimal and Standard, and Full leaves it as it is, so Full matches with or
+// without it. A preset only ever turns it off, never on, and weather is not part of the presets at all.
+const currentState = () => ({ quote: quoteOn, links: linksOn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, showIp: showIpOn })
+// The preset that matches the current choices: only the keys a preset names are compared.
 const matchPreset = () => {
   const now = currentState()
-  return Object.keys(presets).find((name) => Object.keys(now).every((key) => now[key] === presets[name][key])) || 'custom'
+  return Object.keys(presets).find((name) => Object.keys(presets[name]).every((key) => now[key] === presets[name][key])) || 'custom'
 }
 // Each option is changed through its own switch, so the same handlers and storage run as when clicked.
 const applyPreset = (name) => {
   const choice = presets[name]
   // Custom is what the page shows for mixed choices; picking it changes nothing.
   if (!choice) return syncSettings()
-  Object.keys(choice).filter((key) => key !== 'weather' && key !== 'showIp').forEach((key) => {
+  Object.keys(choice).forEach((key) => {
     const field = key === 'wallpaper' ? settingsFields.wallpaper : settingsFields[key === 'wallpaperButton' ? 'wallpaperButton' : key]
     field.checked = choice[key]
     field.dispatchEvent(new Event('change'))
