@@ -291,7 +291,7 @@ button {
   line-height: 1.6;
   text-align: center;
   color: var(--color-fg-2);
-  opacity: .5;
+  opacity: .7;
   cursor: pointer;
   transition: opacity .3s ease-in-out, color .3s ease-in-out;
 }
@@ -299,7 +299,7 @@ button {
 .quote:hover,
 .quote:focus-visible {
   color: var(--color-fg-1);
-  opacity: .9;
+  opacity: 1;
 }
 
 #quote-by {
@@ -319,7 +319,7 @@ footer {
   font-size: 10px;
   letter-spacing: .06em;
   color: var(--color-fg-2);
-  opacity: .4;
+  opacity: .6;
 }
 
 @media (prefers-reduced-motion: reduce) {
