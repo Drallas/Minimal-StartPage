@@ -292,12 +292,12 @@ const bgTitleText = {
   zh: { secBackground: '背景' }
 }
 const pageText = {
-  en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Full', askAi: 'Ask AI links' },
-  nl: { secPage: 'Pagina', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetFull: 'Volledig', askAi: 'Ask AI-links' },
-  de: { secPage: 'Seite', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Voll', askAi: 'KI-Links' },
-  fr: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Complet', askAi: 'Liens IA' },
-  es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetFull: 'Completo', askAi: 'Enlaces de IA' },
-  zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetFull: '完整', askAi: 'AI 链接' }
+  en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Full', presetCustom: 'Custom', askAi: 'Ask AI links' },
+  nl: { secPage: 'Pagina', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetFull: 'Volledig', presetCustom: 'Custom', askAi: 'Ask AI-links' },
+  de: { secPage: 'Seite', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Voll', presetCustom: 'Custom', askAi: 'KI-Links' },
+  fr: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Complet', presetCustom: 'Custom', askAi: 'Liens IA' },
+  es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetFull: 'Completo', presetCustom: 'Custom', askAi: 'Enlaces de IA' },
+  zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetFull: '完整', presetCustom: '自定义', askAi: 'AI 链接' }
 }
 const recheckText = {
   en: { ipRecheck: 'Click to check again' },
@@ -668,6 +668,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-preset-minimal').textContent = t.presetMinimal
   document.getElementById('lbl-preset-standard').textContent = t.presetStandard
   document.getElementById('lbl-preset-full').textContent = t.presetFull
+  document.getElementById('lbl-preset-custom').textContent = t.presetCustom
   document.getElementById('lbl-askai').textContent = t.askAi
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
@@ -864,11 +865,13 @@ const currentState = () => ({ quote: quoteOn, links: linksOn, zones: zonesOn, as
 // The preset that matches the current choices, or none once a single option differs.
 const matchPreset = () => {
   const now = currentState()
-  return Object.keys(presets).find((name) => Object.keys(now).every((key) => now[key] === presets[name][key])) || ''
+  return Object.keys(presets).find((name) => Object.keys(now).every((key) => now[key] === presets[name][key])) || 'custom'
 }
 // Each option is changed through its own switch, so the same handlers and storage run as when clicked.
 const applyPreset = (name) => {
   const choice = presets[name]
+  // Custom is what the page shows for mixed choices; picking it changes nothing.
+  if (!choice) return syncSettings()
   Object.keys(choice).forEach((key) => {
     const field = key === 'wallpaper' ? settingsFields.wallpaper : settingsFields[key === 'wallpaperButton' ? 'wallpaperButton' : key]
     field.checked = choice[key]
