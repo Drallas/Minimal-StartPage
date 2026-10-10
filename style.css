@@ -1105,3 +1105,12 @@ html[data-quote-off] #quote {
 .zones-button:focus-visible ~ .zones-preview {
   display: block;
 }
+
+/* Options that belong to the weather sit under it, indented, and grey out while it is off. */
+.weather-sub {
+  margin-left: 24px;
+}
+
+.weather-sub:has(input:disabled) {
+  opacity: .5;
+}

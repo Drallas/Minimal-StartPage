@@ -71,8 +71,8 @@
       <p class="settings-hint" id="settings-hint"></p>
       <label class="setting"><input type="checkbox" id="set-weather"> <span id="lbl-weather">Show weather</span></label>
       <p class="settings-hint weather-hint" id="weather-hint" hidden></p>
+      <div class="weather-sub" id="weather-sub">
       <label class="setting"><input type="checkbox" id="set-ip"> <span id="lbl-ip">Find my city from my IP address</span></label>
-      <label class="setting"><input type="checkbox" id="set-showip"> <span id="lbl-showip">Show my IP address under the footer</span></label>
       <form class="city-form" id="city-form">
         <label for="city-input" id="lbl-city">Or enter a city</label>
         <div class="city-row">
@@ -82,6 +82,8 @@
         <button type="button" id="city-clear" class="text-button" hidden>Use my IP address instead</button>
         <p class="city-msg" id="city-msg" role="status"></p>
       </form>
+      </div>
+      <label class="setting"><input type="checkbox" id="set-showip"> <span id="lbl-showip">Show my IP address under the footer</span></label>
       <label class="setting"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Show the quote</span></label>
       <label class="setting"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Show time zones (globe next to the date)</span></label>
       <p class="privacy" id="privacy"></p>

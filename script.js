@@ -417,6 +417,8 @@ const updateWeatherHint = () => {
   const hint = document.getElementById('weather-hint')
   hint.textContent = t.needPlace
   hint.hidden = !(weatherOn && !hasSource())
+  // The IP lookup and city belong to the weather, so they are off while it is.
+  document.querySelectorAll('#weather-sub input, #weather-sub button').forEach((el) => { el.disabled = !weatherOn })
 }
 
 const setWeather = (on) => {
