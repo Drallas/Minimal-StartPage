@@ -16,10 +16,10 @@ This needs an internet connection, but nothing else.
 
 Use this if you want the page to work offline, or if you want to change it yourself. You do not need admin rights or extra software.
 
-**Step 1: download the files.** Go to [github.com/Drallas/Minimal-StartPage](https://github.com/Drallas/Minimal-StartPage). Click the green **Code** button, then **Download ZIP**.
+**Step 1: download the files.** Go to the [releases page](https://github.com/Drallas/Minimal-StartPage/releases/latest) and click **Source code (zip)** under the latest release. That is the tested, stable version. (The green **Code** button on the main page also has a **Download ZIP**, which gives the newest version, but that one may not be released yet.)
 
 **Step 2: unzip the file.**
-- **Windows:** right-click the downloaded `Minimal-StartPage-main.zip` and choose **Extract All…**.
+- **Windows:** right-click the downloaded ZIP and choose **Extract All…**.
 - **macOS:** double-click the file. A folder appears next to it.
 
 Move the folder somewhere you will keep it, for example your Documents folder. Keep everything inside it together: the `assets` folder must stay next to `index.html`.
