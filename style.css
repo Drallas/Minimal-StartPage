@@ -367,9 +367,67 @@ html[data-wallpaper-on] footer {
   opacity: .8;
 }
 
+:root[data-tint] {
+  --color-bg: hsl(var(--hue) 22% 94%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-tint]:not([data-theme="light"]) {
+    --color-bg: hsl(var(--hue) 24% 9%);
+  }
+}
+
+:root[data-theme="dark"][data-tint] {
+  --color-bg: hsl(var(--hue) 24% 9%);
+}
+
+.hue {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 72px;
+  height: 16px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hue::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(to right, hsl(0 12% 60%), hsl(60 12% 60%), hsl(120 12% 60%), hsl(180 12% 60%), hsl(240 12% 60%), hsl(300 12% 60%), hsl(360 12% 60%));
+  border-radius: 1px;
+}
+
+.hue::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 8px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--color-fg-2);
+  border: none;
+}
+
+.hue::-moz-range-track {
+  height: 2px;
+  background: linear-gradient(to right, hsl(0 12% 60%), hsl(60 12% 60%), hsl(120 12% 60%), hsl(180 12% 60%), hsl(240 12% 60%), hsl(300 12% 60%), hsl(360 12% 60%));
+}
+
+.hue::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-fg-2);
+}
+
 .controls {
   position: absolute;
+  left: 24px;
   right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   bottom: 16px;
   z-index: 1;
   opacity: .3;

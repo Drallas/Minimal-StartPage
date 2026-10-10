@@ -172,3 +172,25 @@ wallpaperToggle.addEventListener('click', () => {
   applyWallpaper(wallpaperOn)
   try { localStorage.setItem('wallpaper', wallpaperOn ? 'on' : 'off') } catch {}
 })
+
+// Background tint: a hue from the slider; zero keeps the neutral monochrome look.
+const hueSlider = document.getElementById('hue')
+
+const applyHue = (value) => {
+  const hue = Number(value)
+  hueSlider.value = hue
+  if (hue > 0) {
+    root.dataset.tint = ''
+    root.style.setProperty('--hue', hue)
+  } else {
+    delete root.dataset.tint
+    root.style.removeProperty('--hue')
+  }
+}
+
+try { applyHue(localStorage.getItem('hue') || 0) } catch { applyHue(0) }
+
+hueSlider.addEventListener('input', () => {
+  applyHue(hueSlider.value)
+  try { localStorage.setItem('hue', hueSlider.value) } catch {}
+})
