@@ -1018,10 +1018,17 @@ const matchPreset = () => {
   return Object.keys(presets).find((name) => Object.keys(presets[name]).every((key) => now[key] === presets[name][key])) || 'custom'
 }
 // Each option is changed through its own switch, so the same handlers and storage run as when clicked.
+// Personal: the last mixed choices are kept, so switching to a page and back restores them.
+const readPersonal = () => {
+  try { return JSON.parse(localStorage.getItem('personalState') || 'null') } catch { return null }
+}
+const keepPersonal = () => {
+  if (matchPreset() === 'custom') writeKey('personalState', JSON.stringify(currentState()))
+}
 const applyPreset = (name) => {
-  const choice = presets[name]
-  // Custom is what the page shows for mixed choices; picking it changes nothing.
+  const choice = name === 'custom' ? readPersonal() : presets[name]
   if (!choice) return syncSettings()
+  keepPersonal()
   Object.keys(choice).forEach((key) => {
     const field = key === 'wallpaper' ? settingsFields.wallpaper : settingsFields[key === 'wallpaperButton' ? 'wallpaperButton' : key]
     field.checked = choice[key]
@@ -1032,7 +1039,10 @@ const applyPreset = (name) => {
 }
 settingsFields.preset.forEach((radio) => radio.addEventListener('change', () => applyPreset(radio.value)))
 // Changing an option in the advanced view can make a preset match or stop matching, so the page radio follows it.
-advancedBlock.addEventListener('change', () => settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() }))
+advancedBlock.addEventListener('change', () => {
+  keepPersonal()
+  settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
+})
 
 settingsFields.quote.addEventListener('change', () => {
   quoteOn = settingsFields.quote.checked
@@ -1085,9 +1095,9 @@ const clearKeys = (keys) => {
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
 }
-const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces']
+const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState']
 settingsFields.resetSettings.addEventListener('click', () => {
-  clearKeys(['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
+  clearKeys(['personalState', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
   location.reload()
 })
 settingsFields.resetData.addEventListener('click', () => {
@@ -1406,7 +1416,9 @@ const renderLinks = () => {
     down.disabled = index === links.length - 1
     down.dataset.index = String(index)
     down.dataset.step = '1'
-    row.append(linkAnchor(link, true), up, down, edit, remove)
+    const actions = el('div', 'link-actions')
+    actions.append(up, down, edit, remove)
+    row.append(linkAnchor(link, true), actions)
     return row
   })
   linksList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.linksEmpty)]))

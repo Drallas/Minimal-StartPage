@@ -1202,10 +1202,6 @@ html[data-quote-off] #quote {
   cursor: default;
 }
 
-/* Custom is a state, not a choice: full strength when it is the one that applies. */
-.setting:has(input:checked:disabled) {
-  opacity: 1;
-}
 
 .location-title {
   margin-top: 6px;
@@ -1425,11 +1421,16 @@ html[data-quote-off] #quote {
 
 .link-row {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   gap: 10px;
   align-items: center;
   padding: 8px 0;
   border-bottom: 1px solid var(--color-border);
+}
+
+.link-actions {
+  display: flex;
+  gap: 4px;
 }
 
 .row-btn {
