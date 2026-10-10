@@ -247,7 +247,7 @@ button {
   text-transform: uppercase;
   text-align: center;
   color: var(--color-fg-2);
-  opacity: .45;
+  opacity: .6;
 }
 
 /* Icons sit in a tight, centred group so the row reads as one unit. */
@@ -266,7 +266,7 @@ button {
   height: 36px;
   border-radius: 10px;
   color: var(--color-fg-2);
-  opacity: .55;
+  opacity: .7;
   transition: color .2s ease-in-out, opacity .2s ease-in-out;
 }
 
@@ -289,7 +289,7 @@ button {
   line-height: 1.6;
   text-align: center;
   color: var(--color-fg-2);
-  opacity: .35;
+  opacity: .5;
   cursor: pointer;
   transition: opacity .3s ease-in-out, color .3s ease-in-out;
 }
@@ -305,7 +305,7 @@ button {
   margin-top: 6px;
   font-size: 11px;
   letter-spacing: .04em;
-  opacity: .7;
+  opacity: .8;
 }
 
 footer {
@@ -317,7 +317,7 @@ footer {
   font-size: 10px;
   letter-spacing: .06em;
   color: var(--color-fg-2);
-  opacity: .25;
+  opacity: .4;
 }
 
 @media (prefers-reduced-motion: reduce) {

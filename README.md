@@ -13,16 +13,16 @@
 <table>
   <tr>
     <td align="center">
-      <img src="assets/screenshot_dark.png" width="800" alt="Dark theme"/>
+      <img src="assets/screenshot_light.png" width="800" alt="Light theme"/>
       <br/>
-      <sub><b>Dark theme</b></sub>
+      <sub><b>Light theme</b></sub>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="assets/screenshot_light.png" width="800" alt="Light theme"/>
+      <img src="assets/screenshot_dark.png" width="800" alt="Dark theme"/>
       <br/>
-      <sub><b>Light theme</b></sub>
+      <sub><b>Dark theme</b></sub>
     </td>
   </tr>
 </table>
