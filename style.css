@@ -295,10 +295,10 @@ footer {
   right: 0;
   bottom: 20px;
   text-align: center;
-  font-size: 12px;
-  letter-spacing: .04em;
+  font-size: 10px;
+  letter-spacing: .06em;
   color: var(--color-fg-2);
-  opacity: .55;
+  opacity: .45;
 }
 
 @media (prefers-reduced-motion: reduce) {
