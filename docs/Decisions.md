@@ -7,7 +7,9 @@
 - The IP address and the IP-based weather location are advanced options. The basic view only carries the privacy note.
 - The hover list shows only the visitor's own links. The permanent ones live in the window.
 - Settings save straight away; there is no save button.
-- Page presets: Minimal, Standard and Full, chosen in the settings. They switch display options, and they turn the IP display off, but never on. Full leaves the IP display as it is. Weather is not part of the presets.
-- Custom is shown when the choices match none of the presets. It is a state, not a choice, so it cannot be clicked.
+- Page presets: Minimal and Standard, chosen in the settings. They switch display options and turn the IP display off, but never on. Weather is not part of the presets.
+- Personal is shown when the choices match neither preset. It is a state, not a choice, so it cannot be clicked.
+- The AI shortcuts are a visitor list: up to five, editable, and the row can be switched off.
+- Advanced is a button under the presets; its link goes back to the basic settings.
 - Footer and IP line: no underline on hover; the pointer shows they are clickable.
 - Dialogs open with the panel focused, not a button, so nothing looks selected.

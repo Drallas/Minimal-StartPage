@@ -252,6 +252,14 @@ const sectionText = {
   es: { secWeather: 'Tiempo', secLook: 'Mostrar', secPrivacy: 'Privacidad', placeTime: 'Hora local' },
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
+const aiText = {
+  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiAdd: 'Add', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', aiInvalid: 'Enter a valid https address' },
+  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiAdd: 'Toevoegen', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiAdd: 'Hinzufügen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiAdd: 'Ajouter', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiAdd: 'Añadir', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiAdd: '添加', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiInvalid: '请输入有效的 https 地址' }
+}
 const linksOwnText = {
   en: { linksOwn: 'Own links' },
   nl: { linksOwn: 'Eigen links' },
@@ -301,12 +309,12 @@ const bgTitleText = {
   zh: { secBackground: '背景' }
 }
 const pageText = {
-  en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Full', presetCustom: 'Custom', askAi: 'Ask AI links' },
-  nl: { secPage: 'Pagina', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetFull: 'Volledig', presetCustom: 'Custom', askAi: 'Ask AI-links' },
-  de: { secPage: 'Seite', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Voll', presetCustom: 'Custom', askAi: 'KI-Links' },
-  fr: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Complet', presetCustom: 'Custom', askAi: 'Liens IA' },
-  es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetFull: 'Completo', presetCustom: 'Custom', askAi: 'Enlaces de IA' },
-  zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetFull: '完整', presetCustom: '自定义', askAi: 'AI 链接' }
+  en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personal' },
+  nl: { secPage: 'Pagina', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetCustom: 'Persoonlijk' },
+  de: { secPage: 'Seite', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Persönlich' },
+  fr: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personnalisé' },
+  es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetCustom: 'Personal' },
+  zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
 const recheckText = {
   en: { ipRecheck: 'Click to check again' },
@@ -317,14 +325,14 @@ const recheckText = {
   zh: { ipRecheck: '点击重新检查' }
 }
 const advancedText = {
-  en: { advancedOpen: 'Advanced', advancedClosed: 'Basic' },
-  nl: { advancedOpen: 'Geavanceerd', advancedClosed: 'Basis' },
-  de: { advancedOpen: 'Erweitert', advancedClosed: 'Basis' },
-  fr: { advancedOpen: 'Avancé', advancedClosed: 'Base' },
-  es: { advancedOpen: 'Avanzado', advancedClosed: 'Básico' },
-  zh: { advancedOpen: '高级', advancedClosed: '基本' }
+  en: { advancedOpen: 'Advanced', advancedClosed: '← Back to basic settings' },
+  nl: { advancedOpen: 'Geavanceerd', advancedClosed: '← Terug naar basisinstellingen' },
+  de: { advancedOpen: 'Erweitert', advancedClosed: '← Zurück zu den Grundeinstellungen' },
+  fr: { advancedOpen: 'Avancé', advancedClosed: '← Retour aux réglages de base' },
+  es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
+  zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -343,7 +351,7 @@ const helpText = {
     ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 24 hours and seven days.'],
     ['Background', 'The round button at the bottom right turns the wallpaper on or off. The slider at the bottom left tints the background.'],
-    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal, Standard and Full) sit at the top of the settings. Custom shows when your choices match none of them. Advanced lists every option in four groups, and Basic brings the presets back.'],
+    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal and Standard) sit at the top of the settings. Personal shows when your choices match neither. Advanced lists every option in four groups; its link goes back to the basic settings.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset all choices" clears everything and brings back the defaults.'],
   ] },
   nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', sections: [
@@ -353,7 +361,7 @@ const helpText = {
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
     ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 24 uur en zeven dagen.'],
     ['Achtergrond', 'De ronde knop rechtsonder zet de wallpaper aan of uit. De schuif linksonder kleurt de achtergrond.'],
-    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal, Standaard en Volledig. Past geen van die bij je keuzes, dan staat Custom aan. Geavanceerd toont alle opties in vier groepen; Basis brengt de paginakeuzes terug.'],
+    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal en Standaard. Persoonlijk verschijnt als je keuzes bij geen van beide passen. Geavanceerd toont alle opties in vier groepen; de link ernaast brengt je terug naar de basisinstellingen.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Alle keuzes resetten" wist alles en zet de standaard terug.'],
   ] },
   de: { title: 'Hilfe', settings: 'Einstellungen', close: 'Schließen', sections: [
@@ -363,7 +371,7 @@ const helpText = {
     ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen. Ist Eigene Links aus, öffnet die Schaltfläche direkt Wikipedia.'],
     ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 24 Stunden und sieben Tagen.'],
     ['Hintergrund', 'Die runde Schaltfläche unten rechts schaltet das Hintergrundbild ein oder aus. Der Regler unten links färbt den Hintergrund.'],
-    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal, Standard und Voll. Passt keine davon zu deiner Auswahl, ist Custom aktiv. Erweitert zeigt alle Optionen in vier Gruppen; Basis zeigt die Vorlagen wieder.'],
+    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal und Standard. Persönlich erscheint, wenn deine Auswahl zu keiner passt. Erweitert zeigt alle Optionen in vier Gruppen; der Link führt zurück zu den Grundeinstellungen.'],
     ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Alle Einstellungen zurücksetzen“ löscht alles und stellt die Standards wieder her.'],
   ] },
   fr: { title: 'Aide', settings: 'Paramètres', close: 'Fermer', sections: [
@@ -373,7 +381,7 @@ const helpText = {
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 24 heures et sept jours.'],
     ['Fond', 'Le bouton rond en bas à droite active ou désactive le fond d’écran. Le curseur en bas à gauche teinte le fond.'],
-    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal, Standard et Complet. Custom s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options en quatre groupes ; Base rétablit les pages.'],
+    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal et Standard. Personnalisé s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options en quatre groupes ; le lien ramène aux réglages de base.'],
     ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser tous les choix » efface tout et rétablit les valeurs par défaut.'],
   ] },
   es: { title: 'Ayuda', settings: 'Ajustes', close: 'Cerrar', sections: [
@@ -383,7 +391,7 @@ const helpText = {
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 24 horas y siete días.'],
     ['Fondo', 'El botón redondo de abajo a la derecha activa o desactiva el fondo. El control de abajo a la izquierda tiñe el fondo.'],
-    ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo, Estándar y Completo. Custom aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones en cuatro grupos; Básico vuelve a mostrar las páginas.'],
+    ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo y Estándar. Personal aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones en cuatro grupos; el enlace vuelve a los ajustes básicos.'],
     ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer todas las opciones» borra todo y devuelve los valores por defecto.'],
   ] },
   zh: { title: '帮助', settings: '设置', close: '关闭', sections: [
@@ -393,7 +401,7 @@ const helpText = {
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 24 小时和七天的完整预报。'],
     ['背景', '右下角的圆形按钮可开启或关闭壁纸。左下角的滑块会给背景染色。'],
-    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简、标准和完整。选择与任何一个都不符时显示“自定义”。“高级”按四组显示全部选项，“基本”则回到页面预设。'],
+    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简和标准。选择与两者都不符时显示“个性化”。“高级”按四组显示全部选项，链接可返回基本设置。'],
     ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置所有设置”会清除全部内容并恢复默认值。'],
   ] },
 };
@@ -677,9 +685,14 @@ const applySettingsText = () => {
   document.getElementById('sec-page').textContent = t.secPage
   document.getElementById('lbl-preset-minimal').textContent = t.presetMinimal
   document.getElementById('lbl-preset-standard').textContent = t.presetStandard
-  document.getElementById('lbl-preset-full').textContent = t.presetFull
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
-  document.getElementById('lbl-askai').textContent = t.askAi
+  document.getElementById('sec-ai').textContent = t.aiSec
+  document.getElementById('lbl-askai').textContent = t.aiOn
+  document.getElementById('ai-name').placeholder = t.aiName
+  document.getElementById('ai-name').setAttribute('aria-label', t.aiName)
+  document.getElementById('ai-url').placeholder = 'https://'
+  document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
+  document.getElementById('ai-add').textContent = t.aiAdd
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
@@ -860,22 +873,20 @@ settingsFields.zones.addEventListener('change', () => {
 // Ask AI links below the search bar.
 let askaiOn = readFlag('askai', true)
 const askAi = document.getElementById('ask-ai')
-askAi.hidden = !askaiOn
 settingsFields.askai.addEventListener('change', () => {
   askaiOn = settingsFields.askai.checked
   writeKey('askai', askaiOn ? 'on' : 'off')
-  askAi.hidden = !askaiOn
+  renderAskAi()
 })
 
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
 // IP address are never changed by a preset, since they send data.
 const presets = {
   minimal: { quote: false, links: true, linksOwn: false, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false, showIp: false },
-  standard: { quote: false, links: true, linksOwn: true, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true, showIp: false },
-  full: { quote: true, links: true, linksOwn: true, zones: true, askai: true, wallpaper: true, wallpaperButton: true, tint: true },
+  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true, showIp: false },
 }
-// The IP display is off in Minimal and Standard, and Full leaves it as it is, so Full matches with or
-// without it. A preset only ever turns it off, never on, and weather is not part of the presets at all.
+// Weather and the IP display are off in both presets, so choosing one never starts a lookup.
+// Weather is not part of the presets at all.
 const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, showIp: showIpOn })
 // The preset that matches the current choices: only the keys a preset names are compared.
 const matchPreset = () => {
@@ -1171,7 +1182,7 @@ try {
   if (Array.isArray(saved)) links = saved.filter(isValidLink).slice(0, LINK_LIMIT)
 } catch {}
 let linksOn = readFlag('linksOn', true)
-let linksOwn = readFlag('linksOwn', true)
+let linksOwn = readFlag('linksOwn', false)
 let editing = null
 let linksFrom = null
 
@@ -1310,6 +1321,90 @@ settingsFields.linksOwn.addEventListener('change', () => {
 })
 renderLinks()
 
+// AI shortcuts below the search bar. Five at most; the visitor can change, reorder or remove them.
+const ASK_AI_LIMIT = 5
+const askAiIcons = {
+  "claude": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" fill-rule=\"evenodd\" aria-hidden=\"true\"><path d=\"M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z\"></svg>",
+  "chatgpt": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" fill-rule=\"evenodd\" aria-hidden=\"true\"><path d=\"M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z\"></svg>",
+  "grok": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" fill-rule=\"evenodd\" aria-hidden=\"true\"><path d=\"M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815\"></svg>",
+  "duck": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 .984C18.083.984 23.016 5.916 23.016 12S18.084 23.016 12 23.016.984 18.084.984 12C.984 5.917 5.916.984 12 .984zm0 .938C6.434 1.922 1.922 6.434 1.922 12c0 4.437 2.867 8.205 6.85 9.55-.237-.82-.776-2.753-1.6-6.052-1.184-4.741-2.064-8.606 2.379-9.813.047-.011.064-.064.03-.093-.514-.467-1.382-.548-2.233-.38a.06.06 0 0 1-.07-.058c0-.011 0-.023.011-.035.205-.286.572-.507.822-.64a1.843 1.843 0 0 0-.607-.335c-.059-.022-.059-.12-.006-.144.006-.006.012-.012.024-.012 1.749-.233 3.586.292 4.49 1.448.011.011.023.017.035.023 2.968.635 3.509 4.837 3.328 5.998a9.607 9.607 0 0 0 2.346-.576c.746-.286 1.008-.222 1.101-.053.1.193-.018.513-.28.81-.496.567-1.393 1.01-2.974 1.137-.546.044-1.029.024-1.445.006-.789-.035-1.339-.059-1.633.39-.192.298-.041.998 1.487 1.22 1.09.157 2.078.047 2.798-.034.643-.07 1.073-.118 1.172.069.21.402-.996 1.207-3.066 1.224-.158 0-.315-.006-.467-.011-1.283-.065-2.227-.414-2.816-.735a.094.094 0 0 1-.035-.017c-.105-.059-.31.045-.188.267.07.134.444.478 1.004.776-.058.466.087 1.184.338 2l.088-.016c.041-.009.087-.019.134-.025.507-.082.775.012.926.175.717-.536 1.913-1.294 2.03-1.154.583.694.66 2.332.53 2.99-.004.012-.017.024-.04.035-.274.117-1.783-.296-1.783-.511-.059-1.075-.26-1.173-.493-1.225h-.156c.006.006.012.018.018.03l.052.12c.093.257.24 1.063.13 1.26-.112.199-.835.297-1.284.303-.443.006-.543-.158-.637-.408-.07-.204-.103-.675-.103-.95a.857.857 0 0 1 .012-.216c-.134.058-.333.193-.397.281-.017.262-.017.682.123 1.149.07.221-1.518 1.164-1.74.99-.227-.181-.634-1.952-.459-2.67-.187.017-.338.075-.42.191-.367.508.093 2.933.582 3.248.257.169 1.54-.553 2.176-1.095.105.145.305.158.553.158.326-.012.782-.06 1.103-.158.192.45.423.972.613 1.388 4.47-1.032 7.803-5.037 7.803-9.82 0-5.566-4.512-10.078-10.078-10.078zm1.791 5.646c-.42 0-.678.146-.795.332-.023.047.047.094.094.07.14-.075.357-.161.701-.156.328.006.516.09.67.159l.023.01c.041.017.088-.03.059-.065-.134-.18-.332-.35-.752-.35zm-5.078.198a1.24 1.24 0 0 0-.522.082c-.454.169-.67.526-.67.76 0 .051.112.057.141.011.081-.123.21-.31.617-.478.408-.17.73-.146.951-.094.047.012.083-.041.041-.07a.989.989 0 0 0-.558-.211zm5.434 1.423a.651.651 0 0 0-.655.647.652.652 0 0 0 1.307 0 .646.646 0 0 0-.652-.647zm.283.262h.008a.17.17 0 0 1 .17.17c0 .093-.077.17-.17.17a.17.17 0 0 1-.17-.17c0-.09.072-.165.162-.17zm-5.358.076a.752.752 0 0 0-.758.758c0 .42.338.758.758.758s.758-.337.758-.758a.756.756 0 0 0-.758-.758zm.328.303h.01c.112 0 .2.089.2.2 0 .11-.088.197-.2.197a.195.195 0 0 1-.197-.198c0-.107.082-.194.187-.199z\"/></svg>"
+}
+const defaultAskAi = [
+  { key: 'claude', title: 'Claude', url: 'https://claude.ai/' },
+  { key: 'chatgpt', title: 'ChatGPT', url: 'https://chatgpt.com/' },
+  { key: 'grok', title: 'Grok', url: 'https://grok.com/' },
+  { key: 'duck', title: 'Duck.ai', url: 'https://duck.ai/' },
+]
+let askAiList = defaultAskAi.map((item) => ({ ...item }))
+try {
+  const saved = JSON.parse(localStorage.getItem('askAiList') || 'null')
+  if (Array.isArray(saved)) askAiList = saved.filter((item) => item && typeof item.title === 'string' && safeUrl(item.url)).slice(0, ASK_AI_LIMIT)
+} catch {}
+const askAiRow = document.getElementById('ask-ai-list')
+const aiList = document.getElementById('ai-list')
+const aiForm = document.getElementById('ai-form')
+const aiName = document.getElementById('ai-name')
+const aiUrl = document.getElementById('ai-url')
+const aiMsg = document.getElementById('ai-msg')
+
+const saveAskAi = () => {
+  writeKey('askAiList', JSON.stringify(askAiList))
+  renderAskAi()
+}
+
+const aiButton = (label, glyph, onClick, disabled = false) => {
+  const button = Object.assign(document.createElement('button'), { type: 'button', textContent: glyph, disabled })
+  button.setAttribute('aria-label', label)
+  button.title = label
+  button.addEventListener('click', onClick)
+  return button
+}
+
+const renderAskAi = () => {
+  askAi.hidden = !askaiOn || askAiList.length === 0
+  askAiRow.replaceChildren(...askAiList.map((item) => {
+    const link = Object.assign(document.createElement('a'), { href: item.url })
+    link.title = item.title
+    link.setAttribute('aria-label', item.title)
+    if (askAiIcons[item.key]) link.innerHTML = askAiIcons[item.key]
+    else link.textContent = item.title
+    const li = document.createElement('li')
+    li.append(link)
+    return li
+  }))
+  aiList.replaceChildren(...askAiList.map((item, index) => {
+    const row = document.createElement('li')
+    row.append(el('span', '', item.title))
+    const move = (step) => () => {
+      const next = [...askAiList]
+      ;[next[index], next[index + step]] = [next[index + step], next[index]]
+      askAiList = next
+      saveAskAi()
+    }
+    row.append(
+      aiButton(t.aiUp, '↑', move(-1), index === 0),
+      aiButton(t.aiDown, '↓', move(1), index === askAiList.length - 1),
+      aiButton(t.aiRemove, '×', () => { askAiList = askAiList.filter((_, i) => i !== index); saveAskAi() }),
+    )
+    return row
+  }))
+}
+
+aiForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  // A bare host such as example.com gets https:// in front of it.
+  let url = aiUrl.value.trim()
+  if (url && !/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = `https://${url}`
+  if (!safeUrl(url)) { aiMsg.textContent = t.aiInvalid; return }
+  if (askAiList.length >= ASK_AI_LIMIT) { aiMsg.textContent = t.aiMax; return }
+  askAiList = [...askAiList, { key: '', title: aiName.value.trim() || hostOf(url), url }]
+  aiName.value = ''
+  aiUrl.value = ''
+  aiMsg.textContent = ''
+  saveAskAi()
+})
+
+renderAskAi()
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
 updateWeatherHint()
