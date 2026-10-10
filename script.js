@@ -52,16 +52,32 @@ searchForm.addEventListener('submit', (e) => {
   hintTimer = setTimeout(() => { searchBox.placeholder = '' }, 1500)
 })
 
+// Clock: click the time to switch between 24-hour and 12-hour (AM/PM); hover shows the time zone.
+let clock12 = false
+try { clock12 = localStorage.getItem('clockFormat') === '12' } catch {}
+
 const updateClock = () => {
   const now = new Date()
-  const time = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+  const time = now.toLocaleTimeString(clock12 ? 'en-US' : 'en-GB', { hour: '2-digit', minute: '2-digit', hour12: clock12 })
   const date = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
+  const offset = -now.getTimezoneOffset()
+  const sign = offset >= 0 ? '+' : '-'
+  const hh = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0')
+  const mm = String(Math.abs(offset) % 60).padStart(2, '0')
+  const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local time'
   clockTime.textContent = time
   clockTime.dateTime = now.toISOString()
+  clockTime.title = `${zone} (UTC${sign}${hh}:${mm})`
   clockDate.textContent = date
 }
 updateClock()
 setInterval(updateClock, 30000)
+
+clockTime.addEventListener('click', () => {
+  clock12 = !clock12
+  try { localStorage.setItem('clockFormat', clock12 ? '12' : '24') } catch {}
+  updateClock()
+})
 
 // A new quote every six hours, so the same one stays put for that window.
 const quoteText = document.getElementById('quote-text')
