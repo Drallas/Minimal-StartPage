@@ -29,6 +29,13 @@
       <sub><b>Dark theme</b></sub>
     </td>
   </tr>
+  <tr>
+    <td align="center">
+      <img src="assets/screenshot_wallpaper.webp" width="800" alt="Wallpaper mode"/>
+      <br/>
+      <sub><b>Wallpaper mode</b></sub>
+    </td>
+  </tr>
 </table>
 
 ## Features
