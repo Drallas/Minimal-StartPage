@@ -511,8 +511,9 @@ html[data-wallpaper-on] .controls {
     inset: -16px;
   }
 
+  /* The tint slider is fiddly on a phone; the wallpaper switch stays. */
   .hue {
-    height: 44px;
+    display: none;
   }
 }
 

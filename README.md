@@ -47,7 +47,7 @@
 - **Date.** Hover over the date to see the ISO week number and the day of the year. Click the date to switch between the long form and DD-MM-YYYY.
 - **Quote.** A short quote from a philosopher or teacher, changing every six hours. There are 50 quotes, shown in your browser's language (English, Dutch, German, French, Spanish or Chinese, falling back to English). Click the quote to see the next one.
 - **Shortcuts.** A Wikipedia link in the top left, and links to Claude, ChatGPT, Grok and Duck.ai below the search bar under the caption "Ask AI".
-- **Background.** Quiet controls sit in the bottom corners. The slider on the left gives the background a subtle tint in any hue (drag back to the far left for the neutral look). The wallpaper is on by default. The circle on the right turns it off or on again, and your choice is remembered. The background adapts to light and dark mode. On a phone the controls sit just above the browser's bottom bar, so they stay reachable.
+- **Background.** Quiet controls sit in the bottom corners. The slider on the left gives the background a subtle tint in any hue (drag back to the far left for the neutral look). On a phone the slider is hidden and only the wallpaper switch remains. The wallpaper is on by default. The circle on the right turns it off or on again, and your choice is remembered. The background adapts to light and dark mode. On a phone the controls sit just above the browser's bottom bar, so they stay reachable.
 - **Hidden details.** A few small details are tucked away in the page. Look closely and explore.
 
 ## Your data
