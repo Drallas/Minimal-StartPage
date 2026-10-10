@@ -357,10 +357,20 @@ footer a:focus-visible svg {
 
 .weather-row {
   display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 24px;
+  grid-template-columns: 1fr 4ch 5ch;
+  gap: 16px;
   padding: 3px 0;
   font-variant-numeric: tabular-nums;
+}
+
+.weather-row > span + span {
+  text-align: right;
+}
+
+/* Time zone lines have a name and a time, and a day word that may be longer. */
+.weather-row.zone-line {
+  grid-template-columns: 1fr auto auto;
+  gap: 24px;
 }
 
 .weather-row + .weather-row {
@@ -1113,4 +1123,17 @@ html[data-quote-off] #quote {
 
 .weather-sub:has(input:disabled) {
   opacity: .5;
+}
+
+.location-title {
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+}
+
+.nested {
+  margin-left: 24px;
 }

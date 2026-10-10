@@ -132,7 +132,8 @@ const settingsButton = document.getElementById('settings-button')
 const settings = document.getElementById('settings')
 const settingsFields = {
   weather: document.getElementById('set-weather'),
-  ip: document.getElementById('set-ip'),
+  locIp: document.getElementById('loc-ip'),
+  locCity: document.getElementById('loc-city'),
   showIp: document.getElementById('set-showip'),
   quote: document.getElementById('set-quote'),
   zones: document.getElementById('set-zones'),
@@ -149,31 +150,42 @@ const readFlag = (key, fallback) => {
 const writeKey = (key, value) => { try { localStorage.setItem(key, value) } catch {} }
 
 let weatherOn = readFlag('weather', false)
-let ipLookupOn = readFlag('ipLookup', false)
 let quoteOn = readFlag('quote', false)
 let showIpOn = readFlag('showIp', false)
 let lastIp = null
+let lastInfo = ''
 // The IP address line under the footer: only when we have one and it is wanted.
 const updateIpLine = () => {
   ipLine.textContent = lastIp && showIpOn ? `${t.ip}: ${lastIp}` : ''
+  ipLine.title = lastInfo
   ipLine.hidden = !(lastIp && showIpOn)
 }
-// Showing the IP address is its own choice, separate from the weather. It asks ipify.org only when it is on.
+// Showing the IP address is its own choice. It asks ipapi.co, the same service the IP location uses.
 const fetchMyIp = async () => {
   if (!showIpOn) {
     lastIp = null
+    lastInfo = ''
     updateIpLine()
     return
   }
   try {
-    lastIp = (await fetchCached('myIp', 24 * 3600e3, 'https://api.ipify.org?format=json')).ip
+    const info = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
+    lastIp = info.ip
+    lastInfo = [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ')
   } catch {
     lastIp = null
+    lastInfo = ''
   }
   updateIpLine()
 }
 let city = null
 try { city = JSON.parse(localStorage.getItem('city') || 'null') } catch {}
+// 'ip' finds the place from the IP address; 'city' uses the city the visitor entered.
+let locationMode = city ? 'city' : 'ip'
+try {
+  const saved = localStorage.getItem('location')
+  if (saved === 'ip' || saved === 'city') locationMode = saved
+} catch {}
 
 const uiLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
 const weatherWords = {
@@ -209,15 +221,15 @@ const zonesText = {
   es: { zonesToggle: 'Mostrar zonas horarias (globo junto a la fecha)', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
   zh: { zonesToggle: '显示时区（日期旁的地球图标）', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
 }
-const ipPrivacy = {'en': 'Showing your IP address asks ipify.org for it.', 'nl': 'Het tonen van je IP-adres vraagt het op bij ipify.org.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie bei ipify.org abgefragt.', 'fr': 'Afficher votre adresse IP la demande à ipify.org.', 'es': 'Mostrar tu IP la pide a ipify.org.', 'zh': '显示 IP 地址时，会向 ipify.org 查询。'}
+const ipPrivacy = {'en': 'Showing your IP address also asks ipapi.co for it.', 'nl': 'Het tonen van je IP-adres vraagt het ook op bij ipapi.co.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie ebenfalls bei ipapi.co abgefragt.', 'fr': 'Afficher votre adresse IP la demande aussi à ipapi.co.', 'es': 'Mostrar tu IP también la pide a ipapi.co.', 'zh': '显示 IP 地址时，同样会向 ipapi.co 查询。'}
 for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
-  en: { lookup: 'Find my location from my IP address (for the weather)', noSource: 'Choose a place', needPlace: 'The weather needs a place: turn on the IP lookup below, or enter a city.' },
-  nl: { lookup: 'Mijn plaats zoeken via mijn IP-adres (voor het weer)', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: zet hieronder het zoeken via IP aan, of vul een plaats in.' },
-  de: { lookup: 'Meinen Ort über meine IP-Adresse finden (für das Wetter)', noSource: 'Ort wählen', needPlace: 'Das Wetter braucht einen Ort: schalte unten die IP-Suche ein oder gib einen Ort ein.' },
-  fr: { lookup: 'Trouver ma position via mon adresse IP (pour la météo)', noSource: 'Choisir un lieu', needPlace: 'La météo a besoin d’un lieu : activez la recherche par IP ci-dessous, ou saisissez une ville.' },
-  es: { lookup: 'Buscar mi ubicación por IP (para el tiempo)', noSource: 'Elige un lugar', needPlace: 'El tiempo necesita un lugar: activa la búsqueda por IP abajo o escribe una ciudad.' },
-  zh: { lookup: '通过 IP 地址查找我的位置（用于天气）', noSource: '选择地点', needPlace: '天气需要一个地点：请在下方开启 IP 查找，或输入城市。' },
+  en: { location: 'Location', locIp: 'My IP address (finds my city)', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
+  nl: { location: 'Locatie', locIp: 'Mijn IP-adres (zoekt mijn plaats)', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
+  de: { location: 'Standort', locIp: 'Meine IP-Adresse (findet meinen Ort)', locCity: 'Eine Stadt, die ich wähle', noSource: 'Ort wählen', needPlace: 'Das Wetter braucht einen Ort: wähle unten deine IP-Adresse oder eine Stadt.' },
+  fr: { location: 'Position', locIp: 'Mon adresse IP (trouve ma ville)', locCity: 'Une ville que je choisis', noSource: 'Choisir un lieu', needPlace: 'La météo a besoin d’un lieu : choisissez ci-dessous votre adresse IP ou une ville.' },
+  es: { location: 'Ubicación', locIp: 'Mi IP (busca mi ciudad)', locCity: 'Una ciudad que elijo', noSource: 'Elige un lugar', needPlace: 'El tiempo necesita un lugar: elige abajo tu IP o una ciudad.' },
+  zh: { location: '位置', locIp: '我的 IP 地址（查找我的城市）', locCity: '我选择的城市', noSource: '选择地点', needPlace: '天气需要一个地点：请在下方选择你的 IP 地址或一个城市。' },
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[lang])
 const t = text[uiLang] || text.en
@@ -281,8 +293,7 @@ const weatherRow = (...cells) => {
 
 // The city you entered wins; otherwise the IP lookup, if you allow it.
 const getPlace = async () => {
-  if (city) return { label: `${city.name}, ${city.country}`, latitude: city.latitude, longitude: city.longitude, ip: null }
-  if (!ipLookupOn) return null
+  if (locationMode === 'city') return city ? { label: `${city.name}, ${city.country}`, latitude: city.latitude, longitude: city.longitude, ip: null } : null
   const info = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
   if (typeof info.latitude !== 'number') return null
   return { label: `${info.city}, ${info.country_name}`, latitude: info.latitude, longitude: info.longitude, ip: info.ip }
@@ -325,7 +336,7 @@ const showWeather = async () => {
     weatherButton.setAttribute('aria-label', `${key ? words[key] : ''} ${temperature}`.trim())
     weatherDetail.replaceChildren(
       el('div', 'preview-title', place.label),
-      weatherRow(key ? words[key] : '', temperature),
+      weatherRow(key ? words[key] : '', temperature, ''),
       ...next,
       el('div', 'preview-hint', t.more)
     )
@@ -410,7 +421,7 @@ const hideWeather = () => {
   current = null
 }
 
-const hasSource = () => ipLookupOn || !!city
+const hasSource = () => (locationMode === 'city' ? !!city : true)
 
 // The settings say when weather is on but has no place to look up.
 const updateWeatherHint = () => {
@@ -474,7 +485,9 @@ const applySettingsText = () => {
   document.getElementById('settings-title').textContent = t.title
   document.getElementById('settings-hint').textContent = t.hint
   document.getElementById('lbl-weather').textContent = t.weather
-  document.getElementById('lbl-ip').textContent = t.lookup
+  document.getElementById('lbl-location').textContent = t.location
+  document.getElementById('lbl-loc-ip').textContent = t.locIp
+  document.getElementById('lbl-loc-city').textContent = t.locCity
   document.getElementById('lbl-showip').textContent = t.showIp
   document.getElementById('lbl-city').textContent = t.cityLabel
   settingsFields.cityInput.placeholder = t.cityPlaceholder
@@ -498,7 +511,8 @@ const applySettingsText = () => {
 
 const syncSettings = () => {
   settingsFields.weather.checked = weatherOn
-  settingsFields.ip.checked = ipLookupOn
+  settingsFields.locIp.checked = locationMode === 'ip'
+  settingsFields.locCity.checked = locationMode === 'city'
   settingsFields.showIp.checked = showIpOn
   settingsFields.quote.checked = quoteOn
   settingsFields.zones.checked = zonesOn
@@ -557,12 +571,15 @@ settingsFields.showIp.addEventListener('change', () => {
   fetchMyIp()
 })
 
-settingsFields.ip.addEventListener('change', () => {
-  ipLookupOn = settingsFields.ip.checked
-  writeKey('ipLookup', ipLookupOn ? 'on' : 'off')
+// Choosing a location: the IP address or the city. Either one refreshes the weather when it is on.
+const setLocation = (mode) => {
+  locationMode = mode
+  writeKey('location', mode)
   updateWeatherHint()
   if (weatherOn) showWeather()
-})
+}
+settingsFields.locIp.addEventListener('change', () => setLocation('ip'))
+settingsFields.locCity.addEventListener('change', () => setLocation('city'))
 
 settingsFields.zones.addEventListener('change', () => {
   zonesOn = settingsFields.zones.checked
@@ -591,6 +608,9 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
     city = { name: hit.name, country: hit.country, latitude: hit.latitude, longitude: hit.longitude }
     updateWeatherHint()
     writeKey('city', JSON.stringify(city))
+    locationMode = 'city'
+    writeKey('location', 'city')
+    settingsFields.locCity.checked = true
     settingsFields.cityClear.hidden = false
     settingsFields.cityMessage.textContent = ''
     settingsFields.cityInput.value = ''
@@ -603,6 +623,9 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
 settingsFields.cityClear.addEventListener('click', () => {
   city = null
   try { localStorage.removeItem('city') } catch {}
+  locationMode = 'ip'
+  writeKey('location', 'ip')
+  settingsFields.locIp.checked = true
   updateWeatherHint()
   settingsFields.cityClear.hidden = true
   if (weatherOn) showWeather()
@@ -610,7 +633,7 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'ipLookup', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
@@ -667,7 +690,11 @@ const renderPreview = () => {
     return
   }
   const now = new Date()
-  zonesPreview.replaceChildren(...sortedZones(now).map((zone) => weatherRow(cityOf(zone), zoneClock(zone, now), dayWord(dayDifference(zone, now)))))
+  zonesPreview.replaceChildren(...sortedZones(now).map((zone) => {
+    const row = weatherRow(cityOf(zone), zoneClock(zone, now), dayWord(dayDifference(zone, now)))
+    row.classList.add('zone-line')
+    return row
+  }))
 }
 
 const renderZones = () => {
