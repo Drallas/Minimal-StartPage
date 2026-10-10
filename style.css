@@ -369,8 +369,8 @@ footer a:focus-visible svg {
 
 /* Time zone lines have a name and a time, and a day word that may be longer. */
 .weather-row.zone-line {
-  grid-template-columns: 1fr auto auto;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) 7ch 6ch 1fr;
+  gap: 12px;
 }
 
 .weather-row + .weather-row {
@@ -1037,7 +1037,7 @@ html[data-quote-off] #quote {
 
 .zone-row {
   display: grid;
-  grid-template-columns: 1.4fr auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr) 7ch 6ch 1fr auto;
   gap: 12px;
   align-items: center;
   padding: 8px 0;
@@ -1087,7 +1087,7 @@ html[data-quote-off] #quote {
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 8px;
-  min-width: 240px;
+  min-width: 300px;
   padding: 12px 14px;
   background: var(--color-field);
   border: 1px solid var(--color-border);
@@ -1323,16 +1323,29 @@ html[data-quote-off] #quote {
   display: none;
 }
 
-/* The UTC label of a time zone: small and quiet, next to its name. */
+/* Time zone lines: name, UTC label, time and day, each in its own column so they line up. */
 .zone-tag {
-  margin-left: 6px;
   font-size: 10px;
   letter-spacing: .04em;
-  opacity: .6;
+  color: var(--color-fg-2);
+}
+
+.zone-time {
+  text-align: right;
+}
+
+.zone-day {
+  text-align: right;
 }
 
 /* Permanent link logos in the links window: the same size and weight as the other icons. */
 .link-icon svg {
   width: 16px;
+  height: 16px;
+}
+
+/* The Reuters name as a wide icon, so the word stays readable. */
+.link-icon svg.wide {
+  width: 40px;
   height: 16px;
 }

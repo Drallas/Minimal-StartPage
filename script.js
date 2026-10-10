@@ -570,7 +570,7 @@ const openSettings = () => {
   openedFrom.el = document.activeElement
   syncSettings()
   settings.hidden = false
-  settingsFields.weather.focus()
+  document.getElementById('settings-close').focus()
 }
 
 const closeSettings = () => {
@@ -738,7 +738,7 @@ const renderPreview = () => {
   }
   const now = new Date()
   zonesPreview.replaceChildren(...sortedZones(now).map((zone) => {
-    const row = weatherRow(zoneName(zone, now), zoneClock(zone, now), dayWordFor(dayDifference(zone, now)))
+    const row = weatherRow(zoneName(zone), zoneTag(zone, now), zoneClock(zone, now), dayWordFor(dayDifference(zone, now)))
     row.classList.add('zone-line')
     return row
   }))
@@ -752,7 +752,7 @@ const renderZones = () => {
     const remove = Object.assign(document.createElement('button'), { type: 'button', className: 'zone-remove', textContent: '×' })
     remove.setAttribute('aria-label', `${t.remove} ${cityOf(zone)}`)
     remove.dataset.zone = zone
-    row.append(zoneName(zone, now), el('span', '', zoneClock(zone, now)), el('span', 'zone-day', dayWordFor(dayDifference(zone, now))), remove)
+    row.append(zoneName(zone), zoneTag(zone, now), el('span', 'zone-time', zoneClock(zone, now)), el('span', 'zone-day', dayWordFor(dayDifference(zone, now))), remove)
     return row
   })
   zonesList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.zonesEmpty)]))
@@ -772,11 +772,8 @@ const utcLabel = (zone, now) => {
   const clock = `${Math.floor(abs / 60)}${abs % 60 ? `:${String(abs % 60).padStart(2, '0')}` : ''}`
   return `UTC${minutes > 0 ? '+' : '−'}${clock}`
 }
-const zoneName = (zone, now) => {
-  const name = el('span', '', cityOf(zone))
-  name.append(el('small', 'zone-tag', utcLabel(zone, now)))
-  return name
-}
+const zoneName = (zone) => el('span', 'zone-name', cityOf(zone))
+const zoneTag = (zone, now) => el('span', 'zone-tag', utcLabel(zone, now))
 
 const openZones = () => {
   zonesFrom = document.activeElement
@@ -879,15 +876,17 @@ const brandIcons = {
   dw: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.143 5.182A6.854 6.854 0 0 0 12 7.493a6.855 6.855 0 0 0-5.143-2.311C3.07 5.182 0 8.234 0 12c0 3.766 3.07 6.818 6.857 6.818A6.855 6.855 0 0 0 12 16.507a6.854 6.854 0 0 0 5.143 2.311C20.929 18.818 24 15.766 24 12c0-3.766-3.07-6.818-6.857-6.818zm-6.04 10.05a5.349 5.349 0 0 1-4.246 2.086c-2.954 0-5.348-2.38-5.348-5.318 0-2.937 2.394-5.318 5.348-5.318 1.731 0 3.27.818 4.247 2.087A5.274 5.274 0 0 1 12.206 12a5.274 5.274 0 0 1-1.102 3.231zm8.88-.641h-1.608l-1.049-2.549-1.025 2.549h-1.605l-1.661-5.182h1.833l.779 2.602.972-2.602h1.434l.973 2.602.778-2.602h1.841zM7.058 9.273H4.083v5.454h2.975c1.534 0 3.107-.878 3.107-2.727 0-1.768-1.434-2.727-3.107-2.727zm-.161 3.874H5.729v-2.318h1.168c1.062 0 1.44.59 1.44 1.159.001.561-.375 1.159-1.44 1.159z"/></svg>'
 }
 // Permanent links: recognisable logos (Simple Icons, CC0). The Wikipedia edition follows the browser language.
-// Deutsche Welle is the news link: a public broadcaster; no logo for Reuters or the BBC is in the icon set.
+// Reuters is the news link, shown by its name: no Reuters logo is in the open icon set.
+const wikipediaIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5v4a1.6 1.6 0 1 0 0 0M2.5 12h4a1.6 1.6 0 1 1 0 0M14.5 21.5v-3a1.6 1.6 0 1 1 0 0M21.5 12h-3.5a1.6 1.6 0 1 1 0-0"/></svg>'
+const reutersIcon = '<svg class="wide" viewBox="0 0 60 24" fill="currentColor" aria-hidden="true"><text x="30" y="17" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="700">Reuters</text></svg>'
 const permanentLinks = () => [
-  { title: 'Wikipedia', url: `https://${wikiCode}.wikipedia.org/`, description: '', icon: brandIcons.wikipedia },
+  { title: 'Wikipedia', url: `https://${wikiCode}.wikipedia.org/`, description: '', icon: wikipediaIcon },
   { title: 'Google', url: 'https://www.google.com/', description: '', icon: brandIcons.google },
   { title: 'Apple', url: 'https://www.apple.com/', description: '', icon: brandIcons.apple },
   { title: 'Facebook', url: 'https://www.facebook.com/', description: '', icon: brandIcons.facebook },
   { title: 'X', url: 'https://x.com/', description: '', icon: brandIcons.x },
   { title: 'Instagram', url: 'https://www.instagram.com/', description: '', icon: brandIcons.instagram },
-  { title: 'Deutsche Welle', url: 'https://www.dw.com/en/', description: '', icon: brandIcons.dw },
+  { title: 'Reuters', url: 'https://www.reuters.com/', description: '', icon: reutersIcon },
 ]
 const isPermanent = (url) => permanentLinks().some((link) => link.url === url)
 const isValidLink = (link) => !!link && typeof link.title === 'string' && typeof link.url === 'string' && safeUrl(link.url) && !isPermanent(link.url)
