@@ -1124,8 +1124,9 @@ html[data-quote-off] #quote {
   margin-left: 24px;
 }
 
-.weather-sub:has(input:disabled) {
+.setting:has(input:disabled) {
   opacity: .5;
+  cursor: default;
 }
 
 .location-title {

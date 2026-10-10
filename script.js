@@ -155,28 +155,13 @@ let showIpOn = readFlag('showIp', false)
 let lastIp = null
 let lastInfo = ''
 // The IP address line under the footer: only when we have one and it is wanted.
+// The IP line shows only when weather is on, the location is the IP address, and the option is on.
+// It reuses the lookup the weather already makes, so no extra request is sent.
 const updateIpLine = () => {
-  ipLine.textContent = lastIp && showIpOn ? `${t.ip}: ${lastIp}` : ''
-  ipLine.title = lastInfo
-  ipLine.hidden = !(lastIp && showIpOn)
-}
-// Showing the IP address is its own choice. It asks ipapi.co, the same service the IP location uses.
-const fetchMyIp = async () => {
-  if (!showIpOn) {
-    lastIp = null
-    lastInfo = ''
-    updateIpLine()
-    return
-  }
-  try {
-    const info = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
-    lastIp = info.ip
-    lastInfo = [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ')
-  } catch {
-    lastIp = null
-    lastInfo = ''
-  }
-  updateIpLine()
+  const visible = weatherOn && locationMode === 'ip' && showIpOn && !!lastIp
+  ipLine.textContent = visible ? `${t.ip}: ${lastIp}` : ''
+  ipLine.title = visible ? lastInfo : ''
+  ipLine.hidden = !visible
 }
 let city = null
 try { city = JSON.parse(localStorage.getItem('city') || 'null') } catch {}
@@ -230,7 +215,15 @@ const linksText = {
   es: { linksButton: 'Enlaces', linksTitle: 'Enlaces', linksEmpty: 'Aún no hay enlaces.', linkAdd: 'Añadir enlace', linkEdit: 'Editar enlace', lblName: 'Nombre', lblUrl: 'Dirección', lblDesc: 'Descripción (opcional)', linkSave: 'Guardar', linkCancel: 'Cancelar', linksFull: 'Puedes tener hasta 15 enlaces.', linkInvalid: 'Escribe una dirección válida, por ejemplo https://ejemplo.es', linkEditBtn: 'Editar', linkRemove: 'Quitar' },
   zh: { linksButton: '链接', linksTitle: '链接', linksEmpty: '还没有链接。', linkAdd: '添加链接', linkEdit: '编辑链接', lblName: '名称', lblUrl: '地址', lblDesc: '说明（可选）', linkSave: '保存', linkCancel: '取消', linksFull: '最多可以添加 15 个链接。', linkInvalid: '请输入有效的地址，例如 https://example.com', linkEditBtn: '编辑', linkRemove: '移除' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const sectionText = {
+  en: { secWeather: 'Weather', secLook: 'Display', secPrivacy: 'Privacy', placeTime: 'Local time' },
+  nl: { secWeather: 'Weer', secLook: 'Weergave', secPrivacy: 'Privacy', placeTime: 'Lokale tijd' },
+  de: { secWeather: 'Wetter', secLook: 'Anzeige', secPrivacy: 'Datenschutz', placeTime: 'Ortszeit' },
+  fr: { secWeather: 'Météo', secLook: 'Affichage', secPrivacy: 'Confidentialité', placeTime: 'Heure locale' },
+  es: { secWeather: 'Tiempo', secLook: 'Vista', secPrivacy: 'Privacidad', placeTime: 'Hora local' },
+  zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My IP address (finds my city)', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn IP-adres (zoekt mijn plaats)', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -312,7 +305,7 @@ const getPlace = async () => {
   if (locationMode === 'city') return city ? { label: `${city.name}, ${city.country}`, latitude: city.latitude, longitude: city.longitude, ip: null } : null
   const info = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
   if (typeof info.latitude !== 'number') return null
-  return { label: `${info.city}, ${info.country_name}`, latitude: info.latitude, longitude: info.longitude, ip: info.ip }
+  return { label: `${info.city}, ${info.country_name}`, latitude: info.latitude, longitude: info.longitude, ip: info.ip, detail: [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ') }
 }
 
 // Latest answer, kept so the full forecast can be drawn without asking again.
@@ -334,11 +327,16 @@ const showWeather = async () => {
       // Greyed-out icon: a click opens settings, where a place can be chosen.
       showIdle(t.noSource)
       current = null
+      lastIp = null
       weatherDetail.replaceChildren()
+      updateIpLine()
       return
     }
     const forecast = await fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
     current = { place, forecast }
+    lastIp = place.ip
+    lastInfo = place.detail || ''
+    updateIpLine()
     const now = forecast.current
     const start = forecast.hourly.time.indexOf(now.time)
     const key = weatherKey(now.weather_code)
@@ -359,7 +357,9 @@ const showWeather = async () => {
   } catch {
     weatherButton.textContent = t.unavailable
     current = null
+    lastIp = null
     weatherDetail.replaceChildren()
+    updateIpLine()
   }
 }
 
@@ -378,6 +378,13 @@ const renderForecast = () => {
   nowIcon.innerHTML = weatherIcon(key)
   const nowRow = el('div', 'forecast-now')
   nowRow.append(nowIcon, el('span', 'forecast-temp', temp(now.temperature_2m)), el('span', 'forecast-word', key ? words[key] : ''))
+  let localLine = null
+  if (forecast.timezone) {
+    try {
+      const time = new Date().toLocaleTimeString(clockMode === '12' ? 'en-US' : 'en-GB', { timeZone: forecast.timezone, hour: '2-digit', minute: '2-digit', hour12: clockMode === '12' })
+      localLine = el('div', 'forecast-meta', `${t.placeTime}: ${time} · ${cityOf(forecast.timezone)}`)
+    } catch {}
+  }
   const meta = el('div', 'forecast-meta', `${t.feels} ${temp(now.apparent_temperature)} · ${t.wind} ${Math.round(now.wind_speed_10m)} km/h · ${t.humidity} ${now.relative_humidity_2m}%`)
 
   const start = forecast.hourly.time.indexOf(now.time)
@@ -412,7 +419,7 @@ const renderForecast = () => {
 
   document.getElementById('forecast-title').textContent = place.label
   document.getElementById('forecast-body').replaceChildren(
-    section(t.now, [nowRow, meta]),
+    section(t.now, [nowRow, meta, ...(localLine ? [localLine] : [])]),
     section(t.hours, hourRows),
     section(t.days, dayRows)
   )
@@ -444,8 +451,11 @@ const updateWeatherHint = () => {
   const hint = document.getElementById('weather-hint')
   hint.textContent = t.needPlace
   hint.hidden = !(weatherOn && !hasSource())
-  // The IP lookup and city belong to the weather, so they are off while it is.
+  // The location options belong to the weather, so they are off while it is.
   document.querySelectorAll('#weather-sub input, #weather-sub button').forEach((el) => { el.disabled = !weatherOn })
+  // The IP display only means something when the IP address is the location.
+  settingsFields.showIp.disabled = !weatherOn || locationMode !== 'ip'
+  updateIpLine()
 }
 
 const setWeather = (on) => {
@@ -502,6 +512,9 @@ const applySettingsText = () => {
   document.getElementById('settings-hint').textContent = t.hint
   document.getElementById('lbl-weather').textContent = t.weather
   document.getElementById('lbl-location').textContent = t.location
+  document.getElementById('sec-weather').textContent = t.secWeather
+  document.getElementById('sec-look').textContent = t.secLook
+  document.getElementById('sec-privacy').textContent = t.secPrivacy
   document.getElementById('lbl-loc-ip').textContent = t.locIp
   document.getElementById('lbl-loc-city').textContent = t.locCity
   document.getElementById('lbl-showip').textContent = t.showIp
@@ -592,7 +605,8 @@ settingsFields.weather.addEventListener('change', () => setWeather(settingsField
 settingsFields.showIp.addEventListener('change', () => {
   showIpOn = settingsFields.showIp.checked
   writeKey('showIp', showIpOn ? 'on' : 'off')
-  fetchMyIp()
+  if (weatherOn && locationMode === 'ip' && showIpOn && !lastIp) showWeather()
+  else updateIpLine()
 })
 
 // Choosing a location: the IP address or the city. Either one refreshes the weather when it is on.
@@ -950,7 +964,6 @@ renderLinks()
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
 updateWeatherHint()
-fetchMyIp()
 if (weatherOn) weatherButton.textContent = t.loading
 else showIdle()
 if (weatherOn) showWeather()
