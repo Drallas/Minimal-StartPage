@@ -1347,6 +1347,16 @@ html[data-quote-off] #quote {
   border-bottom-color: var(--color-fg-2);
 }
 
+/* Export and import at the foot of the Data panel, under every tab. */
+.manage-io {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
 .manage-section[hidden] {
   display: none;
 }
