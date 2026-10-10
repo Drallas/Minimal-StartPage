@@ -91,7 +91,8 @@
             <form class="city-form" id="city-form">
               <label for="city-input" id="lbl-city">Or enter a city</label>
               <div class="city-row">
-                <input type="text" id="city-input" autocomplete="off">
+                <input type="text" id="city-input" list="city-options" autocomplete="off">
+                <datalist id="city-options"></datalist>
                 <button type="submit" id="city-save">Save</button>
               </div>
               <button type="button" id="city-clear" class="text-button" hidden>Use my IP address instead</button>
@@ -187,7 +188,8 @@
         <form class="city-form" id="place-form">
           <label for="place-input" id="lbl-place">Add a city</label>
           <div class="city-row">
-            <input type="text" id="place-input" autocomplete="off">
+            <input type="text" id="place-input" list="place-options" autocomplete="off">
+            <datalist id="place-options"></datalist>
             <button type="submit" id="place-add">Add</button>
           </div>
           <p class="city-msg" id="place-msg" role="status"></p>

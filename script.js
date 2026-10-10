@@ -801,6 +801,32 @@ const renderPlaces = () => {
   }))
 }
 const placeMsg = document.getElementById('place-msg')
+// City suggestions while typing, the same kind of lookup the time zone box does. Only the typed name is sent.
+const cityLabel = (r) => [r.name, r.country].filter(Boolean).join(', ')
+const geocode = async (query, count) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${uiLang}&format=json`)).json()).results || []
+const suggestCities = (input, datalist, hits) => {
+  let timer = null
+  input.addEventListener('input', () => {
+    clearTimeout(timer)
+    const query = input.value.trim()
+    if (query.length < 2) { datalist.replaceChildren(); return }
+    timer = setTimeout(async () => {
+      try {
+        const results = await geocode(query, 5)
+        hits.clear()
+        for (const r of results) hits.set(cityLabel(r), r)
+        datalist.replaceChildren(...results.map((r) => Object.assign(document.createElement('option'), { value: cityLabel(r) })))
+      } catch {
+        datalist.replaceChildren()
+      }
+    }, 300)
+  })
+}
+const placeHits = new Map()
+suggestCities(document.getElementById('place-input'), document.getElementById('place-options'), placeHits)
+const cityHits = new Map()
+suggestCities(settingsFields.cityInput, document.getElementById('city-options'), cityHits)
+
 document.getElementById('place-form').addEventListener('submit', async (e) => {
   e.preventDefault()
   const input = document.getElementById('place-input')
@@ -808,8 +834,7 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
   if (!name) return
   if (extraPlaces.length >= PLACE_LIMIT) { placeMsg.textContent = t.placeLimit; return }
   try {
-    const found = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=1&language=${uiLang}&format=json`)).json()
-    const hit = found.results && found.results[0]
+    const hit = placeHits.get(name) || (await geocode(name, 1))[0]
     if (!hit) { placeMsg.textContent = t.notFound; return }
     const place = { label: `${hit.name}, ${hit.country}`, latitude: hit.latitude, longitude: hit.longitude, timezone: hit.timezone || 'UTC' }
     if (extraPlaces.some((p) => p.label === place.label)) { placeMsg.textContent = t.placeDuplicate; return }
@@ -1119,8 +1144,7 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
   const name = settingsFields.cityInput.value.trim()
   if (!name) return
   try {
-    const found = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=1&language=${uiLang}&format=json`)).json()
-    const hit = found.results && found.results[0]
+    const hit = cityHits.get(name) || (await geocode(name, 1))[0]
     if (!hit) {
       settingsFields.cityMessage.textContent = t.notFound
       return
