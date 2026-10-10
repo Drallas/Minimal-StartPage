@@ -1140,16 +1140,27 @@ settingsFields.resetData.addEventListener('click', () => {
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
 const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
-document.getElementById('export-data').addEventListener('click', () => {
+document.getElementById('export-data').addEventListener('click', async () => {
   const payload = { app: 'Minimal-StartPage', version: 1, exported: new Date().toISOString(), settings: {}, data: {} }
   EXPORT_SETTINGS.forEach((key) => { const value = localStorage.getItem(key); if (value !== null) payload.settings[key] = value })
   EXPORT_DATA.forEach((key) => { try { const value = localStorage.getItem(key); if (value !== null) payload.data[key] = JSON.parse(value) } catch {} })
-  const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }))
-  const link = Object.assign(document.createElement('a'), { href: url, download: 'minimal-startpage.json' })
+  const file = new File([JSON.stringify(payload, null, 2)], 'minimal-startpage.json', { type: 'application/json' })
+  // On iPhone and iPad this opens the share sheet, where the file can go to Files or iCloud Drive.
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: 'Minimal-StartPage' })
+      return
+    } catch (error) {
+      if (error.name === 'AbortError') return
+    }
+  }
+  // Elsewhere, a normal download. Safari needs the link to stay valid until the download has started.
+  const url = URL.createObjectURL(file)
+  const link = Object.assign(document.createElement('a'), { href: url, download: file.name })
   document.body.append(link)
   link.click()
   link.remove()
-  setTimeout(() => URL.revokeObjectURL(url), 1000)
+  setTimeout(() => URL.revokeObjectURL(url), 60000)
 })
 const importFile = document.getElementById('import-file')
 document.getElementById('import-data').addEventListener('click', () => importFile.click())
