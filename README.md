@@ -93,6 +93,8 @@ Short notes, one topic each:
 
 ## Credits
 
+Inspired by [Nimplex/Minimal-StartPage](https://github.com/Nimplex/Minimal-StartPage) by Przemysław Szafraniec. This project is a full rebuild from scratch; it shares the idea of a minimal start page, not its code.
+
 The wallpapers are photos from [Unsplash](https://unsplash.com), used under the Unsplash License.
 
 The weather forecast comes from [Open-Meteo](https://open-meteo.com), licensed under CC BY 4.0.
