@@ -214,14 +214,25 @@
     </div>
   </div>
   <div class="settings" id="links-window" hidden>
-    <div class="settings-panel links-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="links-window-title">
+    <div class="settings-panel list-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="links-window-title">
       <div class="settings-head">
         <h2 id="links-window-title">Links</h2>
         <button type="button" id="links-window-close" class="settings-close" aria-label="Close">×</button>
       </div>
       <div class="link-icons" id="links-window-icons"></div>
       <div class="links-own" id="links-own"></div>
-      <button type="button" id="links-manage" class="ghost-button">Manage</button>
+      <button type="button" id="links-manage" class="ghost-button">Edit links</button>
+    </div>
+  </div>
+  <div class="settings" id="zones-window" hidden>
+    <div class="settings-panel list-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="zones-window-title">
+      <div class="settings-head">
+        <h2 id="zones-window-title">Time zones</h2>
+        <button type="button" id="zones-window-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <p class="zones-local" id="zones-local-window"></p>
+      <div id="zones-window-list"></div>
+      <button type="button" id="zones-manage" class="ghost-button">Edit time zones</button>
     </div>
   </div>
   <div class="settings" id="forecast" hidden>

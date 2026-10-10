@@ -1816,8 +1816,9 @@ html[data-quote-off] #quote {
   }
 }
 
+/* The links and time zones windows: a short list plus a way to the full manage panel. */
 /* The links window: the permanent icons, the visitor's own links, and a way to the full manage panel. */
-.links-panel {
+.list-panel {
   max-width: 460px;
 }
 

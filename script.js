@@ -262,21 +262,21 @@ const forecastText = {
 }
 const hourHeads = { en: ['Time', 'Temp', 'Rain', 'Wind'], nl: ['Tijd', 'Temp', 'Regen', 'Wind'], de: ['Zeit', 'Temp.', 'Regen', 'Wind'], fr: ['Heure', 'Temp.', 'Pluie', 'Vent'], es: ['Hora', 'Temp.', 'Lluvia', 'Viento'], zh: ['时间', '气温', '降水', '风'] }
 const zonesText = {
-  en: { zonesToggle: 'Time zones', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to five)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to five.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
-  nl: { zonesToggle: 'Tijdzones', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal vijf)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal vijf tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
-  de: { zonesToggle: 'Zeitzonen', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu fünf)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens fünf anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
-  fr: { zonesToggle: 'Fuseaux horaires', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (cinq maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher cinq au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
-  es: { zonesToggle: 'Zonas horarias', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
-  zh: { zonesToggle: '时区', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
+  en: { zonesEdit: 'Edit time zones', zonesToggle: 'Time zones', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to five)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to five.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
+  nl: { zonesEdit: 'Tijdzones bewerken', zonesToggle: 'Tijdzones', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal vijf)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal vijf tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
+  de: { zonesEdit: 'Zeitzonen bearbeiten', zonesToggle: 'Zeitzonen', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu fünf)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens fünf anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
+  fr: { zonesEdit: 'Modifier les fuseaux horaires', zonesToggle: 'Fuseaux horaires', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (cinq maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher cinq au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
+  es: { zonesEdit: 'Editar zonas horarias', zonesToggle: 'Zonas horarias', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
+  zh: { zonesEdit: '编辑时区', zonesToggle: '时区', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
 }
 const ipPrivacy = {'en': 'Checking your IP address asks ipapi.co for it.', 'nl': 'Je IP-adres opvragen vraagt het bij ipapi.co.', 'de': 'Zum Abfragen deiner IP-Adresse wird sie bei ipapi.co angefragt.', 'fr': 'Vérifier votre adresse IP la demande à ipapi.co.', 'es': 'Consultar tu IP también la pide a ipapi.co.', 'zh': '查询 IP 地址时，会向 ipapi.co 请求。'}
 const linksText = {
-  en: { linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'No links yet.', linkAdd: 'Add link', linkEdit: 'Edit link', lblName: 'Name', lblUrl: 'Address', lblDesc: 'Description (optional)', linkSave: 'Save', linkCancel: 'Cancel', linksFull: 'You can have up to 15 links.', linkInvalid: 'Enter a valid address, for example https://example.com', linkEditBtn: 'Edit', linkRemove: 'Remove' },
-  nl: { linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Nog geen links.', linkAdd: 'Link toevoegen', linkEdit: 'Link bewerken', lblName: 'Naam', lblUrl: 'Adres', lblDesc: 'Beschrijving (optioneel)', linkSave: 'Opslaan', linkCancel: 'Annuleren', linksFull: 'Je kunt maximaal 15 links hebben.', linkInvalid: 'Vul een geldig adres in, bijvoorbeeld https://voorbeeld.nl', linkEditBtn: 'Bewerken', linkRemove: 'Verwijderen' },
-  de: { linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Noch keine Links.', linkAdd: 'Link hinzufügen', linkEdit: 'Link bearbeiten', lblName: 'Name', lblUrl: 'Adresse', lblDesc: 'Beschreibung (optional)', linkSave: 'Speichern', linkCancel: 'Abbrechen', linksFull: 'Du kannst höchstens 15 Links haben.', linkInvalid: 'Gib eine gültige Adresse ein, zum Beispiel https://beispiel.de', linkEditBtn: 'Bearbeiten', linkRemove: 'Entfernen' },
-  fr: { linksButton: 'Liens', linksTitle: 'Liens', linksEmpty: 'Aucun lien pour l’instant.', linkAdd: 'Ajouter un lien', linkEdit: 'Modifier le lien', lblName: 'Nom', lblUrl: 'Adresse', lblDesc: 'Description (facultatif)', linkSave: 'Enregistrer', linkCancel: 'Annuler', linksFull: 'Vous pouvez avoir jusqu’à 15 liens.', linkInvalid: 'Saisissez une adresse valide, par exemple https://exemple.fr', linkEditBtn: 'Modifier', linkRemove: 'Supprimer' },
-  es: { linksButton: 'Enlaces', linksTitle: 'Enlaces', linksEmpty: 'Aún no hay enlaces.', linkAdd: 'Añadir enlace', linkEdit: 'Editar enlace', lblName: 'Nombre', lblUrl: 'Dirección', lblDesc: 'Descripción (opcional)', linkSave: 'Guardar', linkCancel: 'Cancelar', linksFull: 'Puedes tener hasta 15 enlaces.', linkInvalid: 'Escribe una dirección válida, por ejemplo https://ejemplo.es', linkEditBtn: 'Editar', linkRemove: 'Quitar' },
-  zh: { linksButton: '链接', linksTitle: '链接', linksEmpty: '还没有链接。', linkAdd: '添加链接', linkEdit: '编辑链接', lblName: '名称', lblUrl: '地址', lblDesc: '说明（可选）', linkSave: '保存', linkCancel: '取消', linksFull: '最多可以添加 15 个链接。', linkInvalid: '请输入有效的地址，例如 https://example.com', linkEditBtn: '编辑', linkRemove: '移除' }
+  en: { linksEdit: 'Edit links', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'No links yet.', linkAdd: 'Add link', linkEdit: 'Edit link', lblName: 'Name', lblUrl: 'Address', lblDesc: 'Description (optional)', linkSave: 'Save', linkCancel: 'Cancel', linksFull: 'You can have up to 15 links.', linkInvalid: 'Enter a valid address, for example https://example.com', linkEditBtn: 'Edit', linkRemove: 'Remove' },
+  nl: { linksEdit: 'Links bewerken', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Nog geen links.', linkAdd: 'Link toevoegen', linkEdit: 'Link bewerken', lblName: 'Naam', lblUrl: 'Adres', lblDesc: 'Beschrijving (optioneel)', linkSave: 'Opslaan', linkCancel: 'Annuleren', linksFull: 'Je kunt maximaal 15 links hebben.', linkInvalid: 'Vul een geldig adres in, bijvoorbeeld https://voorbeeld.nl', linkEditBtn: 'Bewerken', linkRemove: 'Verwijderen' },
+  de: { linksEdit: 'Links bearbeiten', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Noch keine Links.', linkAdd: 'Link hinzufügen', linkEdit: 'Link bearbeiten', lblName: 'Name', lblUrl: 'Adresse', lblDesc: 'Beschreibung (optional)', linkSave: 'Speichern', linkCancel: 'Abbrechen', linksFull: 'Du kannst höchstens 15 Links haben.', linkInvalid: 'Gib eine gültige Adresse ein, zum Beispiel https://beispiel.de', linkEditBtn: 'Bearbeiten', linkRemove: 'Entfernen' },
+  fr: { linksEdit: 'Modifier les liens', linksButton: 'Liens', linksTitle: 'Liens', linksEmpty: 'Aucun lien pour l’instant.', linkAdd: 'Ajouter un lien', linkEdit: 'Modifier le lien', lblName: 'Nom', lblUrl: 'Adresse', lblDesc: 'Description (facultatif)', linkSave: 'Enregistrer', linkCancel: 'Annuler', linksFull: 'Vous pouvez avoir jusqu’à 15 liens.', linkInvalid: 'Saisissez une adresse valide, par exemple https://exemple.fr', linkEditBtn: 'Modifier', linkRemove: 'Supprimer' },
+  es: { linksEdit: 'Editar enlaces', linksButton: 'Enlaces', linksTitle: 'Enlaces', linksEmpty: 'Aún no hay enlaces.', linkAdd: 'Añadir enlace', linkEdit: 'Editar enlace', lblName: 'Nombre', lblUrl: 'Dirección', lblDesc: 'Descripción (opcional)', linkSave: 'Guardar', linkCancel: 'Cancelar', linksFull: 'Puedes tener hasta 15 enlaces.', linkInvalid: 'Escribe una dirección válida, por ejemplo https://ejemplo.es', linkEditBtn: 'Editar', linkRemove: 'Quitar' },
+  zh: { linksEdit: '编辑链接', linksButton: '链接', linksTitle: '链接', linksEmpty: '还没有链接。', linkAdd: '添加链接', linkEdit: '编辑链接', lblName: '名称', lblUrl: '地址', lblDesc: '说明（可选）', linkSave: '保存', linkCancel: '取消', linksFull: '最多可以添加 15 个链接。', linkInvalid: '请输入有效的地址，例如 https://example.com', linkEditBtn: '编辑', linkRemove: '移除' }
 }
 const sectionText = {
   en: { secWeather: 'Weather', secLook: 'Show', secPrivacy: 'Privacy', placeTime: 'Local time' },
@@ -845,7 +845,10 @@ const applySettingsText = () => {
   document.getElementById('ip-window-close').setAttribute('aria-label', t.close)
   document.getElementById('links-window-title').textContent = t.linksTitle
   document.getElementById('links-window-close').setAttribute('aria-label', t.close)
-  document.getElementById('links-manage').textContent = t.manageOpen
+  document.getElementById('links-manage').textContent = t.linksEdit
+  document.getElementById('zones-window-title').textContent = t.zonesTitle
+  document.getElementById('zones-window-close').setAttribute('aria-label', t.close)
+  document.getElementById('zones-manage').textContent = t.zonesEdit
   renderIp()
   document.getElementById('lbl-city').textContent = t.cityLabel
   settingsFields.cityInput.placeholder = t.cityPlaceholder
@@ -993,7 +996,7 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  const open = [helpWindow, ipWindow, linksWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
+  const open = [helpWindow, ipWindow, linksWindow, zonesWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -1005,6 +1008,7 @@ document.addEventListener('keydown', (e) => {
     if (open === helpWindow) closeHelp()
     else if (open === ipWindow) closeIpWindow()
     else if (open === linksWindow) closeLinks()
+    else if (open === zonesWindow) closeZones()
     else if (open === forecastDialog) closeForecast()
     else if (open === manageWindow) closeManage()
     else if (!advancedBlock.hidden) setAdvanced(false)
@@ -1050,6 +1054,7 @@ settingsFields.zones.addEventListener('change', () => {
   writeKey('timeZones', zonesOn ? 'on' : 'off')
   applyZonesVisibility()
   if (!zonesOn && manageTab === 'zones' && !manageWindow.hidden) closeManage()
+  if (!zonesOn && !zonesWindow.hidden) closeZones()
 })
 
 // Ask AI links below the search bar.
@@ -1264,17 +1269,21 @@ const renderPreview = () => {
   }))
 }
 
-const renderZones = () => {
-  const now = new Date()
-  zonesLocalLine.textContent = `${t.zonesLocal}: ${cityOf(localZone)} ${zoneClock(localZone, now)} · ${utcLabel(localZone, now)}`
-  const rows = sortedZones(now).map((zone) => {
-    const row = el('div', 'zone-row')
+const zoneRows = (now, editable) => sortedZones(now).map((zone) => {
+  const row = el('div', 'zone-row')
+  row.append(zoneName(zone), zoneTag(zone, now), el('span', 'zone-time', zoneClock(zone, now)), el('span', 'zone-day', dayWordFor(dayDifference(zone, now))))
+  if (editable) {
     const remove = Object.assign(document.createElement('button'), { type: 'button', className: 'zone-remove', textContent: '×' })
     remove.setAttribute('aria-label', `${t.remove} ${cityOf(zone)}`)
     remove.dataset.zone = zone
-    row.append(zoneName(zone), zoneTag(zone, now), el('span', 'zone-time', zoneClock(zone, now)), el('span', 'zone-day', dayWordFor(dayDifference(zone, now))), remove)
-    return row
-  })
+    row.append(remove)
+  }
+  return row
+})
+const renderZones = () => {
+  const now = new Date()
+  zonesLocalLine.textContent = `${t.zonesLocal}: ${cityOf(localZone)} ${zoneClock(localZone, now)} · ${utcLabel(localZone, now)}`
+  const rows = zoneRows(now, true)
   zonesList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.zonesEmpty)]))
   const full = zones.length >= 5
   renderPreview()
@@ -1342,8 +1351,27 @@ manageTabs.forEach((button, index) => {
 document.getElementById('manage-close').addEventListener('click', closeManage)
 manageWindow.addEventListener('click', (e) => { if (e.target === manageWindow) closeManage() })
 
-const openZones = () => openManage('zones')
-const closeZones = () => closeManage()
+const zonesWindow = document.getElementById('zones-window')
+const zonesWindowList = document.getElementById('zones-window-list')
+const zonesLocalWindow = document.getElementById('zones-local-window')
+const renderZonesWindow = () => {
+  const now = new Date()
+  zonesLocalWindow.textContent = `${t.zonesLocal}: ${cityOf(localZone)} ${zoneClock(localZone, now)} · ${utcLabel(localZone, now)}`
+  const rows = zoneRows(now, false)
+  zonesWindowList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.zonesEmpty)]))
+}
+const openZones = () => {
+  renderZonesWindow()
+  zonesWindow.hidden = false
+  zonesWindow.querySelector('.settings-panel').focus()
+}
+const closeZones = () => { zonesWindow.hidden = true; zonesButton.focus() }
+document.getElementById('zones-window-close').addEventListener('click', closeZones)
+zonesWindow.addEventListener('click', (e) => { if (e.target === zonesWindow) closeZones() })
+document.getElementById('zones-manage').addEventListener('click', () => {
+  zonesWindow.hidden = true
+  openManage('zones')
+})
 zonesButton.addEventListener('click', openZones)
 zonesPreview.addEventListener('click', openZones)
 zonesList.addEventListener('click', (e) => {
