@@ -1307,6 +1307,14 @@ html[data-quote-off] #quote {
   width: min(100%, 460px);
 }
 
+/* Advanced and Manage sit side by side under the presets. */
+.settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+}
+
 /* The tabs of the manage panel; the active one is underlined. */
 .manage-tabs {
   display: flex;

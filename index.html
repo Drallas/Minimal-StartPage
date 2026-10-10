@@ -75,7 +75,10 @@
         <label class="setting"><input type="radio" name="preset" id="preset-standard" value="standard"> <span id="lbl-preset-standard">Standard</span></label>
         <label class="setting"><input type="radio" name="preset" id="preset-custom" value="custom" disabled> <span id="lbl-preset-custom">Personal</span></label>
       </div>
-      <button type="button" id="advanced-toggle" aria-expanded="false" aria-controls="advanced">Advanced</button>
+      <div class="settings-actions">
+        <button type="button" id="advanced-toggle" aria-expanded="false" aria-controls="advanced">Advanced</button>
+        <button type="button" id="manage-open">Manage</button>
+      </div>
       <p class="location-title" id="sec-privacy-basic">Privacy</p>
       <p class="privacy" id="privacy"></p>
       <div class="advanced" id="advanced" hidden>
@@ -96,7 +99,6 @@
               <p class="city-msg" id="city-msg" role="status"></p>
             </form>
           </div>
-        <button type="button" id="places-open" class="text-button">Manage places</button>
         </section>
         <section class="adv-group">
           <p class="location-title" id="sec-look">Show</p>
@@ -109,7 +111,6 @@
         <section class="adv-group">
           <p class="location-title" id="sec-ai">AI shortcuts</p>
           <label class="setting"><input type="checkbox" id="set-askai"> <span id="lbl-askai">On</span></label>
-          <button type="button" id="ai-open" class="text-button">Manage shortcuts</button>
         </section>
         <section class="adv-group">
           <p class="location-title" id="sec-bg">Background</p>
@@ -131,7 +132,7 @@
   <div class="settings" id="manage" hidden>
     <div class="settings-panel manage-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="manage-title">
       <div class="settings-head">
-        <h2 id="manage-title">Links</h2>
+        <h2 id="manage-title">Manage</h2>
         <button type="button" id="manage-close" class="settings-close" aria-label="Close">×</button>
       </div>
       <div class="manage-tabs" role="tablist">
