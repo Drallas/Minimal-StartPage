@@ -137,13 +137,17 @@ const updateClock = () => {
 updateClock()
 setInterval(updateClock, 30000)
 
-// One quote per day, picked by day of the year so it stays the same all day.
+// A new quote every six hours, so the same one stays put for that window.
 const quoteEl = document.getElementById('quote')
-const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 864e5)
 const quoteLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
 const quoteList = quotes[quoteLang] || quotes.en
-const todaysQuote = quoteList[dayOfYear % quoteList.length]
-quoteEl.textContent = `${todaysQuote.text} — ${todaysQuote.by}`
+const showQuote = () => {
+  const sixHours = Math.floor(Date.now() / (6 * 3600 * 1000))
+  const current = quoteList[sixHours % quoteList.length]
+  quoteEl.textContent = `${current.text} — ${current.by}`
+}
+showQuote()
+setInterval(showQuote, 60000)
 
 const showTheme = () => {
   const stored = root.dataset.theme || 'auto'

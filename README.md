@@ -33,8 +33,8 @@
 - **Search engine.** The icon on the left of the search bar shows the current engine (DuckDuckGo by default, or Kagi, Brave or Google). Click it to cycle to the next one. Your choice is remembered.
 - **Theme.** Follows your system's light or dark setting by default. The icons in the top right switch to a fixed Light or Dark theme, and that choice is remembered too. Choose the monitor icon to go back to following the system.
 - **Clock.** The time sits above the search bar, with the date underneath.
-- **Quote of the day.** A short quote from a philosopher or teacher, chosen by the day of the year. It is shown in your browser's language (English, Dutch, German, French, Spanish or Chinese) and falls back to English.
-- **Shortcuts.** A Wikipedia link in the top left, and links to Claude, ChatGPT and Grok below the search bar under the caption "Ask AI".
+- **Quote of the day.** A short quote from a philosopher or teacher, that changes every six hours. It is shown in your browser's language (English, Dutch, German, French, Spanish or Chinese) and falls back to English.
+- **Shortcuts.** A Wikipedia link in the top left, and links to Claude, ChatGPT, Grok and Duck.ai below the search bar under the caption "Ask AI".
 
 ## Your data
 
