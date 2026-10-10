@@ -1050,3 +1050,58 @@ html[data-quote-off] #quote {
 .zone-remove:focus-visible {
   color: var(--color-fg-1);
 }
+
+/* Date row: the globe sits beside the date, out of the layout, so nothing else moves. */
+.date-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.zones-wrap {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.zones-preview {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  min-width: 240px;
+  padding: 12px 14px;
+  background: var(--color-field);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-fg-1);
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.zones-preview:empty {
+  display: none !important;
+}
+
+.zones-preview::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.zones-wrap:hover .zones-preview,
+.zones-button:focus-visible ~ .zones-preview {
+  display: block;
+}

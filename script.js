@@ -202,12 +202,12 @@ const forecastText = {
 }
 const hourHeads = { en: ['Time', 'Temp', 'Rain', 'Wind'], nl: ['Tijd', 'Temp', 'Regen', 'Wind'], de: ['Zeit', 'Temp.', 'Regen', 'Wind'], fr: ['Heure', 'Temp.', 'Pluie', 'Vent'], es: ['Hora', 'Temp.', 'Lluvia', 'Viento'], zh: ['时间', '气温', '降水', '风'] }
 const zonesText = {
-  en: { zonesToggle: 'Show time zones (globe next to the date)', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to three)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to three.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
-  nl: { zonesToggle: 'Wereldklok tonen (bolletje naast de datum)', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal drie)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal drie tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
-  de: { zonesToggle: 'Zeitzonen anzeigen (Kugel neben dem Datum)', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu drei)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens drei anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
-  fr: { zonesToggle: 'Afficher les fuseaux horaires (globe à côté de la date)', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (trois maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher trois au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
-  es: { zonesToggle: 'Mostrar zonas horarias (globo junto a la fecha)', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo tres)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta tres.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
-  zh: { zonesToggle: '显示时区（日期旁的地球图标）', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多三个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示三个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
+  en: { zonesToggle: 'Show time zones (globe next to the date)', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to five)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to five.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
+  nl: { zonesToggle: 'Wereldklok tonen (bolletje naast de datum)', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal vijf)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal vijf tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
+  de: { zonesToggle: 'Zeitzonen anzeigen (Kugel neben dem Datum)', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu fünf)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens fünf anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
+  fr: { zonesToggle: 'Afficher les fuseaux horaires (globe à côté de la date)', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (cinq maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher cinq au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
+  es: { zonesToggle: 'Mostrar zonas horarias (globo junto a la fecha)', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
+  zh: { zonesToggle: '显示时区（日期旁的地球图标）', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
 }
 const ipPrivacy = {'en': 'Showing your IP address asks ipify.org for it.', 'nl': 'Het tonen van je IP-adres vraagt het op bij ipify.org.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie bei ipify.org abgefragt.', 'fr': 'Afficher votre adresse IP la demande à ipify.org.', 'es': 'Mostrar tu IP la pide a ipify.org.', 'zh': '显示 IP 地址时，会向 ipify.org 查询。'}
 for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
@@ -590,7 +590,7 @@ settingsFields.reset.addEventListener('click', () => {
   location.reload()
 })
 
-// Time zones: optional. A small globe next to the date opens a window with up to three extra zones.
+// Time zones: optional. A small globe next to the date opens a window with up to five extra zones.
 const zonesButton = document.getElementById('zones-button')
 const zonesDialog = document.getElementById('zones')
 const zonesList = document.getElementById('zones-list')
@@ -605,7 +605,7 @@ const zoneNames = (() => {
   try { return Intl.supportedValuesOf('timeZone') } catch { return ['Europe/Amsterdam', 'Europe/London', 'America/New_York', 'America/Los_Angeles', 'Asia/Tokyo', 'Australia/Sydney'] }
 })()
 let zones = []
-try { zones = (JSON.parse(localStorage.getItem('zones') || '[]') || []).filter((z) => zoneNames.includes(z)).slice(0, 3) } catch {}
+try { zones = (JSON.parse(localStorage.getItem('zones') || '[]') || []).filter((z) => zoneNames.includes(z)).slice(0, 5) } catch {}
 
 const cityOf = (zone) => zone.split('/').pop().replace(/_/g, ' ')
 const zoneClock = (zone, now) => now.toLocaleTimeString(clockMode === '12' ? 'en-US' : 'en-GB', { timeZone: zone, hour: '2-digit', minute: '2-digit', hour12: clockMode === '12' })
@@ -615,6 +615,17 @@ const dayDifference = (zone, now) => {
   return Math.round((Date.parse(ymd(zone)) - Date.parse(ymd(localZone))) / 864e5)
 }
 const dayWord = (diff) => (diff === 0 ? '' : new Intl.RelativeTimeFormat(uiLang, { numeric: 'auto' }).format(diff, 'day'))
+
+// The hover preview under the globe, like the weather preview: the chosen zones at a glance.
+const zonesPreview = document.getElementById('zones-preview')
+const renderPreview = () => {
+  if (!zonesOn || !zones.length) {
+    zonesPreview.replaceChildren()
+    return
+  }
+  const now = new Date()
+  zonesPreview.replaceChildren(...zones.map((zone) => weatherRow(cityOf(zone), zoneClock(zone, now), dayWord(dayDifference(zone, now)))))
+}
 
 const renderZones = () => {
   const now = new Date()
@@ -628,7 +639,8 @@ const renderZones = () => {
     return row
   })
   zonesList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.zonesEmpty)]))
-  const full = zones.length >= 3
+  const full = zones.length >= 5
+  renderPreview()
   zoneInput.disabled = full
   zoneAddButton.disabled = full
   zoneMsg.textContent = full ? t.zonesMax : ''
@@ -650,6 +662,7 @@ const closeZones = () => {
 }
 
 zonesButton.addEventListener('click', openZones)
+zonesPreview.addEventListener('click', openZones)
 document.getElementById('zones-close').addEventListener('click', closeZones)
 zonesDialog.addEventListener('click', (e) => { if (e.target === zonesDialog) closeZones() })
 zonesList.addEventListener('click', (e) => {
@@ -681,10 +694,16 @@ document.getElementById('zone-form').addEventListener('submit', (e) => {
 
 zoneOptions.replaceChildren(...zoneNames.map((z) => Object.assign(document.createElement('option'), { value: cityOf(z) })))
 
-const applyZonesVisibility = () => { zonesButton.hidden = !zonesOn }
+const applyZonesVisibility = () => {
+  zonesButton.hidden = !zonesOn
+  renderPreview()
+}
 applyZonesVisibility()
 // The window ticks along with the clock while it is open.
-setInterval(() => { if (!zonesDialog.hidden) renderZones() }, 1000)
+setInterval(() => {
+  renderPreview()
+  if (!zonesDialog.hidden) renderZones()
+}, 1000)
 
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()

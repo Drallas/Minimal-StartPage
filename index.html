@@ -34,7 +34,7 @@
     </header>
 
     <main id="main">
-      <div id="clock"><time id="time" title="Click to cycle through 24-hour, 12-hour and full time"></time><span id="date"></span><button type="button" id="zones-button" class="zones-button" hidden><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></button></div>
+      <div id="clock"><time id="time" title="Click to cycle through 24-hour, 12-hour and full time"></time><div class="date-row"><span id="date"></span><div class="zones-wrap"><button type="button" id="zones-button" class="zones-button" hidden><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></button><div class="zones-preview" id="zones-preview"></div></div></div></div>
       <form id="searchform" class="searchbar" role="search" title="Type a search and press Enter">
         <label for="search" class="sr-only">Search the web</label>
         <input id="search" type="text" autocomplete="off">
@@ -107,7 +107,7 @@
       <p class="zones-local" id="zones-local"></p>
       <div id="zones-list"></div>
       <form class="city-form" id="zone-form">
-        <label for="zone-input" id="zone-label">Add a time zone (up to three)</label>
+        <label for="zone-input" id="zone-label">Add a time zone (up to five)</label>
         <div class="city-row">
           <input type="text" id="zone-input" list="zone-options" autocomplete="off">
           <button type="submit" id="zone-add-btn">Add</button>

@@ -48,7 +48,7 @@ Changes to make:
 
 **Format:** one line per zone, with the city name from the zone name, the time, and the day difference when it is not today ("+1 dag" or "−1 dag"), so it reads clearly across midnight.
 
-**Choosing zones:** a search field in the settings, filled from the list of zones the browser knows (`Intl.supportedValuesOf('timeZone')`). Limit: three. A zone can be removed with one click.
+**Choosing zones:** a search field in the settings, filled from the list of zones the browser knows (`Intl.supportedValuesOf('timeZone')`). Limit: five. A zone can be removed with one click.
 
 **Points to watch:**
 - Daylight saving changes the offsets twice a year; the display is computed live, so it stays correct, but the stored choice is only the zone name.
@@ -56,4 +56,4 @@ Changes to make:
 - The city name comes from the zone name ("Europe/Amsterdam" → "Amsterdam"), which is good enough for a start page.
 - The canvas can show the same list, because it needs no network, so this one can be mirrored later.
 
-**Decided and built:** optional, switched on in the settings. A small globe next to the date opens a window with up to three extra zones, which the visitor chooses there. Nothing changes on the time or the date.
+**Decided and built:** optional, switched on in the settings. A small globe next to the date opens a window with up to five extra zones, which the visitor chooses there. Nothing changes on the time or the date.
