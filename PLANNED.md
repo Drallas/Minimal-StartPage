@@ -94,8 +94,12 @@ Changes to make:
 2. Custom links, with the default Wikipedia entry.
 3. Canvas: the links can be mirrored later, since they need no network.
 
+## Decided
+
+- Links: as many as fit on the screen. The window scrolls, with a cap of 15 so it stays usable.
+- The description is optional and written by the visitor. It is not taken from the site, since sites add unrelated text.
+- The Wikipedia link can be removed. It comes back when "Reset all choices" is used.
+- Weather icons: done in the hover preview and the full forecast.
+
 ## Questions to settle before building
 
-- Is five extra links enough, or should it be a longer list?
-- Should the description be optional or required?
-- Should the Wikipedia default be removable?

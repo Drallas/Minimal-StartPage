@@ -287,8 +287,16 @@ const fetchCached = async (key, maxAge, url) => {
 const weatherRow = (...cells) => {
   const row = document.createElement('div')
   row.className = 'weather-row'
-  row.append(...cells.map((cell) => Object.assign(document.createElement('span'), { textContent: cell })))
+  row.append(...cells.map((cell) => (cell instanceof Node ? cell : Object.assign(document.createElement('span'), { textContent: cell }))))
   return row
+}
+
+// A cell with a condition icon before its text, e.g. an hour or the current state.
+const iconCell = (key, label, className) => {
+  const cell = el('span', className)
+  cell.innerHTML = weatherIcon(key)
+  cell.append(label)
+  return cell
 }
 
 // The city you entered wins; otherwise the IP lookup, if you allow it.
@@ -328,7 +336,7 @@ const showWeather = async () => {
     const key = weatherKey(now.weather_code)
     const temperature = `${Math.round(now.temperature_2m)}°`
     const next = forecast.hourly.time.slice(start + 1, start + 7).map((time, i) => weatherRow(
-      time.slice(11, 16),
+      iconCell(weatherKey(forecast.hourly.weather_code[start + 1 + i]), time.slice(11, 16), 'hour-cell'),
       `${Math.round(forecast.hourly.temperature_2m[start + 1 + i])}°`,
       `${forecast.hourly.precipitation_probability[start + 1 + i]}%`
     ))
@@ -336,7 +344,7 @@ const showWeather = async () => {
     weatherButton.setAttribute('aria-label', `${key ? words[key] : ''} ${temperature}`.trim())
     weatherDetail.replaceChildren(
       el('div', 'preview-title', place.label),
-      weatherRow(key ? words[key] : '', temperature, ''),
+      weatherRow(iconCell(key, key ? words[key] : '', 'now-cell'), temperature, ''),
       ...next,
       el('div', 'preview-hint', t.more)
     )
@@ -371,7 +379,7 @@ const renderForecast = () => {
     const row = el('div', 'forecast-row')
     const j = start + 1 + i
     row.append(
-      el('span', '', time.slice(11, 16)),
+      iconCell(weatherKey(forecast.hourly.weather_code[j]), time.slice(11, 16), 'hour-cell'),
       el('span', '', temp(forecast.hourly.temperature_2m[j])),
       el('span', '', `${forecast.hourly.precipitation_probability[j]}%`),
       el('span', '', `${Math.round(forecast.hourly.wind_speed_10m[j])} km/h`)

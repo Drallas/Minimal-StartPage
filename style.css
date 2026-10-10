@@ -1137,3 +1137,32 @@ html[data-quote-off] #quote {
 .nested {
   margin-left: 24px;
 }
+
+/* Condition icons inside the pop-ups: small, next to the hour or the current state. */
+.hour-cell,
+.now-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hour-cell .weather-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.now-cell .weather-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* In the hover preview the icons take their colour on hover, like the top bar. */
+.weather:hover .weather-detail .weather-icon,
+.weather-detail .weather-icon:hover {
+  color: var(--wx, currentColor);
+}
+
+/* The full forecast is a deliberate view, so its icons keep their colour. */
+.forecast-row .weather-icon {
+  color: var(--wx);
+}
