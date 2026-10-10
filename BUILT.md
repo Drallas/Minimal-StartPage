@@ -12,5 +12,5 @@ What is in the page now. The open items are in [PLANNED.md](PLANNED.md), and the
 - Weather places: up to three extra places besides your own, shown as chips in the forecast window.
 - Settings: a basic view (the pages and the privacy note, with Help) and an Advanced view grouped into Weather, Display, Background and Privacy. Gear icon, Help guide in six languages, Escape closes the top window.
 - Pages: Minimal and Standard presets in the settings, plus Personal when the choices match neither. They change only the display options; weather and the IP address are never changed by a preset.
-- Privacy: everything is off by default. Only weather and the IP address send data, and a short disclaimer points to Help.
+- Privacy: everything is off by default. Only weather and the IP address send data, and a one-line note sits at the foot of the settings.
 - Phones: the bottom controls sit above the browser's bar; the tint slider and the wallpaper button are adjusted for touch.
