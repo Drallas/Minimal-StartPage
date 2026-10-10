@@ -17,10 +17,6 @@ What is built, what is still open, and what was decided. Nothing in "Open" is bu
 
 ## Open
 
-### Canvas
-
-The canvas has the date and week in the browser language, the footer and the phone layout. It does not have weather, the IP address, the links or the time zones: those need a network connection or per-visitor storage, which the canvas does not have. If it is wanted there, time zones can be added as a session-only setting.
-
 ### Wallpapers
 
 - Five curated wallpapers, chosen by hand and checked against the text colours in light and dark mode. Waiting for the images.
