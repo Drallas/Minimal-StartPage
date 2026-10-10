@@ -271,12 +271,12 @@ const zonesText = {
 }
 const ipPrivacy = {'en': 'Checking your IP address asks ipapi.co for it.', 'nl': 'Je IP-adres opvragen vraagt het bij ipapi.co.', 'de': 'Zum Abfragen deiner IP-Adresse wird sie bei ipapi.co angefragt.', 'fr': 'Vérifier votre adresse IP la demande à ipapi.co.', 'es': 'Consultar tu IP también la pide a ipapi.co.', 'zh': '查询 IP 地址时，会向 ipapi.co 请求。'}
 const linksText = {
-  en: { linksEdit: 'Edit links', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'No links yet.', linkAdd: 'Add link', linkEdit: 'Edit link', lblName: 'Name', lblUrl: 'Address', lblDesc: 'Description (optional)', linkSave: 'Save', linkCancel: 'Cancel', linksFull: 'You can have up to 15 links.', linkInvalid: 'Enter a valid address, for example https://example.com', linkEditBtn: 'Edit', linkRemove: 'Remove' },
-  nl: { linksEdit: 'Links bewerken', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Nog geen links.', linkAdd: 'Link toevoegen', linkEdit: 'Link bewerken', lblName: 'Naam', lblUrl: 'Adres', lblDesc: 'Beschrijving (optioneel)', linkSave: 'Opslaan', linkCancel: 'Annuleren', linksFull: 'Je kunt maximaal 15 links hebben.', linkInvalid: 'Vul een geldig adres in, bijvoorbeeld https://voorbeeld.nl', linkEditBtn: 'Bewerken', linkRemove: 'Verwijderen' },
-  de: { linksEdit: 'Links bearbeiten', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Noch keine Links.', linkAdd: 'Link hinzufügen', linkEdit: 'Link bearbeiten', lblName: 'Name', lblUrl: 'Adresse', lblDesc: 'Beschreibung (optional)', linkSave: 'Speichern', linkCancel: 'Abbrechen', linksFull: 'Du kannst höchstens 15 Links haben.', linkInvalid: 'Gib eine gültige Adresse ein, zum Beispiel https://beispiel.de', linkEditBtn: 'Bearbeiten', linkRemove: 'Entfernen' },
-  fr: { linksEdit: 'Modifier les liens', linksButton: 'Liens', linksTitle: 'Liens', linksEmpty: 'Aucun lien pour l’instant.', linkAdd: 'Ajouter un lien', linkEdit: 'Modifier le lien', lblName: 'Nom', lblUrl: 'Adresse', lblDesc: 'Description (facultatif)', linkSave: 'Enregistrer', linkCancel: 'Annuler', linksFull: 'Vous pouvez avoir jusqu’à 15 liens.', linkInvalid: 'Saisissez une adresse valide, par exemple https://exemple.fr', linkEditBtn: 'Modifier', linkRemove: 'Supprimer' },
-  es: { linksEdit: 'Editar enlaces', linksButton: 'Enlaces', linksTitle: 'Enlaces', linksEmpty: 'Aún no hay enlaces.', linkAdd: 'Añadir enlace', linkEdit: 'Editar enlace', lblName: 'Nombre', lblUrl: 'Dirección', lblDesc: 'Descripción (opcional)', linkSave: 'Guardar', linkCancel: 'Cancelar', linksFull: 'Puedes tener hasta 15 enlaces.', linkInvalid: 'Escribe una dirección válida, por ejemplo https://ejemplo.es', linkEditBtn: 'Editar', linkRemove: 'Quitar' },
-  zh: { linksEdit: '编辑链接', linksButton: '链接', linksTitle: '链接', linksEmpty: '还没有链接。', linkAdd: '添加链接', linkEdit: '编辑链接', lblName: '名称', lblUrl: '地址', lblDesc: '说明（可选）', linkSave: '保存', linkCancel: '取消', linksFull: '最多可以添加 15 个链接。', linkInvalid: '请输入有效的地址，例如 https://example.com', linkEditBtn: '编辑', linkRemove: '移除' }
+  en: { askAiTip: 'AI shortcuts', linksEdit: 'Edit links', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'No links yet.', linkAdd: 'Add link', linkEdit: 'Edit link', lblName: 'Name', lblUrl: 'Address', lblDesc: 'Description (optional)', linkSave: 'Save', linkCancel: 'Cancel', linksFull: 'You can have up to 15 links.', linkInvalid: 'Enter a valid address, for example https://example.com', linkEditBtn: 'Edit', linkRemove: 'Remove' },
+  nl: { askAiTip: 'AI-snelkoppelingen', linksEdit: 'Links bewerken', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Nog geen links.', linkAdd: 'Link toevoegen', linkEdit: 'Link bewerken', lblName: 'Naam', lblUrl: 'Adres', lblDesc: 'Beschrijving (optioneel)', linkSave: 'Opslaan', linkCancel: 'Annuleren', linksFull: 'Je kunt maximaal 15 links hebben.', linkInvalid: 'Vul een geldig adres in, bijvoorbeeld https://voorbeeld.nl', linkEditBtn: 'Bewerken', linkRemove: 'Verwijderen' },
+  de: { askAiTip: 'KI-Verknüpfungen', linksEdit: 'Links bearbeiten', linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Noch keine Links.', linkAdd: 'Link hinzufügen', linkEdit: 'Link bearbeiten', lblName: 'Name', lblUrl: 'Adresse', lblDesc: 'Beschreibung (optional)', linkSave: 'Speichern', linkCancel: 'Abbrechen', linksFull: 'Du kannst höchstens 15 Links haben.', linkInvalid: 'Gib eine gültige Adresse ein, zum Beispiel https://beispiel.de', linkEditBtn: 'Bearbeiten', linkRemove: 'Entfernen' },
+  fr: { askAiTip: 'Raccourcis IA', linksEdit: 'Modifier les liens', linksButton: 'Liens', linksTitle: 'Liens', linksEmpty: 'Aucun lien pour l’instant.', linkAdd: 'Ajouter un lien', linkEdit: 'Modifier le lien', lblName: 'Nom', lblUrl: 'Adresse', lblDesc: 'Description (facultatif)', linkSave: 'Enregistrer', linkCancel: 'Annuler', linksFull: 'Vous pouvez avoir jusqu’à 15 liens.', linkInvalid: 'Saisissez une adresse valide, par exemple https://exemple.fr', linkEditBtn: 'Modifier', linkRemove: 'Supprimer' },
+  es: { askAiTip: 'Accesos directos de IA', linksEdit: 'Editar enlaces', linksButton: 'Enlaces', linksTitle: 'Enlaces', linksEmpty: 'Aún no hay enlaces.', linkAdd: 'Añadir enlace', linkEdit: 'Editar enlace', lblName: 'Nombre', lblUrl: 'Dirección', lblDesc: 'Descripción (opcional)', linkSave: 'Guardar', linkCancel: 'Cancelar', linksFull: 'Puedes tener hasta 15 enlaces.', linkInvalid: 'Escribe una dirección válida, por ejemplo https://ejemplo.es', linkEditBtn: 'Editar', linkRemove: 'Quitar' },
+  zh: { askAiTip: 'AI 快捷方式', linksEdit: '编辑链接', linksButton: '链接', linksTitle: '链接', linksEmpty: '还没有链接。', linkAdd: '添加链接', linkEdit: '编辑链接', lblName: '名称', lblUrl: '地址', lblDesc: '说明（可选）', linkSave: '保存', linkCancel: '取消', linksFull: '最多可以添加 15 个链接。', linkInvalid: '请输入有效的地址，例如 https://example.com', linkEditBtn: '编辑', linkRemove: '移除' }
 }
 const sectionText = {
   en: { secWeather: 'Weather', secLook: 'Show', secPrivacy: 'Privacy', placeTime: 'Local time' },
@@ -846,6 +846,7 @@ const applySettingsText = () => {
   document.getElementById('links-window-title').textContent = t.linksTitle
   document.getElementById('links-window-close').setAttribute('aria-label', t.close)
   document.getElementById('links-manage').textContent = t.linksEdit
+  document.getElementById('ask-ai-caption').title = t.askAiTip
   document.getElementById('zones-window-title').textContent = t.zonesTitle
   document.getElementById('zones-window-close').setAttribute('aria-label', t.close)
   document.getElementById('zones-manage').textContent = t.zonesEdit
@@ -1770,9 +1771,6 @@ aiForm.addEventListener('submit', (e) => {
   saveAskAi()
 })
 
-const openAiWindow = () => openManage('ai')
-const closeAiWindow = () => closeManage()
-document.getElementById('ask-ai-edit').addEventListener('click', openAiWindow)
 
 renderAskAi()
 root.toggleAttribute('data-quote-off', !quoteOn)

@@ -711,23 +711,6 @@ html[data-wallpaper-on] .modes button {
   color: var(--color-fg-1);
 }
 
-/* The caption above the AI shortcuts is the button that opens their editor. */
-.caption-button {
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: none;
-  font-family: inherit;
-  text-align: center;
-  cursor: pointer;
-}
-
-.caption-button:hover,
-.caption-button:focus-visible {
-  color: var(--color-fg-1);
-}
-
 /* The two icon buttons: a colour button on the left and a background button on the right. Desktop keeps
    the slider and the wallpaper thumbnail, so the icons only show on phones. */
 .controls .tint-cycle,
