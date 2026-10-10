@@ -280,8 +280,13 @@ footer a:focus-visible svg {
 }
 
 /* Weather, centred in the top bar. The details show on hover, focus or a click. */
+/* Centred on the page itself, not between the two icons, which differ in width. */
 .weather {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
   font-size: 12px;
   color: var(--color-fg-2);
 }

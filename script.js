@@ -131,12 +131,42 @@ const ipLine = document.getElementById('ip')
 let weatherOn = false
 try { weatherOn = localStorage.getItem('weather') === 'on' } catch {}
 
-// Open-Meteo weather codes (WMO), in plain words.
+const uiLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
 const weatherWords = {
-  0: 'Clear', 1: 'Mostly clear', 2: 'Partly cloudy', 3: 'Cloudy', 45: 'Fog', 48: 'Fog',
-  51: 'Drizzle', 53: 'Drizzle', 55: 'Drizzle', 61: 'Rain', 63: 'Rain', 65: 'Heavy rain',
-  71: 'Snow', 73: 'Snow', 75: 'Heavy snow', 80: 'Showers', 81: 'Showers', 82: 'Heavy showers',
-  95: 'Thunderstorm', 96: 'Thunderstorm', 99: 'Thunderstorm',
+  en: { clear: 'Clear', mostly: 'Mostly clear', partly: 'Partly cloudy', cloudy: 'Cloudy', fog: 'Fog', drizzle: 'Drizzle', rain: 'Rain', heavyRain: 'Heavy rain', snow: 'Snow', heavySnow: 'Heavy snow', showers: 'Showers', heavyShowers: 'Heavy showers', storm: 'Thunderstorm' },
+  nl: { clear: 'Helder', mostly: 'Overwegend helder', partly: 'Deels bewolkt', cloudy: 'Bewolkt', fog: 'Mist', drizzle: 'Motregen', rain: 'Regen', heavyRain: 'Zware regen', snow: 'Sneeuw', heavySnow: 'Zware sneeuw', showers: 'Buien', heavyShowers: 'Zware buien', storm: 'Onweer' },
+  de: { clear: 'Klar', mostly: 'Überwiegend klar', partly: 'Teilweise bewölkt', cloudy: 'Bewölkt', fog: 'Nebel', drizzle: 'Nieselregen', rain: 'Regen', heavyRain: 'Starker Regen', snow: 'Schnee', heavySnow: 'Starker Schnee', showers: 'Schauer', heavyShowers: 'Starke Schauer', storm: 'Gewitter' },
+  fr: { clear: 'Dégagé', mostly: 'Plutôt dégagé', partly: 'Partiellement nuageux', cloudy: 'Nuageux', fog: 'Brouillard', drizzle: 'Bruine', rain: 'Pluie', heavyRain: 'Forte pluie', snow: 'Neige', heavySnow: 'Forte neige', showers: 'Averses', heavyShowers: 'Fortes averses', storm: 'Orage' },
+  es: { clear: 'Despejado', mostly: 'Mayormente despejado', partly: 'Parcialmente nublado', cloudy: 'Nublado', fog: 'Niebla', drizzle: 'Llovizna', rain: 'Lluvia', heavyRain: 'Lluvia intensa', snow: 'Nieve', heavySnow: 'Nieve intensa', showers: 'Chubascos', heavyShowers: 'Chubascos intensos', storm: 'Tormenta' },
+  zh: { clear: '晴', mostly: '大部晴朗', partly: '局部多云', cloudy: '多云', fog: '雾', drizzle: '毛毛雨', rain: '雨', heavyRain: '大雨', snow: '雪', heavySnow: '大雪', showers: '阵雨', heavyShowers: '强阵雨', storm: '雷暴' },
+}
+const weatherUi = {
+  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', ip: 'Internet IP' },
+  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', ip: 'Internet-IP' },
+  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', ip: 'Internet-IP' },
+  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', ip: 'IP internet' },
+  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', ip: 'IP de internet' },
+  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', ip: '互联网 IP' },
+}
+const wt = weatherUi[uiLang] || weatherUi.en
+const ww = weatherWords[uiLang] || weatherWords.en
+
+// Open-Meteo weather codes (WMO), mapped to the words above.
+const weatherKey = (code) => {
+  if (code === 0) return 'clear'
+  if (code === 1) return 'mostly'
+  if (code === 2) return 'partly'
+  if (code === 3) return 'cloudy'
+  if (code === 45 || code === 48) return 'fog'
+  if (code >= 51 && code <= 55) return 'drizzle'
+  if (code === 61 || code === 63) return 'rain'
+  if (code === 65) return 'heavyRain'
+  if (code === 71 || code === 73) return 'snow'
+  if (code === 75) return 'heavySnow'
+  if (code === 80 || code === 81) return 'showers'
+  if (code === 82) return 'heavyShowers'
+  if (code >= 95) return 'storm'
+  return null
 }
 
 // Keeps a response in localStorage for maxAge milliseconds, so a reload does not fetch again.
@@ -173,35 +203,37 @@ const showWeather = async () => {
       `${Math.round(forecast.hourly.temperature_2m[start + 1 + i])}°`,
       `${forecast.hourly.precipitation_probability[start + 1 + i]}%`
     ))
+    const key = weatherKey(now.weather_code)
     weatherButton.textContent = `${Math.round(now.temperature_2m)}°`
     weatherDetail.replaceChildren(
       weatherRow(`${place.city}, ${place.country_name}`),
-      weatherRow(weatherWords[now.weather_code] || 'Weather', `${Math.round(now.temperature_2m)}°`),
+      weatherRow(key ? ww[key] : '', `${Math.round(now.temperature_2m)}°`),
       ...next,
-      Object.assign(document.createElement('button'), { type: 'button', className: 'weather-off', textContent: 'Hide weather' })
+      Object.assign(document.createElement('button'), { type: 'button', className: 'weather-off', textContent: wt.hide })
     )
-    ipLine.textContent = place.ip
+    ipLine.textContent = `${wt.ip}: ${place.ip}`
     ipLine.hidden = false
   } catch {
-    weatherButton.textContent = 'Weather unavailable'
+    weatherButton.textContent = wt.unavailable
   }
 }
 
 const hideWeather = () => {
   weatherOn = false
   try { localStorage.setItem('weather', 'off') } catch {}
-  weatherButton.textContent = 'Show weather'
+  weatherButton.textContent = wt.show
   weatherButton.setAttribute('aria-expanded', 'false')
   weatherDetail.replaceChildren()
   weatherDetail.classList.remove('open')
   ipLine.hidden = true
 }
 
+weatherButton.textContent = weatherOn ? wt.loading : wt.show
 weatherButton.addEventListener('click', () => {
   if (!weatherOn) {
     weatherOn = true
     try { localStorage.setItem('weather', 'on') } catch {}
-    weatherButton.textContent = 'Loading…'
+    weatherButton.textContent = wt.loading
     showWeather()
     return
   }
