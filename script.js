@@ -163,8 +163,25 @@ let lastInfo = ''
 // The IP address line under the footer: only when we have one and it is wanted.
 // The IP line shows only when weather is on, the location is the IP address, and the option is on.
 // It reuses the lookup the weather already makes, so no extra request is sent.
+const fetchMyIp = async () => {
+  if (!showIpOn) {
+    lastIp = null
+    lastInfo = ''
+    updateIpLine()
+    return
+  }
+  try {
+    const info = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
+    lastIp = info.ip
+    lastInfo = [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ')
+  } catch {
+    lastIp = null
+    lastInfo = ''
+  }
+  updateIpLine()
+}
 const updateIpLine = () => {
-  const visible = weatherOn && locationMode === 'ip' && showIpOn && !!lastIp
+  const visible = showIpOn && !!lastIp
   ipLine.textContent = visible ? `${t.ip}: ${lastIp}` : ''
   ipLine.title = visible ? lastInfo : ''
   ipLine.hidden = !visible
@@ -406,16 +423,11 @@ const showWeather = async () => {
       // Greyed-out icon: a click opens settings, where a place can be chosen.
       showIdle(t.noSource)
       current = null
-      lastIp = null
       weatherDetail.replaceChildren()
-      updateIpLine()
       return
     }
     const forecast = await fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
     current = { place, forecast }
-    lastIp = place.ip
-    lastInfo = place.detail || ''
-    updateIpLine()
     const now = forecast.current
     const start = forecast.hourly.time.indexOf(now.time)
     const key = weatherKey(now.weather_code)
@@ -436,9 +448,7 @@ const showWeather = async () => {
   } catch {
     weatherButton.textContent = t.unavailable
     current = null
-    lastIp = null
     weatherDetail.replaceChildren()
-    updateIpLine()
   }
 }
 
@@ -525,9 +535,6 @@ const updateWeatherHint = () => {
   hint.hidden = !(weatherOn && !hasSource())
   // The location options belong to the weather, so they are off while it is.
   document.querySelectorAll('#weather-sub input, #weather-sub button').forEach((el) => { el.disabled = !weatherOn })
-  // The IP display only means something when the IP address is the location.
-  settingsFields.showIp.disabled = !weatherOn || locationMode !== 'ip'
-  updateIpLine()
 }
 
 const setWeather = (on) => {
@@ -705,11 +712,11 @@ document.addEventListener('keydown', (e) => {
 
 settingsFields.weather.addEventListener('change', () => setWeather(settingsFields.weather.checked))
 
+// Showing the IP address is its own choice, separate from the weather. It asks ipapi.co, the service the IP location uses.
 settingsFields.showIp.addEventListener('change', () => {
   showIpOn = settingsFields.showIp.checked
   writeKey('showIp', showIpOn ? 'on' : 'off')
-  if (weatherOn && locationMode === 'ip' && showIpOn && !lastIp) showWeather()
-  else updateIpLine()
+  fetchMyIp()
 })
 
 // Choosing a location: the IP address or the city. Either one refreshes the weather when it is on.
@@ -1123,6 +1130,7 @@ renderLinks()
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
 updateWeatherHint()
+fetchMyIp()
 if (weatherOn) weatherButton.textContent = t.loading
 else showIdle()
 if (weatherOn) showWeather()
