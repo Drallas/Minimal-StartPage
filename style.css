@@ -1424,6 +1424,11 @@ html[data-quote-off] #quote {
   margin-top: 8px;
 }
 
+/* The grid below would otherwise override the hidden attribute. */
+.advanced[hidden] {
+  display: none;
+}
+
 /* Advanced: a wider window, with the options in two columns. Headings span both. */
 .settings-panel.is-wide {
   width: min(100%, 760px);
