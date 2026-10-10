@@ -138,13 +138,15 @@ updateClock()
 setInterval(updateClock, 30000)
 
 // A new quote every six hours, so the same one stays put for that window.
-const quoteEl = document.getElementById('quote')
+const quoteText = document.getElementById('quote-text')
+const quoteBy = document.getElementById('quote-by')
 const quoteLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
 const quoteList = quotes[quoteLang] || quotes.en
 const showQuote = () => {
   const sixHours = Math.floor(Date.now() / (6 * 3600 * 1000))
   const current = quoteList[sixHours % quoteList.length]
-  quoteEl.textContent = `${current.text} — ${current.by}`
+  quoteText.textContent = `“${current.text}”`
+  quoteBy.textContent = current.by
 }
 showQuote()
 setInterval(showQuote, 60000)

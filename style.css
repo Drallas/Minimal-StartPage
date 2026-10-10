@@ -279,13 +279,20 @@ button {
   position: absolute;
   left: 24px;
   right: 24px;
-  bottom: 180px;
-  max-width: 480px;
+  bottom: 220px;
+  max-width: 360px;
   margin: 0 auto;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
   text-align: center;
   color: var(--color-fg-2);
+}
+
+#quote-by {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: .04em;
   opacity: .7;
 }
 
