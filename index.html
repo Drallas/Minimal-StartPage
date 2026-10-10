@@ -135,12 +135,12 @@
         <button type="button" id="manage-close" class="settings-close" aria-label="Close">×</button>
       </div>
       <div class="manage-tabs" role="tablist">
-        <button type="button" role="tab" class="manage-tab-button" data-tab="links" id="tab-links">Links</button>
-        <button type="button" role="tab" class="manage-tab-button" data-tab="zones" id="tab-zones">Time zones</button>
-        <button type="button" role="tab" class="manage-tab-button" data-tab="ai" id="tab-ai">AI</button>
-        <button type="button" role="tab" class="manage-tab-button" data-tab="weather" id="tab-weather">Weather</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="links" id="tab-links" aria-controls="section-links">Links</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="zones" id="tab-zones" aria-controls="section-zones">Time zones</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="ai" id="tab-ai" aria-controls="section-ai">AI</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="weather" id="tab-weather" aria-controls="section-weather">Weather</button>
       </div>
-      <section class="manage-section" data-tab="links" hidden>
+      <section class="manage-section" data-tab="links" id="section-links" role="tabpanel" aria-labelledby="tab-links" tabindex="0" hidden>
       <div class="link-icons" id="link-icons"></div>
       <div class="links-list" id="links-list"></div>
       <form class="link-form" id="link-form">
@@ -158,7 +158,7 @@
         <p class="city-msg" id="link-msg" role="status"></p>
       </form>
       </section>
-      <section class="manage-section" data-tab="zones" hidden>
+      <section class="manage-section" data-tab="zones" id="section-zones" role="tabpanel" aria-labelledby="tab-zones" tabindex="0" hidden>
       <p class="zones-local" id="zones-local"></p>
       <div id="zones-list"></div>
       <form class="city-form" id="zone-form">
@@ -171,7 +171,7 @@
         <p class="city-msg" id="zone-msg" role="status"></p>
       </form>
       </section>
-      <section class="manage-section" data-tab="ai" hidden>
+      <section class="manage-section" data-tab="ai" id="section-ai" role="tabpanel" aria-labelledby="tab-ai" tabindex="0" hidden>
       <ul class="ai-list" id="ai-list"></ul>
       <form class="link-form" id="ai-form">
         <p class="link-form-title" id="ai-form-title">Add shortcut</p>
@@ -186,7 +186,7 @@
         <p class="city-msg" id="ai-msg" role="status"></p>
       </form>
       </section>
-      <section class="manage-section" data-tab="weather" hidden>
+      <section class="manage-section" data-tab="weather" id="section-weather" role="tabpanel" aria-labelledby="tab-weather" tabindex="0" hidden>
         <p class="manage-note" id="weather-own"></p>
         <ul class="place-list" id="place-list"></ul>
         <form class="city-form" id="place-form">

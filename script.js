@@ -1213,7 +1213,21 @@ const closeManage = () => {
   manageWindow.hidden = true
   if (manageFrom && manageFrom.focus) manageFrom.focus()
 }
-manageTabs.forEach((button) => button.addEventListener('click', () => showManageTab(button.dataset.tab)))
+manageTabs.forEach((button, index) => {
+  button.addEventListener('click', () => showManageTab(button.dataset.tab))
+  // Arrow keys move between the tabs, as the tab pattern expects; Home and End jump to the ends.
+  button.addEventListener('keydown', (e) => {
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key]
+    let next = null
+    if (step) next = (index + step + manageTabs.length) % manageTabs.length
+    else if (e.key === 'Home') next = 0
+    else if (e.key === 'End') next = manageTabs.length - 1
+    if (next === null) return
+    e.preventDefault()
+    manageTabs[next].focus()
+    showManageTab(manageTabs[next].dataset.tab)
+  })
+})
 document.getElementById('manage-close').addEventListener('click', closeManage)
 manageWindow.addEventListener('click', (e) => { if (e.target === manageWindow) closeManage() })
 
