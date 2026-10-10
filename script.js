@@ -262,12 +262,12 @@ const aiText = {
   zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
-  en: { manageOpen: 'Manage', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to three cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
-  nl: { manageOpen: 'Beheren', tabLinks: 'Links', tabZones: 'Tijdzones', tabAi: 'AI', tabWeather: 'Weer', placeLabel: 'Een stad toevoegen', placeAdd: 'Toevoegen', placeOwn: 'Je eigen plaats', placeNone: 'Nog geen plaats', placeLimit: 'Je kunt maximaal drie steden toevoegen.', placeDuplicate: 'Staat al in de lijst', placeRemove: 'Verwijderen' },
-  de: { manageOpen: 'Verwalten', tabLinks: 'Links', tabZones: 'Zeitzonen', tabAi: 'KI', tabWeather: 'Wetter', placeLabel: 'Eine Stadt hinzufügen', placeAdd: 'Hinzufügen', placeOwn: 'Dein Ort', placeNone: 'Noch kein Ort', placeLimit: 'Du kannst höchstens drei Städte hinzufügen.', placeDuplicate: 'Ist schon in der Liste', placeRemove: 'Entfernen' },
-  fr: { manageOpen: 'Gérer', tabLinks: 'Liens', tabZones: 'Fuseaux', tabAi: 'IA', tabWeather: 'Météo', placeLabel: 'Ajouter une ville', placeAdd: 'Ajouter', placeOwn: 'Votre lieu', placeNone: 'Aucun lieu pour l’instant', placeLimit: 'Vous pouvez ajouter jusqu’à trois villes.', placeDuplicate: 'Déjà dans la liste', placeRemove: 'Supprimer' },
-  es: { manageOpen: 'Gestionar', tabLinks: 'Enlaces', tabZones: 'Zonas horarias', tabAi: 'IA', tabWeather: 'Tiempo', placeLabel: 'Añadir una ciudad', placeAdd: 'Añadir', placeOwn: 'Tu lugar', placeNone: 'Aún no hay lugar', placeLimit: 'Puedes añadir hasta tres ciudades.', placeDuplicate: 'Ya está en la lista', placeRemove: 'Quitar' },
-  zh: { manageOpen: '管理', tabLinks: '链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeLimit: '最多添加三个城市。', placeDuplicate: '已在列表中', placeRemove: '移除' }
+  en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to three cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
+  nl: { linkUp: 'Omhoog', linkDown: 'Omlaag', manageOpen: 'Data beheren', tabLinks: 'Links', tabZones: 'Tijdzones', tabAi: 'AI', tabWeather: 'Weer', placeLabel: 'Een stad toevoegen', placeAdd: 'Toevoegen', placeOwn: 'Je eigen plaats', placeNone: 'Nog geen plaats', placeLimit: 'Je kunt maximaal drie steden toevoegen.', placeDuplicate: 'Staat al in de lijst', placeRemove: 'Verwijderen' },
+  de: { linkUp: 'Nach oben', linkDown: 'Nach unten', manageOpen: 'Daten verwalten', tabLinks: 'Links', tabZones: 'Zeitzonen', tabAi: 'KI', tabWeather: 'Wetter', placeLabel: 'Eine Stadt hinzufügen', placeAdd: 'Hinzufügen', placeOwn: 'Dein Ort', placeNone: 'Noch kein Ort', placeLimit: 'Du kannst höchstens drei Städte hinzufügen.', placeDuplicate: 'Ist schon in der Liste', placeRemove: 'Entfernen' },
+  fr: { linkUp: 'Monter', linkDown: 'Descendre', manageOpen: 'Gérer les données', tabLinks: 'Liens', tabZones: 'Fuseaux', tabAi: 'IA', tabWeather: 'Météo', placeLabel: 'Ajouter une ville', placeAdd: 'Ajouter', placeOwn: 'Votre lieu', placeNone: 'Aucun lieu pour l’instant', placeLimit: 'Vous pouvez ajouter jusqu’à trois villes.', placeDuplicate: 'Déjà dans la liste', placeRemove: 'Supprimer' },
+  es: { linkUp: 'Subir', linkDown: 'Bajar', manageOpen: 'Gestionar datos', tabLinks: 'Enlaces', tabZones: 'Zonas horarias', tabAi: 'IA', tabWeather: 'Tiempo', placeLabel: 'Añadir una ciudad', placeAdd: 'Añadir', placeOwn: 'Tu lugar', placeNone: 'Aún no hay lugar', placeLimit: 'Puedes añadir hasta tres ciudades.', placeDuplicate: 'Ya está en la lista', placeRemove: 'Quitar' },
+  zh: { linkUp: '上移', linkDown: '下移', manageOpen: '管理数据', tabLinks: '链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeLimit: '最多添加三个城市。', placeDuplicate: '已在列表中', placeRemove: '移除' }
 }
 const footerText = {
   en: { pre: 'Vibe coded with', post: 'by Allards', title: 'View the README on GitHub' },
@@ -705,6 +705,7 @@ const choosePlace = async (index) => {
   renderForecast()
 }
 const renderPlaceChips = () => {
+  sortPlaces()
   const box = document.getElementById('forecast-places')
   if (!weatherOn || !current || extraPlaces.length === 0) {
     box.replaceChildren()
@@ -719,8 +720,15 @@ const renderPlaceChips = () => {
   }))
 }
 
+// Extra places in time-zone order, the same order as the time zones: earliest UTC offset first.
+const sortPlaces = () => {
+  const now = new Date()
+  extraPlaces.sort((a, b) => utcOffset(a.timezone || 'UTC', now) - utcOffset(b.timezone || 'UTC', now) || a.label.localeCompare(b.label))
+}
+
 // The weather tab: the own place, and the extra places with a remove button each.
 const renderPlaces = () => {
+  sortPlaces()
   document.getElementById('weather-own').textContent = `${t.placeOwn}: ${current ? current.place.label : t.placeNone}`
   document.getElementById('place-list').replaceChildren(...extraPlaces.map((place, index) => {
     const row = document.createElement('li')
@@ -746,9 +754,10 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
     const found = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=1&language=${uiLang}&format=json`)).json()
     const hit = found.results && found.results[0]
     if (!hit) { placeMsg.textContent = t.notFound; return }
-    const place = { label: `${hit.name}, ${hit.country}`, latitude: hit.latitude, longitude: hit.longitude }
+    const place = { label: `${hit.name}, ${hit.country}`, latitude: hit.latitude, longitude: hit.longitude, timezone: hit.timezone || 'UTC' }
     if (extraPlaces.some((p) => p.label === place.label)) { placeMsg.textContent = t.placeDuplicate; return }
     extraPlaces = [...extraPlaces, place]
+    sortPlaces()
     savePlaces()
     input.value = ''
     placeMsg.textContent = ''
@@ -1365,7 +1374,19 @@ const renderLinks = () => {
     const remove = el('button', 'row-btn', t.linkRemove)
     remove.type = 'button'
     remove.dataset.remove = String(index)
-    row.append(linkAnchor(link, true), edit, remove)
+    const up = el('button', 'row-btn', '↑')
+    up.type = 'button'
+    up.title = t.linkUp
+    up.disabled = index === 0
+    up.dataset.index = String(index)
+    up.dataset.step = '-1'
+    const down = el('button', 'row-btn', '↓')
+    down.type = 'button'
+    down.title = t.linkDown
+    down.disabled = index === links.length - 1
+    down.dataset.index = String(index)
+    down.dataset.step = '1'
+    row.append(linkAnchor(link, true), up, down, edit, remove)
     return row
   })
   linksList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.linksEmpty)]))
@@ -1411,8 +1432,16 @@ linkForm.addEventListener('submit', (e) => {
 linkCancel.addEventListener('click', resetLinkForm)
 
 linksList.addEventListener('click', (e) => {
-  const { edit, remove } = e.target.dataset
-  if (edit !== undefined) {
+  const { edit, remove, index, step } = e.target.dataset
+  if (step !== undefined) {
+    const next = Number(index) + Number(step)
+    const moved = [...links]
+    ;[moved[Number(index)], moved[next]] = [moved[next], moved[Number(index)]]
+    links = moved
+    saveLinks()
+    if (editing !== null) resetLinkForm()
+    renderLinks()
+  } else if (edit !== undefined) {
     const link = links[Number(edit)]
     editing = Number(edit)
     linkName.value = link.title

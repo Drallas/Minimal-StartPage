@@ -67,7 +67,7 @@ There are three ways to use it, from easiest to most control. You do not need to
 Searches go straight to the search engine you chose. The page keeps your choices in your browser only, not on a server. Nothing leaves the page unless you switch on one of these:
 
 - **Weather** sends your IP address to [ipapi.co](https://ipapi.co) to find your city, or the city you choose to [Open-Meteo](https://open-meteo.com) to find its coordinates. The forecast itself comes from Open-Meteo. Only while weather is on.
-- **Extra places** on the weather send their name to [Open-Meteo](https://open-meteo.com) to find them. Up to three can be added in the Manage panel, under Weather.
+- **Extra places** on the weather send their name to [Open-Meteo](https://open-meteo.com) to find them. Up to three can be added in the Data panel, under Weather.
 - **Your IP address** under the footer asks [ipapi.co](https://ipapi.co) for your address, whether or not the weather is on.
 
 Your IP address is looked up again at most every ten minutes, so a VPN change shows after a refresh, and clicking the address under the footer checks it straight away; forecasts are kept for 30 minutes. "Reset settings" in the settings brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and asks first.
