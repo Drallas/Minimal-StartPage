@@ -247,7 +247,7 @@ button {
 .caption {
   margin-bottom: 12px;
   font-size: 11px;
-  letter-spacing: .14em;
+  letter-spacing: .12em;
   text-transform: uppercase;
   text-align: center;
   color: var(--color-fg-2);
@@ -891,7 +891,7 @@ html[data-wallpaper-on] .modes button {
 }
 
 .settings-panel {
-  width: min(100%, 420px);
+  width: min(100%, 440px);
   max-height: 86vh;
   overflow: auto;
   padding: 24px;
@@ -1014,8 +1014,6 @@ html[data-quote-off] #quote {
 /* Full forecast: opens when the weather is clicked. */
 .forecast-panel {
   width: min(100%, 560px);
-  padding: 12px 20px;
-  line-height: 1.35;
 }
 
 .forecast-now {
@@ -1048,11 +1046,11 @@ html[data-quote-off] #quote {
 }
 
 .forecast-section {
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 .forecast-section h3 {
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .12em;
@@ -1086,15 +1084,20 @@ html[data-quote-off] #quote {
 
 .forecast-foot {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px 16px;
+  gap: 12px;
   margin-top: 8px;
 }
 
 .forecast-foot .ghost-button {
+  flex: none;
   margin: 0;
+}
+
+.forecast-foot .forecast-link {
+  min-width: 0;
+  margin-top: 0;
 }
 
 .forecast-link {
@@ -1258,7 +1261,7 @@ html[data-quote-off] #quote {
 
 
 .location-title {
-  margin-top: 6px;
+  margin-top: 16px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .12em;
@@ -1365,10 +1368,6 @@ html[data-quote-off] #quote {
 
 .links-preview .link-main {
   padding: 4px 0;
-}
-
-.manage-panel {
-  width: min(100%, 460px);
 }
 
 /* Advanced and Manage sit side by side under the presets. */
@@ -1604,7 +1603,7 @@ html[data-quote-off] #quote {
 
 /* Help: the guide from the settings window. */
 .help-panel {
-  width: min(100%, 860px);
+  width: min(100%, 760px);
 }
 
 /* The guide in two columns on a wide window, so more fits without scrolling. */
@@ -1618,7 +1617,7 @@ html[data-quote-off] #quote {
 }
 
 .help-section {
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .help-section h3 {
@@ -1693,10 +1692,6 @@ html[data-quote-off] #quote {
 
 .ghost-button:disabled {
   opacity: .5;
-}
-
-.ip-panel {
-  max-width: 460px;
 }
 
 .ip-list {
@@ -1816,10 +1811,6 @@ html[data-quote-off] #quote {
 
 /* The links and time zones windows: a short list plus a way to the full manage panel. */
 /* The links window: the permanent icons, the visitor's own links, and a way to the full manage panel. */
-.list-panel {
-  max-width: 460px;
-}
-
 .links-own {
   margin: 12px 0 16px;
 }
@@ -1841,4 +1832,16 @@ html[data-quote-off] #quote {
   display: block;
   font-size: 12px;
   color: var(--color-fg-2);
+}
+
+/* On a phone every window has the same inner gutter; the desktop gutter is 24 px. The forecast is the one
+   window that must fit without scrolling, so its sections sit a little closer on a phone. */
+@media (max-width: 600px) {
+  .settings-panel {
+    padding: 18px;
+  }
+
+  .forecast-section {
+    margin-top: 12px;
+  }
 }
