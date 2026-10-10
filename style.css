@@ -1312,7 +1312,11 @@ html[data-quote-off] #quote {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 20px;
+  gap: 0 12px;
+}
+
+.settings-actions button {
+  margin-top: 14px;
 }
 
 /* The tabs of the manage panel; the active one is underlined. */
@@ -1628,8 +1632,9 @@ html[data-quote-off] #quote {
   margin-top: 14px;
 }
 
-/* Advanced is a button, not a link: it is an action that opens more options. */
-#advanced-toggle {
+/* Advanced and Manage are buttons, not links: they are actions that open more options. */
+#advanced-toggle,
+#manage-open {
   align-self: flex-start;
   height: 32px;
   margin: 14px 0 6px;
@@ -1642,7 +1647,9 @@ html[data-quote-off] #quote {
 }
 
 #advanced-toggle:hover,
-#advanced-toggle:focus-visible {
+#advanced-toggle:focus-visible,
+#manage-open:hover,
+#manage-open:focus-visible {
   border-color: var(--color-fg-2);
 }
 
