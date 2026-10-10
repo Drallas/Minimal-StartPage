@@ -46,7 +46,7 @@ Everything is optional. The settings start with a choice of page: **Minimal** (s
 - **Greeting.** Optional. Enter a name under Advanced, and a line such as "Hallo, Allard" appears above the clock.
 - **Date.** Hover over the date for the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY. The date follows your browser's language.
 - **Quote.** Optional. A short quote from a philosopher or teacher, changing every six hours, in your browser's language. Click it for the next one.
-- **Links.** The button at the top left opens a window with permanent links as icons (Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub and Reuters) and up to 15 links of your own, each with an optional description. Hover the button to see your own links. By default the button is a plain Wikipedia link that opens Wikipedia in your browser's language. Turn on **Own links** for the window and your own links. The button can be switched off.
+- **Links.** The button at the top left opens a window with permanent links as icons (Wikipedia, Google, Reuters, Apple, Microsoft, GitHub, Facebook, Instagram, X and Reddit) and up to 15 links of your own, each with an optional description. Hover the button to see your own links. By default the button is a plain Wikipedia link that opens Wikipedia in your browser's language. Turn on **Own links** for the window and your own links. The button can be switched off.
 - **AI shortcuts.** Shortcuts below the search bar. The default set is Claude, ChatGPT, Grok and Duck.ai. In the settings you can change them: up to five, in any order, or none at all. The row can be switched off.
 - **Weather.** Optional, off by default. Up to three extra places can be added, shown as chips in the forecast window. The temperature and a small icon sit at the top middle. Hover for a short preview with the next six hours; click for the full forecast: the next 24 hours, the next seven days, and a link to Windy. The place comes from your IP address or from a city you choose.
 - **Your IP address.** Optional, off by default, in the advanced settings under Privacy. It shows the last address you asked for, and clicking it checks again. Details shows the city, provider and more.
@@ -102,7 +102,7 @@ The wallpapers are photos from [Unsplash](https://unsplash.com), used under the 
 
 The weather forecast comes from [Open-Meteo](https://open-meteo.com), licensed under CC BY 4.0.
 
-The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon and the logos of Wikipedia, Google, Apple, Facebook, X, Instagram and GitHub come from [Simple Icons](https://simpleicons.org) (CC0). Microsoft and Reuters are shown by their names, since their logos are not in the open icon set. The logos are trademarks of their owners.
+The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon and the logos of Wikipedia, Google, Apple, Facebook, X, Instagram, GitHub and Reddit come from [Simple Icons](https://simpleicons.org) (CC0). Microsoft and Reuters are shown by their names, since their logos are not in the open icon set. The logos are trademarks of their owners.
 
 The gear icon is from [Feather](https://feathericons.com) (MIT).
 

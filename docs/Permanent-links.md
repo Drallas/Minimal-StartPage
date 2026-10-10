@@ -1,6 +1,6 @@
 # Permanent links
 
-The permanent row holds nine links now: Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub and Reuters. Visitors can add up to 15 of their own.
+The permanent row holds ten links now, grouped: Wikipedia, Google and Reuters; Apple, Microsoft and GitHub; Facebook, Instagram, X and Reddit. Visitors can add up to 15 of their own.
 
 ## Candidates (open)
 
