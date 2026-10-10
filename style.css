@@ -360,11 +360,17 @@ html[data-wallpaper-on] .blob {
 }
 
 html[data-wallpaper-on] .quote {
+  color: var(--color-fg-1);
   opacity: .9;
 }
 
 html[data-wallpaper-on] footer {
-  opacity: .8;
+  color: var(--color-fg-1);
+  opacity: .85;
+}
+
+html[data-wallpaper-on] .controls {
+  opacity: .6;
 }
 
 :root[data-tint] {
