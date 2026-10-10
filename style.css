@@ -1350,12 +1350,17 @@ html[data-quote-off] #quote {
 
 /* Help: the guide from the settings window. */
 .help-panel {
-  width: min(100%, 520px);
+  width: min(100%, 860px);
 }
 
+/* The guide in two columns on a wide window, so more fits without scrolling. */
 .help-body {
-  max-height: 70vh;
+  max-height: 80vh;
   overflow: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  align-items: start;
 }
 
 .help-section {
