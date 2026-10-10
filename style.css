@@ -1430,7 +1430,7 @@ html[data-quote-off] #quote {
   display: none;
 }
 
-/* Advanced: a wider window, with the options in two columns. Headings span both. */
+/* Advanced: a wider window. The options sit in four groups, two per row, so each group keeps its own column. */
 .settings-panel.is-wide {
   width: min(100%, 760px);
 }
@@ -1438,16 +1438,23 @@ html[data-quote-off] #quote {
 .advanced {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 40px;
+  gap: 8px 40px;
   align-items: start;
 }
 
-.advanced > .location-title {
-  grid-column: 1 / -1;
+.adv-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
-.advanced > .location-title:not(:first-child) {
-  margin-top: 16px;
+.adv-group > .location-title {
+  margin-bottom: 4px;
+}
+
+.adv-group > .location-title:not(:first-child) {
+  margin-top: 14px;
 }
 
 #advanced-toggle {
@@ -1456,6 +1463,7 @@ html[data-quote-off] #quote {
 
 #reset-all {
   grid-column: 1 / -1;
+  justify-self: center;
 }
 
 /* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
