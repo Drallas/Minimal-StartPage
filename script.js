@@ -1141,14 +1141,21 @@ settingsFields.resetData.addEventListener('click', () => {
 const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
+// The export is a real link with a download name. Its address is prepared when the button is pressed, before
+// the click, so the browser already has the file when it follows the link (Safari reads the address early).
 const exportLink = document.getElementById('export-data')
-exportLink.addEventListener('click', () => {
+let exportUrl = null
+const prepareExport = () => {
   const payload = { app: 'Minimal-StartPage', version: 1, exported: new Date().toISOString(), settings: {}, data: {} }
   EXPORT_SETTINGS.forEach((key) => { const value = localStorage.getItem(key); if (value !== null) payload.settings[key] = value })
   EXPORT_DATA.forEach((key) => { try { const value = localStorage.getItem(key); if (value !== null) payload.data[key] = JSON.parse(value) } catch {} })
-  // Set in the same click, so the browser downloads the link as it is followed.
-  exportLink.href = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(payload, null, 2))}`
-})
+  if (exportUrl) URL.revokeObjectURL(exportUrl)
+  exportUrl = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }))
+  exportLink.href = exportUrl
+}
+exportLink.addEventListener('pointerdown', prepareExport)
+exportLink.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') prepareExport() })
+exportLink.addEventListener('click', () => { if (!exportUrl) prepareExport() })
 const importFile = document.getElementById('import-file')
 document.getElementById('import-data').addEventListener('click', () => importFile.click())
 importFile.addEventListener('change', async () => {
