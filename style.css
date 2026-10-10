@@ -141,6 +141,7 @@ button {
   font-size: 12px;
   letter-spacing: .06em;
   color: var(--color-fg-2);
+  cursor: pointer;
 }
 
 /* Centred column: search field and shortcut row. */

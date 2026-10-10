@@ -56,10 +56,27 @@ searchForm.addEventListener('submit', (e) => {
 let clock12 = false
 try { clock12 = localStorage.getItem('clockFormat') === '12' } catch {}
 
+// Date: click to switch between the long date and DD-MM-YYYY; hover shows the ISO week and day of the year.
+let dateNumeric = false
+try { dateNumeric = localStorage.getItem('dateFormat') === 'numeric' } catch {}
+
+const isoWeek = (d) => {
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))
+  const day = t.getUTCDay() || 7
+  t.setUTCDate(t.getUTCDate() + 4 - day)
+  const yearStart = new Date(Date.UTC(t.getUTCFullYear(), 0, 1))
+  return Math.ceil(((t - yearStart) / 864e5 + 1) / 7)
+}
+// Round, not floor: daylight saving shifts the difference by an hour.
+const dayOfYear = (d) => Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(d.getFullYear(), 0, 0)) / 864e5)
+const isLeap = (y) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0
+
 const updateClock = () => {
   const now = new Date()
   const time = now.toLocaleTimeString(clock12 ? 'en-US' : 'en-GB', { hour: '2-digit', minute: '2-digit', hour12: clock12 })
-  const date = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
+  const date = dateNumeric
+    ? [String(now.getDate()).padStart(2, '0'), String(now.getMonth() + 1).padStart(2, '0'), now.getFullYear()].join('-')
+    : now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
   const offset = -now.getTimezoneOffset()
   const sign = offset >= 0 ? '+' : '-'
   const hh = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0')
@@ -69,9 +86,16 @@ const updateClock = () => {
   clockTime.dateTime = now.toISOString()
   clockTime.title = `${zone} (UTC${sign}${hh}:${mm})`
   clockDate.textContent = date
+  clockDate.title = `Week ${isoWeek(now)} · day ${dayOfYear(now)} of ${isLeap(now.getFullYear()) ? 366 : 365}`
 }
 updateClock()
 setInterval(updateClock, 30000)
+
+clockDate.addEventListener('click', () => {
+  dateNumeric = !dateNumeric
+  try { localStorage.setItem('dateFormat', dateNumeric ? 'numeric' : 'long') } catch {}
+  updateClock()
+})
 
 clockTime.addEventListener('click', () => {
   clock12 = !clock12
