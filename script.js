@@ -913,7 +913,8 @@ const linkAnchor = (link, withDescription) => {
 
 const renderLinks = () => {
   linksButton.hidden = !linksOn
-  linksPreview.replaceChildren(...[...permanentLinks(), ...links].map((link) => linkAnchor(link, false)))
+  // The hover list shows only the links the visitor added; the permanent ones live in the window.
+  linksPreview.replaceChildren(...links.map((link) => linkAnchor(link, false)))
 
   // Permanent links as a row of icons at the top of the window.
   linksIcons.replaceChildren(...permanentLinks().map((link) => {
