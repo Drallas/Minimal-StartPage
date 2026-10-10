@@ -270,12 +270,14 @@ footer a:focus-visible svg {
 
 /* Your IP address, just under the footer line. */
 .ip {
-  display: block;
-  width: 100%;
-  margin-bottom: 6px;
-  font-size: 9px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  font-size: 8px;
   letter-spacing: .04em;
-  opacity: .8;
+  opacity: .55;
   white-space: nowrap;
 }
 
@@ -463,7 +465,7 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 28px;
+  bottom: 36px;
   text-align: center;
   font-size: 10px;
   letter-spacing: .06em;
@@ -582,7 +584,7 @@ html[data-wallpaper-on] .modes button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  bottom: 28px;
+  bottom: 36px;
   z-index: 1;
   opacity: .8;
   transition: opacity .3s ease-in-out;
@@ -650,12 +652,12 @@ html[data-wallpaper-on] .modes button {
 @media (max-width: 600px) {
   /* As close to the bottom edge as the browser allows: the safe area on iPhone, and the small toolbar. */
   .controls {
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 36px);
   }
 
   /* Phones: footer and controls move above the browser's bottom bar, and stay on one line. */
   footer {
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 36px);
   }
 
   .controls button {
