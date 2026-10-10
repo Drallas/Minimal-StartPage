@@ -805,7 +805,8 @@ const renderPlaces = () => {
 const placeMsg = document.getElementById('place-msg')
 // City suggestions while typing, the same kind of lookup the time zone box does. Only the typed name is sent.
 // Results are ranked by population, so the big city wins a shared name; the region tells apart the rest.
-const cityLabel = (r) => [r.name, r.admin1 && r.admin1 !== r.name ? r.admin1 : '', r.country].filter(Boolean).join(', ')
+// The region is shown only when it adds something: 'Shanghai Shi' under Shanghai is left out.
+const cityLabel = (r) => [r.name, r.admin1 && !r.name.toLowerCase().includes(r.admin1.toLowerCase()) ? r.admin1 : '', r.country].filter(Boolean).join(', ')
 const fetchCities = async (query, count, language) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${language}&format=json`)).json()).results || []
 const geocode = async (query, count) => {
   let results = await fetchCities(query, count, uiLang)
