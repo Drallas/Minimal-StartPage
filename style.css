@@ -473,6 +473,28 @@ html[data-wallpaper-on] .controls {
   background-position: center;
 }
 
+/* Landscape phones are short: tighten the column so the quote does not overlap the search bar. */
+@media (max-height: 560px) {
+  #main {
+    transform: none;
+  }
+
+  #clock {
+    margin-bottom: 20px;
+  }
+
+  .links {
+    margin-top: 20px;
+  }
+
+  .quote {
+    bottom: 40px;
+    max-width: 560px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
 /* Phones: lift the controls above the browser's bottom bar and enlarge their touch area. */
 @media (max-width: 600px) {
   .controls {
