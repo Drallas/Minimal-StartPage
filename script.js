@@ -142,6 +142,8 @@ const settingsFields = {
   showIp: document.getElementById('set-showip'),
   quote: document.getElementById('set-quote'),
   zones: document.getElementById('set-zones'),
+  wallpaper: document.getElementById('set-wallpaper'),
+  wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links'),
   cityForm: document.getElementById('city-form'),
   cityInput: document.getElementById('city-input'),
@@ -262,7 +264,15 @@ const disclaimerText = {
   es: { privacy: 'El tiempo busca tu lugar a partir de tu IP; el tiempo y tu IP envían datos a servicios externos. Detalles en {help}.' },
   zh: { privacy: '天气会根据你的 IP 地址查找位置；天气和 IP 地址会向外部服务发送数据。详见{help}。' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const wallpaperText = {
+  en: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Show the wallpaper button' },
+  nl: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaperknop tonen' },
+  de: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaper-Schaltfläche anzeigen' },
+  fr: { wallpaperToggle: 'Fond d’écran', wallpaperButton: 'Afficher le bouton du fond d’écran' },
+  es: { wallpaperToggle: 'Fondo de pantalla', wallpaperButton: 'Mostrar el botón del fondo' },
+  zh: { wallpaperToggle: '壁纸', wallpaperButton: '显示壁纸按钮' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -609,6 +619,8 @@ const applySettingsText = () => {
   settingsFields.cityClear.textContent = t.clearCity
   document.getElementById('lbl-quote').textContent = t.quote
   document.getElementById('lbl-zones').textContent = t.zonesToggle
+  document.getElementById('lbl-wallpaper').textContent = t.wallpaperToggle
+  document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
   document.getElementById('zones-title').textContent = t.zonesTitle
   document.getElementById('zone-label').textContent = t.zonesAdd
@@ -641,6 +653,8 @@ const syncSettings = () => {
   settingsFields.showIp.checked = showIpOn
   settingsFields.quote.checked = quoteOn
   settingsFields.zones.checked = zonesOn
+  settingsFields.wallpaper.checked = wallpaperOn
+  settingsFields.wallpaperButton.checked = wallpaperButtonOn
   settingsFields.links.checked = linksOn
   settingsFields.cityClear.hidden = !city
   updateWeatherHint()
@@ -720,6 +734,18 @@ document.addEventListener('keydown', (e) => {
 
 settingsFields.weather.addEventListener('change', () => setWeather(settingsFields.weather.checked))
 
+// Wallpaper on or off, and whether its button shows, from settings.
+settingsFields.wallpaper.addEventListener('change', () => {
+  wallpaperOn = settingsFields.wallpaper.checked
+  applyWallpaper(wallpaperOn)
+  writeKey('wallpaper', wallpaperOn ? 'on' : 'off')
+})
+settingsFields.wallpaperButton.addEventListener('change', () => {
+  wallpaperButtonOn = settingsFields.wallpaperButton.checked
+  wallpaperToggle.hidden = !wallpaperButtonOn
+  writeKey('wallpaperButton', wallpaperButtonOn ? 'on' : 'off')
+})
+
 // Showing the IP address is its own choice, separate from the weather. It asks ipapi.co, the service the IP location uses.
 settingsFields.showIp.addEventListener('change', () => {
   showIpOn = settingsFields.showIp.checked
@@ -789,7 +815,7 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn', 'wallpaperButton']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
@@ -1227,6 +1253,14 @@ wallpaperToggle.addEventListener('click', () => {
   applyWallpaper(wallpaperOn)
   try { localStorage.setItem('wallpaper', wallpaperOn ? 'on' : 'off') } catch {}
 })
+
+// The wallpaper button itself can be hidden in settings; the wallpaper keeps its last state.
+let wallpaperButtonOn = true
+try {
+  const saved = localStorage.getItem('wallpaperButton')
+  if (saved) wallpaperButtonOn = saved === 'on'
+} catch {}
+wallpaperToggle.hidden = !wallpaperButtonOn
 
 // Background tint: a hue from the slider; zero keeps the neutral monochrome look.
 const hueSlider = document.getElementById('hue')
