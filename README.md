@@ -5,6 +5,10 @@
 </p>
 
 <p align="center">
+  <a href="https://drallas.github.io/Minimal-StartPage/"><strong>Open the start page</strong></a>
+</p>
+
+<p align="center">
   <a href="Installation.md">Installation</a>
 </p>
 
