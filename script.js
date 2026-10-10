@@ -399,12 +399,12 @@ const pageText = {
   zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
 const advancedText = {
-  en: { advancedOpen: 'Advanced', advancedClosed: '← Back to basic settings' },
-  nl: { advancedOpen: 'Geavanceerd', advancedClosed: '← Terug naar basisinstellingen' },
-  de: { advancedOpen: 'Erweitert', advancedClosed: '← Zurück zu den Grundeinstellungen' },
-  fr: { advancedOpen: 'Avancé', advancedClosed: '← Retour aux réglages de base' },
-  es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
-  zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
+  en: { advTitle: 'Advanced settings', advancedOpen: 'Advanced', advancedClosed: '← Back to basic settings' },
+  nl: { advTitle: 'Geavanceerde instellingen', advancedOpen: 'Geavanceerd', advancedClosed: '← Terug naar basisinstellingen' },
+  de: { advTitle: 'Erweiterte Einstellungen', advancedOpen: 'Erweitert', advancedClosed: '← Zurück zu den Grundeinstellungen' },
+  fr: { advTitle: 'Réglages avancés', advancedOpen: 'Avancé', advancedClosed: '← Retour aux réglages de base' },
+  es: { advTitle: 'Ajustes avanzados', advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
+  zh: { advTitle: '高级设置', advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], wallText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
@@ -831,7 +831,7 @@ const openedFrom = { el: null }
 const isTyping = (el) => !!el && el.matches && el.matches('input, textarea, select, [contenteditable="true"]')
 
 const applySettingsText = () => {
-  document.getElementById('settings-title').textContent = t.title
+  document.getElementById('settings-title').textContent = document.getElementById('advanced').hidden ? t.title : t.advTitle
   document.getElementById('settings-hint').textContent = t.hint
   document.getElementById('lbl-weather').textContent = t.weather
   document.getElementById('lbl-location').textContent = t.location
@@ -855,7 +855,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-zones').textContent = t.zonesToggle
   document.getElementById('lbl-wallpaper').textContent = t.wallpaperToggle
   document.getElementById('sec-bg').textContent = t.secBackground
-  document.getElementById('sec-page').textContent = t.secPage
+  document.querySelector('.presets').setAttribute('aria-label', t.secPage)
   document.getElementById('lbl-preset-minimal').textContent = t.presetMinimal
   document.getElementById('lbl-preset-standard').textContent = t.presetStandard
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
@@ -933,13 +933,14 @@ const syncSettings = () => {
 // Advanced options: the page presets and the disclaimer are the basic view; the rest opens from a link.
 const advancedToggle = document.getElementById('advanced-toggle')
 const advancedBlock = document.getElementById('advanced')
-const basicPages = [document.getElementById('sec-page'), document.querySelector('.presets')]
+const basicPages = [document.querySelector('.presets')]
 const setAdvanced = (open) => {
   advancedBlock.hidden = !open
   basicPages.forEach((el) => { el.hidden = open })
   advancedBlock.closest('.settings-panel').classList.toggle('is-wide', open)
   advancedToggle.setAttribute('aria-expanded', String(open))
   advancedToggle.textContent = open ? t.advancedClosed : t.advancedOpen
+  document.getElementById('settings-title').textContent = open ? t.advTitle : t.title
   // Data beheren and IP details live in the basic view only; one place is enough.
   manageOpenButton.hidden = open
   ipOpen.hidden = open
