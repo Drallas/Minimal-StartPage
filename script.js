@@ -823,7 +823,8 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
     placeMsg.textContent = t.unavailable
   }
 })
-document.getElementById('manage-open').addEventListener('click', () => openManage(manageTab))
+const manageOpenButton = document.getElementById('manage-open')
+manageOpenButton.addEventListener('click', () => openManage(manageTab))
 
 // Settings and help: a floating panel, opened with ? and closed with Escape.
 const openedFrom = { el: null }
@@ -940,6 +941,8 @@ const setAdvanced = (open) => {
   advancedBlock.closest('.settings-panel').classList.toggle('is-wide', open)
   advancedToggle.setAttribute('aria-expanded', String(open))
   advancedToggle.textContent = open ? t.advancedClosed : t.advancedOpen
+  // Data beheren lives in the basic view only; one place is enough.
+  manageOpenButton.hidden = open
 }
 advancedToggle.addEventListener('click', () => setAdvanced(advancedBlock.hidden))
 
