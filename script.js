@@ -255,12 +255,12 @@ const linkToggleText = {
   zh: { linksToggle: '显示链接按钮' }
 }
 const disclaimerText = {
-  en: { privacy: 'Weather can find your place from your IP address, and weather and your IP address send data to outside services. See Help for details.' },
-  nl: { privacy: 'Het weer zoekt je plaats via je IP-adres, en het weer en je IP-adres sturen gegevens naar externe diensten. Zie Help voor de details.' },
-  de: { privacy: 'Das Wetter findet deinen Ort über deine IP-Adresse; Wetter und IP-Adresse senden Daten an externe Dienste. Details siehe Hilfe.' },
-  fr: { privacy: 'La météo trouve votre lieu à partir de votre adresse IP ; la météo et votre adresse IP envoient des données à des services externes. Détails dans l’aide.' },
-  es: { privacy: 'El tiempo busca tu lugar a partir de tu IP; el tiempo y tu IP envían datos a servicios externos. Detalles en la ayuda.' },
-  zh: { privacy: '天气会根据你的 IP 地址查找位置；天气和 IP 地址会向外部服务发送数据。详见帮助。' }
+  en: { privacy: 'Weather can find your place from your IP address, and weather and your IP address send data to outside services. See {help} for details.' },
+  nl: { privacy: 'Het weer zoekt je plaats via je IP-adres, en het weer en je IP-adres sturen gegevens naar externe diensten. Zie {help} voor de details.' },
+  de: { privacy: 'Das Wetter findet deinen Ort über deine IP-Adresse; Wetter und IP-Adresse senden Daten an externe Dienste. Details siehe {help}.' },
+  fr: { privacy: 'La météo trouve votre lieu à partir de votre adresse IP ; la météo et votre adresse IP envoient des données à des services externes. Détails : {help}.' },
+  es: { privacy: 'El tiempo busca tu lugar a partir de tu IP; el tiempo y tu IP envían datos a servicios externos. Detalles en {help}.' },
+  zh: { privacy: '天气会根据你的 IP 地址查找位置；天气和 IP 地址会向外部服务发送数据。详见{help}。' }
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
@@ -565,7 +565,7 @@ const openForecast = () => {
   renderForecast()
   forecastFrom = document.activeElement
   forecastDialog.hidden = false
-  document.getElementById('forecast-close').focus()
+  forecastDialog.querySelector('.settings-panel').focus()
 }
 
 const closeForecast = () => {
@@ -623,7 +623,10 @@ const applySettingsText = () => {
   document.getElementById('links-close').setAttribute('aria-label', t.close)
   zonesButton.setAttribute('aria-label', t.zonesButton)
   zonesButton.title = t.zonesButton
-  document.getElementById('privacy').textContent = t.privacy
+  const [beforeHelp, afterHelp = ''] = t.privacy.split('{help}')
+  const helpLink = Object.assign(document.createElement('button'), { type: 'button', className: 'text-button', textContent: helpCopy.title })
+  helpLink.addEventListener('click', () => openHelp())
+  document.getElementById('privacy').replaceChildren(beforeHelp, helpLink, afterHelp)
   settingsFields.reset.textContent = t.reset
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
   document.getElementById('forecast-close').setAttribute('aria-label', t.close)
@@ -648,7 +651,7 @@ const openSettings = () => {
   openedFrom.el = document.activeElement
   syncSettings()
   settings.hidden = false
-  document.getElementById('settings-close').focus()
+  settings.querySelector('.settings-panel').focus()
 }
 
 const closeSettings = () => {
@@ -675,7 +678,7 @@ const openHelp = () => {
   helpFrom = document.activeElement
   renderHelp()
   helpWindow.hidden = false
-  document.getElementById('help-close').focus()
+  helpWindow.querySelector('.settings-panel').focus()
 }
 const closeHelp = () => {
   helpWindow.hidden = true
@@ -885,7 +888,7 @@ const openZones = () => {
   zonesFrom = document.activeElement
   renderZones()
   zonesDialog.hidden = false
-  document.getElementById('zones-close').focus()
+  zonesDialog.querySelector('.settings-panel').focus()
 }
 
 let zonesFrom = null
@@ -1111,7 +1114,7 @@ const openLinks = () => {
   linksFrom = document.activeElement
   resetLinkForm()
   linksWindow.hidden = false
-  document.getElementById('links-close').focus()
+  linksWindow.querySelector('.settings-panel').focus()
 }
 
 const closeLinks = () => {

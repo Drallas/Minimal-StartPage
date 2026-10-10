@@ -1382,3 +1382,8 @@ html[data-quote-off] #quote {
   margin-left: auto;
   margin-right: 12px;
 }
+
+/* Dialog panels are focused as a whole when they open; the outline is not wanted there. */
+.settings-panel:focus {
+  outline: none;
+}
