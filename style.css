@@ -908,7 +908,7 @@ html[data-wallpaper-on] .modes button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .settings-head h2 {
@@ -934,6 +934,10 @@ html[data-wallpaper-on] .modes button {
 .city-msg {
   font-size: 12px;
   color: var(--color-fg-2);
+}
+
+.settings-hint {
+  margin: 0 0 16px;
 }
 
 .setting {
@@ -1087,7 +1091,9 @@ html[data-quote-off] #quote {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
 }
 
 .forecast-foot .ghost-button {
@@ -1157,6 +1163,10 @@ html[data-quote-off] #quote {
 .zones-empty {
   font-size: 12px;
   color: var(--color-fg-2);
+}
+
+#zones-local-window {
+  margin: 0 0 8px;
 }
 
 .zone-row {
@@ -1379,7 +1389,7 @@ html[data-quote-off] #quote {
 }
 
 .settings-actions button {
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 /* The tabs of the manage panel; the active one is underlined. */
@@ -1654,7 +1664,6 @@ html[data-quote-off] #quote {
 .presets {
   display: flex;
   gap: 18px;
-  margin-bottom: 4px;
 }
 
 .presets .setting {
@@ -1669,9 +1678,13 @@ html[data-quote-off] #quote {
 }
 
 .ip-meta {
-  margin: 0 0 12px;
+  margin: 0 0 16px;
   font-size: 13px;
   color: var(--color-fg-2);
+}
+
+.settings-panel > .ghost-button {
+  margin-top: 16px;
 }
 
 .ghost-button {
@@ -1697,8 +1710,14 @@ html[data-quote-off] #quote {
 .ip-list {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 6px 16px;
+  gap: 0 16px;
   margin: 0;
+}
+
+.ip-list dt,
+.ip-list dd {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .ip-list dt {
@@ -1714,7 +1733,7 @@ html[data-quote-off] #quote {
 
 /* The advanced block sits under the basic view with some air. */
 .advanced {
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 /* The grid below would otherwise override the hidden attribute. */
@@ -1732,7 +1751,7 @@ html[data-quote-off] #quote {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px 40px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .adv-group {
@@ -1740,6 +1759,8 @@ html[data-quote-off] #quote {
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .adv-group > .location-title {
@@ -1780,7 +1801,7 @@ html[data-quote-off] #quote {
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px 24px;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 /* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
@@ -1842,6 +1863,15 @@ html[data-quote-off] #quote {
   }
 
   .forecast-section {
-    margin-top: 12px;
+    margin-top: 10px;
+  }
+
+  .forecast-foot {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .forecast-row {
+    padding: 1px 0;
   }
 }
