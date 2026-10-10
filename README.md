@@ -1,7 +1,7 @@
 <h1 align="center">Minimal-StartPage</h1>
 
 <p align="center">
-  A minimal start page with search, a clock, a quote and a light, dark or system theme.
+  A minimal start page with search, a clock, optional weather, links and a light, dark or system theme. Everything beyond the search is switched on in the settings.
 </p>
 
 <p align="center">
@@ -38,16 +38,20 @@
 
 ## Features
 
-- **Search.** Type a query and press Enter, or click the magnifier on the right of the search bar. An empty search shows a short hint instead of doing nothing.
-- **Search engine.** The icon on the left of the search bar shows the current engine. DuckDuckGo is the default; click the icon to cycle through Kagi, Brave and Google. Your choice is remembered.
-- **Theme.** Follows your system's light or dark setting by default. The icons in the top right switch to a fixed Light or Dark theme, and that choice is remembered too.
-- **Clock.** The time sits above the search bar, with the date underneath. Hover over the time to see your time zone and its offset from UTC. Click the time to cycle through 24-hour, 12-hour (AM/PM) and full time, which shows the seconds with blinking colons. The choice is remembered, and the blinking stops if your system asks for reduced motion.
-- **Date.** Hover over the date to see the ISO week number and the day of the year. Click the date to switch between the long form and DD-MM-YYYY.
-- **Quote.** A short quote from a philosopher or teacher, changing every six hours. There are 50 quotes, shown in your browser's language (English, Dutch, German, French, Spanish or Chinese, falling back to English). Click the quote to see the next one.
-- **Shortcuts.** A links button in the top left, with Wikipedia to start with. You can add up to 15 links of your own, with an optional description, and remove Wikipedia if you like. Reset all choices brings it back; and links to Claude, ChatGPT, Grok and Duck.ai below the search bar under the caption "Ask AI".
-- **Background.** The wallpaper is on by default. The round button in the bottom right turns it off or on again, and your choice is remembered. Without the wallpaper, the slider in the bottom left gives the background a subtle tint in any hue (drag back to the far left for the neutral look). The background adapts to light and dark mode. On a phone the slider is hidden and the wallpaper button sits just above the browser's bottom bar.
-- **Weather.** Off by default. Turn it on in the settings, or click "Show weather" at the top. The temperature and a small icon then sit in the top middle; the icon takes colour on hover. Hover over it for a short preview. Click it for the full forecast: the next 24 hours, the next seven days, and a link to the full forecast on Windy. You can enter a city yourself instead of using your IP address. The details are in [Your data](#your-data).
-- **Settings and help.** Press `?` anywhere on the page, or click the gear at the top right, to open the settings. They switch the weather, the links, the quote and the time zones on or off, set the location, and reset all choices. The Help button in that window opens a guide to every feature, without screenshots. Press `Esc` to close.
+Everything is optional. A new visitor starts with the search, the clock, the date and the Ask AI shortcuts; the other things are switched on in the settings.
+
+- **Search.** Type a query and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.
+- **Clock.** The time sits above the search bar, with the date underneath. Click the time to cycle through 24-hour, 12-hour (AM/PM) and full time with seconds; the colons blink, unless your system asks for reduced motion. Hover over the time to see your time zone and its UTC offset.
+- **Time zones.** Optional. A small globe above the clock opens up to five extra time zones, each with its UTC offset and a day difference when it is not today. Hover over the globe for the list; click it to change the list.
+- **Date.** Hover over the date for the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY. The date follows your browser's language.
+- **Quote.** Optional. A short quote from a philosopher or teacher, changing every six hours, in your browser's language. Click it for the next one.
+- **Links.** The button at the top left opens a window with permanent links as icons (Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub and Reuters) and up to 15 links of your own, each with an optional description. Hover the button to see your own links. The button can be switched off.
+- **Ask AI.** Shortcuts below the search bar to Claude, ChatGPT, Grok and Duck.ai.
+- **Weather.** Optional, off by default. The temperature and a small icon sit at the top middle. Hover for a short preview with the next six hours; click for the full forecast: the next 24 hours, the next seven days, and a link to Windy. The place comes from your IP address or from a city you choose.
+- **Your IP address.** Optional, off by default. Shows your IP address just under the footer, and hovering it shows your city, country and provider.
+- **Background.** A wallpaper that can be switched on or off, and a button to hide that switch. A tint slider (on a computer) gives the neutral background a colour, or the tint can be switched off. The background adapts to light and dark mode.
+- **Settings and help.** Open the settings with the gear at the top right, or press `?`. They are grouped into Weather, Display, Background and Privacy. The Help button in the settings opens a guide to every feature. Press `Esc` to close.
+- **Phones.** The bottom controls sit above the browser's bar, and the layout fits landscape phones too.
 - **Hidden details.** A few small details are tucked away in the page. Look closely and explore.
 
 ## Use it
@@ -60,17 +64,18 @@ There are three ways to use it, from easiest to most control. You do not need to
 
 ## Your data
 
-Searches go straight to the search engine you chose. The page only stores your choices for the search engine, theme, wallpaper, clock, date format and weather in your browser.
+Searches go straight to the search engine you chose. The page keeps your choices in your browser only, not on a server. Nothing leaves the page unless you switch on one of these:
 
-The weather is off by default. When you turn it on, the page finds your place in one of two ways. By default it sends your IP address to [ipapi.co](https://ipapi.co) to find your approximate city; your IP address is then shown just under the footer. If you turn that lookup off and enter a city instead, only that city name is sent to [Open-Meteo](https://open-meteo.com) to find its coordinates, and no IP address is sent at all. In both cases the coordinates go to Open-Meteo to get the forecast. Responses are kept in your browser for 24 hours (location) and 30 minutes (forecast).
+- **Weather** sends your IP address to [ipapi.co](https://ipapi.co) to find your city, or the city you choose to [Open-Meteo](https://open-meteo.com) to find its coordinates. The forecast itself comes from Open-Meteo. Only while weather is on.
+- **Your IP address** under the footer asks [ipapi.co](https://ipapi.co) for your address, whether or not the weather is on.
 
-Showing your IP address is a separate choice, off by default, and it works whether or not the weather is on. When it is on, the page asks [ipapi.co](https://ipapi.co) for it and shows it just under the footer; hover over it to see your city, country and provider. Nothing else leaves the page.
+Responses are kept in your browser for 24 hours (locations) and 30 minutes (forecasts). "Reset all choices" in the settings clears everything and brings back the defaults.
 
 ## Customise
 
 If you are comfortable editing text files, you can change the page yourself. Use any plain text editor, such as Notepad on Windows or TextEdit on macOS (set it to plain text first).
 
-- **Shortcut links:** edit the links in `index.html`.
+- **Permanent links:** edit `permanentLinks()` in `script.js`.
 - **Search engines:** edit the `engines` list in `script.js`.
 - **Colours:** edit the colours in `color.css`.
 
@@ -78,7 +83,9 @@ If you are comfortable editing text files, you can change the page yourself. Use
 
 The wallpapers are photos from [Unsplash](https://unsplash.com), used under the Unsplash License.
 
-The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon and the logos of the permanent links (Wikipedia, Google, Apple, Facebook, X, Instagram and GitHub) come from [Simple Icons](https://simpleicons.org) (CC0). Microsoft and Reuters are shown by their names, since their logos are not in the open icon set. The logos are trademarks of their owners. The logos are trademarks of their owners.
+The weather forecast comes from [Open-Meteo](https://open-meteo.com), licensed under CC BY 4.0.
+
+The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon and the logos of Wikipedia, Google, Apple, Facebook, X, Instagram and GitHub come from [Simple Icons](https://simpleicons.org) (CC0). Microsoft and Reuters are shown by their names, since their logos are not in the open icon set. The logos are trademarks of their owners.
 
 The gear icon is from [Feather](https://feathericons.com) (MIT).
 
