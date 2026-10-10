@@ -293,6 +293,14 @@ const tintCycleText = {
   en: { tintCycle: 'Change colour' }, nl: { tintCycle: 'Kleur wisselen' }, de: { tintCycle: 'Farbe wechseln' },
   fr: { tintCycle: 'Changer la couleur' }, es: { tintCycle: 'Cambiar el color' }, zh: { tintCycle: '切换颜色' }
 }
+const wallText = {
+  en: { wallShow: 'Show wallpaper', wallHide: 'Hide wallpaper' },
+  nl: { wallShow: 'Achtergrond aanzetten', wallHide: 'Achtergrond uitzetten' },
+  de: { wallShow: 'Hintergrund einblenden', wallHide: 'Hintergrund ausblenden' },
+  fr: { wallShow: 'Afficher le fond', wallHide: 'Masquer le fond' },
+  es: { wallShow: 'Mostrar el fondo', wallHide: 'Ocultar el fondo' },
+  zh: { wallShow: '显示壁纸', wallHide: '隐藏壁纸' }
+}
 const greetText = {
   en: { greetLabel: 'Name in the greeting' },
   nl: { greetLabel: 'Naam in de begroeting' },
@@ -373,7 +381,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], wallText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -838,6 +846,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
   document.getElementById('lbl-greet').textContent = t.greetLabel
+  document.getElementById('advanced-toggle').textContent = advancedToggle.getAttribute('aria-expanded') === 'true' ? t.advancedClosed : t.advancedOpen
   tintCycle.setAttribute('aria-label', t.tintCycle)
   tintCycle.title = t.tintCycle
   const foot = footerText[uiLang] || footerText.en
@@ -1789,7 +1798,8 @@ const applyWallpaper = (on) => {
   wallpaper.style.backgroundImage = on ? `url("${wallpaperUrl}")` : ''
   root.toggleAttribute('data-wallpaper-on', on)
   wallpaperToggle.setAttribute('aria-pressed', String(on))
-  wallpaperToggle.title = on ? 'Hide wallpaper' : 'Show wallpaper'
+  wallpaperToggle.title = on ? t.wallHide : t.wallShow
+  wallpaperToggle.setAttribute('aria-label', wallpaperToggle.title)
 }
 
 // On by default; a saved choice ('on' or 'off') overrides it.

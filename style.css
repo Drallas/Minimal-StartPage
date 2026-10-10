@@ -275,7 +275,7 @@ footer a:focus-visible svg {
   left: 0;
   right: 0;
   margin-top: 4px;
-  font-size: 8px;
+  font-size: 4.5px;
   letter-spacing: .04em;
   opacity: .55;
   white-space: nowrap;
@@ -465,7 +465,7 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 36px;
+  bottom: 28px;
   text-align: center;
   font-size: 10px;
   letter-spacing: .06em;
@@ -584,7 +584,7 @@ html[data-wallpaper-on] .modes button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  bottom: 36px;
+  bottom: 28px;
   z-index: 1;
   opacity: .8;
   transition: opacity .3s ease-in-out;
@@ -652,12 +652,12 @@ html[data-wallpaper-on] .modes button {
 @media (max-width: 600px) {
   /* As close to the bottom edge as the browser allows: the safe area on iPhone, and the small toolbar. */
   .controls {
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 36px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   }
 
   /* Phones: footer and controls move above the browser's bottom bar, and stay on one line. */
   footer {
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 36px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   }
 
   .controls button {
@@ -1696,9 +1696,10 @@ html[data-quote-off] #quote {
 
 /* The IP line is a button: a click checks the address again. */
 .ip {
-  padding: 2px 6px;
+  padding: 0;
+  line-height: 1;
   color: inherit;
-  font: inherit;
+  font-family: inherit;
   letter-spacing: inherit;
   cursor: pointer;
 }
