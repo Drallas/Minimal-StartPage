@@ -163,8 +163,12 @@ const applyWallpaper = (on) => {
   wallpaperToggle.title = on ? 'Hide wallpaper' : 'Show wallpaper'
 }
 
-let wallpaperOn = false
-try { wallpaperOn = localStorage.getItem('wallpaper') === 'on' } catch {}
+// On by default; a saved choice ('on' or 'off') overrides it.
+let wallpaperOn = true
+try {
+  const saved = localStorage.getItem('wallpaper')
+  if (saved) wallpaperOn = saved === 'on'
+} catch {}
 applyWallpaper(wallpaperOn)
 
 wallpaperToggle.addEventListener('click', () => {
