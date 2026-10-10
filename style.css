@@ -716,6 +716,20 @@ html[data-wallpaper-on] .controls {
   color: var(--color-fg-1);
 }
 
+/* The pencil next to the AI shortcuts opens their window; it stays even when the row is empty. */
+.ai-edit {
+  align-self: center;
+  padding: 2px 6px;
+  color: var(--color-fg-2);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ai-edit:hover,
+.ai-edit:focus-visible {
+  color: var(--color-fg-1);
+}
+
 /* Minimal links: the preview is off, so it stays hidden even on hover. */
 .links-preview[hidden] {
   display: none !important;
@@ -1287,9 +1301,98 @@ html[data-quote-off] #quote {
   padding: 4px 0;
 }
 
-.links-panel,
-.ai-panel {
+.manage-panel {
   width: min(100%, 460px);
+}
+
+/* The tabs of the manage panel; the active one is underlined. */
+.manage-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.manage-tab-button {
+  padding: 6px 0 8px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  color: var(--color-fg-2);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.manage-tab-button[aria-selected="true"] {
+  color: var(--color-fg-1);
+  border-bottom-color: var(--color-fg-2);
+}
+
+.manage-section[hidden] {
+  display: none;
+}
+
+.manage-note {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.place-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.place-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.place-list li span {
+  flex: 1;
+  min-width: 0;
+}
+
+.place-list button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-fg-2);
+  cursor: pointer;
+}
+
+/* The extra places in the forecast window: pick one to see its forecast. */
+.forecast-places {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.forecast-places:empty {
+  display: none;
+}
+
+.place-chip {
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-fg-2);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.place-chip[aria-pressed="true"] {
+  color: var(--color-fg-1);
+  border-color: var(--color-fg-2);
 }
 
 .links-list {

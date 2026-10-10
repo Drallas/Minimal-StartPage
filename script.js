@@ -261,6 +261,14 @@ const aiText = {
   es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiManage: 'Gestionar accesos', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiInvalid: 'Escribe una dirección https válida' },
   zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiManage: '管理快捷方式', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiInvalid: '请输入有效的 https 地址' }
 }
+const manageText = {
+  en: { tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placesManage: 'Manage places', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to three cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
+  nl: { tabLinks: 'Links', tabZones: 'Tijdzones', tabAi: 'AI', tabWeather: 'Weer', placesManage: 'Plaatsen beheren', placeLabel: 'Een stad toevoegen', placeAdd: 'Toevoegen', placeOwn: 'Je eigen plaats', placeNone: 'Nog geen plaats', placeLimit: 'Je kunt maximaal drie steden toevoegen.', placeDuplicate: 'Staat al in de lijst', placeRemove: 'Verwijderen' },
+  de: { tabLinks: 'Links', tabZones: 'Zeitzonen', tabAi: 'KI', tabWeather: 'Wetter', placesManage: 'Orte verwalten', placeLabel: 'Eine Stadt hinzufügen', placeAdd: 'Hinzufügen', placeOwn: 'Dein Ort', placeNone: 'Noch kein Ort', placeLimit: 'Du kannst höchstens drei Städte hinzufügen.', placeDuplicate: 'Ist schon in der Liste', placeRemove: 'Entfernen' },
+  fr: { tabLinks: 'Liens', tabZones: 'Fuseaux', tabAi: 'IA', tabWeather: 'Météo', placesManage: 'Gérer les lieux', placeLabel: 'Ajouter une ville', placeAdd: 'Ajouter', placeOwn: 'Votre lieu', placeNone: 'Aucun lieu pour l’instant', placeLimit: 'Vous pouvez ajouter jusqu’à trois villes.', placeDuplicate: 'Déjà dans la liste', placeRemove: 'Supprimer' },
+  es: { tabLinks: 'Enlaces', tabZones: 'Zonas horarias', tabAi: 'IA', tabWeather: 'Tiempo', placesManage: 'Gestionar lugares', placeLabel: 'Añadir una ciudad', placeAdd: 'Añadir', placeOwn: 'Tu lugar', placeNone: 'Aún no hay lugar', placeLimit: 'Puedes añadir hasta tres ciudades.', placeDuplicate: 'Ya está en la lista', placeRemove: 'Quitar' },
+  zh: { tabLinks: '链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placesManage: '管理地点', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeLimit: '最多添加三个城市。', placeDuplicate: '已在列表中', placeRemove: '移除' }
+}
 const linksOwnText = {
   en: { linksOwn: 'Own links' },
   nl: { linksOwn: 'Eigen links' },
@@ -333,7 +341,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -350,60 +358,60 @@ const helpText = {
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the globe above the time opens the zones you chose.'],
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY.'],
     ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
-    ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 24 hours and seven days.'],
+    ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 24 hours and seven days. Up to three more places can be added in Manage, under Weather; choose one in this window to see its forecast.'],
     ['Background', 'The round button at the bottom right turns the wallpaper on or off. The slider at the bottom left tints the background.'],
     ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal and Standard) sit at the top of the settings. Personal shows when your choices match neither. Advanced lists every option in four groups; its link goes back to the basic settings.'],
-    ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset settings" brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and nothing else.'],
+    ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset settings" brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and nothing else. Extra places send their name to Open-Meteo to find them and fetch their forecast.'],
   ] },
   nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', sections: [
     ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden.'],
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent de wereldbol boven de tijd de zones die je koos.'],
     ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en DD-MM-JJJJ.'],
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
-    ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 24 uur en zeven dagen.'],
+    ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 24 uur en zeven dagen. Je kunt in Beheren onder Weer tot drie extra plaatsen toevoegen; kies er in dit venster een om die voorspelling te zien.'],
     ['Achtergrond', 'De ronde knop rechtsonder zet de wallpaper aan of uit. De schuif linksonder kleurt de achtergrond.'],
     ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal en Standaard. Persoonlijk verschijnt als je keuzes bij geen van beide passen. Geavanceerd toont alle opties in vier groepen; de link ernaast brengt je terug naar de basisinstellingen.'],
-    ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Instellingen resetten" zet de standaard terug. "Eigen links, AI-snelkoppelingen en plaatsen wissen" verwijdert alleen je eigen links, AI-snelkoppelingen, tijdzones en je stad.'],
+    ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Instellingen resetten" zet de standaard terug. "Eigen links, AI-snelkoppelingen en plaatsen wissen" verwijdert alleen je eigen links, AI-snelkoppelingen, tijdzones, je stad en extra plaatsen. Extra plaatsen sturen hun naam naar Open-Meteo om ze te vinden en hun verwachting op te halen.'],
   ] },
   de: { title: 'Hilfe', settings: 'Einstellungen', close: 'Schließen', sections: [
     ['Suche', 'Tippe und drücke Enter, oder klicke auf die Lupe. Das Symbol links zeigt die Suchmaschine: Klick darauf, um zwischen DuckDuckGo (Standard), Kagi, Brave und Google zu wechseln. Deine Wahl wird gespeichert.'],
     ['Uhr', 'Fahre mit der Maus über die Zeit, um deine Zeitzone zu sehen. Ein Klick auf die Zeit wechselt zwischen 24-Stunden-, 12-Stunden- und voller Zeit mit Sekunden. Sind Zeitzonen aktiv, öffnet die Kugel über der Zeit die gewählten Zonen.'],
     ['Datum', 'Fahre mit der Maus über das Datum, um die ISO-Woche und den Tag des Jahres zu sehen. Ein Klick wechselt zwischen langer Form und TT-MM-JJJJ.'],
     ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen. Ist Eigene Links aus, öffnet die Schaltfläche direkt Wikipedia.'],
-    ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 24 Stunden und sieben Tagen.'],
+    ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 24 Stunden und sieben Tagen. Unter Verwalten, Wetter kannst du bis zu drei weitere Orte hinzufügen; wähle hier einen aus, um dessen Vorhersage zu sehen.'],
     ['Hintergrund', 'Die runde Schaltfläche unten rechts schaltet das Hintergrundbild ein oder aus. Der Regler unten links färbt den Hintergrund.'],
     ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal und Standard. Persönlich erscheint, wenn deine Auswahl zu keiner passt. Erweitert zeigt alle Optionen in vier Gruppen; der Link führt zurück zu den Grundeinstellungen.'],
-    ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Einstellungen zurücksetzen“ stellt die Standards wieder her. „Eigene Links, KI-Verknüpfungen und Orte löschen“ entfernt nur deine eigenen Links, KI-Verknüpfungen, Zeitzonen und deine Stadt.'],
+    ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Einstellungen zurücksetzen“ stellt die Standards wieder her. „Eigene Links, KI-Verknüpfungen und Orte löschen“ entfernt nur deine eigenen Links, KI-Verknüpfungen, Zeitzonen, deine Stadt und weitere Orte. Zusätzliche Orte senden ihren Namen an Open-Meteo, um sie zu finden und ihre Vorhersage abzurufen.'],
   ] },
   fr: { title: 'Aide', settings: 'Paramètres', close: 'Fermer', sections: [
     ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé.'],
     ['Horloge', 'Passez la souris sur l’heure pour voir votre fuseau. Cliquez sur l’heure pour passer de 24 heures à 12 heures, puis à l’heure complète avec les secondes. Si les fuseaux sont activés, le globe au-dessus de l’heure ouvre les fuseaux choisis.'],
     ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à JJ-MM-AAAA.'],
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
-    ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 24 heures et sept jours.'],
+    ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 24 heures et sept jours. Vous pouvez ajouter jusqu’à trois lieux de plus dans Gérer, sous Météo ; choisissez-en un dans cette fenêtre pour voir sa prévision.'],
     ['Fond', 'Le bouton rond en bas à droite active ou désactive le fond d’écran. Le curseur en bas à gauche teinte le fond.'],
     ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal et Standard. Personnalisé s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options en quatre groupes ; le lien ramène aux réglages de base.'],
-    ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser les réglages » rétablit les valeurs par défaut. « Supprimer mes liens, raccourcis IA et lieux » retire seulement vos liens personnels, raccourcis IA, fuseaux et votre ville.'],
+    ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser les réglages » rétablit les valeurs par défaut. « Supprimer mes liens, raccourcis IA et lieux » retire seulement vos liens personnels, raccourcis IA, fuseaux, votre ville et les lieux supplémentaires. Les lieux supplémentaires envoient leur nom à Open-Meteo pour les trouver et récupérer leur prévision.'],
   ] },
   es: { title: 'Ayuda', settings: 'Ajustes', close: 'Cerrar', sections: [
     ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda.'],
     ['Reloj', 'Pasa el ratón sobre la hora para ver tu zona horaria. Haz clic en la hora para cambiar entre 24 horas, 12 horas y hora completa con segundos. Si las zonas horarias están activas, el globo sobre la hora abre las zonas que elegiste.'],
     ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y DD-MM-AAAA.'],
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
-    ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 24 horas y siete días.'],
+    ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 24 horas y siete días. Puedes añadir hasta tres lugares más en Gestionar, en Tiempo; elige uno en esta ventana para ver su previsión.'],
     ['Fondo', 'El botón redondo de abajo a la derecha activa o desactiva el fondo. El control de abajo a la izquierda tiñe el fondo.'],
     ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo y Estándar. Personal aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones en cuatro grupos; el enlace vuelve a los ajustes básicos.'],
-    ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer ajustes» devuelve los valores por defecto. «Borrar mis enlaces, accesos de IA y lugares» quita solo tus enlaces propios, accesos de IA, zonas horarias y tu ciudad.'],
+    ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer ajustes» devuelve los valores por defecto. «Borrar mis enlaces, accesos de IA y lugares» quita solo tus enlaces propios, accesos de IA, zonas horarias, tu ciudad y los lugares adicionales. Los lugares adicionales envían su nombre a Open-Meteo para encontrarlos y obtener su previsión.'],
   ] },
   zh: { title: '帮助', settings: '设置', close: '关闭', sections: [
     ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。'],
     ['时钟', '把鼠标移到时间上可看到你的时区。点击时间可在 24 小时制、12 小时制和带秒的完整时间之间切换。开启时区后，时间上方的地球图标会打开你选择的时区。'],
     ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和 DD-MM-YYYY 之间切换。'],
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
-    ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 24 小时和七天的完整预报。'],
+    ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 24 小时和七天的完整预报。 在“管理”的“天气”中最多可添加三个其他地点；在此窗口中选择一个即可查看其预报。'],
     ['背景', '右下角的圆形按钮可开启或关闭壁纸。左下角的滑块会给背景染色。'],
     ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简和标准。选择与两者都不符时显示“个性化”。“高级”按四组显示全部选项，链接可返回基本设置。'],
-    ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置设置”会恢复默认值。“删除我的链接、AI 快捷方式和地点”只删除你的自定义链接、AI 快捷方式、时区和城市。'],
+    ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置设置”会恢复默认值。“删除我的链接、AI 快捷方式和地点”只删除你的自定义链接、AI 快捷方式、时区和城市。 额外地点会把名称发送到 Open-Meteo 以查找位置并获取预报。'],
   ] },
 };
 
@@ -485,6 +493,17 @@ const getPlace = async () => {
 
 // Latest answer, kept so the full forecast can be drawn without asking again.
 let current = null
+// Extra places next to the own one: three at most, shown as chips in the forecast window.
+let extraPlaces = []
+try {
+  const saved = JSON.parse(localStorage.getItem('weatherPlaces') || 'null')
+  if (Array.isArray(saved)) extraPlaces = saved.filter((p) => p && typeof p.label === 'string' && typeof p.latitude === 'number' && typeof p.longitude === 'number').slice(0, 3)
+} catch {}
+const savePlaces = () => writeKey('weatherPlaces', JSON.stringify(extraPlaces))
+const PLACE_LIMIT = 3
+// The place shown in the forecast window: null for the own place, otherwise { place, forecast }.
+let viewed = null
+let viewIndex = 0
 
 const forecastUrl = (place) => 'https://api.open-meteo.com/v1/forecast' +
   `?latitude=${place.latitude}&longitude=${place.longitude}` +
@@ -532,8 +551,10 @@ const showWeather = async () => {
 }
 
 const renderForecast = () => {
-  if (!current) return
-  const { place, forecast } = current
+  const shown = viewed || current
+  if (!shown) return
+  const { place, forecast } = shown
+  renderPlaceChips()
   const now = forecast.current
   const key = weatherKey(now.weather_code)
   const temp = (v) => `${Math.round(v)}°`
@@ -633,6 +654,8 @@ const forecastDialog = document.getElementById('forecast')
 
 const openForecast = () => {
   if (!current) return
+  viewed = null
+  viewIndex = 0
   renderForecast()
   forecastFrom = document.activeElement
   forecastDialog.hidden = false
@@ -657,6 +680,76 @@ weatherDetail.addEventListener('click', openForecast)
 
 document.getElementById('forecast-close').addEventListener('click', closeForecast)
 forecastDialog.addEventListener('click', (e) => { if (e.target === forecastDialog) closeForecast() })
+
+// The forecast of an extra place is fetched the same way as the own one, and cached the same way.
+const loadPlace = (place) => fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
+const choosePlace = async (index) => {
+  viewIndex = index
+  viewed = null
+  if (index > 0) {
+    const place = extraPlaces[index - 1]
+    try {
+      viewed = { place, forecast: await loadPlace(place) }
+    } catch {
+      viewIndex = 0
+    }
+  }
+  renderForecast()
+}
+const renderPlaceChips = () => {
+  const box = document.getElementById('forecast-places')
+  if (!weatherOn || !current || extraPlaces.length === 0) {
+    box.replaceChildren()
+    return
+  }
+  box.replaceChildren(...[current.place.label, ...extraPlaces.map((place) => place.label)].map((label, index) => {
+    const chip = el('button', 'place-chip', label)
+    chip.type = 'button'
+    chip.setAttribute('aria-pressed', String(index === viewIndex))
+    chip.addEventListener('click', () => choosePlace(index))
+    return chip
+  }))
+}
+
+// The weather tab: the own place, and the extra places with a remove button each.
+const renderPlaces = () => {
+  document.getElementById('weather-own').textContent = `${t.placeOwn}: ${current ? current.place.label : t.placeNone}`
+  document.getElementById('place-list').replaceChildren(...extraPlaces.map((place, index) => {
+    const row = document.createElement('li')
+    row.append(el('span', '', place.label))
+    row.append(aiButton(t.placeRemove, '×', () => {
+      extraPlaces = extraPlaces.filter((_, i) => i !== index)
+      if (viewIndex === index + 1) choosePlace(0)
+      savePlaces()
+      renderPlaces()
+      renderPlaceChips()
+    }))
+    return row
+  }))
+}
+const placeMsg = document.getElementById('place-msg')
+document.getElementById('place-form').addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const input = document.getElementById('place-input')
+  const name = input.value.trim()
+  if (!name) return
+  if (extraPlaces.length >= PLACE_LIMIT) { placeMsg.textContent = t.placeLimit; return }
+  try {
+    const found = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=1&language=${uiLang}&format=json`)).json()
+    const hit = found.results && found.results[0]
+    if (!hit) { placeMsg.textContent = t.notFound; return }
+    const place = { label: `${hit.name}, ${hit.country}`, latitude: hit.latitude, longitude: hit.longitude }
+    if (extraPlaces.some((p) => p.label === place.label)) { placeMsg.textContent = t.placeDuplicate; return }
+    extraPlaces = [...extraPlaces, place]
+    savePlaces()
+    input.value = ''
+    placeMsg.textContent = ''
+    renderPlaces()
+  } catch {
+    placeMsg.textContent = t.unavailable
+  }
+})
+document.getElementById('places-open').addEventListener('click', () => openManage('weather'))
 
 // Settings and help: a floating panel, opened with ? and closed with Escape.
 const openedFrom = { el: null }
@@ -699,21 +792,25 @@ const applySettingsText = () => {
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('lbl-ai-name').textContent = t.aiName
   document.getElementById('lbl-ai-url').textContent = t.aiUrl
-  document.getElementById('ai-title').textContent = t.aiSec
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
   document.getElementById('lbl-links-own').textContent = t.linksOwn
-  document.getElementById('zones-title').textContent = t.zonesTitle
   document.getElementById('zone-label').textContent = t.zonesAdd
   document.getElementById('zone-add-btn').textContent = t.zoneAddBtn
-  document.getElementById('zones-close').setAttribute('aria-label', t.close)
+  document.getElementById('manage-close').setAttribute('aria-label', t.close)
+  document.getElementById('tab-links').textContent = t.tabLinks
+  document.getElementById('tab-zones').textContent = t.tabZones
+  document.getElementById('tab-ai').textContent = t.tabAi
+  document.getElementById('tab-weather').textContent = t.tabWeather
+  document.getElementById('places-open').textContent = t.placesManage
+  document.getElementById('lbl-place').textContent = t.placeLabel
+  document.getElementById('place-add').textContent = t.placeAdd
+  document.getElementById('place-input').placeholder = t.cityPlaceholder
   labelLinksButton()
-  document.getElementById('links-title').textContent = t.linksTitle
   document.getElementById('lbl-link-name').textContent = t.lblName
   document.getElementById('lbl-link-url').textContent = t.lblUrl
   document.getElementById('lbl-link-desc').textContent = t.lblDesc
-  document.getElementById('links-close').setAttribute('aria-label', t.close)
   zonesButton.setAttribute('aria-label', t.zonesButton)
   zonesButton.title = t.zonesButton
   const [beforeHelp, afterHelp = ''] = t.privacy.split('{help}')
@@ -806,8 +903,7 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  const zonesWindow = document.getElementById('zones')
-  const open = [helpWindow, forecastDialog, zonesWindow, document.getElementById('links'), document.getElementById('ai-window'), settings].find((d) => !d.hidden) || null
+  const open = [helpWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -818,9 +914,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (open === helpWindow) closeHelp()
     else if (open === forecastDialog) closeForecast()
-    else if (open === zonesWindow) closeZones()
-    else if (open === document.getElementById('links')) closeLinks()
-    else if (open === document.getElementById('ai-window')) closeAiWindow()
+    else if (open === manageWindow) closeManage()
     else if (!advancedBlock.hidden) setAdvanced(false)
     else closeSettings()
     return
@@ -876,7 +970,7 @@ settingsFields.zones.addEventListener('change', () => {
   zonesOn = settingsFields.zones.checked
   writeKey('timeZones', zonesOn ? 'on' : 'off')
   applyZonesVisibility()
-  if (!zonesOn && !zonesDialog.hidden) closeZones()
+  if (!zonesOn && manageTab === 'zones' && !manageWindow.hidden) closeManage()
 })
 
 // Ask AI links below the search bar.
@@ -970,7 +1064,7 @@ const clearKeys = (keys) => {
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
 }
-const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location']
+const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces']
 settingsFields.resetSettings.addEventListener('click', () => {
   clearKeys(['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
   location.reload()
@@ -983,7 +1077,6 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Time zones: optional. A small globe next to the date opens a window with up to five extra zones.
 const zonesButton = document.getElementById('zones-button')
-const zonesDialog = document.getElementById('zones')
 const zonesList = document.getElementById('zones-list')
 const zoneInput = document.getElementById('zone-input')
 const zoneMsg = document.getElementById('zone-msg')
@@ -1070,23 +1163,44 @@ const utcLabel = (zone, now) => {
 const zoneName = (zone) => el('span', 'zone-name', cityOf(zone))
 const zoneTag = (zone, now) => el('span', 'zone-tag', utcLabel(zone, now))
 
-const openZones = () => {
-  zonesFrom = document.activeElement
-  renderZones()
-  zonesDialog.hidden = false
-  zonesDialog.querySelector('.settings-panel').focus()
+// One panel for the links, time zones, AI shortcuts and weather places. Each opens on its own tab.
+const manageWindow = document.getElementById('manage')
+const manageTabs = [...manageWindow.querySelectorAll('.manage-tab-button')]
+const manageSections = [...manageWindow.querySelectorAll('.manage-section')]
+let manageTab = 'links'
+let manageFrom = null
+const showManageTab = (tab) => {
+  manageTab = tab
+  manageTabs.forEach((button) => {
+    const on = button.dataset.tab === tab
+    button.setAttribute('aria-selected', String(on))
+    button.tabIndex = on ? 0 : -1
+  })
+  manageSections.forEach((section) => { section.hidden = section.dataset.tab !== tab })
+  document.getElementById('manage-title').textContent = manageTabs.find((button) => button.dataset.tab === tab).textContent
+  if (tab === 'links') resetLinkForm()
+  if (tab === 'zones') renderZones()
+  if (tab === 'ai') resetAiForm()
+  if (tab === 'weather') renderPlaces()
 }
-
-let zonesFrom = null
-const closeZones = () => {
-  zonesDialog.hidden = true
-  if (zonesFrom && zonesFrom.focus) zonesFrom.focus()
+const openManage = (tab) => {
+  manageFrom = document.activeElement
+  showManageTab(tab)
+  manageWindow.hidden = false
+  manageWindow.querySelector('.settings-panel').focus()
 }
+const closeManage = () => {
+  manageWindow.hidden = true
+  if (manageFrom && manageFrom.focus) manageFrom.focus()
+}
+manageTabs.forEach((button) => button.addEventListener('click', () => showManageTab(button.dataset.tab)))
+document.getElementById('manage-close').addEventListener('click', closeManage)
+manageWindow.addEventListener('click', (e) => { if (e.target === manageWindow) closeManage() })
 
+const openZones = () => openManage('zones')
+const closeZones = () => closeManage()
 zonesButton.addEventListener('click', openZones)
 zonesPreview.addEventListener('click', openZones)
-document.getElementById('zones-close').addEventListener('click', closeZones)
-zonesDialog.addEventListener('click', (e) => { if (e.target === zonesDialog) closeZones() })
 zonesList.addEventListener('click', (e) => {
   if (!e.target.dataset.zone) return
   zones = zones.filter((z) => z !== e.target.dataset.zone)
@@ -1126,7 +1240,7 @@ applyZonesVisibility()
 // The window ticks along with the clock while it is open.
 setInterval(() => {
   renderPreview()
-  if (!zonesDialog.hidden) renderZones()
+  if (!manageWindow.hidden && manageTab === 'zones') renderZones()
 }, 1000)
 
 // Links. Permanent links are built in: Wikipedia, in the browser's language. They cannot be removed.
@@ -1140,7 +1254,6 @@ const labelLinksButton = () => {
   linksButton.title = label
 }
 const linksPreview = document.getElementById('links-preview')
-const linksWindow = document.getElementById('links')
 const linksIcons = document.getElementById('link-icons')
 const linksList = document.getElementById('links-list')
 const linkForm = document.getElementById('link-form')
@@ -1204,7 +1317,6 @@ try {
 let linksOn = readFlag('linksOn', true)
 let linksOwn = readFlag('linksOwn', false)
 let editing = null
-let linksFrom = null
 
 const saveLinks = () => writeKey('links', JSON.stringify(links))
 
@@ -1308,30 +1420,18 @@ linksList.addEventListener('click', (e) => {
   }
 })
 
-const openLinks = () => {
-  linksFrom = document.activeElement
-  resetLinkForm()
-  linksWindow.hidden = false
-  linksWindow.querySelector('.settings-panel').focus()
-}
-
-const closeLinks = () => {
-  linksWindow.hidden = true
-  if (linksFrom && linksFrom.focus) linksFrom.focus()
-}
-
+const openLinks = () => openManage('links')
+const closeLinks = () => closeManage()
 linksButton.addEventListener('click', () => {
   if (!linksOwn) return window.open(permanentLinks()[0].url, '_blank', 'noopener')
   openLinks()
 })
-document.getElementById('links-close').addEventListener('click', closeLinks)
-linksWindow.addEventListener('click', (e) => { if (e.target === linksWindow) closeLinks() })
 
 // The links button can be switched off in settings; the window closes with it.
 settingsFields.links.addEventListener('change', () => {
   linksOn = settingsFields.links.checked
   writeKey('linksOn', linksOn ? 'on' : 'off')
-  if (!linksOn && !linksWindow.hidden) closeLinks()
+  if (!linksOn && manageTab === 'links' && !manageWindow.hidden) closeManage()
   renderLinks()
 })
 settingsFields.linksOwn.addEventListener('change', () => {
@@ -1381,7 +1481,8 @@ const aiButton = (label, glyph, onClick, disabled = false) => {
 }
 
 const renderAskAi = () => {
-  askAi.hidden = !askaiOn || askAiList.length === 0
+  askAi.hidden = !askaiOn
+  askAiRow.hidden = askAiList.length === 0
   askAiRow.replaceChildren(...askAiList.map((item) => {
     const link = Object.assign(document.createElement('a'), { href: item.url })
     link.title = item.title
@@ -1448,23 +1549,10 @@ aiForm.addEventListener('submit', (e) => {
   saveAskAi()
 })
 
-// The AI window: opened from the advanced settings, closed with Escape, the close button or a click outside.
-const aiWindow = document.getElementById('ai-window')
-const openAiWindow = () => {
-  aiWindowFrom = document.activeElement
-  resetAiForm()
-  renderAskAi()
-  aiWindow.hidden = false
-  aiWindow.querySelector('.settings-panel').focus()
-}
-let aiWindowFrom = null
-const closeAiWindow = () => {
-  aiWindow.hidden = true
-  if (aiWindowFrom && aiWindowFrom.focus) aiWindowFrom.focus()
-}
+const openAiWindow = () => openManage('ai')
+const closeAiWindow = () => closeManage()
 document.getElementById('ai-open').addEventListener('click', openAiWindow)
-document.getElementById('ai-close').addEventListener('click', closeAiWindow)
-aiWindow.addEventListener('click', (e) => { if (e.target === aiWindow) closeAiWindow() })
+document.getElementById('ask-ai-edit').addEventListener('click', openAiWindow)
 
 renderAskAi()
 root.toggleAttribute('data-quote-off', !quoteOn)

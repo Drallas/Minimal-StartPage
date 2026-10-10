@@ -8,6 +8,8 @@ What is in the page now. The open items are in [PLANNED.md](PLANNED.md), and the
 - IP address: its own optional switch under the footer, with the city, country and provider on hover.
 - Links: a button at the top left. Permanent links as logos in a row (Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub, Reuters); up to 15 of your own. Hovering the button shows your own links only. The button can be switched off. With Own links off it is a plain Wikipedia button that opens Wikipedia directly; the Minimal page uses that.
 - Background: a wallpaper switch, an option to hide its button, and a tint switch that hides the slider.
+- Manage panel: links, time zones, AI shortcuts and weather places in one panel with four tabs. Each opens on its own tab: the links button, the globe, the pencil next to the AI shortcuts, and the Manage places button.
+- Weather places: up to three extra places besides your own, shown as chips in the forecast window.
 - Settings: a basic view (the pages and the privacy note, with Help) and an Advanced view grouped into Weather, Display, Background and Privacy. Gear icon, Help guide in six languages, Escape closes the top window.
 - Pages: Minimal and Standard presets in the settings, plus Personal when the choices match neither. They change only the display options; weather and the IP address are never changed by a preset.
 - Privacy: everything is off by default. Only weather and the IP address send data, and a short disclaimer points to Help.

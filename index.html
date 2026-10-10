@@ -48,6 +48,7 @@
       <nav class="links" id="ask-ai" aria-label="Shortcuts">
         <p class="caption">Ask AI</p>
         <ul id="ask-ai-list"></ul>
+        <button type="button" id="ask-ai-edit" class="ai-edit" aria-label="Edit AI shortcuts" title="Edit AI shortcuts">✎</button>
       </nav>
     </main>
 
@@ -95,6 +96,7 @@
               <p class="city-msg" id="city-msg" role="status"></p>
             </form>
           </div>
+        <button type="button" id="places-open" class="text-button">Manage places</button>
         </section>
         <section class="adv-group">
           <p class="location-title" id="sec-look">Show</p>
@@ -126,63 +128,19 @@
     </div>
   </div>
 
-  <div class="settings" id="forecast" hidden>
-    <div class="settings-panel forecast-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="forecast-title">
+  <div class="settings" id="manage" hidden>
+    <div class="settings-panel manage-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="manage-title">
       <div class="settings-head">
-        <h2 id="forecast-title">Weather</h2>
-        <button type="button" id="forecast-close" class="settings-close" aria-label="Close">×</button>
+        <h2 id="manage-title">Links</h2>
+        <button type="button" id="manage-close" class="settings-close" aria-label="Close">×</button>
       </div>
-      <div id="forecast-body"></div>
-      <a class="forecast-link" id="forecast-link" href="https://www.windy.com/" target="_blank" rel="noopener"></a>
-    </div>
-  </div>
-  <div class="settings" id="zones" hidden>
-    <div class="settings-panel zones-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="zones-title">
-      <div class="settings-head">
-        <h2 id="zones-title">Time zones</h2>
-        <button type="button" id="zones-close" class="settings-close" aria-label="Close">×</button>
+      <div class="manage-tabs" role="tablist">
+        <button type="button" role="tab" class="manage-tab-button" data-tab="links" id="tab-links">Links</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="zones" id="tab-zones">Time zones</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="ai" id="tab-ai">AI</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="weather" id="tab-weather">Weather</button>
       </div>
-      <p class="zones-local" id="zones-local"></p>
-      <div id="zones-list"></div>
-      <form class="city-form" id="zone-form">
-        <label for="zone-input" id="zone-label">Add a time zone (up to five)</label>
-        <div class="city-row">
-          <input type="text" id="zone-input" list="zone-options" autocomplete="off">
-          <button type="submit" id="zone-add-btn">Add</button>
-        </div>
-        <datalist id="zone-options"></datalist>
-        <p class="city-msg" id="zone-msg" role="status"></p>
-      </form>
-    </div>
-  </div>
-  <div class="settings" id="ai-window" hidden>
-    <div class="settings-panel ai-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="ai-title">
-      <div class="settings-head">
-        <h2 id="ai-title">AI shortcuts</h2>
-        <button type="button" id="ai-close" class="settings-close" aria-label="Close">×</button>
-      </div>
-      <ul class="ai-list" id="ai-list"></ul>
-      <form class="link-form" id="ai-form">
-        <p class="link-form-title" id="ai-form-title">Add shortcut</p>
-        <label for="ai-name" id="lbl-ai-name">Name</label>
-        <input type="text" id="ai-name" autocomplete="off">
-        <label for="ai-url" id="lbl-ai-url">Address</label>
-        <input type="text" id="ai-url" inputmode="url" autocomplete="off" placeholder="https://">
-        <div class="link-form-actions">
-          <button type="submit" id="ai-save">Save</button>
-          <button type="button" id="ai-cancel" class="text-button" hidden>Cancel</button>
-        </div>
-        <p class="city-msg" id="ai-msg" role="status"></p>
-      </form>
-    </div>
-  </div>
-
-  <div class="settings" id="links" hidden>
-    <div class="settings-panel links-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="links-title">
-      <div class="settings-head">
-        <h2 id="links-title">Links</h2>
-        <button type="button" id="links-close" class="settings-close" aria-label="Close">×</button>
-      </div>
+      <section class="manage-section" data-tab="links" hidden>
       <div class="link-icons" id="link-icons"></div>
       <div class="links-list" id="links-list"></div>
       <form class="link-form" id="link-form">
@@ -199,8 +157,61 @@
         </div>
         <p class="city-msg" id="link-msg" role="status"></p>
       </form>
+      </section>
+      <section class="manage-section" data-tab="zones" hidden>
+      <p class="zones-local" id="zones-local"></p>
+      <div id="zones-list"></div>
+      <form class="city-form" id="zone-form">
+        <label for="zone-input" id="zone-label">Add a time zone (up to five)</label>
+        <div class="city-row">
+          <input type="text" id="zone-input" list="zone-options" autocomplete="off">
+          <button type="submit" id="zone-add-btn">Add</button>
+        </div>
+        <datalist id="zone-options"></datalist>
+        <p class="city-msg" id="zone-msg" role="status"></p>
+      </form>
+      </section>
+      <section class="manage-section" data-tab="ai" hidden>
+      <ul class="ai-list" id="ai-list"></ul>
+      <form class="link-form" id="ai-form">
+        <p class="link-form-title" id="ai-form-title">Add shortcut</p>
+        <label for="ai-name" id="lbl-ai-name">Name</label>
+        <input type="text" id="ai-name" autocomplete="off">
+        <label for="ai-url" id="lbl-ai-url">Address</label>
+        <input type="text" id="ai-url" inputmode="url" autocomplete="off" placeholder="https://">
+        <div class="link-form-actions">
+          <button type="submit" id="ai-save">Save</button>
+          <button type="button" id="ai-cancel" class="text-button" hidden>Cancel</button>
+        </div>
+        <p class="city-msg" id="ai-msg" role="status"></p>
+      </form>
+      </section>
+      <section class="manage-section" data-tab="weather" hidden>
+        <p class="manage-note" id="weather-own"></p>
+        <ul class="place-list" id="place-list"></ul>
+        <form class="city-form" id="place-form">
+          <label for="place-input" id="lbl-place">Add a city</label>
+          <div class="city-row">
+            <input type="text" id="place-input" autocomplete="off">
+            <button type="submit" id="place-add">Add</button>
+          </div>
+          <p class="city-msg" id="place-msg" role="status"></p>
+        </form>
+      </section>
     </div>
   </div>
+  <div class="settings" id="forecast" hidden>
+    <div class="settings-panel forecast-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="forecast-title">
+      <div class="settings-head">
+        <h2 id="forecast-title">Weather</h2>
+        <button type="button" id="forecast-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <div class="forecast-places" id="forecast-places"></div>
+      <div id="forecast-body"></div>
+      <a class="forecast-link" id="forecast-link" href="https://www.windy.com/" target="_blank" rel="noopener"></a>
+    </div>
+  </div>
+
   <div class="settings" id="help" hidden>
     <div class="settings-panel help-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="help-title">
       <div class="settings-head">
