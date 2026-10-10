@@ -722,10 +722,13 @@ html[data-wallpaper-on] .modes button {
 
 /* The caption above the AI shortcuts is the button that opens their editor. */
 .caption-button {
+  display: block;
+  width: 100%;
   padding: 0;
   border: 0;
   background: none;
   font-family: inherit;
+  text-align: center;
   cursor: pointer;
 }
 
