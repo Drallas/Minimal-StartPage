@@ -291,6 +291,12 @@ footer a:focus-visible svg {
   color: var(--color-fg-2);
 }
 
+.weather-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 6px;
+}
+
 .weather button {
   padding: 6px 8px;
   border-radius: 6px;

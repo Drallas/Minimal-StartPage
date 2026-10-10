@@ -169,6 +169,25 @@ const weatherKey = (code) => {
   return null
 }
 
+// Small outline icons in the same style as the rest of the page, one per weather group.
+const cloudPath = 'M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.1 9.2 3.5 3.5 0 0 0 7 18z'
+const weatherIcons = {
+  clear: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  mostly: '<circle cx="9" cy="8" r="3"/><path d="M9 2v1M3.5 8h-1M4.6 3.6l.7.7M13.4 3.6l-.7.7"/><path d="M9 19h8a3.5 3.5 0 0 0 .4-6.97A5 5 0 0 0 8 13.5 3 3 0 0 0 9 19z"/>',
+  partly: '<circle cx="9" cy="8" r="3"/><path d="M9 2v1M3.5 8h-1M4.6 3.6l.7.7M13.4 3.6l-.7.7"/><path d="M9 19h8a3.5 3.5 0 0 0 .4-6.97A5 5 0 0 0 8 13.5 3 3 0 0 0 9 19z"/>',
+  cloudy: `<path d="${cloudPath}"/>`,
+  fog: '<path d="M4 9h16M6 13h12M4 17h16"/>',
+  drizzle: `<path d="${cloudPath}"/><path d="M8 21l.5-1M12 21l.5-1M16 21l.5-1"/>`,
+  rain: `<path d="${cloudPath}"/><path d="M8 21l-1 1.5M12 21l-1 1.5M16 21l-1 1.5"/>`,
+  heavyRain: `<path d="${cloudPath}"/><path d="M7 21l-1 1.5M11 21l-1 1.5M15 21l-1 1.5M19 21l-1 1.5"/>`,
+  snow: `<path d="${cloudPath}"/><path d="M8 20h.01M12 21h.01M16 20h.01"/>`,
+  heavySnow: `<path d="${cloudPath}"/><path d="M7 20h.01M10 21h.01M13 20h.01M16 21h.01"/>`,
+  showers: `<path d="${cloudPath}"/><path d="M9 21l-1 1.5M15 21l-1 1.5"/>`,
+  heavyShowers: `<path d="${cloudPath}"/><path d="M7 21l-1 1.5M11 21l-1 1.5M15 21l-1 1.5M19 21l-1 1.5"/>`,
+  storm: `<path d="${cloudPath}"/><path d="M12.5 14.5l-2 3.5h2.5l-1.5 3.5"/>`,
+}
+const weatherIcon = (key) => `<svg class="weather-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${weatherIcons[key] || weatherIcons.cloudy}</svg>`
+
 // Keeps a response in localStorage for maxAge milliseconds, so a reload does not fetch again.
 const fetchCached = async (key, maxAge, url) => {
   try {
@@ -204,7 +223,9 @@ const showWeather = async () => {
       `${forecast.hourly.precipitation_probability[start + 1 + i]}%`
     ))
     const key = weatherKey(now.weather_code)
-    weatherButton.textContent = `${Math.round(now.temperature_2m)}°`
+    const temperature = `${Math.round(now.temperature_2m)}°`
+    weatherButton.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
+    weatherButton.setAttribute('aria-label', `${key ? ww[key] : ''} ${temperature}`.trim())
     weatherDetail.replaceChildren(
       weatherRow(`${place.city}, ${place.country_name}`),
       weatherRow(key ? ww[key] : '', `${Math.round(now.temperature_2m)}°`),
@@ -222,6 +243,7 @@ const hideWeather = () => {
   weatherOn = false
   try { localStorage.setItem('weather', 'off') } catch {}
   weatherButton.textContent = wt.show
+  weatherButton.removeAttribute('aria-label')
   weatherButton.setAttribute('aria-expanded', 'false')
   weatherDetail.replaceChildren()
   weatherDetail.classList.remove('open')
