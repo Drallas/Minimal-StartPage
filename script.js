@@ -808,11 +808,8 @@ const placeMsg = document.getElementById('place-msg')
 // The region is shown only when it adds something: 'Shanghai Shi' under Shanghai is left out.
 const cityLabel = (r) => [r.name, r.admin1 && !r.name.toLowerCase().includes(r.admin1.toLowerCase()) ? r.admin1 : '', r.country].filter(Boolean).join(', ')
 const fetchCities = async (query, count, language) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${language}&format=json`)).json()).results || []
-const geocode = async (query, count) => {
-  let results = await fetchCities(query, count, uiLang)
-  if (!results.length && uiLang !== 'en') results = await fetchCities(query, count, 'en')
-  return results.sort((x, y) => (y.population || 0) - (x.population || 0))
-}
+// English names: the spelling people type (Shanghai, not the Dutch transliteration), in every language of the page.
+const geocode = async (query, count) => (await fetchCities(query, count, 'en')).sort((x, y) => (y.population || 0) - (x.population || 0))
 const suggestCities = (input, datalist, hits) => {
   let timer = null
   input.addEventListener('input', () => {
