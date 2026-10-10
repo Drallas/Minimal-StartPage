@@ -843,6 +843,9 @@ const applySettingsText = () => {
   document.getElementById('ip-window-title').textContent = t.ipWindowTitle
   document.getElementById('ip-open').textContent = t.ipWindowTitle
   document.getElementById('ip-window-close').setAttribute('aria-label', t.close)
+  document.getElementById('links-window-title').textContent = t.linksTitle
+  document.getElementById('links-window-close').setAttribute('aria-label', t.close)
+  document.getElementById('links-manage').textContent = t.manageOpen
   renderIp()
   document.getElementById('lbl-city').textContent = t.cityLabel
   settingsFields.cityInput.placeholder = t.cityPlaceholder
@@ -989,7 +992,7 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  const open = [helpWindow, ipWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
+  const open = [helpWindow, ipWindow, linksWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -1000,6 +1003,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (open === helpWindow) closeHelp()
     else if (open === ipWindow) closeIpWindow()
+    else if (open === linksWindow) closeLinks()
     else if (open === forecastDialog) closeForecast()
     else if (open === manageWindow) closeManage()
     else if (!advancedBlock.hidden) setAdvanced(false)
@@ -1394,7 +1398,9 @@ const labelLinksButton = () => {
   linksButton.title = label
 }
 const linksPreview = document.getElementById('links-preview')
-const linksIcons = document.getElementById('link-icons')
+const linksIcons = document.getElementById('links-window-icons')
+const linksOwnBox = document.getElementById('links-own')
+const linksWindow = document.getElementById('links-window')
 const linksList = document.getElementById('links-list')
 const linkForm = document.getElementById('link-form')
 const linkName = document.getElementById('link-name')
@@ -1519,6 +1525,13 @@ const renderLinks = () => {
     return row
   })
   linksList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.linksEmpty)]))
+  const ownRows = links.map((link) => {
+    const row = Object.assign(document.createElement('a'), { href: link.url, target: '_blank', rel: 'noopener', className: 'own-link' })
+    row.append(link.title)
+    if (link.description) row.append(el('span', 'own-desc', link.description))
+    return row
+  })
+  linksOwnBox.replaceChildren(...(ownRows.length ? ownRows : [el('p', 'zones-empty', t.linksEmpty)]))
 
   const full = links.length >= LINK_LIMIT && editing === null
   linkName.disabled = full
@@ -1589,8 +1602,17 @@ linksList.addEventListener('click', (e) => {
   }
 })
 
-const openLinks = () => openManage('links')
-const closeLinks = () => closeManage()
+const openLinks = () => {
+  linksWindow.hidden = false
+  linksWindow.querySelector('.settings-panel').focus()
+}
+const closeLinks = () => { linksWindow.hidden = true; linksButton.focus() }
+document.getElementById('links-window-close').addEventListener('click', closeLinks)
+linksWindow.addEventListener('click', (e) => { if (e.target === linksWindow) closeLinks() })
+document.getElementById('links-manage').addEventListener('click', () => {
+  linksWindow.hidden = true
+  openManage('links')
+})
 linksButton.addEventListener('click', () => {
   if (!linksOwn) return window.open(permanentLinks()[0].url, '_blank', 'noopener')
   openLinks()
@@ -1601,6 +1623,7 @@ settingsFields.links.addEventListener('change', () => {
   linksOn = settingsFields.links.checked
   writeKey('linksOn', linksOn ? 'on' : 'off')
   if (!linksOn && manageTab === 'links' && !manageWindow.hidden) closeManage()
+  if (!linksOn && !linksWindow.hidden) closeLinks()
   renderLinks()
 })
 settingsFields.linksOwn.addEventListener('change', () => {

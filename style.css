@@ -1677,7 +1677,7 @@ html[data-quote-off] #quote {
   color: var(--color-fg-2);
 }
 
-.ip-check {
+.ghost-button {
   align-self: flex-start;
   height: 32px;
   margin: 4px 0 6px;
@@ -1688,12 +1688,12 @@ html[data-quote-off] #quote {
   font-size: 13px;
 }
 
-.ip-check:hover,
-.ip-check:focus-visible {
+.ghost-button:hover,
+.ghost-button:focus-visible {
   border-color: var(--color-fg-2);
 }
 
-.ip-check:disabled {
+.ghost-button:disabled {
   opacity: .5;
 }
 
@@ -1814,4 +1814,32 @@ html[data-quote-off] #quote {
   .privacy {
     font-size: 14px;
   }
+}
+
+/* The links window: the permanent icons, the visitor's own links, and a way to the full manage panel. */
+.links-panel {
+  max-width: 460px;
+}
+
+.links-own {
+  margin: 12px 0 16px;
+}
+
+.own-link {
+  display: block;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-fg-1);
+  text-decoration: none;
+}
+
+.own-link:hover,
+.own-link:focus-visible {
+  color: var(--color-fg-2);
+}
+
+.own-desc {
+  display: block;
+  font-size: 12px;
+  color: var(--color-fg-2);
 }

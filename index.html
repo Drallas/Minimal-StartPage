@@ -138,7 +138,6 @@
         <button type="button" role="tab" class="manage-tab-button" data-tab="weather" id="tab-weather" aria-controls="section-weather">Weather</button>
       </div>
       <section class="manage-section" data-tab="links" id="section-links" role="tabpanel" aria-labelledby="tab-links" tabindex="0" hidden>
-      <div class="link-icons" id="link-icons"></div>
       <div class="links-list" id="links-list"></div>
       <form class="link-form" id="link-form">
         <p class="link-form-title" id="link-form-title">Add link</p>
@@ -210,9 +209,20 @@
       </div>
       <p class="ip-current" id="ip-value"></p>
       <p class="ip-meta" id="ip-meta"></p>
-      <button type="button" class="ip-check" id="ip-check"></button>
+      <button type="button" class="ghost-button" id="ip-check"></button>
       <p class="ip-meta" id="ip-status" aria-live="polite"></p>
       <dl class="ip-list" id="ip-list"></dl>
+    </div>
+  </div>
+  <div class="settings" id="links-window" hidden>
+    <div class="settings-panel links-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="links-window-title">
+      <div class="settings-head">
+        <h2 id="links-window-title">Links</h2>
+        <button type="button" id="links-window-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <div class="link-icons" id="links-window-icons"></div>
+      <div class="links-own" id="links-own"></div>
+      <button type="button" id="links-manage" class="ghost-button">Manage</button>
     </div>
   </div>
   <div class="settings" id="forecast" hidden>
