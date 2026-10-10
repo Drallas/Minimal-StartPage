@@ -728,19 +728,6 @@ html[data-wallpaper-on] .modes button {
   color: var(--color-fg-1);
 }
 
-/* The greeting above the clock: small and quiet. */
-.greeting {
-  margin: 0 0 6px;
-  font-size: 14px;
-  letter-spacing: .02em;
-  color: var(--color-fg-2);
-  text-align: center;
-}
-
-.greeting[hidden] {
-  display: none;
-}
-
 /* The two icon buttons: a colour button on the left and a background button on the right. Desktop keeps
    the slider and the wallpaper thumbnail, so the icons only show on phones. */
 .controls .tint-cycle,

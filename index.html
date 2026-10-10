@@ -37,7 +37,6 @@
     </header>
 
     <main id="main">
-      <p class="greeting" id="greeting" hidden></p>
       <div id="clock"><div class="zones-wrap"><button type="button" id="zones-button" class="zones-button" hidden><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button><div class="zones-preview" id="zones-preview"></div></div><time id="time" title="Click to cycle through 24-hour, 12-hour and full time"></time><div class="date-row"><span id="date"></span></div></div>
       <form id="searchform" class="searchbar" role="search" title="Type a search and press Enter">
         <label for="search" class="sr-only">Search the web</label>
@@ -108,10 +107,6 @@
           <label class="setting"><input type="checkbox" id="set-links"> <span id="lbl-links">Links button</span></label>
           <label class="setting"><input type="checkbox" id="set-links-own"> <span id="lbl-links-own">Own links</span></label>
           <label class="setting"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Time zones</span></label>
-          <div class="city-form">
-            <label for="greet-name" id="lbl-greet">Name in the greeting</label>
-            <input type="text" id="greet-name" autocomplete="given-name" maxlength="40">
-          </div>
           <label class="setting"><input type="checkbox" id="set-wallpaper-btn"> <span id="lbl-wallpaper-btn">Wallpaper button</span></label>
         </section>
         <section class="adv-group">
