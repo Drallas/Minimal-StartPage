@@ -110,6 +110,10 @@ const quotes = window.QUOTES
 const quoteLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
 const translated = quotes[quoteLang] || []
 const quoteList = quotes.en.map((q, i) => translated[i] || q)
+
+// Wikipedia in the browser's language; English when there is no edition for it.
+const wikiLang = ['nl', 'de', 'fr', 'es', 'zh'].includes(quoteLang) ? quoteLang : 'en'
+document.getElementById('wikipedia').href = `https://${wikiLang}.wikipedia.org/`
 // Clicking the quote steps to the next one; the six-hour rotation keeps going from there.
 let quoteOffset = 0
 const showQuote = () => {
