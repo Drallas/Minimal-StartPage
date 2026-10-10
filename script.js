@@ -334,7 +334,7 @@ const helpText = {
     ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them.'],
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 24 hours and seven days.'],
     ['Background', 'The round button at the bottom right turns the wallpaper on or off. On a computer, the slider at the bottom left tints the background; on a phone it is hidden.'],
-    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on.'],
+    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal, Standard and Full) sit at the top of the settings. Custom shows when your choices match none of them. Advanced lists every option in four groups, and Basic brings the presets back.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset all choices" clears everything and brings back the defaults.'],
   ] },
   nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', sections: [
@@ -344,7 +344,7 @@ const helpText = {
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen.'],
     ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 24 uur en zeven dagen.'],
     ['Achtergrond', 'De ronde knop rechtsonder zet de wallpaper aan of uit. Op een computer kleurt de schuif linksonder de achtergrond; op een telefoon is die verborgen.'],
-    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat.'],
+    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal, Standaard en Volledig. Past geen van die bij je keuzes, dan staat Custom aan. Geavanceerd toont alle opties in vier groepen; Basis brengt de paginakeuzes terug.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Alle keuzes resetten" wist alles en zet de standaard terug.'],
   ] },
   de: { title: 'Hilfe', settings: 'Einstellungen', close: 'Schließen', sections: [
@@ -354,7 +354,7 @@ const helpText = {
     ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen.'],
     ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 24 Stunden und sieben Tagen.'],
     ['Hintergrund', 'Die runde Schaltfläche unten rechts schaltet das Hintergrundbild ein oder aus. Am Computer färbt der Regler unten links den Hintergrund; auf dem Telefon ist er ausgeblendet.'],
-    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist.'],
+    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal, Standard und Voll. Passt keine davon zu deiner Auswahl, ist Custom aktiv. Erweitert zeigt alle Optionen in vier Gruppen; Basis zeigt die Vorlagen wieder.'],
     ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Alle Einstellungen zurücksetzen“ löscht alles und stellt die Standards wieder her.'],
   ] },
   fr: { title: 'Aide', settings: 'Paramètres', close: 'Fermer', sections: [
@@ -364,7 +364,7 @@ const helpText = {
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer.'],
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 24 heures et sept jours.'],
     ['Fond', 'Le bouton rond en bas à droite active ou désactive le fond d’écran. Sur ordinateur, le curseur en bas à gauche teinte le fond ; sur téléphone il est masqué.'],
-    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée.'],
+    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal, Standard et Complet. Custom s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options en quatre groupes ; Base rétablit les pages.'],
     ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser tous les choix » efface tout et rétablit les valeurs par défaut.'],
   ] },
   es: { title: 'Ayuda', settings: 'Ajustes', close: 'Cerrar', sections: [
@@ -374,7 +374,7 @@ const helpText = {
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos.'],
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 24 horas y siete días.'],
     ['Fondo', 'El botón redondo de abajo a la derecha activa o desactiva el fondo. En el ordenador, el control de abajo a la izquierda tiñe el fondo; en el móvil está oculto.'],
-    ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa.'],
+    ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo, Estándar y Completo. Custom aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones en cuatro grupos; Básico vuelve a mostrar las páginas.'],
     ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer todas las opciones» borra todo y devuelve los valores por defecto.'],
   ] },
   zh: { title: '帮助', settings: '设置', close: '关闭', sections: [
@@ -384,7 +384,7 @@ const helpText = {
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。'],
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 24 小时和七天的完整预报。'],
     ['背景', '右下角的圆形按钮可开启或关闭壁纸。在电脑上，左下角的滑块会给背景染色；在手机上它被隐藏。'],
-    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。'],
+    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简、标准和完整。选择与任何一个都不符时显示“自定义”。“高级”按四组显示全部选项，“基本”则回到页面预设。'],
     ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置所有设置”会清除全部内容并恢复默认值。'],
   ] },
 };
