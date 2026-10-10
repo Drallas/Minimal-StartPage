@@ -1330,3 +1330,9 @@ html[data-quote-off] #quote {
   letter-spacing: .04em;
   opacity: .6;
 }
+
+/* Permanent link logos in the links window: the same size and weight as the other icons. */
+.link-icon svg {
+  width: 16px;
+  height: 16px;
+}

@@ -105,7 +105,11 @@ Changes to make:
 ## Questions to settle before building
 
 
-## Permanent links: candidates
+## Permanent links: built
+
+Wikipedia, Google, Apple, Facebook, X, Instagram and Deutsche Welle are in the row, with logos from Simple Icons. Reuters and the BBC have no logo in that set, so Deutsche Welle was chosen as the news link. A generic news icon could replace it later.
+
+## Permanent links: earlier candidates
 
 Built in, shown as icons in a row at the top of the links window, not removable. Wikipedia is in place, in the browser's language. Candidates for a few more, to choose from:
 
