@@ -269,6 +269,14 @@ const manageText = {
   es: { manageOpen: 'Gestionar', tabLinks: 'Enlaces', tabZones: 'Zonas horarias', tabAi: 'IA', tabWeather: 'Tiempo', placeLabel: 'Añadir una ciudad', placeAdd: 'Añadir', placeOwn: 'Tu lugar', placeNone: 'Aún no hay lugar', placeLimit: 'Puedes añadir hasta tres ciudades.', placeDuplicate: 'Ya está en la lista', placeRemove: 'Quitar' },
   zh: { manageOpen: '管理', tabLinks: '链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeLimit: '最多添加三个城市。', placeDuplicate: '已在列表中', placeRemove: '移除' }
 }
+const footerText = {
+  en: { pre: 'Vibe coded with', post: 'by Allards', title: 'View the README on GitHub' },
+  nl: { pre: 'Gemaakt met', post: 'door Allards', title: 'Bekijk de README op GitHub' },
+  de: { pre: 'Gebaut mit', post: 'von Allards', title: 'README auf GitHub ansehen' },
+  fr: { pre: 'Créé avec', post: 'par Allards', title: 'Voir le README sur GitHub' },
+  es: { pre: 'Hecho con', post: 'por Allards', title: 'Ver el README en GitHub' },
+  zh: { pre: '用', post: '由 Allards 制作', title: '在 GitHub 上查看 README' }
+}
 const linksOwnText = {
   en: { linksOwn: 'Own links' },
   nl: { linksOwn: 'Eigen links' },
@@ -796,6 +804,10 @@ const applySettingsText = () => {
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
+  const foot = footerText[uiLang] || footerText.en
+  document.getElementById('foot-pre').textContent = foot.pre
+  document.getElementById('foot-post').textContent = foot.post
+  document.getElementById('foot-link').title = foot.title
   document.getElementById('lbl-links-own').textContent = t.linksOwn
   document.getElementById('zone-label').textContent = t.zonesAdd
   document.getElementById('zone-add-btn').textContent = t.zoneAddBtn

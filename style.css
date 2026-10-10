@@ -533,6 +533,8 @@ html[data-wallpaper-on] .modes button {
 .hue {
   -webkit-appearance: none;
   appearance: none;
+  /* No tap highlight: on iOS it shows as a white disc around the thumb. */
+  -webkit-tap-highlight-color: transparent;
   width: 72px;
   height: 22px;
   margin: 0;
@@ -555,6 +557,7 @@ html[data-wallpaper-on] .modes button {
   margin-top: -10px;
   border-radius: 50%;
   background: radial-gradient(circle, var(--color-fg-2) 0 4px, transparent 4.5px);
+  box-shadow: none;
   border: none;
 }
 
