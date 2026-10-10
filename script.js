@@ -133,6 +133,7 @@ const settings = document.getElementById('settings')
 const settingsFields = {
   weather: document.getElementById('set-weather'),
   ip: document.getElementById('set-ip'),
+  showIp: document.getElementById('set-showip'),
   quote: document.getElementById('set-quote'),
   cityForm: document.getElementById('city-form'),
   cityInput: document.getElementById('city-input'),
@@ -149,6 +150,13 @@ const writeKey = (key, value) => { try { localStorage.setItem(key, value) } catc
 let weatherOn = readFlag('weather', false)
 let ipLookupOn = readFlag('ipLookup', true)
 let quoteOn = readFlag('quote', true)
+let showIpOn = readFlag('showIp', true)
+let lastIp = null
+// The IP address line under the footer: only when we have one and it is wanted.
+const updateIpLine = () => {
+  ipLine.textContent = lastIp && showIpOn ? `${t.ip}: ${lastIp}` : ''
+  ipLine.hidden = !(lastIp && showIpOn)
+}
 let city = null
 try { city = JSON.parse(localStorage.getItem('city') || 'null') } catch {}
 
@@ -162,12 +170,12 @@ const weatherWords = {
   zh: { clear: '晴', mostly: '大部晴朗', partly: '局部多云', cloudy: '多云', fog: '雾', drizzle: '毛毛雨', rain: '雨', heavyRain: '大雨', snow: '雪', heavySnow: '大雪', showers: '阵雨', heavyShowers: '强阵雨', storm: '雷暴' },
 }
 const text = {
-  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'Show weather', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Show the quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', reset: 'Reset all choices', close: 'Close', open: 'Settings and help' },
-  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Weer tonen', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat tonen', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', reset: 'Alle keuzes resetten', close: 'Sluiten', open: 'Instellingen en hulp' },
-  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'Wetter anzeigen', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat anzeigen', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', reset: 'Alle Einstellungen zurücksetzen', close: 'Schließen', open: 'Einstellungen und Hilfe' },
-  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Afficher la météo', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Afficher la citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', reset: 'Réinitialiser tous les choix', close: 'Fermer', open: 'Paramètres et aide' },
-  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Mostrar el tiempo', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Mostrar la cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes y ayuda' },
-  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '显示天气', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '显示名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置与帮助' },
+  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'Show weather', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Show the quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', reset: 'Reset all choices', close: 'Close', open: 'Settings and help' , showIp: 'Show my IP address under the footer'},
+  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Weer tonen', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat tonen', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', reset: 'Alle keuzes resetten', close: 'Sluiten', open: 'Instellingen en hulp' , showIp: 'Mijn IP-adres onder de footer tonen'},
+  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'Wetter anzeigen', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat anzeigen', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', reset: 'Alle Einstellungen zurücksetzen', close: 'Schließen', open: 'Einstellungen und Hilfe' , showIp: 'Meine IP-Adresse unter der Fußzeile anzeigen'},
+  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Afficher la météo', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Afficher la citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', reset: 'Réinitialiser tous les choix', close: 'Fermer', open: 'Paramètres et aide' , showIp: 'Afficher mon adresse IP sous le pied de page'},
+  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Mostrar el tiempo', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Mostrar la cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes y ayuda' , showIp: 'Mostrar mi IP debajo del pie'},
+  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '显示天气', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '显示名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置与帮助' , showIp: '在页脚下方显示我的 IP 地址'},
 }
 const forecastText = {
   en: { now: 'Now', hours: 'Next 24 hours', days: 'Next 7 days', feels: 'Feels like', wind: 'Wind', humidity: 'Humidity', more: 'Click for the full forecast', windy: 'Full forecast on Windy', rain: 'Rain' },
@@ -264,7 +272,10 @@ const showWeather = async () => {
     const place = await getPlace()
     if (!place) {
       weatherButton.textContent = t.noSource
-      ipLine.hidden = true
+      current = null
+      lastIp = null
+      weatherDetail.replaceChildren()
+      updateIpLine()
       return
     }
     const forecast = await fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
@@ -286,11 +297,14 @@ const showWeather = async () => {
       ...next,
       el('div', 'preview-hint', t.more)
     )
-    ipLine.textContent = place.ip ? `${t.ip}: ${place.ip}` : ''
-    ipLine.hidden = !place.ip
+    lastIp = place.ip
+    updateIpLine()
   } catch {
     weatherButton.textContent = t.unavailable
-    ipLine.hidden = true
+    current = null
+    lastIp = null
+    weatherDetail.replaceChildren()
+    updateIpLine()
   }
 }
 
@@ -365,7 +379,9 @@ const hideWeather = () => {
   weatherButton.setAttribute('aria-expanded', 'false')
   weatherDetail.replaceChildren()
   weatherDetail.classList.remove('open')
-  ipLine.hidden = true
+  current = null
+  lastIp = null
+  updateIpLine()
 }
 
 const setWeather = (on) => {
@@ -420,6 +436,7 @@ const applySettingsText = () => {
   document.getElementById('settings-hint').textContent = t.hint
   document.getElementById('lbl-weather').textContent = t.weather
   document.getElementById('lbl-ip').textContent = t.lookup
+  document.getElementById('lbl-showip').textContent = t.showIp
   document.getElementById('lbl-city').textContent = t.cityLabel
   settingsFields.cityInput.placeholder = t.cityPlaceholder
   document.getElementById('city-save').textContent = t.save
@@ -435,6 +452,7 @@ const applySettingsText = () => {
 const syncSettings = () => {
   settingsFields.weather.checked = weatherOn
   settingsFields.ip.checked = ipLookupOn
+  settingsFields.showIp.checked = showIpOn
   settingsFields.quote.checked = quoteOn
   settingsFields.cityClear.hidden = !city
   settingsFields.cityMessage.textContent = ''
@@ -482,6 +500,12 @@ document.addEventListener('keydown', (e) => {
 
 settingsFields.weather.addEventListener('change', () => setWeather(settingsFields.weather.checked))
 
+settingsFields.showIp.addEventListener('change', () => {
+  showIpOn = settingsFields.showIp.checked
+  writeKey('showIp', showIpOn ? 'on' : 'off')
+  updateIpLine()
+})
+
 settingsFields.ip.addEventListener('change', () => {
   ipLookupOn = settingsFields.ip.checked
   writeKey('ipLookup', ipLookupOn ? 'on' : 'off')
@@ -525,7 +549,7 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'ipLookup', 'quote', 'city', 'ipInfo']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'ipLookup', 'showIp', 'quote', 'city', 'ipInfo']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
