@@ -473,6 +473,27 @@ html[data-wallpaper-on] .controls {
   background-position: center;
 }
 
+/* Phones: lift the controls above the browser's bottom bar and enlarge their touch area. */
+@media (max-width: 600px) {
+  .controls {
+    bottom: 64px;
+  }
+
+  .controls button {
+    position: relative;
+  }
+
+  .controls button::before {
+    content: "";
+    position: absolute;
+    inset: -16px;
+  }
+
+  .hue {
+    height: 44px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .wallpaper,
   body,
