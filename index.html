@@ -16,9 +16,13 @@
     <span class="blob blob-b" aria-hidden="true"></span>
 
     <header class="topbar">
-      <a class="icon-link" id="wikipedia" href="https://en.wikipedia.org/" title="Wikipedia" aria-label="Wikipedia">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-      </a>
+      <div class="links-wrap">
+        <button type="button" class="icon-link links-button" id="links-button" aria-haspopup="dialog" aria-label="Links" title="Links">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          <span class="links-dot" id="links-dot" hidden></span>
+        </button>
+        <div class="links-preview" id="links-preview"></div>
+      </div>
       <div class="weather">
         <button type="button" id="weather-button" aria-expanded="false" aria-controls="weather-detail">Show weather</button>
         <div class="weather-detail" id="weather-detail"></div>
@@ -121,6 +125,29 @@
         </div>
         <datalist id="zone-options"></datalist>
         <p class="city-msg" id="zone-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+  <div class="settings" id="links" hidden>
+    <div class="settings-panel links-panel" role="dialog" aria-modal="true" aria-labelledby="links-title">
+      <div class="settings-head">
+        <h2 id="links-title">Links</h2>
+        <button type="button" id="links-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <div class="links-list" id="links-list"></div>
+      <form class="link-form" id="link-form">
+        <p class="link-form-title" id="link-form-title">Add link</p>
+        <label for="link-name" id="lbl-link-name">Name</label>
+        <input type="text" id="link-name" autocomplete="off">
+        <label for="link-url" id="lbl-link-url">Address</label>
+        <input type="text" id="link-url" inputmode="url" autocomplete="off" placeholder="https://">
+        <label for="link-desc" id="lbl-link-desc">Description (optional)</label>
+        <input type="text" id="link-desc" maxlength="120" autocomplete="off">
+        <div class="link-form-actions">
+          <button type="submit" id="link-save">Save</button>
+          <button type="button" id="link-cancel" class="text-button" hidden>Cancel</button>
+        </div>
+        <p class="city-msg" id="link-msg" role="status"></p>
       </form>
     </div>
   </div>

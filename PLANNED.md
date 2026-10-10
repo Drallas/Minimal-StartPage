@@ -100,6 +100,7 @@ Changes to make:
 - The description is optional and written by the visitor. It is not taken from the site, since sites add unrelated text.
 - The Wikipedia link can be removed. It comes back when "Reset all choices" is used.
 - Weather icons: done in the hover preview and the full forecast.
+- Custom links: built, with Wikipedia as the first default.
 
 ## Questions to settle before building
 

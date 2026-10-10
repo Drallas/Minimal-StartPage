@@ -222,7 +222,15 @@ const zonesText = {
   zh: { zonesToggle: '显示时区（日期旁的地球图标）', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
 }
 const ipPrivacy = {'en': 'Showing your IP address also asks ipapi.co for it.', 'nl': 'Het tonen van je IP-adres vraagt het ook op bij ipapi.co.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie ebenfalls bei ipapi.co abgefragt.', 'fr': 'Afficher votre adresse IP la demande aussi à ipapi.co.', 'es': 'Mostrar tu IP también la pide a ipapi.co.', 'zh': '显示 IP 地址时，同样会向 ipapi.co 查询。'}
-for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const linksText = {
+  en: { linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'No links yet.', linkAdd: 'Add link', linkEdit: 'Edit link', lblName: 'Name', lblUrl: 'Address', lblDesc: 'Description (optional)', linkSave: 'Save', linkCancel: 'Cancel', linksFull: 'You can have up to 15 links.', linkInvalid: 'Enter a valid address, for example https://example.com', linkEditBtn: 'Edit', linkRemove: 'Remove' },
+  nl: { linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Nog geen links.', linkAdd: 'Link toevoegen', linkEdit: 'Link bewerken', lblName: 'Naam', lblUrl: 'Adres', lblDesc: 'Beschrijving (optioneel)', linkSave: 'Opslaan', linkCancel: 'Annuleren', linksFull: 'Je kunt maximaal 15 links hebben.', linkInvalid: 'Vul een geldig adres in, bijvoorbeeld https://voorbeeld.nl', linkEditBtn: 'Bewerken', linkRemove: 'Verwijderen' },
+  de: { linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Noch keine Links.', linkAdd: 'Link hinzufügen', linkEdit: 'Link bearbeiten', lblName: 'Name', lblUrl: 'Adresse', lblDesc: 'Beschreibung (optional)', linkSave: 'Speichern', linkCancel: 'Abbrechen', linksFull: 'Du kannst höchstens 15 Links haben.', linkInvalid: 'Gib eine gültige Adresse ein, zum Beispiel https://beispiel.de', linkEditBtn: 'Bearbeiten', linkRemove: 'Entfernen' },
+  fr: { linksButton: 'Liens', linksTitle: 'Liens', linksEmpty: 'Aucun lien pour l’instant.', linkAdd: 'Ajouter un lien', linkEdit: 'Modifier le lien', lblName: 'Nom', lblUrl: 'Adresse', lblDesc: 'Description (facultatif)', linkSave: 'Enregistrer', linkCancel: 'Annuler', linksFull: 'Vous pouvez avoir jusqu’à 15 liens.', linkInvalid: 'Saisissez une adresse valide, par exemple https://exemple.fr', linkEditBtn: 'Modifier', linkRemove: 'Supprimer' },
+  es: { linksButton: 'Enlaces', linksTitle: 'Enlaces', linksEmpty: 'Aún no hay enlaces.', linkAdd: 'Añadir enlace', linkEdit: 'Editar enlace', lblName: 'Nombre', lblUrl: 'Dirección', lblDesc: 'Descripción (opcional)', linkSave: 'Guardar', linkCancel: 'Cancelar', linksFull: 'Puedes tener hasta 15 enlaces.', linkInvalid: 'Escribe una dirección válida, por ejemplo https://ejemplo.es', linkEditBtn: 'Editar', linkRemove: 'Quitar' },
+  zh: { linksButton: '链接', linksTitle: '链接', linksEmpty: '还没有链接。', linkAdd: '添加链接', linkEdit: '编辑链接', lblName: '名称', lblUrl: '地址', lblDesc: '说明（可选）', linkSave: '保存', linkCancel: '取消', linksFull: '最多可以添加 15 个链接。', linkInvalid: '请输入有效的地址，例如 https://example.com', linkEditBtn: '编辑', linkRemove: '移除' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My IP address (finds my city)', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn IP-adres (zoekt mijn plaats)', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -507,6 +515,13 @@ const applySettingsText = () => {
   document.getElementById('zone-label').textContent = t.zonesAdd
   document.getElementById('zone-add-btn').textContent = t.zoneAddBtn
   document.getElementById('zones-close').setAttribute('aria-label', t.close)
+  linksButton.setAttribute('aria-label', t.linksButton)
+  linksButton.title = t.linksButton
+  document.getElementById('links-title').textContent = t.linksTitle
+  document.getElementById('lbl-link-name').textContent = t.lblName
+  document.getElementById('lbl-link-url').textContent = t.lblUrl
+  document.getElementById('lbl-link-desc').textContent = t.lblDesc
+  document.getElementById('links-close').setAttribute('aria-label', t.close)
   zonesButton.setAttribute('aria-label', t.zonesButton)
   zonesButton.title = t.zonesButton
   document.getElementById('privacy').textContent = `${t.privacy} ${t.ipPrivacy}`
@@ -547,7 +562,7 @@ settings.addEventListener('click', (e) => { if (e.target === settings) closeSett
 
 document.addEventListener('keydown', (e) => {
   const zonesWindow = document.getElementById('zones')
-  const open = [forecastDialog, zonesWindow, settings].find((d) => !d.hidden) || null
+  const open = [forecastDialog, zonesWindow, document.getElementById('links'), settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -558,6 +573,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (open === forecastDialog) closeForecast()
     else if (open === zonesWindow) closeZones()
+    else if (open === document.getElementById('links')) closeLinks()
     else closeSettings()
     return
   }
@@ -641,7 +657,7 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
@@ -785,6 +801,152 @@ setInterval(() => {
   if (!zonesDialog.hidden) renderZones()
 }, 1000)
 
+// Links: up to 15 web links in the top left. Wikipedia is the first default; it returns on reset.
+const linksButton = document.getElementById('links-button')
+const linksDot = document.getElementById('links-dot')
+const linksPreview = document.getElementById('links-preview')
+const linksWindow = document.getElementById('links')
+const linksList = document.getElementById('links-list')
+const linkForm = document.getElementById('link-form')
+const linkName = document.getElementById('link-name')
+const linkUrl = document.getElementById('link-url')
+const linkDesc = document.getElementById('link-desc')
+const linkMsg = document.getElementById('link-msg')
+const linkCancel = document.getElementById('link-cancel')
+const linkSave = document.getElementById('link-save')
+const linkFormTitle = document.getElementById('link-form-title')
+const LINK_LIMIT = 15
+
+// Only http and https addresses are accepted, so nothing like javascript: can be stored.
+const safeUrl = (value) => {
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' || url.protocol === 'http:'
+  } catch {
+    return false
+  }
+}
+const hostOf = (value) => {
+  try { return new URL(value).host } catch { return '' }
+}
+const isValidLink = (link) => !!link && typeof link.title === 'string' && typeof link.url === 'string' && safeUrl(link.url)
+
+// The Wikipedia edition follows the browser language, with English as the fallback.
+const defaultLinks = () => [{ title: 'Wikipedia', url: `https://${['nl', 'de', 'fr', 'es', 'zh'].includes(uiLang) ? uiLang : 'en'}.wikipedia.org/`, description: '' }]
+let links = defaultLinks()
+try {
+  const saved = JSON.parse(localStorage.getItem('links') || 'null')
+  if (Array.isArray(saved)) links = saved.filter(isValidLink).slice(0, LINK_LIMIT)
+} catch {}
+let editing = null
+let linksFrom = null
+
+const saveLinks = () => writeKey('links', JSON.stringify(links))
+
+// A link as a row in the preview or the window. Link text is set with textContent, never as HTML.
+const linkAnchor = (link, withDescription) => {
+  const anchor = Object.assign(document.createElement('a'), { href: link.url, target: '_blank', rel: 'noopener', className: 'link-main' })
+  anchor.append(el('span', 'link-title', link.title))
+  const detail = [hostOf(link.url), withDescription ? link.description : ''].filter(Boolean).join(' · ')
+  if (detail) anchor.append(el('small', '', detail))
+  return anchor
+}
+
+const renderLinks = () => {
+  linksDot.hidden = links.length === 0
+  linksPreview.replaceChildren(...links.map((link) => linkAnchor(link, false)))
+
+  const rows = links.map((link, index) => {
+    const row = el('div', 'link-row')
+    const remove = el('button', 'row-btn', t.linkRemove)
+    remove.type = 'button'
+    remove.dataset.remove = String(index)
+    const edit = el('button', 'row-btn', t.linkEditBtn)
+    edit.type = 'button'
+    edit.dataset.edit = String(index)
+    row.append(linkAnchor(link, true), edit, remove)
+    return row
+  })
+  linksList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.linksEmpty)]))
+
+  const full = links.length >= LINK_LIMIT && editing === null
+  linkName.disabled = full
+  linkUrl.disabled = full
+  linkDesc.disabled = full
+  linkSave.disabled = full
+  linkMsg.textContent = full ? t.linksFull : ''
+}
+
+const resetLinkForm = () => {
+  editing = null
+  linkForm.reset()
+  linkFormTitle.textContent = t.linkAdd
+  linkSave.textContent = t.linkSave
+  linkCancel.hidden = true
+  linkMsg.textContent = ''
+  renderLinks()
+}
+
+linkForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  // A bare host such as example.com gets https:// in front of it.
+  let url = linkUrl.value.trim()
+  if (url && !/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = `https://${url}`
+  if (!safeUrl(url)) {
+    linkMsg.textContent = t.linkInvalid
+    return
+  }
+  const link = {
+    title: linkName.value.trim() || hostOf(url),
+    url,
+    description: linkDesc.value.trim().slice(0, 120),
+  }
+  if (editing !== null) links[editing] = link
+  else if (links.length < LINK_LIMIT) links = [...links, link]
+  saveLinks()
+  resetLinkForm()
+})
+
+linkCancel.addEventListener('click', resetLinkForm)
+
+linksList.addEventListener('click', (e) => {
+  const { edit, remove } = e.target.dataset
+  if (edit !== undefined) {
+    const link = links[Number(edit)]
+    editing = Number(edit)
+    linkName.value = link.title
+    linkUrl.value = link.url
+    linkDesc.value = link.description || ''
+    linkFormTitle.textContent = t.linkEdit
+    linkSave.textContent = t.linkSave
+    linkCancel.hidden = false
+    renderLinks()
+    linkName.focus()
+  } else if (remove !== undefined) {
+    links = links.filter((_, index) => index !== Number(remove))
+    saveLinks()
+    if (editing !== null) resetLinkForm()
+    renderLinks()
+  }
+})
+
+const openLinks = () => {
+  linksFrom = document.activeElement
+  resetLinkForm()
+  linksWindow.hidden = false
+  document.getElementById('links-close').focus()
+}
+
+const closeLinks = () => {
+  linksWindow.hidden = true
+  if (linksFrom && linksFrom.focus) linksFrom.focus()
+}
+
+linksButton.addEventListener('click', openLinks)
+document.getElementById('links-close').addEventListener('click', closeLinks)
+linksWindow.addEventListener('click', (e) => { if (e.target === linksWindow) closeLinks() })
+renderLinks()
+
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
 updateWeatherHint()
@@ -792,6 +954,7 @@ fetchMyIp()
 if (weatherOn) weatherButton.textContent = t.loading
 else showIdle()
 if (weatherOn) showWeather()
+
 
 // A new quote every six hours, so the same one stays put for that window.
 const quoteText = document.getElementById('quote-text')
@@ -803,7 +966,6 @@ const quoteList = quotes.en.map((q, i) => translated[i] || q)
 
 // Wikipedia in the browser's language; English when there is no edition for it.
 const wikiLang = ['nl', 'de', 'fr', 'es', 'zh'].includes(quoteLang) ? quoteLang : 'en'
-document.getElementById('wikipedia').href = `https://${wikiLang}.wikipedia.org/`
 // Clicking the quote steps to the next one; the six-hour rotation keeps going from there.
 let quoteOffset = 0
 const showQuote = () => {

@@ -857,7 +857,10 @@ html[data-wallpaper-on] .controls {
 }
 
 #city-input,
-#zone-input {
+#zone-input,
+#link-name,
+#link-url,
+#link-desc {
   flex: 1;
   min-width: 0;
   height: 36px;
@@ -1165,4 +1168,134 @@ html[data-quote-off] #quote {
 /* The full forecast is a deliberate view, so its icons keep their colour. */
 .forecast-row .weather-icon {
   color: var(--wx);
+}
+
+/* Links: a button in the top left, a hover list, and a window with the full list. */
+.links-wrap {
+  position: relative;
+  display: flex;
+}
+
+.links-button {
+  position: relative;
+}
+
+.links-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-fg-2);
+}
+
+.links-preview {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  min-width: 240px;
+  max-width: 320px;
+  max-height: 60vh;
+  overflow: auto;
+  padding: 10px 12px;
+  background: var(--color-field);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  font-size: 12px;
+  z-index: 2;
+}
+
+.links-preview:empty {
+  display: none !important;
+}
+
+.links-preview::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.links-wrap:hover .links-preview,
+.links-button:focus-visible ~ .links-preview {
+  display: block;
+}
+
+.link-main {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-fg-1);
+}
+
+.link-main small {
+  font-size: 11px;
+  color: var(--color-fg-2);
+}
+
+.links-preview .link-main {
+  padding: 4px 0;
+}
+
+.links-panel {
+  width: min(100%, 460px);
+}
+
+.links-list {
+  max-height: 40vh;
+  overflow: auto;
+}
+
+.link-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.row-btn {
+  padding: 2px 4px;
+  font-size: 12px;
+  color: var(--color-fg-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.row-btn:hover,
+.row-btn:focus-visible {
+  color: var(--color-fg-1);
+}
+
+.link-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.link-form > label {
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.link-form-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.link-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.link-form input:disabled,
+.link-form button:disabled {
+  opacity: .5;
 }
