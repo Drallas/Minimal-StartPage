@@ -46,10 +46,8 @@ searchForm.addEventListener('submit', (e) => {
     return
   }
   searchBox.value = ''
-  searchBox.placeholder = 'Type something to search'
   searchBox.focus()
   clearTimeout(hintTimer)
-  hintTimer = setTimeout(() => { searchBox.placeholder = '' }, 1500)
 })
 
 // Clock: click the time to cycle through 24-hour, 12-hour (AM/PM) and full time (with ticking seconds
@@ -245,12 +243,12 @@ const weatherWords = {
   zh: { clear: '晴', mostly: '大部晴朗', partly: '局部多云', cloudy: '多云', fog: '雾', drizzle: '毛毛雨', rain: '雨', heavyRain: '大雨', snow: '雪', heavySnow: '大雪', showers: '阵雨', heavyShowers: '强阵雨', storm: '雷暴' },
 }
 const text = {
-  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'On', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', resetSettings: 'Reset settings', resetData: 'Delete my links, AI shortcuts and places', resetDataConfirm: 'Delete your custom links, AI shortcuts, time zones and your city? This cannot be undone.', close: 'Close', open: 'Settings' },
-  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Aan', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', resetSettings: 'Instellingen resetten', resetData: 'Eigen links, AI-snelkoppelingen en plaatsen wissen', resetDataConfirm: 'Je eigen links, AI-snelkoppelingen, tijdzones en je stad wissen? Dit kan niet ongedaan worden.', close: 'Sluiten', open: 'Instellingen' },
-  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'An', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', resetSettings: 'Einstellungen zurücksetzen', resetData: 'Eigene Links, KI-Verknüpfungen und Orte löschen', resetDataConfirm: 'Deine eigenen Links, KI-Verknüpfungen, Zeitzonen und deine Stadt löschen? Das lässt sich nicht rückgängig machen.', close: 'Schließen', open: 'Einstellungen' },
-  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Activé', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', resetSettings: 'Réinitialiser les réglages', resetData: 'Supprimer mes liens, raccourcis IA et lieux', resetDataConfirm: 'Supprimer vos liens personnels, raccourcis IA, fuseaux et votre ville ? Action irréversible.', close: 'Fermer', open: 'Paramètres' },
-  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Activado', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', resetSettings: 'Restablecer ajustes', resetData: 'Borrar mis enlaces, accesos de IA y lugares', resetDataConfirm: '¿Borrar tus enlaces propios, accesos de IA, zonas horarias y tu ciudad? No se puede deshacer.', close: 'Cerrar', open: 'Ajustes' },
-  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '开启', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', resetSettings: '重置设置', resetData: '删除我的链接、AI 快捷方式和地点', resetDataConfirm: '删除你的自定义链接、AI 快捷方式、时区和城市？此操作无法撤销。', close: '关闭', open: '设置' },
+  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'On', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', resetSettings: 'Reset settings', resetData: 'Delete my links, AI shortcuts and places', resetDataConfirm: 'Delete your custom links, AI shortcuts, time zones and your city? This cannot be undone.', close: 'Close', open: 'Settings' },
+  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Aan', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', resetSettings: 'Instellingen resetten', resetData: 'Eigen links, AI-snelkoppelingen en plaatsen wissen', resetDataConfirm: 'Je eigen links, AI-snelkoppelingen, tijdzones en je stad wissen? Dit kan niet ongedaan worden.', close: 'Sluiten', open: 'Instellingen' },
+  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'An', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', resetSettings: 'Einstellungen zurücksetzen', resetData: 'Eigene Links, KI-Verknüpfungen und Orte löschen', resetDataConfirm: 'Deine eigenen Links, KI-Verknüpfungen, Zeitzonen und deine Stadt löschen? Das lässt sich nicht rückgängig machen.', close: 'Schließen', open: 'Einstellungen' },
+  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Activé', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', resetSettings: 'Réinitialiser les réglages', resetData: 'Supprimer mes liens, raccourcis IA et lieux', resetDataConfirm: 'Supprimer vos liens personnels, raccourcis IA, fuseaux et votre ville ? Action irréversible.', close: 'Fermer', open: 'Paramètres' },
+  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Activado', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', resetSettings: 'Restablecer ajustes', resetData: 'Borrar mis enlaces, accesos de IA y lugares', resetDataConfirm: '¿Borrar tus enlaces propios, accesos de IA, zonas horarias y tu ciudad? No se puede deshacer.', close: 'Cerrar', open: 'Ajustes' },
+  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '开启', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', resetSettings: '重置设置', resetData: '删除我的链接、AI 快捷方式和地点', resetDataConfirm: '删除你的自定义链接、AI 快捷方式、时区和城市？此操作无法撤销。', close: '关闭', open: '设置' },
 }
 const forecastText = {
   en: { now: 'Now', hours: 'Next 6 hours', days: 'Next 7 days', feels: 'Feels like', wind: 'Wind', humidity: 'Humidity', more: 'Click for the full forecast', windy: 'Full forecast on Windy', rain: 'Rain' },
@@ -806,8 +804,14 @@ const renderPlaces = () => {
 }
 const placeMsg = document.getElementById('place-msg')
 // City suggestions while typing, the same kind of lookup the time zone box does. Only the typed name is sent.
-const cityLabel = (r) => [r.name, r.country].filter(Boolean).join(', ')
-const geocode = async (query, count) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${uiLang}&format=json`)).json()).results || []
+// Results are ranked by population, so the big city wins a shared name; the region tells apart the rest.
+const cityLabel = (r) => [r.name, r.admin1 && r.admin1 !== r.name ? r.admin1 : '', r.country].filter(Boolean).join(', ')
+const fetchCities = async (query, count, language) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${language}&format=json`)).json()).results || []
+const geocode = async (query, count) => {
+  let results = await fetchCities(query, count, uiLang)
+  if (!results.length && uiLang !== 'en') results = await fetchCities(query, count, 'en')
+  return results.sort((x, y) => (y.population || 0) - (x.population || 0))
+}
 const suggestCities = (input, datalist, hits) => {
   let timer = null
   input.addEventListener('input', () => {
@@ -816,7 +820,7 @@ const suggestCities = (input, datalist, hits) => {
     if (query.length < 2) { datalist.replaceChildren(); return }
     timer = setTimeout(async () => {
       try {
-        const results = await geocode(query, 5)
+        const results = (await geocode(query, 10)).slice(0, 5)
         hits.clear()
         for (const r of results) hits.set(cityLabel(r), r)
         datalist.replaceChildren(...results.map((r) => Object.assign(document.createElement('option'), { value: cityLabel(r) })))
@@ -838,9 +842,9 @@ document.getElementById('place-form').addEventListener('submit', async (e) => {
   if (!name) return
   if (extraPlaces.length >= PLACE_LIMIT) { placeMsg.textContent = t.placeLimit; return }
   try {
-    const hit = placeHits.get(name) || (await geocode(name, 1))[0]
+    const hit = placeHits.get(name) || (await geocode(name, 10))[0]
     if (!hit) { placeMsg.textContent = t.notFound; return }
-    const place = { label: `${hit.name}, ${hit.country}`, latitude: hit.latitude, longitude: hit.longitude, timezone: hit.timezone || 'UTC' }
+    const place = { label: cityLabel(hit), latitude: hit.latitude, longitude: hit.longitude, timezone: hit.timezone || 'UTC' }
     if (extraPlaces.some((p) => p.label === place.label)) { placeMsg.textContent = t.placeDuplicate; return }
     extraPlaces = [...extraPlaces, place]
     sortPlaces()
@@ -882,7 +886,6 @@ const applySettingsText = () => {
   document.getElementById('zones-manage').textContent = t.zonesEdit
   renderIp()
   document.getElementById('lbl-city').textContent = t.cityLabel
-  settingsFields.cityInput.placeholder = t.cityPlaceholder
   document.getElementById('city-save').textContent = t.save
   settingsFields.cityClear.textContent = t.clearCity
   document.getElementById('lbl-quote').textContent = t.quote
@@ -895,9 +898,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
   document.getElementById('sec-ai').textContent = t.aiSec
   document.getElementById('lbl-askai').textContent = t.aiOn
-  document.getElementById('ai-name').placeholder = t.aiName
   document.getElementById('ai-name').setAttribute('aria-label', t.aiName)
-  document.getElementById('ai-url').placeholder = 'https://'
   document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
   document.getElementById('manage-open').textContent = t.manageOpen
   document.getElementById('manage-title').textContent = t.manageOpen
@@ -927,7 +928,6 @@ const applySettingsText = () => {
   document.getElementById('tab-weather').textContent = t.tabWeather
   document.getElementById('lbl-place').textContent = t.placeLabel
   document.getElementById('place-add').textContent = t.placeAdd
-  document.getElementById('place-input').placeholder = t.cityPlaceholder
   labelLinksButton()
   document.getElementById('lbl-link-name').textContent = t.lblName
   document.getElementById('lbl-link-url').textContent = t.lblUrl
@@ -1149,7 +1149,7 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
   const name = settingsFields.cityInput.value.trim()
   if (!name) return
   try {
-    const hit = cityHits.get(name) || (await geocode(name, 1))[0]
+    const hit = cityHits.get(name) || (await geocode(name, 10))[0]
     if (!hit) {
       settingsFields.cityMessage.textContent = t.notFound
       return
