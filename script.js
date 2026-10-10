@@ -719,6 +719,7 @@ const advancedToggle = document.getElementById('advanced-toggle')
 const advancedBlock = document.getElementById('advanced')
 const setAdvanced = (open) => {
   advancedBlock.hidden = !open
+  advancedBlock.closest('.settings-panel').classList.toggle('is-wide', open)
   advancedToggle.setAttribute('aria-expanded', String(open))
   advancedToggle.textContent = open ? t.advancedClosed : t.advancedOpen
 }
