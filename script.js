@@ -304,7 +304,8 @@ const showWeather = async () => {
   try {
     const place = await getPlace()
     if (!place) {
-      weatherButton.textContent = t.noSource
+      // Greyed-out icon: a click opens settings, where a place can be chosen.
+      showIdle(t.noSource)
       current = null
       weatherDetail.replaceChildren()
       return
@@ -394,11 +395,11 @@ const renderForecast = () => {
 }
 
 // Weather off: only a faint icon stays in the top bar, and it opens settings.
-const showIdle = () => {
+const showIdle = (label = t.show) => {
   weatherButton.classList.add('idle')
   weatherButton.innerHTML = weatherIcon(null)
-  weatherButton.setAttribute('aria-label', t.show)
-  weatherButton.title = t.show
+  weatherButton.setAttribute('aria-label', label)
+  weatherButton.title = label
 }
 
 const hideWeather = () => {
