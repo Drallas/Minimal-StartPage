@@ -38,18 +38,18 @@
 
 ## Features
 
-Everything is optional. The settings start with a choice of page: **Minimal** (search, clock, date and the links button), **Standard** (the default, with the Ask AI shortcuts and the wallpaper) or **Full** (everything, including the quote and the time zones). Each option can still be changed on its own. A preset never switches weather or your IP address on, since they send data. The IP address is off in Minimal and Standard; Full leaves it as you set it.
+Everything is optional. The settings start with a choice of page: **Minimal** (search, clock, date and a plain Wikipedia button), **Standard** (the default, with the Ask AI shortcuts and the wallpaper) or **Full** (everything, including the quote and the time zones). Each option can still be changed on its own. A preset never switches weather or your IP address on, since they send data. The IP address is off in Minimal and Standard; Full leaves it as you set it.
 
 - **Search.** Type a query and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.
 - **Clock.** The time sits above the search bar, with the date underneath. Click the time to cycle through 24-hour, 12-hour (AM/PM) and full time with seconds; the colons blink, unless your system asks for reduced motion. Hover over the time to see your time zone and its UTC offset.
 - **Time zones.** Optional. A small globe above the clock opens up to five extra time zones, each with its UTC offset and a day difference when it is not today. Hover over the globe for the list; click it to change the list.
 - **Date.** Hover over the date for the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY. The date follows your browser's language.
 - **Quote.** Optional. A short quote from a philosopher or teacher, changing every six hours, in your browser's language. Click it for the next one.
-- **Links.** The button at the top left opens a window with permanent links as icons (Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub and Reuters) and up to 15 links of your own, each with an optional description. Hover the button to see your own links. The button can be switched off.
+- **Links.** The button at the top left opens a window with permanent links as icons (Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub and Reuters) and up to 15 links of your own, each with an optional description. Hover the button to see your own links. The button can be switched off. Turn off **Own links** for a plain Wikipedia button that opens Wikipedia directly; Minimal uses that.
 - **Ask AI.** Shortcuts below the search bar to Claude, ChatGPT, Grok and Duck.ai.
 - **Weather.** Optional, off by default. The temperature and a small icon sit at the top middle. Hover for a short preview with the next six hours; click for the full forecast: the next 24 hours, the next seven days, and a link to Windy. The place comes from your IP address or from a city you choose.
 - **Your IP address.** Optional, off by default. Shows your IP address just under the footer, and hovering it shows your city, country and provider.
-- **Background.** A wallpaper that can be switched on or off, and a button to hide that switch. A tint slider (on a computer) gives the neutral background a colour, or the tint can be switched off. The background adapts to light and dark mode.
+- **Background.** A wallpaper that can be switched on or off, and a button to hide that switch. A tint slider gives the neutral background a colour, or the tint can be switched off. The background adapts to light and dark mode.
 - **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages (Minimal, Standard, Full) and the privacy note. When your choices match none of the pages, the page shows Custom. The Advanced link opens the rest, grouped into Weather, Display, Background and Privacy. The Help button in the settings opens a guide to every feature. Press `Esc` to close.
 - **Phones.** The bottom controls sit above the browser's bar, and the layout fits landscape phones too.
 - **Hidden details.** A few small details are tucked away in the page. Look closely and explore.

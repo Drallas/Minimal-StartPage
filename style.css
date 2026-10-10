@@ -663,10 +663,15 @@ html[data-wallpaper-on] .controls {
     inset: -19px;
   }
 
-  /* The tint slider is fiddly on a phone; the wallpaper switch stays. */
+  /* Short enough to stay clear of the footer text on the narrowest phones. */
   .hue {
-    display: none;
+    width: 44px;
   }
+}
+
+/* Minimal links: the preview is off, so it stays hidden even on hover. */
+.links-preview[hidden] {
+  display: none !important;
 }
 
 /* Full time: the colons blink once a second. */

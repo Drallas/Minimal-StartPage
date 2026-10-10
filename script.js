@@ -146,6 +146,7 @@ const settingsFields = {
   tint: document.getElementById('set-tint'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links'),
+  linksOwn: document.getElementById('set-links-own'),
   askai: document.getElementById('set-askai'),
   preset: document.querySelectorAll('input[name="preset"]'),
   cityForm: document.getElementById('city-form'),
@@ -251,6 +252,14 @@ const sectionText = {
   es: { secWeather: 'Tiempo', secLook: 'Mostrar', secPrivacy: 'Privacidad', placeTime: 'Hora local' },
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
+const linksOwnText = {
+  en: { linksOwn: 'Own links' },
+  nl: { linksOwn: 'Eigen links' },
+  de: { linksOwn: 'Eigene Links' },
+  fr: { linksOwn: 'Liens personnels' },
+  es: { linksOwn: 'Enlaces propios' },
+  zh: { linksOwn: '自定义链接' }
+}
 const linkToggleText = {
   en: { linksToggle: 'Links button' },
   nl: { linksToggle: 'Linkknop' },
@@ -315,7 +324,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: 'Básico' },
   zh: { advancedOpen: '高级', advancedClosed: '基本' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -331,9 +340,9 @@ const helpText = {
     ['Search', 'Type and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the globe above the time opens the zones you chose.'],
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY.'],
-    ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them.'],
+    ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 24 hours and seven days.'],
-    ['Background', 'The round button at the bottom right turns the wallpaper on or off. On a computer, the slider at the bottom left tints the background; on a phone it is hidden.'],
+    ['Background', 'The round button at the bottom right turns the wallpaper on or off. The slider at the bottom left tints the background.'],
     ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal, Standard and Full) sit at the top of the settings. Custom shows when your choices match none of them. Advanced lists every option in four groups, and Basic brings the presets back.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset all choices" clears everything and brings back the defaults.'],
   ] },
@@ -341,9 +350,9 @@ const helpText = {
     ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden.'],
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent de wereldbol boven de tijd de zones die je koos.'],
     ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en DD-MM-JJJJ.'],
-    ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen.'],
+    ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
     ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 24 uur en zeven dagen.'],
-    ['Achtergrond', 'De ronde knop rechtsonder zet de wallpaper aan of uit. Op een computer kleurt de schuif linksonder de achtergrond; op een telefoon is die verborgen.'],
+    ['Achtergrond', 'De ronde knop rechtsonder zet de wallpaper aan of uit. De schuif linksonder kleurt de achtergrond.'],
     ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal, Standaard en Volledig. Past geen van die bij je keuzes, dan staat Custom aan. Geavanceerd toont alle opties in vier groepen; Basis brengt de paginakeuzes terug.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Alle keuzes resetten" wist alles en zet de standaard terug.'],
   ] },
@@ -351,9 +360,9 @@ const helpText = {
     ['Suche', 'Tippe und drücke Enter, oder klicke auf die Lupe. Das Symbol links zeigt die Suchmaschine: Klick darauf, um zwischen DuckDuckGo (Standard), Kagi, Brave und Google zu wechseln. Deine Wahl wird gespeichert.'],
     ['Uhr', 'Fahre mit der Maus über die Zeit, um deine Zeitzone zu sehen. Ein Klick auf die Zeit wechselt zwischen 24-Stunden-, 12-Stunden- und voller Zeit mit Sekunden. Sind Zeitzonen aktiv, öffnet die Kugel über der Zeit die gewählten Zonen.'],
     ['Datum', 'Fahre mit der Maus über das Datum, um die ISO-Woche und den Tag des Jahres zu sehen. Ein Klick wechselt zwischen langer Form und TT-MM-JJJJ.'],
-    ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen.'],
+    ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen. Ist Eigene Links aus, öffnet die Schaltfläche direkt Wikipedia.'],
     ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 24 Stunden und sieben Tagen.'],
-    ['Hintergrund', 'Die runde Schaltfläche unten rechts schaltet das Hintergrundbild ein oder aus. Am Computer färbt der Regler unten links den Hintergrund; auf dem Telefon ist er ausgeblendet.'],
+    ['Hintergrund', 'Die runde Schaltfläche unten rechts schaltet das Hintergrundbild ein oder aus. Der Regler unten links färbt den Hintergrund.'],
     ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal, Standard und Voll. Passt keine davon zu deiner Auswahl, ist Custom aktiv. Erweitert zeigt alle Optionen in vier Gruppen; Basis zeigt die Vorlagen wieder.'],
     ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Alle Einstellungen zurücksetzen“ löscht alles und stellt die Standards wieder her.'],
   ] },
@@ -361,9 +370,9 @@ const helpText = {
     ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé.'],
     ['Horloge', 'Passez la souris sur l’heure pour voir votre fuseau. Cliquez sur l’heure pour passer de 24 heures à 12 heures, puis à l’heure complète avec les secondes. Si les fuseaux sont activés, le globe au-dessus de l’heure ouvre les fuseaux choisis.'],
     ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à JJ-MM-AAAA.'],
-    ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer.'],
+    ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 24 heures et sept jours.'],
-    ['Fond', 'Le bouton rond en bas à droite active ou désactive le fond d’écran. Sur ordinateur, le curseur en bas à gauche teinte le fond ; sur téléphone il est masqué.'],
+    ['Fond', 'Le bouton rond en bas à droite active ou désactive le fond d’écran. Le curseur en bas à gauche teinte le fond.'],
     ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal, Standard et Complet. Custom s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options en quatre groupes ; Base rétablit les pages.'],
     ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser tous les choix » efface tout et rétablit les valeurs par défaut.'],
   ] },
@@ -371,9 +380,9 @@ const helpText = {
     ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda.'],
     ['Reloj', 'Pasa el ratón sobre la hora para ver tu zona horaria. Haz clic en la hora para cambiar entre 24 horas, 12 horas y hora completa con segundos. Si las zonas horarias están activas, el globo sobre la hora abre las zonas que elegiste.'],
     ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y DD-MM-AAAA.'],
-    ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos.'],
+    ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 24 horas y siete días.'],
-    ['Fondo', 'El botón redondo de abajo a la derecha activa o desactiva el fondo. En el ordenador, el control de abajo a la izquierda tiñe el fondo; en el móvil está oculto.'],
+    ['Fondo', 'El botón redondo de abajo a la derecha activa o desactiva el fondo. El control de abajo a la izquierda tiñe el fondo.'],
     ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo, Estándar y Completo. Custom aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones en cuatro grupos; Básico vuelve a mostrar las páginas.'],
     ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer todas las opciones» borra todo y devuelve los valores por defecto.'],
   ] },
@@ -381,9 +390,9 @@ const helpText = {
     ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。'],
     ['时钟', '把鼠标移到时间上可看到你的时区。点击时间可在 24 小时制、12 小时制和带秒的完整时间之间切换。开启时区后，时间上方的地球图标会打开你选择的时区。'],
     ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和 DD-MM-YYYY 之间切换。'],
-    ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。'],
+    ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 24 小时和七天的完整预报。'],
-    ['背景', '右下角的圆形按钮可开启或关闭壁纸。在电脑上，左下角的滑块会给背景染色；在手机上它被隐藏。'],
+    ['背景', '右下角的圆形按钮可开启或关闭壁纸。左下角的滑块会给背景染色。'],
     ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简、标准和完整。选择与任何一个都不符时显示“自定义”。“高级”按四组显示全部选项，“基本”则回到页面预设。'],
     ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置所有设置”会清除全部内容并恢复默认值。'],
   ] },
@@ -674,12 +683,12 @@ const applySettingsText = () => {
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
+  document.getElementById('lbl-links-own').textContent = t.linksOwn
   document.getElementById('zones-title').textContent = t.zonesTitle
   document.getElementById('zone-label').textContent = t.zonesAdd
   document.getElementById('zone-add-btn').textContent = t.zoneAddBtn
   document.getElementById('zones-close').setAttribute('aria-label', t.close)
-  linksButton.setAttribute('aria-label', t.linksButton)
-  linksButton.title = t.linksButton
+  labelLinksButton()
   document.getElementById('links-title').textContent = t.linksTitle
   document.getElementById('lbl-link-name').textContent = t.lblName
   document.getElementById('lbl-link-url').textContent = t.lblUrl
@@ -709,6 +718,7 @@ const syncSettings = () => {
   settingsFields.tint.checked = tintOn
   settingsFields.wallpaperButton.checked = wallpaperButtonOn
   settingsFields.links.checked = linksOn
+  settingsFields.linksOwn.checked = linksOwn
   settingsFields.askai.checked = askaiOn
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
   settingsFields.cityClear.hidden = !city
@@ -860,13 +870,13 @@ settingsFields.askai.addEventListener('change', () => {
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
 // IP address are never changed by a preset, since they send data.
 const presets = {
-  minimal: { quote: false, links: true, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false, showIp: false },
-  standard: { quote: false, links: true, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true, showIp: false },
-  full: { quote: true, links: true, zones: true, askai: true, wallpaper: true, wallpaperButton: true, tint: true },
+  minimal: { quote: false, links: true, linksOwn: false, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false, showIp: false },
+  standard: { quote: false, links: true, linksOwn: true, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true, showIp: false },
+  full: { quote: true, links: true, linksOwn: true, zones: true, askai: true, wallpaper: true, wallpaperButton: true, tint: true },
 }
 // The IP display is off in Minimal and Standard, and Full leaves it as it is, so Full matches with or
 // without it. A preset only ever turns it off, never on, and weather is not part of the presets at all.
-const currentState = () => ({ quote: quoteOn, links: linksOn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, showIp: showIpOn })
+const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, showIp: showIpOn })
 // The preset that matches the current choices: only the keys a preset names are compared.
 const matchPreset = () => {
   const now = currentState()
@@ -934,7 +944,7 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn', 'wallpaperButton', 'tint', 'askai', 'preset']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
@@ -1091,6 +1101,13 @@ setInterval(() => {
 // Links. Permanent links are built in: Wikipedia, in the browser's language. They cannot be removed.
 // Custom links are added by the visitor, up to 15. The whole links button can be switched off in settings.
 const linksButton = document.getElementById('links-button')
+const linksButtonIcon = linksButton.innerHTML
+// Own links off: the button is a plain Wikipedia link with its logo, and the label says so.
+const labelLinksButton = () => {
+  const label = linksOwn ? t.linksButton : 'Wikipedia'
+  linksButton.setAttribute('aria-label', label)
+  linksButton.title = label
+}
 const linksPreview = document.getElementById('links-preview')
 const linksWindow = document.getElementById('links')
 const linksIcons = document.getElementById('link-icons')
@@ -1154,6 +1171,7 @@ try {
   if (Array.isArray(saved)) links = saved.filter(isValidLink).slice(0, LINK_LIMIT)
 } catch {}
 let linksOn = readFlag('linksOn', true)
+let linksOwn = readFlag('linksOwn', true)
 let editing = null
 let linksFrom = null
 
@@ -1170,6 +1188,10 @@ const linkAnchor = (link, withDescription) => {
 
 const renderLinks = () => {
   linksButton.hidden = !linksOn
+  linksButton.innerHTML = linksOwn ? linksButtonIcon : wikipediaIcon
+  labelLinksButton()
+  linksPreview.hidden = !linksOwn
+  settingsFields.linksOwn.disabled = !linksOn
   // The hover list shows only the links the visitor added; the permanent ones live in the window.
   linksPreview.replaceChildren(...links.map((link) => linkAnchor(link, false)))
 
@@ -1267,7 +1289,10 @@ const closeLinks = () => {
   if (linksFrom && linksFrom.focus) linksFrom.focus()
 }
 
-linksButton.addEventListener('click', openLinks)
+linksButton.addEventListener('click', () => {
+  if (!linksOwn) return window.open(permanentLinks()[0].url, '_blank', 'noopener')
+  openLinks()
+})
 document.getElementById('links-close').addEventListener('click', closeLinks)
 linksWindow.addEventListener('click', (e) => { if (e.target === linksWindow) closeLinks() })
 
@@ -1276,6 +1301,11 @@ settingsFields.links.addEventListener('change', () => {
   linksOn = settingsFields.links.checked
   writeKey('linksOn', linksOn ? 'on' : 'off')
   if (!linksOn && !linksWindow.hidden) closeLinks()
+  renderLinks()
+})
+settingsFields.linksOwn.addEventListener('change', () => {
+  linksOwn = settingsFields.linksOwn.checked
+  writeKey('linksOwn', linksOwn ? 'on' : 'off')
   renderLinks()
 })
 renderLinks()
