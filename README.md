@@ -79,6 +79,17 @@ If you are comfortable editing text files, you can change the page yourself. Use
 - **Search engines:** edit the `engines` list in `script.js`.
 - **Colours:** edit the colours in `color.css`.
 
+## Documents
+
+Short notes, one topic each:
+
+- [BUILT.md](BUILT.md): what the page does now.
+- [PLANNED.md](PLANNED.md): what is still to be built.
+- [docs/Decisions.md](docs/Decisions.md): the choices made, and why.
+- [docs/Wallpapers.md](docs/Wallpapers.md): the wallpaper set and the upload question.
+- [docs/Permanent-links.md](docs/Permanent-links.md): the permanent links and the candidates.
+- [Installation.md](Installation.md): how to install a copy.
+
 ## Credits
 
 The wallpapers are photos from [Unsplash](https://unsplash.com), used under the Unsplash License.
