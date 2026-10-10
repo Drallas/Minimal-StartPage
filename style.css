@@ -1051,19 +1051,18 @@ html[data-quote-off] #quote {
   color: var(--color-fg-1);
 }
 
-/* Date row: the globe sits beside the date, out of the layout, so nothing else moves. */
-.date-row {
+/* The globe sits above the time, out of the layout, so nothing else moves.
+   Its preview opens upwards, into the empty space above the clock. */
+#clock {
   position: relative;
-  display: flex;
-  justify-content: center;
 }
 
 .zones-wrap {
   position: absolute;
-  left: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: 6px;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
 }
@@ -1071,9 +1070,10 @@ html[data-quote-off] #quote {
 .zones-preview {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 8px;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
   min-width: 240px;
   padding: 12px 14px;
   background: var(--color-field);
@@ -1095,7 +1095,7 @@ html[data-quote-off] #quote {
 .zones-preview::before {
   content: "";
   position: absolute;
-  top: -8px;
+  bottom: -8px;
   left: 0;
   right: 0;
   height: 8px;

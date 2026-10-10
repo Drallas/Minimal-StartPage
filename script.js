@@ -608,6 +608,14 @@ let zones = []
 try { zones = (JSON.parse(localStorage.getItem('zones') || '[]') || []).filter((z) => zoneNames.includes(z)).slice(0, 5) } catch {}
 
 const cityOf = (zone) => zone.split('/').pop().replace(/_/g, ' ')
+// The zone's offset from UTC in minutes, e.g. -300 for New York in winter.
+const utcOffset = (zone, now) => {
+  const name = new Intl.DateTimeFormat('en-US', { timeZone: zone, timeZoneName: 'longOffset' }).formatToParts(now).find((part) => part.type === 'timeZoneName').value
+  const match = /GMT([+-])(\d{2}):(\d{2})/.exec(name)
+  return match ? (match[1] === '-' ? -1 : 1) * (Number(match[2]) * 60 + Number(match[3])) : 0
+}
+// The chosen zones, ordered from the earliest offset (-12) to the latest (+14).
+const sortedZones = (now) => [...zones].sort((a, b) => utcOffset(a, now) - utcOffset(b, now) || cityOf(a).localeCompare(cityOf(b)))
 const zoneClock = (zone, now) => now.toLocaleTimeString(clockMode === '12' ? 'en-US' : 'en-GB', { timeZone: zone, hour: '2-digit', minute: '2-digit', hour12: clockMode === '12' })
 // Whole days between the local date and the date in the other zone, read from calendar dates.
 const dayDifference = (zone, now) => {
@@ -624,13 +632,13 @@ const renderPreview = () => {
     return
   }
   const now = new Date()
-  zonesPreview.replaceChildren(...zones.map((zone) => weatherRow(cityOf(zone), zoneClock(zone, now), dayWord(dayDifference(zone, now)))))
+  zonesPreview.replaceChildren(...sortedZones(now).map((zone) => weatherRow(cityOf(zone), zoneClock(zone, now), dayWord(dayDifference(zone, now)))))
 }
 
 const renderZones = () => {
   const now = new Date()
   zonesLocalLine.textContent = `${t.zonesLocal}: ${cityOf(localZone)} ${zoneClock(localZone, now)}`
-  const rows = zones.map((zone) => {
+  const rows = sortedZones(now).map((zone) => {
     const row = el('div', 'zone-row')
     const remove = Object.assign(document.createElement('button'), { type: 'button', className: 'zone-remove', textContent: '×' })
     remove.setAttribute('aria-label', `${t.remove} ${cityOf(zone)}`)
