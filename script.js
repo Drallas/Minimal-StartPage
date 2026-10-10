@@ -530,9 +530,6 @@ const hasSource = () => (locationMode === 'city' ? !!city : true)
 
 // The settings say when weather is on but has no place to look up.
 const updateWeatherHint = () => {
-  const hint = document.getElementById('weather-hint')
-  hint.textContent = t.needPlace
-  hint.hidden = !(weatherOn && !hasSource())
   // The location options belong to the weather, so they are off while it is.
   document.querySelectorAll('#weather-sub input, #weather-sub button').forEach((el) => { el.disabled = !weatherOn })
 }
