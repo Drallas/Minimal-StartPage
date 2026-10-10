@@ -1403,3 +1403,18 @@ html[data-quote-off] #quote {
 .presets .setting {
   padding: 6px 0;
 }
+
+/* The IP line is a button: a click checks the address again. */
+.ip {
+  padding: 2px 6px;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+.ip:hover,
+.ip:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

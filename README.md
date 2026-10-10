@@ -69,7 +69,7 @@ Searches go straight to the search engine you chose. The page keeps your choices
 - **Weather** sends your IP address to [ipapi.co](https://ipapi.co) to find your city, or the city you choose to [Open-Meteo](https://open-meteo.com) to find its coordinates. The forecast itself comes from Open-Meteo. Only while weather is on.
 - **Your IP address** under the footer asks [ipapi.co](https://ipapi.co) for your address, whether or not the weather is on.
 
-Your IP address is looked up again at most every ten minutes, so a VPN change shows after a refresh; forecasts are kept for 30 minutes. "Reset all choices" in the settings clears everything and brings back the defaults.
+Your IP address is looked up again at most every ten minutes, so a VPN change shows after a refresh, and clicking the address under the footer checks it straight away; forecasts are kept for 30 minutes. "Reset all choices" in the settings clears everything and brings back the defaults.
 
 ## Customise
 

@@ -168,7 +168,7 @@ let lastInfo = ''
 // The IP address line under the footer: only when we have one and it is wanted.
 // The IP line shows only when weather is on, the location is the IP address, and the option is on.
 // It reuses the lookup the weather already makes, so no extra request is sent.
-const fetchMyIp = async () => {
+const fetchMyIp = async (fresh = false) => {
   if (!showIpOn) {
     lastIp = null
     lastInfo = ''
@@ -176,7 +176,7 @@ const fetchMyIp = async () => {
     return
   }
   try {
-    const info = await fetchCached('ipInfo', 10 * 60e3, 'https://ipapi.co/json/')
+    const info = await fetchCached('ipInfo', 10 * 60e3, 'https://ipapi.co/json/', fresh)
     lastIp = info.ip
     lastInfo = [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ')
   } catch {
@@ -188,7 +188,7 @@ const fetchMyIp = async () => {
 const updateIpLine = () => {
   const visible = showIpOn && !!lastIp
   ipLine.textContent = visible ? `${t.ip}: ${lastIp}` : ''
-  ipLine.title = visible ? lastInfo : ''
+  ipLine.title = visible ? `${lastInfo} · ${t.ipRecheck}` : ''
   ipLine.hidden = !visible
 }
 let city = null
@@ -299,7 +299,15 @@ const pageText = {
   es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetFull: 'Completo', askAi: 'Mostrar los enlaces de IA' },
   zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetFull: '完整', askAi: '显示 AI 链接' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const recheckText = {
+  en: { ipRecheck: 'Click to check again' },
+  nl: { ipRecheck: 'Klik om opnieuw te controleren' },
+  de: { ipRecheck: 'Klicken, um erneut zu prüfen' },
+  fr: { ipRecheck: 'Cliquer pour vérifier à nouveau' },
+  es: { ipRecheck: 'Haz clic para volver a comprobar' },
+  zh: { ipRecheck: '点击重新检查' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -416,10 +424,10 @@ const weatherIcons = {
 const weatherIcon = (key) => `<svg class="weather-icon ${key || 'cloudy'}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${weatherIcons[key] || weatherIcons.cloudy}</svg>`
 
 // Keeps a response in localStorage for maxAge milliseconds, so a reload does not fetch again.
-const fetchCached = async (key, maxAge, url) => {
+const fetchCached = async (key, maxAge, url, fresh = false) => {
   try {
     const hit = JSON.parse(localStorage.getItem(key) || 'null')
-    if (hit && Date.now() - hit.at < maxAge) return hit.data
+    if (!fresh && hit && Date.now() - hit.at < maxAge) return hit.data
   } catch {}
   const data = await (await fetch(url)).json()
   try { localStorage.setItem(key, JSON.stringify({ at: Date.now(), data })) } catch {}
@@ -781,6 +789,12 @@ settingsFields.wallpaperButton.addEventListener('change', () => {
   wallpaperButtonOn = settingsFields.wallpaperButton.checked
   wallpaperToggle.hidden = !wallpaperButtonOn
   writeKey('wallpaperButton', wallpaperButtonOn ? 'on' : 'off')
+})
+
+// Clicking the IP address checks it again now, without waiting for the ten minutes; the weather follows.
+ipLine.addEventListener('click', async () => {
+  await fetchMyIp(true)
+  if (weatherOn && locationMode === 'ip') showWeather()
 })
 
 // Showing the IP address is its own choice, separate from the weather. It asks ipapi.co, the service the IP location uses.
