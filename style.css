@@ -369,8 +369,13 @@ html[data-wallpaper-on] footer {
   opacity: .85;
 }
 
+html[data-wallpaper-on] .topbar .icon-link,
+html[data-wallpaper-on] .modes button {
+  color: var(--color-fg-1);
+}
+
 html[data-wallpaper-on] .controls {
-  opacity: .6;
+  opacity: .8;
 }
 
 :root[data-tint] {
