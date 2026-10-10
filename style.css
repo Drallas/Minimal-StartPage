@@ -274,8 +274,8 @@ footer a:focus-visible svg {
   top: 100%;
   left: 0;
   right: 0;
-  margin-top: 4px;
-  font-size: 4.5px;
+  margin-top: 2px;
+  font-size: 7px;
   letter-spacing: .04em;
   opacity: .55;
   white-space: nowrap;

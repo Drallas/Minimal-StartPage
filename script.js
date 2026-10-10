@@ -293,6 +293,10 @@ const tintCycleText = {
   en: { tintCycle: 'Change colour' }, nl: { tintCycle: 'Kleur wisselen' }, de: { tintCycle: 'Farbe wechseln' },
   fr: { tintCycle: 'Changer la couleur' }, es: { tintCycle: 'Cambiar el color' }, zh: { tintCycle: '切换颜色' }
 }
+const quoteTitleText = {
+  en: { quoteAnother: 'Show another quote' }, nl: { quoteAnother: 'Toon een ander citaat' }, de: { quoteAnother: 'Anderes Zitat anzeigen' },
+  fr: { quoteAnother: 'Afficher une autre citation' }, es: { quoteAnother: 'Mostrar otra cita' }, zh: { quoteAnother: '换一条名言' }
+}
 const wallText = {
   en: { wallShow: 'Show wallpaper', wallHide: 'Hide wallpaper' },
   nl: { wallShow: 'Achtergrond aanzetten', wallHide: 'Achtergrond uitzetten' },
@@ -381,7 +385,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], wallText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], wallText[lang], quoteTitleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -848,6 +852,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-greet').textContent = t.greetLabel
   document.getElementById('advanced-toggle').textContent = advancedToggle.getAttribute('aria-expanded') === 'true' ? t.advancedClosed : t.advancedOpen
   tintCycle.setAttribute('aria-label', t.tintCycle)
+  document.getElementById('quote').title = t.quoteAnother
   tintCycle.title = t.tintCycle
   const foot = footerText[uiLang] || footerText.en
   document.getElementById('foot-pre').textContent = foot.pre
