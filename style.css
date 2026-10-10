@@ -268,11 +268,15 @@ footer a:focus-visible svg {
 
 /* Your IP address, just under the footer line. */
 .ip {
-  display: block;
-  margin-top: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
   font-size: 9px;
   letter-spacing: .04em;
   opacity: .8;
+  white-space: nowrap;
 }
 
 .ip[hidden] {
@@ -313,11 +317,11 @@ footer a:focus-visible svg {
 .weather-detail {
   display: none;
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  min-width: 220px;
-  padding: 10px 12px;
+  min-width: 280px;
+  padding: 16px 18px;
   background: var(--color-field);
   border: 1px solid var(--color-border);
   border-radius: 10px;
@@ -337,23 +341,29 @@ footer a:focus-visible svg {
 }
 
 .weather-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 24px;
+  padding: 3px 0;
+  font-variant-numeric: tabular-nums;
 }
 
 .weather-row + .weather-row {
   color: var(--color-fg-2);
 }
 
-.weather-off {
-  margin-top: 6px;
-  padding: 0;
+.preview-title {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--color-fg-1);
+}
+
+.preview-hint {
+  margin-top: 10px;
   font-size: 11px;
   color: var(--color-fg-2);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
+
 
 footer svg {
   display: inline-block;
@@ -429,7 +439,7 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 20px;
+  bottom: 16px;
   text-align: center;
   font-size: 10px;
   letter-spacing: .06em;
@@ -610,12 +620,12 @@ html[data-wallpaper-on] .controls {
 /* Phones: lift the controls above the browser's bottom bar and enlarge their touch area. */
 @media (max-width: 600px) {
   .controls {
-    bottom: 64px;
+    bottom: 110px;
   }
 
-  /* Keeps the footer and IP line above the browser's bottom bar. */
+  /* Phones: footer and controls move above the browser's bottom bar, and stay on one line. */
   footer {
-    bottom: 96px;
+    bottom: 110px;
   }
 
   .controls button {
@@ -863,4 +873,94 @@ html[data-wallpaper-on] .controls {
 /* Quote hidden from the settings. */
 html[data-quote-off] #quote {
   display: none;
+}
+
+/* Full forecast: opens when the weather is clicked. */
+.forecast-panel {
+  width: min(100%, 560px);
+}
+
+.forecast-now {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.forecast-icon .weather-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--wx);
+}
+
+.forecast-temp {
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.forecast-word {
+  color: var(--color-fg-2);
+}
+
+.forecast-meta {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.forecast-section {
+  margin-top: 22px;
+}
+
+.forecast-section h3 {
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+}
+
+.forecast-row {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr .8fr 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-variant-numeric: tabular-nums;
+}
+
+.forecast-row:last-child {
+  border-bottom: none;
+}
+
+.forecast-day {
+  grid-template-columns: 1.4fr auto 1fr 1fr;
+}
+
+.forecast-day .forecast-icon .weather-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.forecast-link {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--color-fg-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.forecast-link:hover,
+.forecast-link:focus-visible {
+  color: var(--color-fg-1);
+}
+
+.forecast-head {
+  padding-top: 0;
+  font-size: 11px;
+  color: var(--color-fg-2);
 }

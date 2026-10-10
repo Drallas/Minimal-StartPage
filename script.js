@@ -169,6 +169,16 @@ const text = {
   es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Mostrar el tiempo', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Mostrar la cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes y ayuda' },
   zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '显示天气', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '显示名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置与帮助' },
 }
+const forecastText = {
+  en: { now: 'Now', hours: 'Next 24 hours', days: 'Next 7 days', feels: 'Feels like', wind: 'Wind', humidity: 'Humidity', more: 'Click for the full forecast', windy: 'Full forecast on Windy', rain: 'Rain' },
+  nl: { now: 'Nu', hours: 'Komende 24 uur', days: 'Komende 7 dagen', feels: 'Voelt als', wind: 'Wind', humidity: 'Luchtvochtigheid', more: 'Klik voor de volledige verwachting', windy: 'Volledige verwachting op Windy', rain: 'Regen' },
+  de: { now: 'Jetzt', hours: 'Nächste 24 Stunden', days: 'Nächste 7 Tage', feels: 'Gefühlt', wind: 'Wind', humidity: 'Luftfeuchtigkeit', more: 'Klicken für die vollständige Vorhersage', windy: 'Vollständige Vorhersage auf Windy', rain: 'Regen' },
+  fr: { now: 'Maintenant', hours: '24 prochaines heures', days: '7 prochains jours', feels: 'Ressenti', wind: 'Vent', humidity: 'Humidité', more: 'Cliquez pour les prévisions complètes', windy: 'Prévisions complètes sur Windy', rain: 'Pluie' },
+  es: { now: 'Ahora', hours: 'Próximas 24 horas', days: 'Próximos 7 días', feels: 'Sensación', wind: 'Viento', humidity: 'Humedad', more: 'Haz clic para la previsión completa', windy: 'Previsión completa en Windy', rain: 'Lluvia' },
+  zh: { now: '现在', hours: '未来 24 小时', days: '未来 7 天', feels: '体感', wind: '风', humidity: '湿度', more: '点击查看完整预报', windy: '在 Windy 查看完整预报', rain: '降水' },
+}
+const hourHeads = { en: ['Time', 'Temp', 'Rain', 'Wind'], nl: ['Tijd', 'Temp', 'Regen', 'Wind'], de: ['Zeit', 'Temp.', 'Regen', 'Wind'], fr: ['Heure', 'Temp.', 'Pluie', 'Vent'], es: ['Hora', 'Temp.', 'Lluvia', 'Viento'], zh: ['时间', '气温', '降水', '风'] }
+for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] })
 const t = text[uiLang] || text.en
 const words = weatherWords[uiLang] || weatherWords.en
 
@@ -237,6 +247,18 @@ const getPlace = async () => {
   return { label: `${info.city}, ${info.country_name}`, latitude: info.latitude, longitude: info.longitude, ip: info.ip }
 }
 
+// Latest answer, kept so the full forecast can be drawn without asking again.
+let current = null
+
+const forecastUrl = (place) => 'https://api.open-meteo.com/v1/forecast' +
+  `?latitude=${place.latitude}&longitude=${place.longitude}` +
+  '&current=temperature_2m,weather_code,apparent_temperature,wind_speed_10m,relative_humidity_2m' +
+  '&hourly=temperature_2m,precipitation_probability,wind_speed_10m,weather_code' +
+  '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max' +
+  '&timezone=auto&forecast_days=7&forecast_hours=24'
+
+const el = (tag, className, textContent) => Object.assign(document.createElement(tag), { className: className || '', textContent: textContent ?? '' })
+
 const showWeather = async () => {
   try {
     const place = await getPlace()
@@ -245,27 +267,24 @@ const showWeather = async () => {
       ipLine.hidden = true
       return
     }
-    const url = 'https://api.open-meteo.com/v1/forecast' +
-      `?latitude=${place.latitude}&longitude=${place.longitude}` +
-      '&current=temperature_2m,weather_code&hourly=temperature_2m,precipitation_probability' +
-      '&timezone=auto&forecast_hours=24'
-    const forecast = await fetchCached(`weather:${place.latitude},${place.longitude}`, 30 * 60e3, url)
+    const forecast = await fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
+    current = { place, forecast }
     const now = forecast.current
     const start = forecast.hourly.time.indexOf(now.time)
+    const key = weatherKey(now.weather_code)
+    const temperature = `${Math.round(now.temperature_2m)}°`
     const next = forecast.hourly.time.slice(start + 1, start + 7).map((time, i) => weatherRow(
       time.slice(11, 16),
       `${Math.round(forecast.hourly.temperature_2m[start + 1 + i])}°`,
       `${forecast.hourly.precipitation_probability[start + 1 + i]}%`
     ))
-    const key = weatherKey(now.weather_code)
-    const temperature = `${Math.round(now.temperature_2m)}°`
     weatherButton.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
     weatherButton.setAttribute('aria-label', `${key ? words[key] : ''} ${temperature}`.trim())
     weatherDetail.replaceChildren(
-      weatherRow(place.label),
+      el('div', 'preview-title', place.label),
       weatherRow(key ? words[key] : '', temperature),
       ...next,
-      Object.assign(document.createElement('button'), { type: 'button', className: 'weather-off', textContent: t.hide })
+      el('div', 'preview-hint', t.more)
     )
     ipLine.textContent = place.ip ? `${t.ip}: ${place.ip}` : ''
     ipLine.hidden = !place.ip
@@ -273,6 +292,64 @@ const showWeather = async () => {
     weatherButton.textContent = t.unavailable
     ipLine.hidden = true
   }
+}
+
+const renderForecast = () => {
+  if (!current) return
+  const { place, forecast } = current
+  const now = forecast.current
+  const key = weatherKey(now.weather_code)
+  const temp = (v) => `${Math.round(v)}°`
+  const section = (title, nodes) => {
+    const s = el('section', 'forecast-section')
+    s.append(el('h3', '', title), ...nodes)
+    return s
+  }
+  const nowIcon = el('span', 'forecast-icon')
+  nowIcon.innerHTML = weatherIcon(key)
+  const nowRow = el('div', 'forecast-now')
+  nowRow.append(nowIcon, el('span', 'forecast-temp', temp(now.temperature_2m)), el('span', 'forecast-word', key ? words[key] : ''))
+  const meta = el('div', 'forecast-meta', `${t.feels} ${temp(now.apparent_temperature)} · ${t.wind} ${Math.round(now.wind_speed_10m)} km/h · ${t.humidity} ${now.relative_humidity_2m}%`)
+
+  const start = forecast.hourly.time.indexOf(now.time)
+  const hourHeader = el('div', 'forecast-row forecast-head')
+  hourHeader.append(...t.hourHeads.map((label) => el('span', '', label)))
+  const hourRows = [hourHeader, ...forecast.hourly.time.slice(start + 1, start + 25).map((time, i) => {
+    const row = el('div', 'forecast-row')
+    const j = start + 1 + i
+    row.append(
+      el('span', '', time.slice(11, 16)),
+      el('span', '', temp(forecast.hourly.temperature_2m[j])),
+      el('span', '', `${forecast.hourly.precipitation_probability[j]}%`),
+      el('span', '', `${Math.round(forecast.hourly.wind_speed_10m[j])} km/h`)
+    )
+    return row
+  })]
+
+  const dayRows = forecast.daily.time.map((iso, i) => {
+    const row = el('div', 'forecast-row forecast-day')
+    const dayKey = weatherKey(forecast.daily.weather_code[i])
+    const icon = el('span', 'forecast-icon')
+    icon.innerHTML = weatherIcon(dayKey)
+    const label = new Date(`${iso}T12:00:00`).toLocaleDateString(uiLang, { weekday: 'short', day: 'numeric', month: 'short' })
+    row.append(
+      el('span', '', label),
+      icon,
+      el('span', '', `${temp(forecast.daily.temperature_2m_min[i])} / ${temp(forecast.daily.temperature_2m_max[i])}`),
+      el('span', '', `${t.rain} ${forecast.daily.precipitation_probability_max[i]}%`)
+    )
+    return row
+  })
+
+  document.getElementById('forecast-title').textContent = place.label
+  document.getElementById('forecast-body').replaceChildren(
+    section(t.now, [nowRow, meta]),
+    section(t.hours, hourRows),
+    section(t.days, dayRows)
+  )
+  const link = document.getElementById('forecast-link')
+  link.textContent = t.windy
+  link.href = `https://www.windy.com/?${place.latitude},${place.longitude},8`
 }
 
 const hideWeather = () => {
@@ -296,18 +373,32 @@ const setWeather = (on) => {
   settingsFields.weather.checked = on
 }
 
+let forecastFrom = null
+const forecastDialog = document.getElementById('forecast')
+
+const openForecast = () => {
+  if (!current) return
+  renderForecast()
+  forecastFrom = document.activeElement
+  forecastDialog.hidden = false
+  document.getElementById('forecast-close').focus()
+}
+
+const closeForecast = () => {
+  forecastDialog.hidden = true
+  if (forecastFrom && forecastFrom.focus) forecastFrom.focus()
+}
+
 weatherButton.addEventListener('click', () => {
   if (!weatherOn) {
     setWeather(true)
     return
   }
-  const open = weatherDetail.classList.toggle('open')
-  weatherButton.setAttribute('aria-expanded', String(open))
+  openForecast()
 })
 
-weatherDetail.addEventListener('click', (e) => {
-  if (e.target.classList.contains('weather-off')) setWeather(false)
-})
+document.getElementById('forecast-close').addEventListener('click', closeForecast)
+forecastDialog.addEventListener('click', (e) => { if (e.target === forecastDialog) closeForecast() })
 
 // Settings and help: a floating panel, opened with ? and closed with Escape.
 const openedFrom = { el: null }
@@ -355,7 +446,8 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  if (settings.hidden) {
+  const open = !forecastDialog.hidden ? forecastDialog : (!settings.hidden ? settings : null)
+  if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
       openSettings()
@@ -363,12 +455,13 @@ document.addEventListener('keydown', (e) => {
     return
   }
   if (e.key === 'Escape') {
-    closeSettings()
+    if (open === forecastDialog) closeForecast()
+    else closeSettings()
     return
   }
   if (e.key === 'Tab') {
-    // Keep keyboard focus inside the panel while it is open.
-    const items = [...settings.querySelectorAll('button, input')].filter((el) => !el.hidden && !el.disabled)
+    // Keep keyboard focus inside the open panel.
+    const items = [...open.querySelectorAll('button, input, a[href]')].filter((item) => !item.hidden && !item.disabled)
     const first = items[0]
     const last = items[items.length - 1]
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
