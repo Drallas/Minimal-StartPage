@@ -252,9 +252,18 @@ button {
   opacity: .6;
 }
 
+/* The padding makes the whole link easy to hit; the negative margin keeps the footer where it was. */
 footer a {
+  display: inline-block;
+  padding: 12px 8px;
+  margin: -12px -8px;
   color: inherit;
   text-decoration: none;
+}
+
+footer a:hover svg,
+footer a:focus-visible svg {
+  color: #d64545;
 }
 
 footer svg {
@@ -449,6 +458,13 @@ html[data-wallpaper-on] .controls {
   z-index: 1;
   opacity: .3;
   transition: opacity .3s ease-in-out;
+  /* The row spans the full width and would otherwise block the footer link. */
+  pointer-events: none;
+}
+
+.controls button,
+.hue {
+  pointer-events: auto;
 }
 
 .controls:hover,
