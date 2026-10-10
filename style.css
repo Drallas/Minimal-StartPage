@@ -1451,3 +1451,29 @@ html[data-quote-off] #quote {
 #reset-all {
   grid-column: 1 / -1;
 }
+
+/* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
+@media (max-width: 600px) {
+  .advanced,
+  .help-body {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-panel.is-wide,
+  .help-panel {
+    width: 100%;
+  }
+
+  .settings-panel {
+    max-height: 90vh;
+  }
+
+  .help-body {
+    max-height: 72vh;
+  }
+
+  .help-section p,
+  .privacy {
+    font-size: 14px;
+  }
+}
