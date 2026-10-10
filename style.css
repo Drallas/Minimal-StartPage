@@ -541,6 +541,24 @@ html[data-wallpaper-on] .controls {
   }
 }
 
+/* Full time: the colons blink once a second. */
+.colon {
+  display: inline-block;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: .2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .colon {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .wallpaper,
   body,

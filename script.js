@@ -52,9 +52,14 @@ searchForm.addEventListener('submit', (e) => {
   hintTimer = setTimeout(() => { searchBox.placeholder = '' }, 1500)
 })
 
-// Clock: click the time to switch between 24-hour and 12-hour (AM/PM); hover shows the time zone.
-let clock12 = false
-try { clock12 = localStorage.getItem('clockFormat') === '12' } catch {}
+// Clock: click the time to cycle through 24-hour, 12-hour (AM/PM) and full time (with ticking seconds
+// and blinking colons). Hover shows the time zone.
+const clockModes = ['24', '12', 'full']
+let clockMode = '24'
+try {
+  const saved = localStorage.getItem('clockFormat')
+  if (clockModes.includes(saved)) clockMode = saved
+} catch {}
 
 // Date: click to switch between the long date and DD-MM-YYYY; hover shows the ISO week and day of the year.
 let dateNumeric = false
@@ -71,9 +76,18 @@ const isoWeek = (d) => {
 const dayOfYear = (d) => Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(d.getFullYear(), 0, 0)) / 864e5)
 const isLeap = (y) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0
 
+// Each colon is its own element, so the full time can blink it.
+const colon = () => Object.assign(document.createElement('span'), { className: 'colon', textContent: ':' })
+
 const updateClock = () => {
   const now = new Date()
-  const time = now.toLocaleTimeString(clock12 ? 'en-US' : 'en-GB', { hour: '2-digit', minute: '2-digit', hour12: clock12 })
+  const full = clockMode === 'full'
+  const time = now.toLocaleTimeString(
+    clockMode === '12' ? 'en-US' : 'en-GB',
+    full
+      ? { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }
+      : { hour: '2-digit', minute: '2-digit', hour12: clockMode === '12' }
+  )
   const date = dateNumeric
     ? [String(now.getDate()).padStart(2, '0'), String(now.getMonth() + 1).padStart(2, '0'), now.getFullYear()].join('-')
     : now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
@@ -82,14 +96,20 @@ const updateClock = () => {
   const hh = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0')
   const mm = String(Math.abs(offset) % 60).padStart(2, '0')
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local time'
-  clockTime.textContent = time
+  if (full) {
+    const [hours, minutes, seconds] = time.split(':')
+    clockTime.replaceChildren(hours, colon(), minutes, colon(), seconds)
+  } else {
+    clockTime.textContent = time
+  }
   clockTime.dateTime = now.toISOString()
   clockTime.title = `${zone} (UTC${sign}${hh}:${mm})`
   clockDate.textContent = date
   clockDate.title = `Week ${isoWeek(now)} · day ${dayOfYear(now)} of ${isLeap(now.getFullYear()) ? 366 : 365}`
 }
 updateClock()
-setInterval(updateClock, 30000)
+// Once a second, so the seconds in full time tick; the other modes only change once a minute.
+setInterval(updateClock, 1000)
 
 clockDate.addEventListener('click', () => {
   dateNumeric = !dateNumeric
@@ -98,8 +118,8 @@ clockDate.addEventListener('click', () => {
 })
 
 clockTime.addEventListener('click', () => {
-  clock12 = !clock12
-  try { localStorage.setItem('clockFormat', clock12 ? '12' : '24') } catch {}
+  clockMode = clockModes[(clockModes.indexOf(clockMode) + 1) % clockModes.length]
+  try { localStorage.setItem('clockFormat', clockMode) } catch {}
   updateClock()
 })
 
