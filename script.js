@@ -1141,21 +1141,22 @@ settingsFields.resetData.addEventListener('click', () => {
 const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
-// The export is a real link with a download name. Its address is prepared when the button is pressed, before
-// the click, so the browser already has the file when it follows the link (Safari reads the address early).
-const exportLink = document.getElementById('export-data')
-let exportUrl = null
-const prepareExport = () => {
+// Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
+// on both iPhone and Mac handles as a normal download. The address is released after a while.
+document.getElementById('export-data').addEventListener('click', (e) => {
+  e.preventDefault()
   const payload = { app: 'Minimal-StartPage', version: 1, exported: new Date().toISOString(), settings: {}, data: {} }
   EXPORT_SETTINGS.forEach((key) => { const value = localStorage.getItem(key); if (value !== null) payload.settings[key] = value })
   EXPORT_DATA.forEach((key) => { try { const value = localStorage.getItem(key); if (value !== null) payload.data[key] = JSON.parse(value) } catch {} })
-  if (exportUrl) URL.revokeObjectURL(exportUrl)
-  exportUrl = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }))
-  exportLink.href = exportUrl
-}
-exportLink.addEventListener('pointerdown', prepareExport)
-exportLink.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') prepareExport() })
-exportLink.addEventListener('click', () => { if (!exportUrl) prepareExport() })
+  const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }))
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'minimal-startpage.json'
+  document.body.append(link)
+  link.click()
+  link.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 40000)
+})
 const importFile = document.getElementById('import-file')
 document.getElementById('import-data').addEventListener('click', () => importFile.click())
 importFile.addEventListener('change', async () => {
