@@ -282,10 +282,18 @@ button {
   bottom: 220px;
   max-width: 360px;
   margin: 0 auto;
+  padding: 4px 8px;
   font-size: 14px;
   line-height: 1.6;
   text-align: center;
   color: var(--color-fg-2);
+  cursor: pointer;
+  transition: color .2s ease-in-out;
+}
+
+.quote:hover,
+.quote:focus-visible {
+  color: var(--color-fg-1);
 }
 
 #quote-by {

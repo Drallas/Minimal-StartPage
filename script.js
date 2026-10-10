@@ -142,14 +142,20 @@ const quoteText = document.getElementById('quote-text')
 const quoteBy = document.getElementById('quote-by')
 const quoteLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
 const quoteList = quotes[quoteLang] || quotes.en
+// Clicking the quote steps to the next one; the six-hour rotation keeps going from there.
+let quoteOffset = 0
 const showQuote = () => {
   const sixHours = Math.floor(Date.now() / (6 * 3600 * 1000))
-  const current = quoteList[sixHours % quoteList.length]
+  const current = quoteList[(sixHours + quoteOffset) % quoteList.length]
   quoteText.textContent = `“${current.text}”`
   quoteBy.textContent = current.by
 }
 showQuote()
 setInterval(showQuote, 60000)
+document.getElementById('quote').addEventListener('click', () => {
+  quoteOffset += 1
+  showQuote()
+})
 
 const showTheme = () => {
   const stored = root.dataset.theme || 'auto'
