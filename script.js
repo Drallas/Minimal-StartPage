@@ -2,7 +2,8 @@ const root = document.documentElement
 const searchForm = document.getElementById('searchform')
 const searchBox = document.getElementById('search')
 const engineButton = document.getElementById('engine')
-const clock = document.getElementById('clock')
+const clockTime = document.getElementById('time')
+const clockDate = document.getElementById('date')
 const modeButtons = document.querySelectorAll('[data-theme-value]')
 
 const engines = [
@@ -52,8 +53,9 @@ const updateClock = () => {
   const now = new Date()
   const time = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
   const date = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
-  clock.textContent = `${date} · ${time}`
-  clock.dateTime = now.toISOString()
+  clockTime.textContent = time
+  clockTime.dateTime = now.toISOString()
+  clockDate.textContent = date
 }
 updateClock()
 setInterval(updateClock, 30000)
