@@ -123,13 +123,34 @@ clockTime.addEventListener('click', () => {
   updateClock()
 })
 
-// Weather is off until you turn it on. It finds your approximate location from your IP address
-// (ipapi.co) and asks Open-Meteo for the forecast. Both requests send data outside this page.
+// Weather is off until you turn it on. It finds your place from your IP address (ipapi.co) or from a city
+// you enter (Open-Meteo search), then asks Open-Meteo for the forecast. Both send data outside this page.
 const weatherButton = document.getElementById('weather-button')
 const weatherDetail = document.getElementById('weather-detail')
 const ipLine = document.getElementById('ip')
-let weatherOn = false
-try { weatherOn = localStorage.getItem('weather') === 'on' } catch {}
+const settingsButton = document.getElementById('settings-button')
+const settings = document.getElementById('settings')
+const settingsFields = {
+  weather: document.getElementById('set-weather'),
+  ip: document.getElementById('set-ip'),
+  quote: document.getElementById('set-quote'),
+  cityForm: document.getElementById('city-form'),
+  cityInput: document.getElementById('city-input'),
+  cityClear: document.getElementById('city-clear'),
+  cityMessage: document.getElementById('city-msg'),
+  reset: document.getElementById('reset-all'),
+}
+
+const readFlag = (key, fallback) => {
+  try { return localStorage.getItem(key) === null ? fallback : localStorage.getItem(key) === 'on' } catch { return fallback }
+}
+const writeKey = (key, value) => { try { localStorage.setItem(key, value) } catch {} }
+
+let weatherOn = readFlag('weather', false)
+let ipLookupOn = readFlag('ipLookup', true)
+let quoteOn = readFlag('quote', true)
+let city = null
+try { city = JSON.parse(localStorage.getItem('city') || 'null') } catch {}
 
 const uiLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
 const weatherWords = {
@@ -140,18 +161,18 @@ const weatherWords = {
   es: { clear: 'Despejado', mostly: 'Mayormente despejado', partly: 'Parcialmente nublado', cloudy: 'Nublado', fog: 'Niebla', drizzle: 'Llovizna', rain: 'Lluvia', heavyRain: 'Lluvia intensa', snow: 'Nieve', heavySnow: 'Nieve intensa', showers: 'Chubascos', heavyShowers: 'Chubascos intensos', storm: 'Tormenta' },
   zh: { clear: '晴', mostly: '大部晴朗', partly: '局部多云', cloudy: '多云', fog: '雾', drizzle: '毛毛雨', rain: '雨', heavyRain: '大雨', snow: '雪', heavySnow: '大雪', showers: '阵雨', heavyShowers: '强阵雨', storm: '雷暴' },
 }
-const weatherUi = {
-  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', ip: 'Internet IP' },
-  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', ip: 'Internet-IP' },
-  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', ip: 'Internet-IP' },
-  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', ip: 'IP internet' },
-  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', ip: 'IP de internet' },
-  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', ip: '互联网 IP' },
+const text = {
+  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'Show weather', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Show the quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', reset: 'Reset all choices', close: 'Close', open: 'Settings and help' },
+  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Weer tonen', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat tonen', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', reset: 'Alle keuzes resetten', close: 'Sluiten', open: 'Instellingen en hulp' },
+  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'Wetter anzeigen', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat anzeigen', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', reset: 'Alle Einstellungen zurücksetzen', close: 'Schließen', open: 'Einstellungen und Hilfe' },
+  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Afficher la météo', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Afficher la citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', reset: 'Réinitialiser tous les choix', close: 'Fermer', open: 'Paramètres et aide' },
+  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Mostrar el tiempo', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Mostrar la cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes y ayuda' },
+  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '显示天气', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '显示名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置与帮助' },
 }
-const wt = weatherUi[uiLang] || weatherUi.en
-const ww = weatherWords[uiLang] || weatherWords.en
+const t = text[uiLang] || text.en
+const words = weatherWords[uiLang] || weatherWords.en
 
-// Open-Meteo weather codes (WMO), mapped to the words above.
+// Open-Meteo weather codes (WMO), grouped.
 const weatherKey = (code) => {
   if (code === 0) return 'clear'
   if (code === 1) return 'mostly'
@@ -169,12 +190,13 @@ const weatherKey = (code) => {
   return null
 }
 
-// Small outline icons in the same style as the rest of the page, one per weather group.
+// Small outline icons in the page's style. The colour only shows on hover (see style.css).
 const cloudPath = 'M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.1 9.2 3.5 3.5 0 0 0 7 18z'
+const sunPath = '<circle cx="9" cy="8" r="3"/><path d="M9 2v1M3.5 8h-1M4.6 3.6l.7.7M13.4 3.6l-.7.7"/>'
 const weatherIcons = {
   clear: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
-  mostly: '<circle cx="9" cy="8" r="3"/><path d="M9 2v1M3.5 8h-1M4.6 3.6l.7.7M13.4 3.6l-.7.7"/><path d="M9 19h8a3.5 3.5 0 0 0 .4-6.97A5 5 0 0 0 8 13.5 3 3 0 0 0 9 19z"/>',
-  partly: '<circle cx="9" cy="8" r="3"/><path d="M9 2v1M3.5 8h-1M4.6 3.6l.7.7M13.4 3.6l-.7.7"/><path d="M9 19h8a3.5 3.5 0 0 0 .4-6.97A5 5 0 0 0 8 13.5 3 3 0 0 0 9 19z"/>',
+  mostly: `${sunPath}<path d="M9 19h8a3.5 3.5 0 0 0 .4-6.97A5 5 0 0 0 8 13.5 3 3 0 0 0 9 19z"/>`,
+  partly: `${sunPath}<path d="M9 19h8a3.5 3.5 0 0 0 .4-6.97A5 5 0 0 0 8 13.5 3 3 0 0 0 9 19z"/>`,
   cloudy: `<path d="${cloudPath}"/>`,
   fog: '<path d="M4 9h16M6 13h12M4 17h16"/>',
   drizzle: `<path d="${cloudPath}"/><path d="M8 21l.5-1M12 21l.5-1M16 21l.5-1"/>`,
@@ -186,7 +208,7 @@ const weatherIcons = {
   heavyShowers: `<path d="${cloudPath}"/><path d="M7 21l-1 1.5M11 21l-1 1.5M15 21l-1 1.5M19 21l-1 1.5"/>`,
   storm: `<path d="${cloudPath}"/><path d="M12.5 14.5l-2 3.5h2.5l-1.5 3.5"/>`,
 }
-const weatherIcon = (key) => `<svg class="weather-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${weatherIcons[key] || weatherIcons.cloudy}</svg>`
+const weatherIcon = (key) => `<svg class="weather-icon ${key || 'cloudy'}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${weatherIcons[key] || weatherIcons.cloudy}</svg>`
 
 // Keeps a response in localStorage for maxAge milliseconds, so a reload does not fetch again.
 const fetchCached = async (key, maxAge, url) => {
@@ -206,15 +228,28 @@ const weatherRow = (...cells) => {
   return row
 }
 
+// The city you entered wins; otherwise the IP lookup, if you allow it.
+const getPlace = async () => {
+  if (city) return { label: `${city.name}, ${city.country}`, latitude: city.latitude, longitude: city.longitude, ip: null }
+  if (!ipLookupOn) return null
+  const info = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
+  if (typeof info.latitude !== 'number') return null
+  return { label: `${info.city}, ${info.country_name}`, latitude: info.latitude, longitude: info.longitude, ip: info.ip }
+}
+
 const showWeather = async () => {
   try {
-    const place = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
-    if (typeof place.latitude !== 'number') throw new Error('no location')
+    const place = await getPlace()
+    if (!place) {
+      weatherButton.textContent = t.noSource
+      ipLine.hidden = true
+      return
+    }
     const url = 'https://api.open-meteo.com/v1/forecast' +
       `?latitude=${place.latitude}&longitude=${place.longitude}` +
       '&current=temperature_2m,weather_code&hourly=temperature_2m,precipitation_probability' +
       '&timezone=auto&forecast_hours=24'
-    const forecast = await fetchCached('weatherData', 30 * 60e3, url)
+    const forecast = await fetchCached(`weather:${place.latitude},${place.longitude}`, 30 * 60e3, url)
     const now = forecast.current
     const start = forecast.hourly.time.indexOf(now.time)
     const next = forecast.hourly.time.slice(start + 1, start + 7).map((time, i) => weatherRow(
@@ -225,24 +260,23 @@ const showWeather = async () => {
     const key = weatherKey(now.weather_code)
     const temperature = `${Math.round(now.temperature_2m)}°`
     weatherButton.innerHTML = `${weatherIcon(key)}<span>${temperature}</span>`
-    weatherButton.setAttribute('aria-label', `${key ? ww[key] : ''} ${temperature}`.trim())
+    weatherButton.setAttribute('aria-label', `${key ? words[key] : ''} ${temperature}`.trim())
     weatherDetail.replaceChildren(
-      weatherRow(`${place.city}, ${place.country_name}`),
-      weatherRow(key ? ww[key] : '', `${Math.round(now.temperature_2m)}°`),
+      weatherRow(place.label),
+      weatherRow(key ? words[key] : '', temperature),
       ...next,
-      Object.assign(document.createElement('button'), { type: 'button', className: 'weather-off', textContent: wt.hide })
+      Object.assign(document.createElement('button'), { type: 'button', className: 'weather-off', textContent: t.hide })
     )
-    ipLine.textContent = `${wt.ip}: ${place.ip}`
-    ipLine.hidden = false
+    ipLine.textContent = place.ip ? `${t.ip}: ${place.ip}` : ''
+    ipLine.hidden = !place.ip
   } catch {
-    weatherButton.textContent = wt.unavailable
+    weatherButton.textContent = t.unavailable
+    ipLine.hidden = true
   }
 }
 
 const hideWeather = () => {
-  weatherOn = false
-  try { localStorage.setItem('weather', 'off') } catch {}
-  weatherButton.textContent = wt.show
+  weatherButton.textContent = t.show
   weatherButton.removeAttribute('aria-label')
   weatherButton.setAttribute('aria-expanded', 'false')
   weatherDetail.replaceChildren()
@@ -250,13 +284,21 @@ const hideWeather = () => {
   ipLine.hidden = true
 }
 
-weatherButton.textContent = weatherOn ? wt.loading : wt.show
+const setWeather = (on) => {
+  weatherOn = on
+  writeKey('weather', on ? 'on' : 'off')
+  if (on) {
+    weatherButton.textContent = t.loading
+    showWeather()
+  } else {
+    hideWeather()
+  }
+  settingsFields.weather.checked = on
+}
+
 weatherButton.addEventListener('click', () => {
   if (!weatherOn) {
-    weatherOn = true
-    try { localStorage.setItem('weather', 'on') } catch {}
-    weatherButton.textContent = wt.loading
-    showWeather()
+    setWeather(true)
     return
   }
   const open = weatherDetail.classList.toggle('open')
@@ -264,9 +306,131 @@ weatherButton.addEventListener('click', () => {
 })
 
 weatherDetail.addEventListener('click', (e) => {
-  if (e.target.classList.contains('weather-off')) hideWeather()
+  if (e.target.classList.contains('weather-off')) setWeather(false)
 })
 
+// Settings and help: a floating panel, opened with ? and closed with Escape.
+const openedFrom = { el: null }
+const isTyping = (el) => !!el && el.matches && el.matches('input, textarea, select, [contenteditable="true"]')
+
+const applySettingsText = () => {
+  document.getElementById('settings-title').textContent = t.title
+  document.getElementById('settings-hint').textContent = t.hint
+  document.getElementById('lbl-weather').textContent = t.weather
+  document.getElementById('lbl-ip').textContent = t.lookup
+  document.getElementById('lbl-city').textContent = t.cityLabel
+  settingsFields.cityInput.placeholder = t.cityPlaceholder
+  document.getElementById('city-save').textContent = t.save
+  settingsFields.cityClear.textContent = t.clearCity
+  document.getElementById('lbl-quote').textContent = t.quote
+  document.getElementById('privacy').textContent = t.privacy
+  settingsFields.reset.textContent = t.reset
+  document.getElementById('settings-close').setAttribute('aria-label', t.close)
+  settingsButton.setAttribute('aria-label', t.open)
+  settingsButton.title = t.open
+}
+
+const syncSettings = () => {
+  settingsFields.weather.checked = weatherOn
+  settingsFields.ip.checked = ipLookupOn
+  settingsFields.quote.checked = quoteOn
+  settingsFields.cityClear.hidden = !city
+  settingsFields.cityMessage.textContent = ''
+}
+
+const openSettings = () => {
+  openedFrom.el = document.activeElement
+  syncSettings()
+  settings.hidden = false
+  settingsFields.weather.focus()
+}
+
+const closeSettings = () => {
+  settings.hidden = true
+  if (openedFrom.el && openedFrom.el.focus) openedFrom.el.focus()
+}
+
+settingsButton.addEventListener('click', openSettings)
+document.getElementById('settings-close').addEventListener('click', closeSettings)
+settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
+
+document.addEventListener('keydown', (e) => {
+  if (settings.hidden) {
+    if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault()
+      openSettings()
+    }
+    return
+  }
+  if (e.key === 'Escape') {
+    closeSettings()
+    return
+  }
+  if (e.key === 'Tab') {
+    // Keep keyboard focus inside the panel while it is open.
+    const items = [...settings.querySelectorAll('button, input')].filter((el) => !el.hidden && !el.disabled)
+    const first = items[0]
+    const last = items[items.length - 1]
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+  }
+})
+
+settingsFields.weather.addEventListener('change', () => setWeather(settingsFields.weather.checked))
+
+settingsFields.ip.addEventListener('change', () => {
+  ipLookupOn = settingsFields.ip.checked
+  writeKey('ipLookup', ipLookupOn ? 'on' : 'off')
+  if (weatherOn) showWeather()
+})
+
+settingsFields.quote.addEventListener('change', () => {
+  quoteOn = settingsFields.quote.checked
+  writeKey('quote', quoteOn ? 'on' : 'off')
+  root.toggleAttribute('data-quote-off', !quoteOn)
+})
+
+settingsFields.cityForm.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const name = settingsFields.cityInput.value.trim()
+  if (!name) return
+  try {
+    const found = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=1&language=${uiLang}&format=json`)).json()
+    const hit = found.results && found.results[0]
+    if (!hit) {
+      settingsFields.cityMessage.textContent = t.notFound
+      return
+    }
+    city = { name: hit.name, country: hit.country, latitude: hit.latitude, longitude: hit.longitude }
+    writeKey('city', JSON.stringify(city))
+    settingsFields.cityClear.hidden = false
+    settingsFields.cityMessage.textContent = ''
+    settingsFields.cityInput.value = ''
+    setWeather(true)
+  } catch {
+    settingsFields.cityMessage.textContent = t.unavailable
+  }
+})
+
+settingsFields.cityClear.addEventListener('click', () => {
+  city = null
+  try { localStorage.removeItem('city') } catch {}
+  settingsFields.cityClear.hidden = true
+  if (weatherOn) showWeather()
+})
+
+settingsFields.reset.addEventListener('click', () => {
+  try {
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'ipLookup', 'quote', 'city', 'ipInfo']
+    keys.forEach((key) => localStorage.removeItem(key))
+    Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
+  } catch {}
+  location.reload()
+})
+
+root.toggleAttribute('data-quote-off', !quoteOn)
+applySettingsText()
+weatherButton.textContent = weatherOn ? t.loading : t.show
 if (weatherOn) showWeather()
 
 // A new quote every six hours, so the same one stays put for that window.

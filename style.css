@@ -664,3 +664,203 @@ html[data-wallpaper-on] .controls {
     transition: none;
   }
 }
+
+/* Top bar: colour mode switch and the settings button share the right edge. */
+.topright {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.settings-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: var(--color-fg-2);
+  font-size: 13px;
+  transition: color .2s ease-in-out;
+}
+
+.settings-button:hover,
+.settings-button:focus-visible {
+  color: var(--color-fg-1);
+}
+
+/* Weather icon: plain on the page, coloured only while the weather button is hovered or focused. */
+.weather-icon {
+  transition: color .2s ease-in-out;
+}
+
+.weather-icon.clear,
+.weather-icon.mostly,
+.weather-icon.partly {
+  --wx: #d9a21b;
+}
+
+.weather-icon.cloudy {
+  --wx: #7f8fa3;
+}
+
+.weather-icon.fog {
+  --wx: #9aa0a8;
+}
+
+.weather-icon.drizzle,
+.weather-icon.rain,
+.weather-icon.showers {
+  --wx: #3b82c4;
+}
+
+.weather-icon.heavyRain,
+.weather-icon.heavyShowers {
+  --wx: #2f6fb0;
+}
+
+.weather-icon.snow,
+.weather-icon.heavySnow {
+  --wx: #6fa3d6;
+}
+
+.weather-icon.storm {
+  --wx: #8b6fd6;
+}
+
+.weather button:hover .weather-icon,
+.weather button:focus-visible .weather-icon {
+  color: var(--wx, currentColor);
+}
+
+/* Settings: a floating panel over a softened page. */
+.settings {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: color-mix(in srgb, var(--color-bg) 70%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.settings[hidden] {
+  display: none;
+}
+
+.settings-panel {
+  width: min(100%, 420px);
+  max-height: 86vh;
+  overflow: auto;
+  padding: 24px;
+  background: var(--color-field);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  color: var(--color-fg-1);
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .12);
+}
+
+.settings-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.settings-head h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.settings-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: var(--color-fg-2);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.settings-close:hover,
+.settings-close:focus-visible {
+  color: var(--color-fg-1);
+}
+
+.settings-hint,
+.city-msg {
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.setting input {
+  accent-color: var(--color-fg-2);
+}
+
+.city-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 0 4px;
+}
+
+.city-form > label {
+  color: var(--color-fg-2);
+  font-size: 12px;
+}
+
+.city-row {
+  display: flex;
+  gap: 8px;
+}
+
+#city-input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  background: var(--color-bg);
+  color: var(--color-fg-1);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+#city-save {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.text-button {
+  align-self: flex-start;
+  padding: 0;
+  font-size: 12px;
+  color: var(--color-fg-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.privacy {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+#reset-all {
+  margin-top: 12px;
+}
+
+/* Quote hidden from the settings. */
+html[data-quote-off] #quote {
+  display: none;
+}
