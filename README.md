@@ -47,7 +47,7 @@ Searches go straight to the search engine you chose. The page only stores two se
 
 ## Credits
 
-The AI icons are from [Font Awesome Free](https://fontawesome.com) (CC BY 4.0).
+The Claude, ChatGPT and Grok icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The logos are trademarks of their owners.
 
 ## License
 
