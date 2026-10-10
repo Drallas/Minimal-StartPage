@@ -79,6 +79,7 @@
       <div class="settings-actions">
         <button type="button" id="advanced-toggle" aria-expanded="false" aria-controls="advanced">Advanced</button>
         <button type="button" id="manage-open">Manage</button>
+        <button type="button" id="ip-open">IP details</button>
       </div>
       <p class="location-title" id="sec-privacy-basic">Privacy</p>
       <p class="privacy" id="privacy"></p>
@@ -121,14 +122,6 @@
           <p class="location-title" id="sec-bg">Background</p>
           <label class="setting"><input type="checkbox" id="set-wallpaper"> <span id="lbl-wallpaper">Wallpaper</span></label>
           <label class="setting"><input type="checkbox" id="set-tint"> <span id="lbl-tint">Background tint</span></label>
-        </section>
-        <section class="adv-group">
-          <p class="location-title" id="sec-privacy">Privacy</p>
-          <div class="ip-row">
-            <span id="lbl-ip-last" class="ip-label">Last requested IP</span>
-            <button type="button" class="ip-value" id="ip-value"></button>
-            <button type="button" id="ip-details" class="text-button" hidden>Details</button>
-          </div>
         </section>
         <div class="reset-row">
           <button type="button" id="reset-settings" class="text-button">Reset settings</button>
@@ -221,6 +214,10 @@
         <h2 id="ip-window-title">IP details</h2>
         <button type="button" id="ip-window-close" class="settings-close" aria-label="Close">×</button>
       </div>
+      <p class="ip-current" id="ip-value"></p>
+      <p class="ip-meta" id="ip-meta"></p>
+      <button type="button" class="ip-check" id="ip-check"></button>
+      <p class="ip-meta" id="ip-status" aria-live="polite"></p>
       <dl class="ip-list" id="ip-list"></dl>
     </div>
   </div>

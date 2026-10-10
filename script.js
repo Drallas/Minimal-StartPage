@@ -177,46 +177,53 @@ const ipLookup = async (fresh = false) => {
   return info
 }
 const ipValue = document.getElementById('ip-value')
-const ipDetails = document.getElementById('ip-details')
+const ipMeta = document.getElementById('ip-meta')
+const ipCheck = document.getElementById('ip-check')
+const ipStatus = document.getElementById('ip-status')
+const ipList = document.getElementById('ip-list')
+const ipOpen = document.getElementById('ip-open')
+const ipWindow = document.getElementById('ip-window')
+// The window shows the last requested address with its time and the fields the lookup returns.
+// A field the service left out shows a dash.
 const renderIp = () => {
-  const d = lastIpRecord && lastIpRecord.data
-  ipValue.textContent = lastIpRecord ? lastIpRecord.ip : t.ipNone
-  ipValue.title = d ? `${[`${d.city}, ${d.country_name}`, d.org].filter(Boolean).join(' · ')} · ${t.ipRecheck}` : t.ipRecheck
-  ipDetails.hidden = !lastIpRecord
+  const rec = lastIpRecord
+  const d = rec && rec.data
+  ipValue.textContent = rec ? rec.ip : t.ipNone
+  ipMeta.textContent = rec ? `${t.ipFieldAt}: ${new Date(rec.at).toLocaleString(uiLang)}` : ''
+  ipCheck.textContent = rec ? t.ipCheckAgain : t.ipCheckFirst
+  const dash = (v) => (v === undefined || v === null || v === '' ? '—' : String(v))
+  const rows = d ? [
+    [t.ipFieldPlace, d.city], [t.ipFieldRegion, d.region], [t.ipFieldCountry, d.country_name],
+    [t.ipFieldPostal, d.postal], [t.ipFieldProvider, d.org], [t.ipFieldAsn, d.asn], [t.ipFieldNetwork, d.network],
+    [t.ipFieldTimezone, d.timezone], [t.ipFieldCoords, d.latitude != null && d.longitude != null ? `${d.latitude}, ${d.longitude}` : '']
+  ] : []
+  ipList.replaceChildren(...rows.flatMap(([label, value]) => [el('dt', '', label), el('dd', '', dash(value))]))
+  ipList.hidden = !d
 }
-// Checking again: asks now, then the weather follows if it uses the IP address.
+// Checking asks now; the weather follows if it uses the IP address.
 const checkIp = async () => {
+  ipCheck.disabled = true
+  ipStatus.textContent = t.loading
   try {
     await ipLookup(true)
   } catch {
-    ipValue.textContent = t.ipFailed
+    ipStatus.textContent = t.ipFailed
+    ipCheck.disabled = false
     return
   }
+  ipStatus.textContent = ''
+  ipCheck.disabled = false
   renderIp()
   if (weatherOn && locationMode === 'ip') showWeather()
 }
-ipValue.addEventListener('click', checkIp)
+ipCheck.addEventListener('click', checkIp)
 
-// Details: the fields the lookup returns; a field the service left out shows a dash.
-const ipWindow = document.getElementById('ip-window')
-const ipList = document.getElementById('ip-list')
 const openIpWindow = () => {
-  const rec = lastIpRecord
-  if (!rec) return
-  const d = rec.data
-  const dash = (v) => (v === undefined || v === null || v === '' ? '—' : String(v))
-  const rows = [
-    [t.ipFieldIp, d.ip], [t.ipFieldPlace, d.city], [t.ipFieldRegion, d.region], [t.ipFieldCountry, d.country_name],
-    [t.ipFieldPostal, d.postal], [t.ipFieldProvider, d.org], [t.ipFieldAsn, d.asn], [t.ipFieldNetwork, d.network],
-    [t.ipFieldTimezone, d.timezone], [t.ipFieldCoords, d.latitude != null && d.longitude != null ? `${d.latitude}, ${d.longitude}` : ''],
-    [t.ipFieldAt, new Date(rec.at).toLocaleString(uiLang)]
-  ]
-  ipList.replaceChildren(...rows.flatMap(([label, value]) => [el('dt', '', label), el('dd', '', dash(value))]))
   ipWindow.hidden = false
   ipWindow.querySelector('.settings-panel').focus()
 }
-const closeIpWindow = () => { ipWindow.hidden = true; ipDetails.focus() }
-ipDetails.addEventListener('click', openIpWindow)
+const closeIpWindow = () => { ipWindow.hidden = true; ipOpen.focus() }
+ipOpen.addEventListener('click', openIpWindow)
 document.getElementById('ip-window-close').addEventListener('click', closeIpWindow)
 ipWindow.addEventListener('click', (e) => { if (e.target === ipWindow) closeIpWindow() })
 
@@ -321,12 +328,12 @@ const quoteTitleText = {
   fr: { quoteAnother: 'Afficher une autre citation' }, es: { quoteAnother: 'Mostrar otra cita' }, zh: { quoteAnother: '换一条名言' }
 }
 const ipText = {
-  en: { ipLastLabel: 'Last requested IP', ipNone: 'Not requested yet', ipFailed: 'Could not check', ipWindowTitle: 'IP details', ipFieldIp: 'IP', ipFieldPlace: 'Place', ipFieldRegion: 'Region', ipFieldCountry: 'Country', ipFieldPostal: 'Postcode', ipFieldProvider: 'Provider', ipFieldAsn: 'AS number', ipFieldNetwork: 'Network', ipFieldTimezone: 'Time zone', ipFieldCoords: 'Coordinates', ipFieldAt: 'Requested' },
-  nl: { ipLastLabel: 'Laatst opgevraagd IP', ipNone: 'Nog niet opgevraagd', ipFailed: 'Niet kunnen controleren', ipWindowTitle: 'IP-gegevens', ipFieldIp: 'IP-adres', ipFieldPlace: 'Plaats', ipFieldRegion: 'Regio', ipFieldCountry: 'Land', ipFieldPostal: 'Postcode', ipFieldProvider: 'Provider', ipFieldAsn: 'AS-nummer', ipFieldNetwork: 'Netwerk', ipFieldTimezone: 'Tijdzone', ipFieldCoords: 'Coördinaten', ipFieldAt: 'Opgevraagd' },
-  de: { ipLastLabel: 'Zuletzt abgefragte IP', ipNone: 'Noch nicht abgefragt', ipFailed: 'Konnte nicht prüfen', ipWindowTitle: 'IP-Details', ipFieldIp: 'IP-Adresse', ipFieldPlace: 'Ort', ipFieldRegion: 'Region', ipFieldCountry: 'Land', ipFieldPostal: 'Postleitzahl', ipFieldProvider: 'Anbieter', ipFieldAsn: 'AS-Nummer', ipFieldNetwork: 'Netzwerk', ipFieldTimezone: 'Zeitzone', ipFieldCoords: 'Koordinaten', ipFieldAt: 'Abgefragt' },
-  fr: { ipLastLabel: 'Dernière IP demandée', ipNone: 'Pas encore demandée', ipFailed: 'Vérification impossible', ipWindowTitle: 'Détails de l’IP', ipFieldIp: 'Adresse IP', ipFieldPlace: 'Lieu', ipFieldRegion: 'Région', ipFieldCountry: 'Pays', ipFieldPostal: 'Code postal', ipFieldProvider: 'Fournisseur', ipFieldAsn: 'Numéro AS', ipFieldNetwork: 'Réseau', ipFieldTimezone: 'Fuseau horaire', ipFieldCoords: 'Coordonnées', ipFieldAt: 'Demandée' },
-  es: { ipLastLabel: 'Última IP consultada', ipNone: 'Aún no consultada', ipFailed: 'No se pudo comprobar', ipWindowTitle: 'Detalles de la IP', ipFieldIp: 'Dirección IP', ipFieldPlace: 'Lugar', ipFieldRegion: 'Región', ipFieldCountry: 'País', ipFieldPostal: 'Código postal', ipFieldProvider: 'Proveedor', ipFieldAsn: 'Número AS', ipFieldNetwork: 'Red', ipFieldTimezone: 'Zona horaria', ipFieldCoords: 'Coordenadas', ipFieldAt: 'Consultada' },
-  zh: { ipLastLabel: '最近查询的 IP', ipNone: '尚未查询', ipFailed: '无法检查', ipWindowTitle: 'IP 详情', ipFieldIp: 'IP 地址', ipFieldPlace: '地点', ipFieldRegion: '地区', ipFieldCountry: '国家', ipFieldPostal: '邮编', ipFieldProvider: '服务商', ipFieldAsn: 'AS 号', ipFieldNetwork: '网络', ipFieldTimezone: '时区', ipFieldCoords: '坐标', ipFieldAt: '查询时间' }
+  en: { ipNone: 'Not requested yet', ipFailed: 'Could not check', ipWindowTitle: 'IP details', ipCheckFirst: 'Check', ipCheckAgain: 'Check again', ipFieldPlace: 'Place', ipFieldRegion: 'Region', ipFieldCountry: 'Country', ipFieldPostal: 'Postcode', ipFieldProvider: 'Provider', ipFieldAsn: 'AS number', ipFieldNetwork: 'Network', ipFieldTimezone: 'Time zone', ipFieldCoords: 'Coordinates', ipFieldAt: 'Requested' },
+  nl: { ipNone: 'Nog niet opgevraagd', ipFailed: 'Niet kunnen controleren', ipWindowTitle: 'IP-gegevens', ipCheckFirst: 'Opvragen', ipCheckAgain: 'Opnieuw opvragen', ipFieldPlace: 'Plaats', ipFieldRegion: 'Regio', ipFieldCountry: 'Land', ipFieldPostal: 'Postcode', ipFieldProvider: 'Provider', ipFieldAsn: 'AS-nummer', ipFieldNetwork: 'Netwerk', ipFieldTimezone: 'Tijdzone', ipFieldCoords: 'Coördinaten', ipFieldAt: 'Opgevraagd' },
+  de: { ipNone: 'Noch nicht abgefragt', ipFailed: 'Konnte nicht prüfen', ipWindowTitle: 'IP-Details', ipCheckFirst: 'Abfragen', ipCheckAgain: 'Erneut abfragen', ipFieldPlace: 'Ort', ipFieldRegion: 'Region', ipFieldCountry: 'Land', ipFieldPostal: 'Postleitzahl', ipFieldProvider: 'Anbieter', ipFieldAsn: 'AS-Nummer', ipFieldNetwork: 'Netzwerk', ipFieldTimezone: 'Zeitzone', ipFieldCoords: 'Koordinaten', ipFieldAt: 'Abgefragt' },
+  fr: { ipNone: 'Pas encore demandée', ipFailed: 'Vérification impossible', ipWindowTitle: 'Détails de l’IP', ipCheckFirst: 'Vérifier', ipCheckAgain: 'Vérifier à nouveau', ipFieldPlace: 'Lieu', ipFieldRegion: 'Région', ipFieldCountry: 'Pays', ipFieldPostal: 'Code postal', ipFieldProvider: 'Fournisseur', ipFieldAsn: 'Numéro AS', ipFieldNetwork: 'Réseau', ipFieldTimezone: 'Fuseau horaire', ipFieldCoords: 'Coordonnées', ipFieldAt: 'Demandée' },
+  es: { ipNone: 'Aún no consultada', ipFailed: 'No se pudo comprobar', ipWindowTitle: 'Detalles de la IP', ipCheckFirst: 'Consultar', ipCheckAgain: 'Consultar de nuevo', ipFieldPlace: 'Lugar', ipFieldRegion: 'Región', ipFieldCountry: 'País', ipFieldPostal: 'Código postal', ipFieldProvider: 'Proveedor', ipFieldAsn: 'Número AS', ipFieldNetwork: 'Red', ipFieldTimezone: 'Zona horaria', ipFieldCoords: 'Coordenadas', ipFieldAt: 'Consultada' },
+  zh: { ipNone: '尚未查询', ipFailed: '无法检查', ipWindowTitle: 'IP 详情', ipCheckFirst: '查询', ipCheckAgain: '重新查询', ipFieldPlace: '地点', ipFieldRegion: '地区', ipFieldCountry: '国家', ipFieldPostal: '邮编', ipFieldProvider: '服务商', ipFieldAsn: 'AS 号', ipFieldNetwork: '网络', ipFieldTimezone: '时区', ipFieldCoords: '坐标', ipFieldAt: '查询时间' }
 }
 const wallText = {
   en: { wallShow: 'Show wallpaper', wallHide: 'Hide wallpaper' },
@@ -400,14 +407,6 @@ const pageText = {
   es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetCustom: 'Personal' },
   zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetCustom: '个性化' }
 }
-const recheckText = {
-  en: { ipRecheck: 'Click to check again' },
-  nl: { ipRecheck: 'Klik om opnieuw te controleren' },
-  de: { ipRecheck: 'Klicken, um erneut zu prüfen' },
-  fr: { ipRecheck: 'Cliquer pour vérifier à nouveau' },
-  es: { ipRecheck: 'Haz clic para volver a comprobar' },
-  zh: { ipRecheck: '点击重新检查' }
-}
 const advancedText = {
   en: { advancedOpen: 'Advanced', advancedClosed: '← Back to basic settings' },
   nl: { advancedOpen: 'Geavanceerd', advancedClosed: '← Terug naar basisinstellingen' },
@@ -416,7 +415,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], wallText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], wallText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -847,12 +846,11 @@ const applySettingsText = () => {
   document.getElementById('help-open').textContent = helpCopy.title
   document.getElementById('sec-weather').textContent = t.secWeather
   document.getElementById('sec-look').textContent = t.secLook
-  document.getElementById('sec-privacy').textContent = t.secPrivacy
   document.getElementById('sec-privacy-basic').textContent = t.secPrivacy
   document.getElementById('lbl-loc-ip').textContent = t.locIp
   document.getElementById('lbl-loc-city').textContent = t.locCity
-  document.getElementById('lbl-ip-last').textContent = t.ipLastLabel
   document.getElementById('ip-window-title').textContent = t.ipWindowTitle
+  document.getElementById('ip-open').textContent = t.ipWindowTitle
   document.getElementById('ip-window-close').setAttribute('aria-label', t.close)
   renderIp()
   document.getElementById('lbl-city').textContent = t.cityLabel

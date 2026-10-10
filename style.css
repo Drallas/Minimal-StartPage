@@ -1677,33 +1677,37 @@ html[data-quote-off] #quote {
   padding: 6px 0;
 }
 
-/* Last requested IP: the value is a button, a click checks the address again. */
-.ip-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 0;
+/* The IP details window: the address, when it was asked, and the check button. */
+.ip-current {
+  margin: 12px 0 2px;
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
 }
 
-.ip-label {
-  flex: 1;
-  min-width: 0;
+.ip-meta {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--color-fg-2);
 }
 
-.ip-value {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: right;
-  text-decoration: underline dotted;
-  text-underline-offset: 3px;
-  cursor: pointer;
+.ip-check {
+  align-self: flex-start;
+  height: 32px;
+  margin: 4px 0 6px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-fg-1);
+  font-size: 13px;
 }
 
-#ip-details[hidden] {
-  display: none;
+.ip-check:hover,
+.ip-check:focus-visible {
+  border-color: var(--color-fg-2);
+}
+
+.ip-check:disabled {
+  opacity: .5;
 }
 
 .ip-panel {
@@ -1768,7 +1772,8 @@ html[data-quote-off] #quote {
 
 /* Advanced and Manage are buttons, not links: they are actions that open more options. */
 #advanced-toggle,
-#manage-open {
+#manage-open,
+#ip-open {
   align-self: flex-start;
   height: 32px;
   margin: 14px 0 6px;
@@ -1783,7 +1788,9 @@ html[data-quote-off] #quote {
 #advanced-toggle:hover,
 #advanced-toggle:focus-visible,
 #manage-open:hover,
-#manage-open:focus-visible {
+#manage-open:focus-visible,
+#ip-open:hover,
+#ip-open:focus-visible {
   border-color: var(--color-fg-2);
 }
 

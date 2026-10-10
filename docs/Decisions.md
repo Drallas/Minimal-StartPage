@@ -3,8 +3,8 @@
 - Wikipedia is a permanent link. It follows the browser language and cannot be removed.
 - Permanent links are logos where the open icon set has them. Microsoft and Reuters are shown by name.
 - Custom links: up to 15, with an optional description written by the visitor, only http and https addresses.
-- Showing the IP address is separate from the weather, off by default, and lives in the advanced settings. It is looked up only on request or when the weather needs it.
-- The IP address and the IP-based weather location are advanced options. The basic view only carries the privacy note.
+- The IP address is a button in the basic settings (IP details), not a setting: it is looked up only on request or when the weather needs it.
+- The IP-based weather location is an advanced option. The IP details button sits beside Data beheren in the basic view.
 - The hover list shows only the visitor's own links. The permanent ones live in the window.
 - Settings save straight away; there is no save button.
 - Page presets: Minimal and Standard, chosen in the settings. They switch display options only; the IP address is never changed by a preset. Weather is not part of the presets.
