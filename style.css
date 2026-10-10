@@ -270,11 +270,9 @@ footer a:focus-visible svg {
 
 /* Your IP address, just under the footer line. */
 .ip {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin-top: 6px;
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
   font-size: 9px;
   letter-spacing: .04em;
   opacity: .8;
@@ -653,12 +651,6 @@ html[data-wallpaper-on] .modes button {
   /* As close to the bottom edge as the browser allows: the safe area on iPhone, and the small toolbar. */
   .controls {
     bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
-  }
-
-  /* With the IP line showing, the footer and the controls move up by one line. */
-  html[data-ip-line] .controls,
-  html[data-ip-line] footer {
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);
   }
 
   /* Phones: footer and controls move above the browser's bottom bar, and stay on one line. */
