@@ -503,6 +503,7 @@ html[data-wallpaper-on] .controls {
 
   .controls button {
     position: relative;
+    margin-left: auto;
   }
 
   .controls button::before {
