@@ -33,7 +33,7 @@
 - **Search engine.** The icon on the left of the search bar shows the current engine (Brave, Google or DuckDuckGo). Click it to cycle to the next one. Your choice is remembered.
 - **Theme.** Follows your system's light or dark setting by default. The icons in the top right switch to a fixed Light or Dark theme, and that choice is remembered too. Choose the monitor icon to go back to following the system.
 - **Clock.** The date and time sit at the top of the page.
-- **Shortcuts.** A Wikipedia link in the top left, and GitHub, X, Apple, LinkedIn and YouTube below the search bar.
+- **Shortcuts.** A Wikipedia link in the top left, and links to Claude, ChatGPT and Grok below the search bar.
 
 ## Your data
 
