@@ -940,8 +940,6 @@ const setAdvanced = (open) => {
   // Data beheren and IP details live in the basic view only; one place is enough.
   manageOpenButton.hidden = open
   ipOpen.hidden = open
-  // The privacy line is basic-only: it is not repeated in advanced settings.
-  document.getElementById('privacy').hidden = open
 }
 advancedToggle.addEventListener('click', () => setAdvanced(advancedBlock.hidden))
 
