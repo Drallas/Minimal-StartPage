@@ -47,7 +47,7 @@
 - **Shortcuts.** A links button in the top left, with Wikipedia to start with. You can add up to 15 links of your own, with an optional description, and remove Wikipedia if you like. Reset all choices brings it back; and links to Claude, ChatGPT, Grok and Duck.ai below the search bar under the caption "Ask AI".
 - **Background.** The wallpaper is on by default. The round button in the bottom right turns it off or on again, and your choice is remembered. Without the wallpaper, the slider in the bottom left gives the background a subtle tint in any hue (drag back to the far left for the neutral look). The background adapts to light and dark mode. On a phone the slider is hidden and the wallpaper button sits just above the browser's bottom bar.
 - **Weather.** Off by default. Turn it on in the settings, or click "Show weather" at the top. The temperature and a small icon then sit in the top middle; the icon takes colour on hover. Hover over it for a short preview. Click it for the full forecast: the next 24 hours, the next seven days, and a link to the full forecast on Windy. You can enter a city yourself instead of using your IP address. The details are in [Your data](#your-data).
-- **Settings and help.** Press `?` anywhere on the page, or click the `?` in the top right, to open a panel where you can switch weather, the IP lookup and the quote on or off, enter a city, or reset all choices. Press `Esc` to close it.
+- **Settings and help.** Press `?` anywhere on the page, or click the gear at the top right, to open the settings. They switch the weather, the links, the quote and the time zones on or off, set the location, and reset all choices. The Help button in that window opens a guide to every feature, without screenshots. Press `Esc` to close.
 - **Hidden details.** A few small details are tucked away in the page. Look closely and explore.
 
 ## Use it
@@ -79,6 +79,8 @@ If you are comfortable editing text files, you can change the page yourself. Use
 The wallpapers are photos from [Unsplash](https://unsplash.com), used under the Unsplash License.
 
 The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon and the logos of the permanent links (Wikipedia, Google, Apple, Facebook, X, Instagram and GitHub) come from [Simple Icons](https://simpleicons.org) (CC0). Microsoft and Reuters are shown by their names, since their logos are not in the open icon set. The logos are trademarks of their owners. The logos are trademarks of their owners.
+
+The gear icon is from [Feather](https://feathericons.com) (MIT).
 
 ## License
 

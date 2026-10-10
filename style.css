@@ -1349,3 +1349,37 @@ html[data-quote-off] #quote {
   width: 40px;
   height: 16px;
 }
+
+/* Help: the guide from the settings window. */
+.help-panel {
+  width: min(100%, 520px);
+}
+
+.help-body {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.help-section {
+  margin-top: 18px;
+}
+
+.help-section h3 {
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+}
+
+.help-section p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-fg-1);
+}
+
+.settings-head .text-button {
+  margin-left: auto;
+  margin-right: 12px;
+}

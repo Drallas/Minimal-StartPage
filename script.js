@@ -188,12 +188,12 @@ const weatherWords = {
   zh: { clear: '晴', mostly: '大部晴朗', partly: '局部多云', cloudy: '多云', fog: '雾', drizzle: '毛毛雨', rain: '雨', heavyRain: '大雨', snow: '雪', heavySnow: '大雪', showers: '阵雨', heavyShowers: '强阵雨', storm: '雷暴' },
 }
 const text = {
-  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'Show weather', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Show the quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', reset: 'Reset all choices', close: 'Close', open: 'Settings and help' , showIp: 'Show my IP address under the footer'},
-  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Weer tonen', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat tonen', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', reset: 'Alle keuzes resetten', close: 'Sluiten', open: 'Instellingen en hulp' , showIp: 'Mijn IP-adres onder de footer tonen'},
-  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'Wetter anzeigen', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat anzeigen', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', reset: 'Alle Einstellungen zurücksetzen', close: 'Schließen', open: 'Einstellungen und Hilfe' , showIp: 'Meine IP-Adresse unter der Fußzeile anzeigen'},
-  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Afficher la météo', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Afficher la citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', reset: 'Réinitialiser tous les choix', close: 'Fermer', open: 'Paramètres et aide' , showIp: 'Afficher mon adresse IP sous le pied de page'},
-  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Mostrar el tiempo', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Mostrar la cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes y ayuda' , showIp: 'Mostrar mi IP debajo del pie'},
-  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '显示天气', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '显示名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置与帮助' , showIp: '在页脚下方显示我的 IP 地址'},
+  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'Show weather', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Show the quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', reset: 'Reset all choices', close: 'Close', open: 'Settings' , showIp: 'Show my IP address under the footer'},
+  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Weer tonen', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat tonen', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', reset: 'Alle keuzes resetten', close: 'Sluiten', open: 'Instellingen' , showIp: 'Mijn IP-adres onder de footer tonen'},
+  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'Wetter anzeigen', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat anzeigen', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', reset: 'Alle Einstellungen zurücksetzen', close: 'Schließen', open: 'Einstellungen' , showIp: 'Meine IP-Adresse unter der Fußzeile anzeigen'},
+  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Afficher la météo', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Afficher la citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', reset: 'Réinitialiser tous les choix', close: 'Fermer', open: 'Paramètres' , showIp: 'Afficher mon adresse IP sous le pied de page'},
+  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Mostrar el tiempo', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Mostrar la cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes' , showIp: 'Mostrar mi IP debajo del pie'},
+  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '显示天气', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '显示名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置' , showIp: '在页脚下方显示我的 IP 地址'},
 }
 const forecastText = {
   en: { now: 'Now', hours: 'Next 24 hours', days: 'Next 7 days', feels: 'Feels like', wind: 'Wind', humidity: 'Humidity', more: 'Click for the full forecast', windy: 'Full forecast on Windy', rain: 'Rain' },
@@ -247,7 +247,72 @@ const weatherWording = {
   zh: { location: '位置', locIp: '我的 IP 地址（查找我的城市）', locCity: '我选择的城市', noSource: '选择地点', needPlace: '天气需要一个地点：请在下方选择你的 IP 地址或一个城市。' },
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[lang])
+// Help: the settings window's help. The same content as the README, without screenshots.
+const helpText = {
+  en: { title: 'Help', settings: 'Settings', close: 'Close', sections: [
+    ['Search', 'Type and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.'],
+    ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the globe above the time opens the zones you chose.'],
+    ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY.'],
+    ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them.'],
+    ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 24 hours and seven days.'],
+    ['Background', 'The round button at the bottom right turns the wallpaper on or off. On a computer, the slider at the bottom left tints the background; on a phone it is hidden.'],
+    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on.'],
+    ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset all choices" clears everything and brings back the defaults.'],
+  ] },
+  nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', sections: [
+    ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden.'],
+    ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent de wereldbol boven de tijd de zones die je koos.'],
+    ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en DD-MM-JJJJ.'],
+    ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen.'],
+    ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 24 uur en zeven dagen.'],
+    ['Achtergrond', 'De ronde knop rechtsonder zet de wallpaper aan of uit. Op een computer kleurt de schuif linksonder de achtergrond; op een telefoon is die verborgen.'],
+    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat.'],
+    ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Alle keuzes resetten" wist alles en zet de standaard terug.'],
+  ] },
+  de: { title: 'Hilfe', settings: 'Einstellungen', close: 'Schließen', sections: [
+    ['Suche', 'Tippe und drücke Enter, oder klicke auf die Lupe. Das Symbol links zeigt die Suchmaschine: Klick darauf, um zwischen DuckDuckGo (Standard), Kagi, Brave und Google zu wechseln. Deine Wahl wird gespeichert.'],
+    ['Uhr', 'Fahre mit der Maus über die Zeit, um deine Zeitzone zu sehen. Ein Klick auf die Zeit wechselt zwischen 24-Stunden-, 12-Stunden- und voller Zeit mit Sekunden. Sind Zeitzonen aktiv, öffnet die Kugel über der Zeit die gewählten Zonen.'],
+    ['Datum', 'Fahre mit der Maus über das Datum, um die ISO-Woche und den Tag des Jahres zu sehen. Ein Klick wechselt zwischen langer Form und TT-MM-JJJJ.'],
+    ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen.'],
+    ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 24 Stunden und sieben Tagen.'],
+    ['Hintergrund', 'Die runde Schaltfläche unten rechts schaltet das Hintergrundbild ein oder aus. Am Computer färbt der Regler unten links den Hintergrund; auf dem Telefon ist er ausgeblendet.'],
+    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist.'],
+    ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Alle Einstellungen zurücksetzen“ löscht alles und stellt die Standards wieder her.'],
+  ] },
+  fr: { title: 'Aide', settings: 'Paramètres', close: 'Fermer', sections: [
+    ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé.'],
+    ['Horloge', 'Passez la souris sur l’heure pour voir votre fuseau. Cliquez sur l’heure pour passer de 24 heures à 12 heures, puis à l’heure complète avec les secondes. Si les fuseaux sont activés, le globe au-dessus de l’heure ouvre les fuseaux choisis.'],
+    ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à JJ-MM-AAAA.'],
+    ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer.'],
+    ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 24 heures et sept jours.'],
+    ['Fond', 'Le bouton rond en bas à droite active ou désactive le fond d’écran. Sur ordinateur, le curseur en bas à gauche teinte le fond ; sur téléphone il est masqué.'],
+    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée.'],
+    ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser tous les choix » efface tout et rétablit les valeurs par défaut.'],
+  ] },
+  es: { title: 'Ayuda', settings: 'Ajustes', close: 'Cerrar', sections: [
+    ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda.'],
+    ['Reloj', 'Pasa el ratón sobre la hora para ver tu zona horaria. Haz clic en la hora para cambiar entre 24 horas, 12 horas y hora completa con segundos. Si las zonas horarias están activas, el globo sobre la hora abre las zonas que elegiste.'],
+    ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y DD-MM-AAAA.'],
+    ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos.'],
+    ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 24 horas y siete días.'],
+    ['Fondo', 'El botón redondo de abajo a la derecha activa o desactiva el fondo. En el ordenador, el control de abajo a la izquierda tiñe el fondo; en el móvil está oculto.'],
+    ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa.'],
+    ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer todas las opciones» borra todo y devuelve los valores por defecto.'],
+  ] },
+  zh: { title: '帮助', settings: '设置', close: '关闭', sections: [
+    ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。'],
+    ['时钟', '把鼠标移到时间上可看到你的时区。点击时间可在 24 小时制、12 小时制和带秒的完整时间之间切换。开启时区后，时间上方的地球图标会打开你选择的时区。'],
+    ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和 DD-MM-YYYY 之间切换。'],
+    ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。'],
+    ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 24 小时和七天的完整预报。'],
+    ['背景', '右下角的圆形按钮可开启或关闭壁纸。在电脑上，左下角的滑块会给背景染色；在手机上它被隐藏。'],
+    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。'],
+    ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置所有设置”会清除全部内容并恢复默认值。'],
+  ] },
+};
+
 const t = text[uiLang] || text.en
+const helpCopy = helpText[uiLang] || helpText.en
 const words = weatherWords[uiLang] || weatherWords.en
 
 // Open-Meteo weather codes (WMO), grouped.
@@ -519,6 +584,7 @@ const applySettingsText = () => {
   document.getElementById('settings-hint').textContent = t.hint
   document.getElementById('lbl-weather').textContent = t.weather
   document.getElementById('lbl-location').textContent = t.location
+  document.getElementById('help-open').textContent = helpCopy.title
   document.getElementById('sec-weather').textContent = t.secWeather
   document.getElementById('sec-look').textContent = t.secLook
   document.getElementById('sec-privacy').textContent = t.secPrivacy
@@ -579,12 +645,39 @@ const closeSettings = () => {
 }
 
 settingsButton.addEventListener('click', openSettings)
+
+// Help: the same guide as the README, opened from the settings window. Escape closes it.
+const helpWindow = document.getElementById('help')
+const helpBody = document.getElementById('help-body')
+let helpFrom = null
+const renderHelp = () => {
+  document.getElementById('help-title').textContent = helpCopy.title
+  document.getElementById('help-close').setAttribute('aria-label', helpCopy.close)
+  helpBody.replaceChildren(...helpCopy.sections.map(([heading, body]) => {
+    const section = el('section', 'help-section')
+    section.append(el('h3', '', heading), el('p', '', body))
+    return section
+  }))
+}
+const openHelp = () => {
+  helpFrom = document.activeElement
+  renderHelp()
+  helpWindow.hidden = false
+  document.getElementById('help-close').focus()
+}
+const closeHelp = () => {
+  helpWindow.hidden = true
+  if (helpFrom && helpFrom.focus) helpFrom.focus()
+}
+document.getElementById('help-open').addEventListener('click', openHelp)
+document.getElementById('help-close').addEventListener('click', closeHelp)
+helpWindow.addEventListener('click', (e) => { if (e.target === helpWindow) closeHelp() })
 document.getElementById('settings-close').addEventListener('click', closeSettings)
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
   const zonesWindow = document.getElementById('zones')
-  const open = [forecastDialog, zonesWindow, document.getElementById('links'), settings].find((d) => !d.hidden) || null
+  const open = [helpWindow, forecastDialog, zonesWindow, document.getElementById('links'), settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -593,7 +686,8 @@ document.addEventListener('keydown', (e) => {
     return
   }
   if (e.key === 'Escape') {
-    if (open === forecastDialog) closeForecast()
+    if (open === helpWindow) closeHelp()
+    else if (open === forecastDialog) closeForecast()
     else if (open === zonesWindow) closeZones()
     else if (open === document.getElementById('links')) closeLinks()
     else closeSettings()
