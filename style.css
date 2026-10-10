@@ -697,7 +697,8 @@ html[data-wallpaper-on] .modes button {
   white-space: nowrap;
 }
 
-.ai-list button {
+.ai-list button,
+.icon-btn {
   width: 28px;
   height: 28px;
   padding: 0;
@@ -710,13 +711,16 @@ html[data-wallpaper-on] .modes button {
   cursor: pointer;
 }
 
-.ai-list button:disabled {
+.ai-list button:disabled,
+.icon-btn:disabled {
   opacity: .35;
   cursor: default;
 }
 
 .ai-list button:focus-visible,
-.ai-list button:hover:not(:disabled) {
+.ai-list button:hover:not(:disabled),
+.icon-btn:focus-visible,
+.icon-btn:hover:not(:disabled) {
   color: var(--color-fg-1);
 }
 

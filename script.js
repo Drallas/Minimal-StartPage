@@ -1368,21 +1368,27 @@ const renderLinks = () => {
 
   const rows = links.map((link, index) => {
     const row = el('div', 'link-row')
-    const edit = el('button', 'row-btn', t.linkEditBtn)
+    const edit = el('button', 'icon-btn', '✎')
     edit.type = 'button'
+    edit.title = t.linkEditBtn
+    edit.setAttribute('aria-label', t.linkEditBtn)
     edit.dataset.edit = String(index)
-    const remove = el('button', 'row-btn', t.linkRemove)
+    const remove = el('button', 'icon-btn', '×')
     remove.type = 'button'
+    remove.title = t.linkRemove
+    remove.setAttribute('aria-label', t.linkRemove)
     remove.dataset.remove = String(index)
-    const up = el('button', 'row-btn', '↑')
+    const up = el('button', 'icon-btn', '↑')
     up.type = 'button'
     up.title = t.linkUp
+    up.setAttribute('aria-label', t.linkUp)
     up.disabled = index === 0
     up.dataset.index = String(index)
     up.dataset.step = '-1'
-    const down = el('button', 'row-btn', '↓')
+    const down = el('button', 'icon-btn', '↓')
     down.type = 'button'
     down.title = t.linkDown
+    down.setAttribute('aria-label', t.linkDown)
     down.disabled = index === links.length - 1
     down.dataset.index = String(index)
     down.dataset.step = '1'
