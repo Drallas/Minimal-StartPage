@@ -49,7 +49,7 @@ Everything is optional. The settings start with a choice of page: **Minimal** (s
 - **Links.** The button at the top left opens a window with permanent links as icons (Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub and Reuters) and up to 15 links of your own, each with an optional description. Hover the button to see your own links. By default the button is a plain Wikipedia link that opens Wikipedia in your browser's language. Turn on **Own links** for the window and your own links. The button can be switched off.
 - **AI shortcuts.** Shortcuts below the search bar. The default set is Claude, ChatGPT, Grok and Duck.ai. In the settings you can change them: up to five, in any order, or none at all. The row can be switched off.
 - **Weather.** Optional, off by default. Up to three extra places can be added, shown as chips in the forecast window. The temperature and a small icon sit at the top middle. Hover for a short preview with the next six hours; click for the full forecast: the next 24 hours, the next seven days, and a link to Windy. The place comes from your IP address or from a city you choose.
-- **Your IP address.** Optional, off by default. Shows your IP address just under the footer, and hovering it shows your city, country and provider.
+- **Your IP address.** Optional, off by default, in the advanced settings under Privacy. It shows the last address you asked for, and clicking it checks again. Details shows the city, provider and more.
 - **Background.** A wallpaper that can be switched on or off, and a button to hide that switch. A tint slider gives the neutral background a colour; on a phone a button at the bottom left steps through a few colours, and the middle of the slider is the neutral background. The tint can be switched off. The background adapts to light and dark mode.
 - **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages (Minimal, Standard) and the privacy note. The Advanced button opens the rest, grouped into Weather, Display, AI shortcuts, Background and Privacy, and its link goes back to the basic settings. The Help button in the settings opens a guide to every feature. Press `Esc` to close.
 - **Phones.** The bottom controls sit above the browser's bar, and the layout fits landscape phones too.
@@ -69,11 +69,11 @@ Searches go straight to the search engine you chose. The page keeps your choices
 
 - **Weather** sends your IP address to [ipapi.co](https://ipapi.co) to find your city, or the city you choose to [Open-Meteo](https://open-meteo.com) to find its coordinates. The forecast itself comes from Open-Meteo. Only while weather is on.
 - **Extra places** on the weather send their name to [Open-Meteo](https://open-meteo.com) to find them. Up to three can be added in the Data panel, under Weather.
-- **Your IP address** under the footer asks [ipapi.co](https://ipapi.co) for your address, whether or not the weather is on.
+- **Your IP address** is only looked up when you click it in the settings, or when the weather uses it. It asks [ipapi.co](https://ipapi.co).
 
 In the Advanced settings, **Export data** saves your choices and your own links, AI shortcuts, time zones and places to one JSON file that you keep yourself (for example in iCloud Drive). **Import data** loads that file on another device. Nothing is sent anywhere when you export or import.
 
-Your IP address is looked up again at most every ten minutes, so a VPN change shows after a refresh, and clicking the address under the footer checks it straight away; forecasts are kept for 30 minutes. "Reset settings" in the settings brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and asks first.
+Your IP address is looked up again at most every ten minutes, so a VPN change shows after a refresh, and clicking the address in the settings checks it straight away; forecasts are kept for 30 minutes. "Reset settings" in the settings brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and asks first.
 
 ## Customise
 

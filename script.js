@@ -132,7 +132,6 @@ clockTime.addEventListener('click', () => {
 // you enter (Open-Meteo search), then asks Open-Meteo for the forecast. Both send data outside this page.
 const weatherButton = document.getElementById('weather-button')
 const weatherDetail = document.getElementById('weather-detail')
-const ipLine = document.getElementById('ip')
 const settingsButton = document.getElementById('settings-button')
 const settings = document.getElementById('settings')
 // On a phone the slider is replaced by a button that steps through a few colours, so a tap is enough.
@@ -142,7 +141,6 @@ const settingsFields = {
   weather: document.getElementById('set-weather'),
   locIp: document.getElementById('loc-ip'),
   locCity: document.getElementById('loc-city'),
-  showIp: document.getElementById('set-showip'),
   quote: document.getElementById('set-quote'),
   greetName: document.getElementById('greet-name'),
   zones: document.getElementById('set-zones'),
@@ -168,35 +166,60 @@ const writeKey = (key, value) => { try { localStorage.setItem(key, value) } catc
 
 let weatherOn = readFlag('weather', false)
 let quoteOn = readFlag('quote', false)
-let showIpOn = readFlag('showIp', false)
-let lastIp = null
-let lastInfo = ''
-// The IP address line under the footer: only when we have one and it is wanted.
-// The IP line shows only when weather is on, the location is the IP address, and the option is on.
-// It reuses the lookup the weather already makes, so no extra request is sent.
-const fetchMyIp = async (fresh = false) => {
-  if (!showIpOn) {
-    lastIp = null
-    lastInfo = ''
-    updateIpLine()
+// The last IP lookup, kept with its time. It is asked for only when the weather needs it, or when the visitor
+// checks it in settings; the page does not ask for the display alone.
+let lastIpRecord = null
+try { lastIpRecord = JSON.parse(localStorage.getItem('lastIp') || 'null') } catch {}
+const ipLookup = async (fresh = false) => {
+  const info = await fetchCached('ipInfo', 10 * 60e3, 'https://ipapi.co/json/', fresh)
+  lastIpRecord = { ip: info.ip, data: info, at: Date.now() }
+  writeKey('lastIp', JSON.stringify(lastIpRecord))
+  return info
+}
+const ipValue = document.getElementById('ip-value')
+const ipDetails = document.getElementById('ip-details')
+const renderIp = () => {
+  const d = lastIpRecord && lastIpRecord.data
+  ipValue.textContent = lastIpRecord ? `${t.ipLast}: ${lastIpRecord.ip}` : t.ipNone
+  ipValue.title = d ? `${[`${d.city}, ${d.country_name}`, d.org].filter(Boolean).join(' · ')} · ${t.ipRecheck}` : t.ipRecheck
+  ipDetails.hidden = !lastIpRecord
+}
+// Checking again: asks now, then the weather follows if it uses the IP address.
+const checkIp = async () => {
+  try {
+    await ipLookup(true)
+  } catch {
+    ipValue.textContent = t.ipFailed
     return
   }
-  try {
-    const info = await fetchCached('ipInfo', 10 * 60e3, 'https://ipapi.co/json/', fresh)
-    lastIp = info.ip
-    lastInfo = [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ')
-  } catch {
-    lastIp = null
-    lastInfo = ''
-  }
-  updateIpLine()
+  renderIp()
+  if (weatherOn && locationMode === 'ip') showWeather()
 }
-const updateIpLine = () => {
-  const visible = showIpOn && !!lastIp
-  ipLine.textContent = visible ? `${t.ip}: ${lastIp}` : ''
-  ipLine.title = visible ? `${lastInfo} · ${t.ipRecheck}` : ''
-  ipLine.hidden = !visible
+ipValue.addEventListener('click', checkIp)
+
+// Details: the fields the lookup returns; a field the service left out shows a dash.
+const ipWindow = document.getElementById('ip-window')
+const ipList = document.getElementById('ip-list')
+const openIpWindow = () => {
+  const rec = lastIpRecord
+  if (!rec) return
+  const d = rec.data
+  const dash = (v) => (v === undefined || v === null || v === '' ? '—' : String(v))
+  const rows = [
+    [t.ipFieldIp, d.ip], [t.ipFieldPlace, d.city], [t.ipFieldRegion, d.region], [t.ipFieldCountry, d.country_name],
+    [t.ipFieldPostal, d.postal], [t.ipFieldProvider, d.org], [t.ipFieldAsn, d.asn], [t.ipFieldNetwork, d.network],
+    [t.ipFieldTimezone, d.timezone], [t.ipFieldCoords, d.latitude != null && d.longitude != null ? `${d.latitude}, ${d.longitude}` : ''],
+    [t.ipFieldAt, new Date(rec.at).toLocaleString(uiLang)]
+  ]
+  ipList.replaceChildren(...rows.flatMap(([label, value]) => [el('dt', '', label), el('dd', '', dash(value))]))
+  ipWindow.hidden = false
+  ipWindow.querySelector('.settings-panel').focus()
 }
+const closeIpWindow = () => { ipWindow.hidden = true; ipDetails.focus() }
+ipDetails.addEventListener('click', openIpWindow)
+document.getElementById('ip-window-close').addEventListener('click', closeIpWindow)
+ipWindow.addEventListener('click', (e) => { if (e.target === ipWindow) closeIpWindow() })
+
 let city = null
 try { city = JSON.parse(localStorage.getItem('city') || 'null') } catch {}
 // 'ip' finds the place from the IP address; 'city' uses the city the visitor entered.
@@ -216,12 +239,12 @@ const weatherWords = {
   zh: { clear: '晴', mostly: '大部晴朗', partly: '局部多云', cloudy: '多云', fog: '雾', drizzle: '毛毛雨', rain: '雨', heavyRain: '大雨', snow: '雪', heavySnow: '大雪', showers: '阵雨', heavyShowers: '强阵雨', storm: '雷暴' },
 }
 const text = {
-  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'On', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', resetSettings: 'Reset settings', resetData: 'Delete my links, AI shortcuts and places', resetDataConfirm: 'Delete your custom links, AI shortcuts, time zones and your city? This cannot be undone.', close: 'Close', open: 'Settings' , showIp: 'My IP address under the footer'},
-  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Aan', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', resetSettings: 'Instellingen resetten', resetData: 'Eigen links, AI-snelkoppelingen en plaatsen wissen', resetDataConfirm: 'Je eigen links, AI-snelkoppelingen, tijdzones en je stad wissen? Dit kan niet ongedaan worden.', close: 'Sluiten', open: 'Instellingen' , showIp: 'Mijn IP-adres onder de footer'},
-  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'An', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', resetSettings: 'Einstellungen zurücksetzen', resetData: 'Eigene Links, KI-Verknüpfungen und Orte löschen', resetDataConfirm: 'Deine eigenen Links, KI-Verknüpfungen, Zeitzonen und deine Stadt löschen? Das lässt sich nicht rückgängig machen.', close: 'Schließen', open: 'Einstellungen' , showIp: 'Meine IP-Adresse unter der Fußzeile'},
-  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Activé', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', resetSettings: 'Réinitialiser les réglages', resetData: 'Supprimer mes liens, raccourcis IA et lieux', resetDataConfirm: 'Supprimer vos liens personnels, raccourcis IA, fuseaux et votre ville ? Action irréversible.', close: 'Fermer', open: 'Paramètres' , showIp: 'Mon adresse IP sous le pied de page'},
-  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Activado', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', resetSettings: 'Restablecer ajustes', resetData: 'Borrar mis enlaces, accesos de IA y lugares', resetDataConfirm: '¿Borrar tus enlaces propios, accesos de IA, zonas horarias y tu ciudad? No se puede deshacer.', close: 'Cerrar', open: 'Ajustes' , showIp: 'Mi IP debajo del pie'},
-  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '开启', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', resetSettings: '重置设置', resetData: '删除我的链接、AI 快捷方式和地点', resetDataConfirm: '删除你的自定义链接、AI 快捷方式、时区和城市？此操作无法撤销。', close: '关闭', open: '设置' , showIp: '页脚下方的我的 IP 地址'},
+  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'On', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', resetSettings: 'Reset settings', resetData: 'Delete my links, AI shortcuts and places', resetDataConfirm: 'Delete your custom links, AI shortcuts, time zones and your city? This cannot be undone.', close: 'Close', open: 'Settings' },
+  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Aan', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', resetSettings: 'Instellingen resetten', resetData: 'Eigen links, AI-snelkoppelingen en plaatsen wissen', resetDataConfirm: 'Je eigen links, AI-snelkoppelingen, tijdzones en je stad wissen? Dit kan niet ongedaan worden.', close: 'Sluiten', open: 'Instellingen' },
+  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'An', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', resetSettings: 'Einstellungen zurücksetzen', resetData: 'Eigene Links, KI-Verknüpfungen und Orte löschen', resetDataConfirm: 'Deine eigenen Links, KI-Verknüpfungen, Zeitzonen und deine Stadt löschen? Das lässt sich nicht rückgängig machen.', close: 'Schließen', open: 'Einstellungen' },
+  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Activé', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', resetSettings: 'Réinitialiser les réglages', resetData: 'Supprimer mes liens, raccourcis IA et lieux', resetDataConfirm: 'Supprimer vos liens personnels, raccourcis IA, fuseaux et votre ville ? Action irréversible.', close: 'Fermer', open: 'Paramètres' },
+  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Activado', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', resetSettings: 'Restablecer ajustes', resetData: 'Borrar mis enlaces, accesos de IA y lugares', resetDataConfirm: '¿Borrar tus enlaces propios, accesos de IA, zonas horarias y tu ciudad? No se puede deshacer.', close: 'Cerrar', open: 'Ajustes' },
+  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '开启', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', resetSettings: '重置设置', resetData: '删除我的链接、AI 快捷方式和地点', resetDataConfirm: '删除你的自定义链接、AI 快捷方式、时区和城市？此操作无法撤销。', close: '关闭', open: '设置' },
 }
 const forecastText = {
   en: { now: 'Now', hours: 'Next 24 hours', days: 'Next 7 days', feels: 'Feels like', wind: 'Wind', humidity: 'Humidity', more: 'Click for the full forecast', windy: 'Full forecast on Windy', rain: 'Rain' },
@@ -240,7 +263,7 @@ const zonesText = {
   es: { zonesToggle: 'Zonas horarias', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
   zh: { zonesToggle: '时区', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
 }
-const ipPrivacy = {'en': 'Showing your IP address also asks ipapi.co for it.', 'nl': 'Het tonen van je IP-adres vraagt het ook op bij ipapi.co.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie ebenfalls bei ipapi.co abgefragt.', 'fr': 'Afficher votre adresse IP la demande aussi à ipapi.co.', 'es': 'Mostrar tu IP también la pide a ipapi.co.', 'zh': '显示 IP 地址时，同样会向 ipapi.co 查询。'}
+const ipPrivacy = {'en': 'Checking your IP address asks ipapi.co for it.', 'nl': 'Je IP-adres opvragen vraagt het bij ipapi.co.', 'de': 'Zum Abfragen deiner IP-Adresse wird sie bei ipapi.co angefragt.', 'fr': 'Vérifier votre adresse IP la demande à ipapi.co.', 'es': 'Consultar tu IP también la pide a ipapi.co.', 'zh': '查询 IP 地址时，会向 ipapi.co 请求。'}
 const linksText = {
   en: { linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'No links yet.', linkAdd: 'Add link', linkEdit: 'Edit link', lblName: 'Name', lblUrl: 'Address', lblDesc: 'Description (optional)', linkSave: 'Save', linkCancel: 'Cancel', linksFull: 'You can have up to 15 links.', linkInvalid: 'Enter a valid address, for example https://example.com', linkEditBtn: 'Edit', linkRemove: 'Remove' },
   nl: { linksButton: 'Links', linksTitle: 'Links', linksEmpty: 'Nog geen links.', linkAdd: 'Link toevoegen', linkEdit: 'Link bewerken', lblName: 'Naam', lblUrl: 'Adres', lblDesc: 'Beschrijving (optioneel)', linkSave: 'Opslaan', linkCancel: 'Annuleren', linksFull: 'Je kunt maximaal 15 links hebben.', linkInvalid: 'Vul een geldig adres in, bijvoorbeeld https://voorbeeld.nl', linkEditBtn: 'Bewerken', linkRemove: 'Verwijderen' },
@@ -296,6 +319,14 @@ const tintCycleText = {
 const quoteTitleText = {
   en: { quoteAnother: 'Show another quote' }, nl: { quoteAnother: 'Toon een ander citaat' }, de: { quoteAnother: 'Anderes Zitat anzeigen' },
   fr: { quoteAnother: 'Afficher une autre citation' }, es: { quoteAnother: 'Mostrar otra cita' }, zh: { quoteAnother: '换一条名言' }
+}
+const ipText = {
+  en: { ipLast: 'Last requested IP', ipLastLabel: 'Last requested IP', ipNone: 'Not requested yet', ipFailed: 'Could not check', ipWindowTitle: 'IP details', ipFieldIp: 'IP', ipFieldPlace: 'Place', ipFieldRegion: 'Region', ipFieldCountry: 'Country', ipFieldPostal: 'Postcode', ipFieldProvider: 'Provider', ipFieldAsn: 'AS number', ipFieldNetwork: 'Network', ipFieldTimezone: 'Time zone', ipFieldCoords: 'Coordinates', ipFieldAt: 'Requested' },
+  nl: { ipLast: 'Laatst opgevraagd IP', ipLastLabel: 'Laatst opgevraagd IP', ipNone: 'Nog niet opgevraagd', ipFailed: 'Niet kunnen controleren', ipWindowTitle: 'IP-gegevens', ipFieldIp: 'IP-adres', ipFieldPlace: 'Plaats', ipFieldRegion: 'Regio', ipFieldCountry: 'Land', ipFieldPostal: 'Postcode', ipFieldProvider: 'Provider', ipFieldAsn: 'AS-nummer', ipFieldNetwork: 'Netwerk', ipFieldTimezone: 'Tijdzone', ipFieldCoords: 'Coördinaten', ipFieldAt: 'Opgevraagd' },
+  de: { ipLast: 'Zuletzt abgefragte IP', ipLastLabel: 'Zuletzt abgefragte IP', ipNone: 'Noch nicht abgefragt', ipFailed: 'Konnte nicht prüfen', ipWindowTitle: 'IP-Details', ipFieldIp: 'IP-Adresse', ipFieldPlace: 'Ort', ipFieldRegion: 'Region', ipFieldCountry: 'Land', ipFieldPostal: 'Postleitzahl', ipFieldProvider: 'Anbieter', ipFieldAsn: 'AS-Nummer', ipFieldNetwork: 'Netzwerk', ipFieldTimezone: 'Zeitzone', ipFieldCoords: 'Koordinaten', ipFieldAt: 'Abgefragt' },
+  fr: { ipLast: 'Dernière IP demandée', ipLastLabel: 'Dernière IP demandée', ipNone: 'Pas encore demandée', ipFailed: 'Vérification impossible', ipWindowTitle: 'Détails de l’IP', ipFieldIp: 'Adresse IP', ipFieldPlace: 'Lieu', ipFieldRegion: 'Région', ipFieldCountry: 'Pays', ipFieldPostal: 'Code postal', ipFieldProvider: 'Fournisseur', ipFieldAsn: 'Numéro AS', ipFieldNetwork: 'Réseau', ipFieldTimezone: 'Fuseau horaire', ipFieldCoords: 'Coordonnées', ipFieldAt: 'Demandée' },
+  es: { ipLast: 'Última IP consultada', ipLastLabel: 'Última IP consultada', ipNone: 'Aún no consultada', ipFailed: 'No se pudo comprobar', ipWindowTitle: 'Detalles de la IP', ipFieldIp: 'Dirección IP', ipFieldPlace: 'Lugar', ipFieldRegion: 'Región', ipFieldCountry: 'País', ipFieldPostal: 'Código postal', ipFieldProvider: 'Proveedor', ipFieldAsn: 'Número AS', ipFieldNetwork: 'Red', ipFieldTimezone: 'Zona horaria', ipFieldCoords: 'Coordenadas', ipFieldAt: 'Consultada' },
+  zh: { ipLast: '最近查询的 IP', ipLastLabel: '最近查询的 IP', ipNone: '尚未查询', ipFailed: '无法检查', ipWindowTitle: 'IP 详情', ipFieldIp: 'IP 地址', ipFieldPlace: '地点', ipFieldRegion: '地区', ipFieldCountry: '国家', ipFieldPostal: '邮编', ipFieldProvider: '服务商', ipFieldAsn: 'AS 号', ipFieldNetwork: '网络', ipFieldTimezone: '时区', ipFieldCoords: '坐标', ipFieldAt: '查询时间' }
 }
 const wallText = {
   en: { wallShow: 'Show wallpaper', wallHide: 'Hide wallpaper' },
@@ -385,7 +416,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], wallText[lang], quoteTitleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], wallText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -530,7 +561,7 @@ const iconCell = (key, label, className) => {
 // The city you entered wins; otherwise the IP lookup, if you allow it.
 const getPlace = async () => {
   if (locationMode === 'city') return city ? { label: `${city.name}, ${city.country}`, latitude: city.latitude, longitude: city.longitude, ip: null } : null
-  const info = await fetchCached('ipInfo', 10 * 60e3, 'https://ipapi.co/json/')
+  const info = await ipLookup()
   if (typeof info.latitude !== 'number') return null
   return { label: `${info.city}, ${info.country_name}`, latitude: info.latitude, longitude: info.longitude, ip: info.ip, detail: [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ') }
 }
@@ -820,7 +851,10 @@ const applySettingsText = () => {
   document.getElementById('sec-privacy-basic').textContent = t.secPrivacy
   document.getElementById('lbl-loc-ip').textContent = t.locIp
   document.getElementById('lbl-loc-city').textContent = t.locCity
-  document.getElementById('lbl-showip').textContent = t.showIp
+  document.getElementById('lbl-ip-last').textContent = t.ipLastLabel
+  document.getElementById('ip-window-title').textContent = t.ipWindowTitle
+  document.getElementById('ip-window-close').setAttribute('aria-label', t.close)
+  renderIp()
   document.getElementById('lbl-city').textContent = t.cityLabel
   settingsFields.cityInput.placeholder = t.cityPlaceholder
   document.getElementById('city-save').textContent = t.save
@@ -893,8 +927,8 @@ const syncSettings = () => {
   settingsFields.weather.checked = weatherOn
   settingsFields.locIp.checked = locationMode === 'ip'
   settingsFields.locCity.checked = locationMode === 'city'
-  settingsFields.showIp.checked = showIpOn
   settingsFields.quote.checked = quoteOn
+  renderIp()
   settingsFields.greetName.value = greetName
   settingsFields.zones.checked = zonesOn
   settingsFields.wallpaper.checked = wallpaperOn
@@ -968,7 +1002,7 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  const open = [helpWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
+  const open = [helpWindow, ipWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -978,6 +1012,7 @@ document.addEventListener('keydown', (e) => {
   }
   if (e.key === 'Escape') {
     if (open === helpWindow) closeHelp()
+    else if (open === ipWindow) closeIpWindow()
     else if (open === forecastDialog) closeForecast()
     else if (open === manageWindow) closeManage()
     else if (!advancedBlock.hidden) setAdvanced(false)
@@ -1006,19 +1041,6 @@ settingsFields.wallpaperButton.addEventListener('change', () => {
   wallpaperButtonOn = settingsFields.wallpaperButton.checked
   wallpaperToggle.hidden = !wallpaperButtonOn
   writeKey('wallpaperButton', wallpaperButtonOn ? 'on' : 'off')
-})
-
-// Clicking the IP address checks it again now, without waiting for the ten minutes; the weather follows.
-ipLine.addEventListener('click', async () => {
-  await fetchMyIp(true)
-  if (weatherOn && locationMode === 'ip') showWeather()
-})
-
-// Showing the IP address is its own choice, separate from the weather. It asks ipapi.co, the service the IP location uses.
-settingsFields.showIp.addEventListener('change', () => {
-  showIpOn = settingsFields.showIp.checked
-  writeKey('showIp', showIpOn ? 'on' : 'off')
-  fetchMyIp()
 })
 
 // Choosing a location: the IP address or the city. Either one refreshes the weather when it is on.
@@ -1050,12 +1072,12 @@ settingsFields.askai.addEventListener('change', () => {
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
 // IP address are never changed by a preset, since they send data.
 const presets = {
-  minimal: { quote: false, links: true, linksOwn: false, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false, showIp: false },
-  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true, showIp: false },
+  minimal: { quote: false, links: true, linksOwn: false, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false },
+  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true },
 }
 // Weather and the IP display are off in both presets, so choosing one never starts a lookup.
 // Weather is not part of the presets at all.
-const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, showIp: showIpOn })
+const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn })
 // The preset that matches the current choices: only the keys a preset names are compared.
 const matchPreset = () => {
   const now = currentState()
@@ -1141,7 +1163,7 @@ const clearKeys = (keys) => {
 }
 const personalKeys = ['greetName', 'links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState']
 settingsFields.resetSettings.addEventListener('click', () => {
-  clearKeys(['personalState', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
+  clearKeys(['personalState', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
   location.reload()
 })
 settingsFields.resetData.addEventListener('click', () => {
@@ -1152,7 +1174,7 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
+const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
@@ -1730,7 +1752,7 @@ renderAskAi()
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
 updateWeatherHint()
-fetchMyIp()
+renderIp()
 if (weatherOn) weatherButton.textContent = t.loading
 else showIdle()
 if (weatherOn) showWeather()

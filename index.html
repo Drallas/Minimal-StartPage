@@ -60,7 +60,7 @@
       <button type="button" id="wallpaper-toggle" aria-label="Hide wallpaper" title="Hide wallpaper" aria-pressed="true"><span></span><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></button>
     </div>
 
-    <footer><a href="https://github.com/Drallas/Minimal-StartPage#readme" id="foot-link" title="View the README on GitHub"><span id="foot-pre">Vibe coded with</span> <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg> <span id="foot-post">by Allards</span></a><button type="button" class="ip" id="ip" hidden></button></footer>
+    <footer><a href="https://github.com/Drallas/Minimal-StartPage#readme" id="foot-link" title="View the README on GitHub"><span id="foot-pre">Vibe coded with</span> <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg> <span id="foot-post">by Allards</span></a></footer>
   </div>
   <div class="settings" id="settings" hidden>
     <div class="settings-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="settings-title">
@@ -124,7 +124,11 @@
         </section>
         <section class="adv-group">
           <p class="location-title" id="sec-privacy">Privacy</p>
-          <label class="setting"><input type="checkbox" id="set-showip"> <span id="lbl-showip">My IP address under the footer</span></label>
+          <div class="ip-row">
+            <span id="lbl-ip-last" class="ip-label">Last requested IP</span>
+            <button type="button" class="ip-value" id="ip-value"></button>
+            <button type="button" id="ip-details" class="text-button" hidden>Details</button>
+          </div>
         </section>
         <div class="reset-row">
           <button type="button" id="reset-settings" class="text-button">Reset settings</button>
@@ -209,6 +213,15 @@
           <button type="button" id="import-data" class="text-button">Import data</button>
           <input type="file" id="import-file" accept="application/json,.json" hidden>
       </div>
+    </div>
+  </div>
+  <div class="settings" id="ip-window" hidden>
+    <div class="settings-panel ip-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="ip-window-title">
+      <div class="settings-head">
+        <h2 id="ip-window-title">IP details</h2>
+        <button type="button" id="ip-window-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <dl class="ip-list" id="ip-list"></dl>
     </div>
   </div>
   <div class="settings" id="forecast" hidden>

@@ -268,23 +268,6 @@ footer a:focus-visible svg {
   color: #d64545;
 }
 
-/* Your IP address, just under the footer line. */
-.ip {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin-top: 2px;
-  font-size: 7px;
-  letter-spacing: .04em;
-  opacity: .55;
-  white-space: nowrap;
-}
-
-.ip[hidden] {
-  display: none;
-}
-
 /* Weather, centred in the top bar. The details show on hover, focus or a click. */
 /* Centred on the page itself, not between the two icons, which differ in width. */
 .weather {
@@ -1694,14 +1677,53 @@ html[data-quote-off] #quote {
   padding: 6px 0;
 }
 
-/* The IP line is a button: a click checks the address again. */
-.ip {
+/* Last requested IP: the value is a button, a click checks the address again. */
+.ip-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.ip-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.ip-value {
   padding: 0;
-  line-height: 1;
+  border: 0;
+  background: none;
   color: inherit;
-  font-family: inherit;
-  letter-spacing: inherit;
+  font: inherit;
+  text-align: right;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
   cursor: pointer;
+}
+
+#ip-details[hidden] {
+  display: none;
+}
+
+.ip-panel {
+  max-width: 460px;
+}
+
+.ip-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  margin: 0;
+}
+
+.ip-list dt {
+  opacity: .6;
+}
+
+.ip-list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
 
