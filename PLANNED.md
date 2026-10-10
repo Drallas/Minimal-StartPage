@@ -107,6 +107,8 @@ Changes to make:
 
 ## Permanent links: built
 
+Nine in the row: Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub and Reuters. Microsoft and Reuters are shown by name. More can be added later if the row has room.
+
 Wikipedia, Google, Apple, Facebook, X, Instagram and Deutsche Welle are in the row, with logos from Simple Icons. Reuters and the BBC have no logo in that set, so Deutsche Welle was chosen as the news link. A generic news icon could replace it later.
 
 ## Permanent links: earlier candidates

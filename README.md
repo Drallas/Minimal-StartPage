@@ -78,7 +78,7 @@ If you are comfortable editing text files, you can change the page yourself. Use
 
 The wallpapers are photos from [Unsplash](https://unsplash.com), used under the Unsplash License.
 
-The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon and the logos of the permanent links (Google, Apple, Facebook, X and Instagram) come from [Simple Icons](https://simpleicons.org) (CC0). The Wikipedia globe is drawn for this page and is not the official logo; Reuters is shown by its name. The logos are trademarks of their owners. The logos are trademarks of their owners.
+The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon and the logos of the permanent links (Wikipedia, Google, Apple, Facebook, X, Instagram and GitHub) come from [Simple Icons](https://simpleicons.org) (CC0). Microsoft and Reuters are shown by their names, since their logos are not in the open icon set. The logos are trademarks of their owners. The logos are trademarks of their owners.
 
 ## License
 
