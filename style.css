@@ -846,7 +846,8 @@ html[data-wallpaper-on] .controls {
   gap: 8px;
 }
 
-#city-input {
+#city-input,
+#zone-input {
   flex: 1;
   min-width: 0;
   height: 36px;
@@ -858,7 +859,8 @@ html[data-wallpaper-on] .controls {
   font: inherit;
 }
 
-#city-save {
+#city-save,
+#zone-add-btn {
   height: 36px;
   padding: 0 14px;
   border: 1px solid var(--color-border);
@@ -988,4 +990,63 @@ html[data-quote-off] #quote {
 .weather button.idle:hover,
 .weather button.idle:focus-visible {
   opacity: 1;
+}
+
+/* Time zones: a small globe after the date, and a window with the chosen zones. */
+.zones-button {
+  display: flex;
+  margin: 2px auto 0;
+  padding: 4px;
+  color: var(--color-fg-2);
+  opacity: .6;
+  transition: opacity .2s ease-in-out, color .2s ease-in-out;
+}
+
+.zones-button:hover,
+.zones-button:focus-visible {
+  color: var(--color-fg-1);
+  opacity: 1;
+}
+
+.zones-button[hidden] {
+  display: none;
+}
+
+.zones-panel {
+  width: min(100%, 420px);
+}
+
+.zones-local,
+.zones-empty {
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.zone-row {
+  display: grid;
+  grid-template-columns: 1.4fr auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-variant-numeric: tabular-nums;
+}
+
+.zone-day {
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.zone-remove {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--color-fg-2);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.zone-remove:hover,
+.zone-remove:focus-visible {
+  color: var(--color-fg-1);
 }

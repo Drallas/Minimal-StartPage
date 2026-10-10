@@ -56,4 +56,4 @@ Changes to make:
 - The city name comes from the zone name ("Europe/Amsterdam" → "Amsterdam"), which is good enough for a start page.
 - The canvas can show the same list, because it needs no network, so this one can be mirrored later.
 
-**Open question:** should the zone list be a hover-only detail (like the weather preview), or should the globe icon always be visible?
+**Decided and built:** optional, switched on in the settings. A small globe next to the date opens a window with up to three extra zones, which the visitor chooses there. Nothing changes on the time or the date.

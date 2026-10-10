@@ -135,6 +135,7 @@ const settingsFields = {
   ip: document.getElementById('set-ip'),
   showIp: document.getElementById('set-showip'),
   quote: document.getElementById('set-quote'),
+  zones: document.getElementById('set-zones'),
   cityForm: document.getElementById('city-form'),
   cityInput: document.getElementById('city-input'),
   cityClear: document.getElementById('city-clear'),
@@ -186,7 +187,15 @@ const forecastText = {
   zh: { now: '现在', hours: '未来 24 小时', days: '未来 7 天', feels: '体感', wind: '风', humidity: '湿度', more: '点击查看完整预报', windy: '在 Windy 查看完整预报', rain: '降水' },
 }
 const hourHeads = { en: ['Time', 'Temp', 'Rain', 'Wind'], nl: ['Tijd', 'Temp', 'Regen', 'Wind'], de: ['Zeit', 'Temp.', 'Regen', 'Wind'], fr: ['Heure', 'Temp.', 'Pluie', 'Vent'], es: ['Hora', 'Temp.', 'Lluvia', 'Viento'], zh: ['时间', '气温', '降水', '风'] }
-for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] })
+const zonesText = {
+  en: { zonesToggle: 'Show time zones (globe next to the date)', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to three)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to three.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
+  nl: { zonesToggle: 'Wereldklok tonen (bolletje naast de datum)', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal drie)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal drie tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
+  de: { zonesToggle: 'Zeitzonen anzeigen (Kugel neben dem Datum)', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu drei)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens drei anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
+  fr: { zonesToggle: 'Afficher les fuseaux horaires (globe à côté de la date)', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (trois maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher trois au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
+  es: { zonesToggle: 'Mostrar zonas horarias (globo junto a la fecha)', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo tres)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta tres.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
+  zh: { zonesToggle: '显示时区（日期旁的地球图标）', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多三个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示三个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang])
 const t = text[uiLang] || text.en
 const words = weatherWords[uiLang] || weatherWords.en
 
@@ -442,6 +451,13 @@ const applySettingsText = () => {
   document.getElementById('city-save').textContent = t.save
   settingsFields.cityClear.textContent = t.clearCity
   document.getElementById('lbl-quote').textContent = t.quote
+  document.getElementById('lbl-zones').textContent = t.zonesToggle
+  document.getElementById('zones-title').textContent = t.zonesTitle
+  document.getElementById('zone-label').textContent = t.zonesAdd
+  document.getElementById('zone-add-btn').textContent = t.zoneAddBtn
+  document.getElementById('zones-close').setAttribute('aria-label', t.close)
+  zonesButton.setAttribute('aria-label', t.zonesButton)
+  zonesButton.title = t.zonesButton
   document.getElementById('privacy').textContent = t.privacy
   settingsFields.reset.textContent = t.reset
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
@@ -455,6 +471,7 @@ const syncSettings = () => {
   settingsFields.ip.checked = ipLookupOn
   settingsFields.showIp.checked = showIpOn
   settingsFields.quote.checked = quoteOn
+  settingsFields.zones.checked = zonesOn
   settingsFields.cityClear.hidden = !city
   settingsFields.cityMessage.textContent = ''
 }
@@ -476,7 +493,8 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  const open = !forecastDialog.hidden ? forecastDialog : (!settings.hidden ? settings : null)
+  const zonesWindow = document.getElementById('zones')
+  const open = [forecastDialog, zonesWindow, settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -486,6 +504,7 @@ document.addEventListener('keydown', (e) => {
   }
   if (e.key === 'Escape') {
     if (open === forecastDialog) closeForecast()
+    else if (open === zonesWindow) closeZones()
     else closeSettings()
     return
   }
@@ -511,6 +530,13 @@ settingsFields.ip.addEventListener('change', () => {
   ipLookupOn = settingsFields.ip.checked
   writeKey('ipLookup', ipLookupOn ? 'on' : 'off')
   if (weatherOn) showWeather()
+})
+
+settingsFields.zones.addEventListener('change', () => {
+  zonesOn = settingsFields.zones.checked
+  writeKey('timeZones', zonesOn ? 'on' : 'off')
+  applyZonesVisibility()
+  if (!zonesOn && !zonesDialog.hidden) closeZones()
 })
 
 settingsFields.quote.addEventListener('change', () => {
@@ -550,12 +576,108 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'ipLookup', 'showIp', 'quote', 'city', 'ipInfo']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'ipLookup', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
   location.reload()
 })
+
+// Time zones: optional. A small globe next to the date opens a window with up to three extra zones.
+const zonesButton = document.getElementById('zones-button')
+const zonesDialog = document.getElementById('zones')
+const zonesList = document.getElementById('zones-list')
+const zoneInput = document.getElementById('zone-input')
+const zoneMsg = document.getElementById('zone-msg')
+const zoneOptions = document.getElementById('zone-options')
+const zoneAddButton = document.getElementById('zone-add-btn')
+const zonesLocalLine = document.getElementById('zones-local')
+let zonesOn = readFlag('timeZones', false)
+const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+const zoneNames = (() => {
+  try { return Intl.supportedValuesOf('timeZone') } catch { return ['Europe/Amsterdam', 'Europe/London', 'America/New_York', 'America/Los_Angeles', 'Asia/Tokyo', 'Australia/Sydney'] }
+})()
+let zones = []
+try { zones = (JSON.parse(localStorage.getItem('zones') || '[]') || []).filter((z) => zoneNames.includes(z)).slice(0, 3) } catch {}
+
+const cityOf = (zone) => zone.split('/').pop().replace(/_/g, ' ')
+const zoneClock = (zone, now) => now.toLocaleTimeString(clockMode === '12' ? 'en-US' : 'en-GB', { timeZone: zone, hour: '2-digit', minute: '2-digit', hour12: clockMode === '12' })
+// Whole days between the local date and the date in the other zone, read from calendar dates.
+const dayDifference = (zone, now) => {
+  const ymd = (tz) => new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(now)
+  return Math.round((Date.parse(ymd(zone)) - Date.parse(ymd(localZone))) / 864e5)
+}
+const dayWord = (diff) => (diff === 0 ? '' : new Intl.RelativeTimeFormat(uiLang, { numeric: 'auto' }).format(diff, 'day'))
+
+const renderZones = () => {
+  const now = new Date()
+  zonesLocalLine.textContent = `${t.zonesLocal}: ${cityOf(localZone)} ${zoneClock(localZone, now)}`
+  const rows = zones.map((zone) => {
+    const row = el('div', 'zone-row')
+    const remove = Object.assign(document.createElement('button'), { type: 'button', className: 'zone-remove', textContent: '×' })
+    remove.setAttribute('aria-label', `${t.remove} ${cityOf(zone)}`)
+    remove.dataset.zone = zone
+    row.append(el('span', '', cityOf(zone)), el('span', '', zoneClock(zone, now)), el('span', 'zone-day', dayWord(dayDifference(zone, now))), remove)
+    return row
+  })
+  zonesList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.zonesEmpty)]))
+  const full = zones.length >= 3
+  zoneInput.disabled = full
+  zoneAddButton.disabled = full
+  zoneMsg.textContent = full ? t.zonesMax : ''
+}
+
+const saveZones = () => writeKey('zones', JSON.stringify(zones))
+
+const openZones = () => {
+  zonesFrom = document.activeElement
+  renderZones()
+  zonesDialog.hidden = false
+  document.getElementById('zones-close').focus()
+}
+
+let zonesFrom = null
+const closeZones = () => {
+  zonesDialog.hidden = true
+  if (zonesFrom && zonesFrom.focus) zonesFrom.focus()
+}
+
+zonesButton.addEventListener('click', openZones)
+document.getElementById('zones-close').addEventListener('click', closeZones)
+zonesDialog.addEventListener('click', (e) => { if (e.target === zonesDialog) closeZones() })
+zonesList.addEventListener('click', (e) => {
+  if (!e.target.dataset.zone) return
+  zones = zones.filter((z) => z !== e.target.dataset.zone)
+  saveZones()
+  renderZones()
+})
+
+document.getElementById('zone-form').addEventListener('submit', (e) => {
+  e.preventDefault()
+  const typed = zoneInput.value.trim().toLowerCase()
+  if (!typed) return
+  const match = zoneNames.find((z) => z.toLowerCase() === typed.replace(/ /g, '_')) ||
+    zoneNames.find((z) => cityOf(z).toLowerCase() === typed)
+  if (!match) {
+    zoneMsg.textContent = t.zoneNotFound
+    return
+  }
+  if (zones.includes(match)) {
+    zoneMsg.textContent = t.zoneDuplicate
+    return
+  }
+  zones = [...zones, match]
+  saveZones()
+  zoneInput.value = ''
+  renderZones()
+})
+
+zoneOptions.replaceChildren(...zoneNames.map((z) => Object.assign(document.createElement('option'), { value: cityOf(z) })))
+
+const applyZonesVisibility = () => { zonesButton.hidden = !zonesOn }
+applyZonesVisibility()
+// The window ticks along with the clock while it is open.
+setInterval(() => { if (!zonesDialog.hidden) renderZones() }, 1000)
 
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()

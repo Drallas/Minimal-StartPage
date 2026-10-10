@@ -34,7 +34,7 @@
     </header>
 
     <main id="main">
-      <div id="clock"><time id="time" title="Click to cycle through 24-hour, 12-hour and full time"></time><span id="date"></span></div>
+      <div id="clock"><time id="time" title="Click to cycle through 24-hour, 12-hour and full time"></time><span id="date"></span><button type="button" id="zones-button" class="zones-button" hidden><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></button></div>
       <form id="searchform" class="searchbar" role="search" title="Type a search and press Enter">
         <label for="search" class="sr-only">Search the web</label>
         <input id="search" type="text" autocomplete="off">
@@ -82,6 +82,7 @@
         <p class="city-msg" id="city-msg" role="status"></p>
       </form>
       <label class="setting"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Show the quote</span></label>
+      <label class="setting"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Show time zones (globe next to the date)</span></label>
       <p class="privacy" id="privacy"></p>
       <button type="button" id="reset-all" class="text-button">Reset all choices</button>
     </div>
@@ -95,6 +96,25 @@
       </div>
       <div id="forecast-body"></div>
       <a class="forecast-link" id="forecast-link" href="https://www.windy.com/" target="_blank" rel="noopener"></a>
+    </div>
+  </div>
+  <div class="settings" id="zones" hidden>
+    <div class="settings-panel zones-panel" role="dialog" aria-modal="true" aria-labelledby="zones-title">
+      <div class="settings-head">
+        <h2 id="zones-title">Time zones</h2>
+        <button type="button" id="zones-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <p class="zones-local" id="zones-local"></p>
+      <div id="zones-list"></div>
+      <form class="city-form" id="zone-form">
+        <label for="zone-input" id="zone-label">Add a time zone (up to three)</label>
+        <div class="city-row">
+          <input type="text" id="zone-input" list="zone-options" autocomplete="off">
+          <button type="submit" id="zone-add-btn">Add</button>
+        </div>
+        <datalist id="zone-options"></datalist>
+        <p class="city-msg" id="zone-msg" role="status"></p>
+      </form>
     </div>
   </div>
   <script src="quotes.js"></script>
