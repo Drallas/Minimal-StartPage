@@ -383,19 +383,19 @@ html[data-wallpaper-on] .blob {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  opacity: .45;
+  opacity: .25;
   transition: opacity .3s ease-in-out;
 }
 
 .controls:hover,
 .controls:focus-within {
-  opacity: 1;
+  opacity: .8;
 }
 
 .hue {
   -webkit-appearance: none;
   appearance: none;
-  width: 96px;
+  width: 72px;
   height: 16px;
   margin: 0;
   background: transparent;
@@ -405,15 +405,15 @@ html[data-wallpaper-on] .blob {
 
 .hue::-webkit-slider-runnable-track {
   height: 2px;
-  background: linear-gradient(to right, hsl(0 30% 60%), hsl(60 30% 60%), hsl(120 30% 60%), hsl(180 30% 60%), hsl(240 30% 60%), hsl(300 30% 60%), hsl(360 30% 60%));
+  background: linear-gradient(to right, hsl(0 12% 60%), hsl(60 12% 60%), hsl(120 12% 60%), hsl(180 12% 60%), hsl(240 12% 60%), hsl(300 12% 60%), hsl(360 12% 60%));
   border-radius: 1px;
 }
 
 .hue::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 10px;
-  height: 10px;
-  margin-top: -4px;
+  width: 8px;
+  height: 8px;
+  margin-top: -3px;
   border-radius: 50%;
   background: var(--color-fg-2);
   border: none;
@@ -421,12 +421,12 @@ html[data-wallpaper-on] .blob {
 
 .hue::-moz-range-track {
   height: 2px;
-  background: linear-gradient(to right, hsl(0 30% 60%), hsl(60 30% 60%), hsl(120 30% 60%), hsl(180 30% 60%), hsl(240 30% 60%), hsl(300 30% 60%), hsl(360 30% 60%));
+  background: linear-gradient(to right, hsl(0 12% 60%), hsl(60 12% 60%), hsl(120 12% 60%), hsl(180 12% 60%), hsl(240 12% 60%), hsl(300 12% 60%), hsl(360 12% 60%));
 }
 
 .hue::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border: none;
   border-radius: 50%;
   background: var(--color-fg-2);
@@ -439,8 +439,8 @@ html[data-wallpaper-on] .blob {
 }
 
 .wallpapers button {
-  width: 22px;
-  height: 22px;
+  width: 14px;
+  height: 14px;
   padding: 0;
   border-radius: 50%;
   overflow: hidden;
@@ -449,8 +449,7 @@ html[data-wallpaper-on] .blob {
 }
 
 .wallpapers button[aria-pressed="true"] {
-  outline: 1px solid var(--color-fg-2);
-  outline-offset: 2px;
+  border-color: var(--color-fg-2);
 }
 
 .wallpapers span {
