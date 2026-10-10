@@ -53,7 +53,9 @@ button {
 #container {
   position: relative;
   height: 100vh;
+  height: 100svh;
   min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
 }
 
@@ -647,13 +649,14 @@ html[data-wallpaper-on] .modes button {
 
 /* Phones: lift the controls above the browser's bottom bar and enlarge their touch area. */
 @media (max-width: 600px) {
+  /* As close to the bottom edge as the browser allows: the safe area on iPhone, and the small toolbar. */
   .controls {
-    bottom: 104px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   }
 
   /* Phones: footer and controls move above the browser's bottom bar, and stay on one line. */
   footer {
-    bottom: 104px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   }
 
   .controls button {
