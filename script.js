@@ -196,6 +196,8 @@ const updateIpLine = () => {
   ipLine.textContent = visible ? `${t.ip}: ${lastIp}` : ''
   ipLine.title = visible ? `${lastInfo} · ${t.ipRecheck}` : ''
   ipLine.hidden = !visible
+  // The IP line adds a row under the footer, so the footer and the controls move up with it on phones.
+  root.toggleAttribute('data-ip-line', visible)
 }
 let city = null
 try { city = JSON.parse(localStorage.getItem('city') || 'null') } catch {}

@@ -655,6 +655,12 @@ html[data-wallpaper-on] .modes button {
     bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   }
 
+  /* With the IP line showing, the footer and the controls move up by one line. */
+  html[data-ip-line] .controls,
+  html[data-ip-line] footer {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);
+  }
+
   /* Phones: footer and controls move above the browser's bottom bar, and stay on one line. */
   footer {
     bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
