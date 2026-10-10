@@ -149,8 +149,8 @@ const readFlag = (key, fallback) => {
 const writeKey = (key, value) => { try { localStorage.setItem(key, value) } catch {} }
 
 let weatherOn = readFlag('weather', false)
-let ipLookupOn = readFlag('ipLookup', true)
-let quoteOn = readFlag('quote', true)
+let ipLookupOn = readFlag('ipLookup', false)
+let quoteOn = readFlag('quote', false)
 let showIpOn = readFlag('showIp', false)
 let lastIp = null
 // The IP address line under the footer: only when we have one and it is wanted.
