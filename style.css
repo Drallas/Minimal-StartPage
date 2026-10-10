@@ -757,6 +757,69 @@ html[data-wallpaper-on] .modes button {
   display: none;
 }
 
+/* The two icon buttons: a colour button on the left and a background button on the right. Desktop keeps
+   the slider and the wallpaper thumbnail, so the icons only show on phones. */
+.controls .tint-cycle,
+#wallpaper-toggle .glyph {
+  display: none;
+}
+
+.glyph {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.glyph .dot {
+  fill: var(--dot, var(--color-fg-2));
+  stroke: none;
+}
+
+.controls .tint-cycle[hidden] {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .hue {
+    display: none;
+  }
+
+  /* The colour button stays on the left; the background button stays on the right. */
+  .controls .tint-cycle {
+    margin-left: 0;
+  }
+
+  .controls .tint-cycle,
+  .controls #wallpaper-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-fg-2);
+    background: none;
+  }
+
+  .controls #wallpaper-toggle span {
+    display: none;
+  }
+
+  .controls #wallpaper-toggle .glyph {
+    display: block;
+  }
+
+  .controls #wallpaper-toggle[aria-pressed="false"] {
+    opacity: .45;
+  }
+}
+
 /* Minimal links: the preview is off, so it stays hidden even on hover. */
 .links-preview[hidden] {
   display: none !important;

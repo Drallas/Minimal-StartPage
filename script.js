@@ -135,6 +135,9 @@ const weatherDetail = document.getElementById('weather-detail')
 const ipLine = document.getElementById('ip')
 const settingsButton = document.getElementById('settings-button')
 const settings = document.getElementById('settings')
+// On a phone the slider is replaced by a button that steps through a few colours, so a tap is enough.
+const tintCycle = document.getElementById('tint-cycle')
+const TINT_STEPS = [0, 210, 40, 140, 340, 270]
 const settingsFields = {
   weather: document.getElementById('set-weather'),
   locIp: document.getElementById('loc-ip'),
@@ -286,6 +289,10 @@ const dataText = {
   es: { exportData: 'Exportar datos', importData: 'Importar datos', importInvalid: 'Este archivo no es una exportación de Minimal-StartPage.', importConfirm: '¿Sustituir tus ajustes y datos actuales por los de este archivo?' },
   zh: { exportData: '导出数据', importData: '导入数据', importInvalid: '此文件不是 Minimal-StartPage 的导出文件。', importConfirm: '用此文件中的设置和数据替换当前的设置和数据？' }
 }
+const tintCycleText = {
+  en: { tintCycle: 'Change colour' }, nl: { tintCycle: 'Kleur wisselen' }, de: { tintCycle: 'Farbe wechseln' },
+  fr: { tintCycle: 'Changer la couleur' }, es: { tintCycle: 'Cambiar el color' }, zh: { tintCycle: '切换颜色' }
+}
 const greetText = {
   en: { greetLabel: 'Name in the greeting' },
   nl: { greetLabel: 'Naam in de begroeting' },
@@ -366,7 +373,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], tintCycleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -831,6 +838,8 @@ const applySettingsText = () => {
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
   document.getElementById('lbl-greet').textContent = t.greetLabel
+  tintCycle.setAttribute('aria-label', t.tintCycle)
+  tintCycle.title = t.tintCycle
   const foot = footerText[uiLang] || footerText.en
   document.getElementById('foot-pre').textContent = foot.pre
   document.getElementById('foot-post').textContent = foot.post
@@ -1808,6 +1817,8 @@ const applyHue = (value) => {
   const hue = Number(value)
   hueSlider.value = hue
   hueSlider.hidden = !tintOn
+  tintCycle.hidden = !tintOn
+  tintCycle.style.setProperty('--dot', hue > 0 && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)')
   if (hue > 0 && tintOn) {
     root.dataset.tint = ''
     root.style.setProperty('--hue', hue)
@@ -1818,6 +1829,12 @@ const applyHue = (value) => {
 }
 
 try { applyHue(localStorage.getItem('hue') || 0) } catch { applyHue(0) }
+tintCycle.addEventListener('click', () => {
+  const index = Math.max(TINT_STEPS.indexOf(Number(hueSlider.value)), 0)
+  const next = TINT_STEPS[(index + 1) % TINT_STEPS.length]
+  applyHue(next)
+  try { localStorage.setItem('hue', String(next)) } catch {}
+})
 
 // Settings: the tint on or off. The chosen hue is kept for when it is switched back on.
 settingsFields.tint.addEventListener('change', () => {
