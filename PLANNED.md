@@ -57,3 +57,45 @@ Changes to make:
 - The canvas can show the same list, because it needs no network, so this one can be mirrored later.
 
 **Decided and built:** optional, switched on in the settings. A small globe next to the date opens a window with up to five extra zones, which the visitor chooses there. Nothing changes on the time or the date.
+
+## Weather icons in the pop-ups
+
+**Problem:** the weather status is only text in the hover preview and the full forecast. Only the top bar has an icon.
+
+**Plan:** add the same small outline icon, in the same colours, to:
+
+- the "now" line of the hover preview and of the full forecast (next to the word, e.g. rain);
+- each hourly row of the preview and of the full forecast (the hourly weather code is already requested);
+- each day row of the full forecast (already requested, now shown as an icon too).
+
+**Points to watch:** the rows must stay aligned and readable at phone width. Colour only on hover in the preview, as in the top bar; the full forecast can keep colour, since it is a deliberate view.
+
+## Custom links
+
+**Idea:** replace the Wikipedia icon in the top left with a links button. The first entry is the local Wikipedia, as now. The visitor can add up to five more.
+
+**Look:** the button shows a small dot or count when there is at least one link, so it reads as "there are links" without text.
+
+**Hover:** a small window with the links, the way the weather preview works.
+
+**Click:** a window in the centre, like the full forecast. Each link shows its title, its address, and an optional short description. The window has add, edit and remove, and a link to reset the defaults.
+
+**Rules:**
+- Only `https://` and `http://` addresses are accepted. `javascript:` and similar are refused.
+- Links open in a new tab, with `rel="noopener"`.
+- The list is stored in the browser only; nothing is sent anywhere.
+- The Wikipedia default can be edited or removed like any other link; "Reset all choices" brings it back.
+
+**Points to watch:** the link list grows the settings and the window, so keep the window simple. Descriptions are optional and short (for example 80 characters).
+
+## Suggested order
+
+1. Weather icons in the pop-ups (small, self-contained).
+2. Custom links, with the default Wikipedia entry.
+3. Canvas: the links can be mirrored later, since they need no network.
+
+## Questions to settle before building
+
+- Is five extra links enough, or should it be a longer list?
+- Should the description be optional or required?
+- Should the Wikipedia default be removable?
