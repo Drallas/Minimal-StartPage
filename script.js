@@ -153,7 +153,8 @@ const settingsFields = {
   cityInput: document.getElementById('city-input'),
   cityClear: document.getElementById('city-clear'),
   cityMessage: document.getElementById('city-msg'),
-  reset: document.getElementById('reset-all'),
+  resetSettings: document.getElementById('reset-settings'),
+  resetData: document.getElementById('reset-data'),
 }
 
 const readFlag = (key, fallback) => {
@@ -211,12 +212,12 @@ const weatherWords = {
   zh: { clear: '晴', mostly: '大部晴朗', partly: '局部多云', cloudy: '多云', fog: '雾', drizzle: '毛毛雨', rain: '雨', heavyRain: '大雨', snow: '雪', heavySnow: '大雪', showers: '阵雨', heavyShowers: '强阵雨', storm: '雷暴' },
 }
 const text = {
-  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'On', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', reset: 'Reset all choices', close: 'Close', open: 'Settings' , showIp: 'My IP address under the footer'},
-  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Aan', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', reset: 'Alle keuzes resetten', close: 'Sluiten', open: 'Instellingen' , showIp: 'Mijn IP-adres onder de footer'},
-  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'An', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', reset: 'Alle Einstellungen zurücksetzen', close: 'Schließen', open: 'Einstellungen' , showIp: 'Meine IP-Adresse unter der Fußzeile'},
-  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Activé', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', reset: 'Réinitialiser tous les choix', close: 'Fermer', open: 'Paramètres' , showIp: 'Mon adresse IP sous le pied de page'},
-  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Activado', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes' , showIp: 'Mi IP debajo del pie'},
-  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '开启', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置' , showIp: '页脚下方的我的 IP 地址'},
+  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'On', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', resetSettings: 'Reset settings', resetData: 'Delete my links, AI shortcuts and places', resetDataConfirm: 'Delete your custom links, AI shortcuts, time zones and your city? This cannot be undone.', close: 'Close', open: 'Settings' , showIp: 'My IP address under the footer'},
+  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Aan', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', resetSettings: 'Instellingen resetten', resetData: 'Eigen links, AI-snelkoppelingen en plaatsen wissen', resetDataConfirm: 'Je eigen links, AI-snelkoppelingen, tijdzones en je stad wissen? Dit kan niet ongedaan worden.', close: 'Sluiten', open: 'Instellingen' , showIp: 'Mijn IP-adres onder de footer'},
+  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'An', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', resetSettings: 'Einstellungen zurücksetzen', resetData: 'Eigene Links, KI-Verknüpfungen und Orte löschen', resetDataConfirm: 'Deine eigenen Links, KI-Verknüpfungen, Zeitzonen und deine Stadt löschen? Das lässt sich nicht rückgängig machen.', close: 'Schließen', open: 'Einstellungen' , showIp: 'Meine IP-Adresse unter der Fußzeile'},
+  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Activé', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', resetSettings: 'Réinitialiser les réglages', resetData: 'Supprimer mes liens, raccourcis IA et lieux', resetDataConfirm: 'Supprimer vos liens personnels, raccourcis IA, fuseaux et votre ville ? Action irréversible.', close: 'Fermer', open: 'Paramètres' , showIp: 'Mon adresse IP sous le pied de page'},
+  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Activado', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', resetSettings: 'Restablecer ajustes', resetData: 'Borrar mis enlaces, accesos de IA y lugares', resetDataConfirm: '¿Borrar tus enlaces propios, accesos de IA, zonas horarias y tu ciudad? No se puede deshacer.', close: 'Cerrar', open: 'Ajustes' , showIp: 'Mi IP debajo del pie'},
+  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '开启', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', resetSettings: '重置设置', resetData: '删除我的链接、AI 快捷方式和地点', resetDataConfirm: '删除你的自定义链接、AI 快捷方式、时区和城市？此操作无法撤销。', close: '关闭', open: '设置' , showIp: '页脚下方的我的 IP 地址'},
 }
 const forecastText = {
   en: { now: 'Now', hours: 'Next 24 hours', days: 'Next 7 days', feels: 'Feels like', wind: 'Wind', humidity: 'Humidity', more: 'Click for the full forecast', windy: 'Full forecast on Windy', rain: 'Rain' },
@@ -352,7 +353,7 @@ const helpText = {
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 24 hours and seven days.'],
     ['Background', 'The round button at the bottom right turns the wallpaper on or off. The slider at the bottom left tints the background.'],
     ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal and Standard) sit at the top of the settings. Personal shows when your choices match neither. Advanced lists every option in four groups; its link goes back to the basic settings.'],
-    ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset all choices" clears everything and brings back the defaults.'],
+    ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset settings" brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and nothing else.'],
   ] },
   nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', sections: [
     ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden.'],
@@ -362,7 +363,7 @@ const helpText = {
     ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 24 uur en zeven dagen.'],
     ['Achtergrond', 'De ronde knop rechtsonder zet de wallpaper aan of uit. De schuif linksonder kleurt de achtergrond.'],
     ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal en Standaard. Persoonlijk verschijnt als je keuzes bij geen van beide passen. Geavanceerd toont alle opties in vier groepen; de link ernaast brengt je terug naar de basisinstellingen.'],
-    ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Alle keuzes resetten" wist alles en zet de standaard terug.'],
+    ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Instellingen resetten" zet de standaard terug. "Eigen links, AI-snelkoppelingen en plaatsen wissen" verwijdert alleen je eigen links, AI-snelkoppelingen, tijdzones en je stad.'],
   ] },
   de: { title: 'Hilfe', settings: 'Einstellungen', close: 'Schließen', sections: [
     ['Suche', 'Tippe und drücke Enter, oder klicke auf die Lupe. Das Symbol links zeigt die Suchmaschine: Klick darauf, um zwischen DuckDuckGo (Standard), Kagi, Brave und Google zu wechseln. Deine Wahl wird gespeichert.'],
@@ -372,7 +373,7 @@ const helpText = {
     ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 24 Stunden und sieben Tagen.'],
     ['Hintergrund', 'Die runde Schaltfläche unten rechts schaltet das Hintergrundbild ein oder aus. Der Regler unten links färbt den Hintergrund.'],
     ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal und Standard. Persönlich erscheint, wenn deine Auswahl zu keiner passt. Erweitert zeigt alle Optionen in vier Gruppen; der Link führt zurück zu den Grundeinstellungen.'],
-    ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Alle Einstellungen zurücksetzen“ löscht alles und stellt die Standards wieder her.'],
+    ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Einstellungen zurücksetzen“ stellt die Standards wieder her. „Eigene Links, KI-Verknüpfungen und Orte löschen“ entfernt nur deine eigenen Links, KI-Verknüpfungen, Zeitzonen und deine Stadt.'],
   ] },
   fr: { title: 'Aide', settings: 'Paramètres', close: 'Fermer', sections: [
     ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé.'],
@@ -382,7 +383,7 @@ const helpText = {
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 24 heures et sept jours.'],
     ['Fond', 'Le bouton rond en bas à droite active ou désactive le fond d’écran. Le curseur en bas à gauche teinte le fond.'],
     ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal et Standard. Personnalisé s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options en quatre groupes ; le lien ramène aux réglages de base.'],
-    ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser tous les choix » efface tout et rétablit les valeurs par défaut.'],
+    ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser les réglages » rétablit les valeurs par défaut. « Supprimer mes liens, raccourcis IA et lieux » retire seulement vos liens personnels, raccourcis IA, fuseaux et votre ville.'],
   ] },
   es: { title: 'Ayuda', settings: 'Ajustes', close: 'Cerrar', sections: [
     ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda.'],
@@ -392,7 +393,7 @@ const helpText = {
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 24 horas y siete días.'],
     ['Fondo', 'El botón redondo de abajo a la derecha activa o desactiva el fondo. El control de abajo a la izquierda tiñe el fondo.'],
     ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo y Estándar. Personal aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones en cuatro grupos; el enlace vuelve a los ajustes básicos.'],
-    ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer todas las opciones» borra todo y devuelve los valores por defecto.'],
+    ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer ajustes» devuelve los valores por defecto. «Borrar mis enlaces, accesos de IA y lugares» quita solo tus enlaces propios, accesos de IA, zonas horarias y tu ciudad.'],
   ] },
   zh: { title: '帮助', settings: '设置', close: '关闭', sections: [
     ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。'],
@@ -402,7 +403,7 @@ const helpText = {
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 24 小时和七天的完整预报。'],
     ['背景', '右下角的圆形按钮可开启或关闭壁纸。左下角的滑块会给背景染色。'],
     ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简和标准。选择与两者都不符时显示“个性化”。“高级”按四组显示全部选项，链接可返回基本设置。'],
-    ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置所有设置”会清除全部内容并恢复默认值。'],
+    ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置设置”会恢复默认值。“删除我的链接、AI 快捷方式和地点”只删除你的自定义链接、AI 快捷方式、时区和城市。'],
   ] },
 };
 
@@ -713,7 +714,8 @@ const applySettingsText = () => {
   const helpLink = Object.assign(document.createElement('button'), { type: 'button', className: 'text-button', textContent: helpCopy.title })
   helpLink.addEventListener('click', () => openHelp())
   document.getElementById('privacy').replaceChildren(beforeHelp, helpLink, afterHelp)
-  settingsFields.reset.textContent = t.reset
+  settingsFields.resetSettings.textContent = t.resetSettings
+  settingsFields.resetData.textContent = t.resetData
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
   document.getElementById('forecast-close').setAttribute('aria-label', t.close)
   settingsButton.setAttribute('aria-label', t.open)
@@ -953,12 +955,22 @@ settingsFields.cityClear.addEventListener('click', () => {
   if (weatherOn) showWeather()
 })
 
-settingsFields.reset.addEventListener('click', () => {
+// Two resets: the settings go back to the defaults; the personal data (own links, AI shortcuts, a city and
+// the time zones) is deleted only when asked. Both reload the page so every part starts from storage.
+const clearKeys = (keys) => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
+}
+const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location']
+settingsFields.resetSettings.addEventListener('click', () => {
+  clearKeys(['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
+  location.reload()
+})
+settingsFields.resetData.addEventListener('click', () => {
+  if (!confirm(t.resetDataConfirm)) return
+  clearKeys(personalKeys)
   location.reload()
 })
 

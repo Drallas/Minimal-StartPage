@@ -973,9 +973,6 @@ html[data-wallpaper-on] .controls {
   color: var(--color-fg-2);
 }
 
-#reset-all {
-  margin-top: 12px;
-}
 
 /* Quote hidden from the settings. */
 html[data-quote-off] #quote {
@@ -1555,9 +1552,13 @@ html[data-quote-off] #quote {
   border-color: var(--color-fg-2);
 }
 
-#reset-all {
+.reset-row {
   grid-column: 1 / -1;
-  justify-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+  margin-top: 12px;
 }
 
 /* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
