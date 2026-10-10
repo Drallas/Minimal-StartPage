@@ -79,6 +79,9 @@
         <label class="setting"><input type="radio" name="preset" id="preset-standard" value="standard"> <span id="lbl-preset-standard">Standard</span></label>
         <label class="setting"><input type="radio" name="preset" id="preset-full" value="full"> <span id="lbl-preset-full">Full</span></label>
       </div>
+      <p class="privacy" id="privacy"></p>
+      <button type="button" id="advanced-toggle" class="text-button" aria-expanded="false" aria-controls="advanced">Advanced</button>
+      <div class="advanced" id="advanced" hidden>
       <p class="location-title" id="sec-weather">Weather</p>
       <label class="setting"><input type="checkbox" id="set-weather"> <span id="lbl-weather">Show weather</span></label>
       <div class="weather-sub" id="weather-sub">
@@ -108,8 +111,8 @@
       <label class="setting"><input type="checkbox" id="set-tint"> <span id="lbl-tint">Background tint</span></label>
       <p class="location-title" id="sec-privacy">Privacy</p>
       <label class="setting"><input type="checkbox" id="set-showip"> <span id="lbl-showip">Show my IP address under the footer</span></label>
-      <p class="privacy" id="privacy"></p>
       <button type="button" id="reset-all" class="text-button">Reset all choices</button>
+      </div>
     </div>
   </div>
 

@@ -396,7 +396,6 @@ footer svg {
   margin: 0 3px;
 }
 
-footer a:hover,
 footer a:focus-visible {
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -1413,8 +1412,13 @@ html[data-quote-off] #quote {
   cursor: pointer;
 }
 
-.ip:hover,
-.ip:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+
+
+/* The advanced block sits under the basic view with some air. */
+.advanced {
+  margin-top: 8px;
+}
+
+#advanced-toggle {
+  margin-top: 14px;
 }

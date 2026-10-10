@@ -307,7 +307,15 @@ const recheckText = {
   es: { ipRecheck: 'Haz clic para volver a comprobar' },
   zh: { ipRecheck: '点击重新检查' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const advancedText = {
+  en: { advancedOpen: 'Advanced', advancedClosed: 'Basic' },
+  nl: { advancedOpen: 'Geavanceerd', advancedClosed: 'Basis' },
+  de: { advancedOpen: 'Erweitert', advancedClosed: 'Basis' },
+  fr: { advancedOpen: 'Avancé', advancedClosed: 'Base' },
+  es: { advancedOpen: 'Avanzado', advancedClosed: 'Básico' },
+  zh: { advancedOpen: '高级', advancedClosed: '基本' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -706,8 +714,19 @@ const syncSettings = () => {
   settingsFields.cityMessage.textContent = ''
 }
 
+// Advanced options: the page presets and the disclaimer are the basic view; the rest opens from a link.
+const advancedToggle = document.getElementById('advanced-toggle')
+const advancedBlock = document.getElementById('advanced')
+const setAdvanced = (open) => {
+  advancedBlock.hidden = !open
+  advancedToggle.setAttribute('aria-expanded', String(open))
+  advancedToggle.textContent = open ? t.advancedClosed : t.advancedOpen
+}
+advancedToggle.addEventListener('click', () => setAdvanced(advancedBlock.hidden))
+
 const openSettings = () => {
   openedFrom.el = document.activeElement
+  setAdvanced(false)
   syncSettings()
   settings.hidden = false
   settings.querySelector('.settings-panel').focus()

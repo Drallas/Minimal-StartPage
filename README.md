@@ -50,7 +50,7 @@ Everything is optional. The settings start with a choice of page: **Minimal** (s
 - **Weather.** Optional, off by default. The temperature and a small icon sit at the top middle. Hover for a short preview with the next six hours; click for the full forecast: the next 24 hours, the next seven days, and a link to Windy. The place comes from your IP address or from a city you choose.
 - **Your IP address.** Optional, off by default. Shows your IP address just under the footer, and hovering it shows your city, country and provider.
 - **Background.** A wallpaper that can be switched on or off, and a button to hide that switch. A tint slider (on a computer) gives the neutral background a colour, or the tint can be switched off. The background adapts to light and dark mode.
-- **Settings and help.** Open the settings with the gear at the top right, or press `?`. They are grouped into Weather, Display, Background and Privacy. The Help button in the settings opens a guide to every feature. Press `Esc` to close.
+- **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages (Minimal, Standard, Full) and the privacy note. The Advanced link opens the rest, grouped into Weather, Display, Background and Privacy. The Help button in the settings opens a guide to every feature. Press `Esc` to close.
 - **Phones.** The bottom controls sit above the browser's bar, and the layout fits landscape phones too.
 - **Hidden details.** A few small details are tucked away in the page. Look closely and explore.
 
