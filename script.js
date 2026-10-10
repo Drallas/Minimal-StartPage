@@ -1140,26 +1140,22 @@ settingsFields.resetData.addEventListener('click', () => {
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
 const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
-document.getElementById('export-data').addEventListener('click', async () => {
+// The export is a real link with a download name, so Safari treats the click as the user's download.
+// Where the share sheet exists (iPhone, iPad) the file goes there instead.
+const exportLink = document.getElementById('export-data')
+exportLink.addEventListener('click', (e) => {
   const payload = { app: 'Minimal-StartPage', version: 1, exported: new Date().toISOString(), settings: {}, data: {} }
   EXPORT_SETTINGS.forEach((key) => { const value = localStorage.getItem(key); if (value !== null) payload.settings[key] = value })
   EXPORT_DATA.forEach((key) => { try { const value = localStorage.getItem(key); if (value !== null) payload.data[key] = JSON.parse(value) } catch {} })
-  const file = new File([JSON.stringify(payload, null, 2)], 'minimal-startpage.json', { type: 'application/json' })
-  // On iPhone and iPad this opens the share sheet, where the file can go to Files or iCloud Drive.
+  const json = JSON.stringify(payload, null, 2)
+  const file = new File([json], 'minimal-startpage.json', { type: 'application/json' })
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try {
-      await navigator.share({ files: [file], title: 'Minimal-StartPage' })
-      return
-    } catch (error) {
-      if (error.name === 'AbortError') return
-    }
+    e.preventDefault()
+    navigator.share({ files: [file], title: 'Minimal-StartPage' }).catch(() => {})
+    return
   }
-  // Elsewhere, a normal download. A data address is used rather than a blob, because Safari can lose a blob
-  // address before the download starts (WebKitBlobResource error 1). A data address needs no clean-up.
-  const link = Object.assign(document.createElement('a'), { href: `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(payload, null, 2))}`, download: file.name })
-  document.body.append(link)
-  link.click()
-  link.remove()
+  // Set in the same click, so the browser downloads the link as it is followed.
+  exportLink.href = `data:application/json;charset=utf-8,${encodeURIComponent(json)}`
 })
 const importFile = document.getElementById('import-file')
 document.getElementById('import-data').addEventListener('click', () => importFile.click())
