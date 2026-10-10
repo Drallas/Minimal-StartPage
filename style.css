@@ -537,17 +537,18 @@ html[data-wallpaper-on] .modes button {
   appearance: none;
   /* No tap highlight: on iOS it shows as a white disc around the thumb. */
   -webkit-tap-highlight-color: transparent;
-  width: 72px;
+  /* 22 px wider than the visible line, so the thumb's centre can reach both ends of it. */
+  width: 94px;
   height: 22px;
-  margin: 0;
-  background: transparent;
+  margin: 0 -11px;
+  background: linear-gradient(to right, hsl(0 12% 60%), hsl(60 12% 60%), hsl(120 12% 60%), hsl(180 12% 60%), hsl(240 12% 60%), hsl(300 12% 60%), hsl(360 12% 60%)) center / calc(100% - 22px) 2px no-repeat;
   border: none;
   cursor: pointer;
 }
 
 .hue::-webkit-slider-runnable-track {
   height: 2px;
-  background: linear-gradient(to right, hsl(0 12% 60%), hsl(60 12% 60%), hsl(120 12% 60%), hsl(180 12% 60%), hsl(240 12% 60%), hsl(300 12% 60%), hsl(360 12% 60%));
+  background: transparent;
   border-radius: 1px;
 }
 
@@ -565,7 +566,7 @@ html[data-wallpaper-on] .modes button {
 
 .hue::-moz-range-track {
   height: 2px;
-  background: linear-gradient(to right, hsl(0 12% 60%), hsl(60 12% 60%), hsl(120 12% 60%), hsl(180 12% 60%), hsl(240 12% 60%), hsl(300 12% 60%), hsl(360 12% 60%));
+  background: transparent;
 }
 
 .hue::-moz-range-thumb {
