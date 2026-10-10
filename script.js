@@ -717,8 +717,10 @@ const syncSettings = () => {
 // Advanced options: the page presets and the disclaimer are the basic view; the rest opens from a link.
 const advancedToggle = document.getElementById('advanced-toggle')
 const advancedBlock = document.getElementById('advanced')
+const basicPages = [document.getElementById('sec-page'), document.querySelector('.presets')]
 const setAdvanced = (open) => {
   advancedBlock.hidden = !open
+  basicPages.forEach((el) => { el.hidden = open })
   advancedBlock.closest('.settings-panel').classList.toggle('is-wide', open)
   advancedToggle.setAttribute('aria-expanded', String(open))
   advancedToggle.textContent = open ? t.advancedClosed : t.advancedOpen

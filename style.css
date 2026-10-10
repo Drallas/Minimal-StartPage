@@ -1425,7 +1425,8 @@ html[data-quote-off] #quote {
 }
 
 /* The grid below would otherwise override the hidden attribute. */
-.advanced[hidden] {
+.advanced[hidden],
+.presets[hidden] {
   display: none;
 }
 
