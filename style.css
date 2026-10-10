@@ -266,6 +266,84 @@ footer a:focus-visible svg {
   color: #d64545;
 }
 
+/* Your IP address, just under the footer line. */
+.ip {
+  display: block;
+  margin-top: 2px;
+  font-size: 9px;
+  letter-spacing: .04em;
+  opacity: .8;
+}
+
+.ip[hidden] {
+  display: none;
+}
+
+/* Weather, centred in the top bar. The details show on hover, focus or a click. */
+.weather {
+  position: relative;
+  font-size: 12px;
+  color: var(--color-fg-2);
+}
+
+.weather button {
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+  transition: color .2s ease-in-out;
+}
+
+.weather button:hover,
+.weather button:focus-visible {
+  color: var(--color-fg-1);
+}
+
+.weather-detail {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  padding: 10px 12px;
+  background: var(--color-field);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-fg-1);
+  line-height: 1.7;
+  z-index: 2;
+}
+
+.weather-detail:empty {
+  display: none !important;
+}
+
+.weather:hover .weather-detail,
+.weather:focus-within .weather-detail,
+.weather-detail.open {
+  display: block;
+}
+
+.weather-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.weather-row + .weather-row {
+  color: var(--color-fg-2);
+}
+
+.weather-off {
+  margin-top: 6px;
+  padding: 0;
+  font-size: 11px;
+  color: var(--color-fg-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 footer svg {
   display: inline-block;
   vertical-align: -1px;
@@ -522,6 +600,11 @@ html[data-wallpaper-on] .controls {
 @media (max-width: 600px) {
   .controls {
     bottom: 64px;
+  }
+
+  /* Keeps the footer and IP line above the browser's bottom bar. */
+  footer {
+    bottom: 96px;
   }
 
   .controls button {

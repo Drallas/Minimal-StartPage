@@ -123,6 +123,98 @@ clockTime.addEventListener('click', () => {
   updateClock()
 })
 
+// Weather is off until you turn it on. It finds your approximate location from your IP address
+// (ipapi.co) and asks Open-Meteo for the forecast. Both requests send data outside this page.
+const weatherButton = document.getElementById('weather-button')
+const weatherDetail = document.getElementById('weather-detail')
+const ipLine = document.getElementById('ip')
+let weatherOn = false
+try { weatherOn = localStorage.getItem('weather') === 'on' } catch {}
+
+// Open-Meteo weather codes (WMO), in plain words.
+const weatherWords = {
+  0: 'Clear', 1: 'Mostly clear', 2: 'Partly cloudy', 3: 'Cloudy', 45: 'Fog', 48: 'Fog',
+  51: 'Drizzle', 53: 'Drizzle', 55: 'Drizzle', 61: 'Rain', 63: 'Rain', 65: 'Heavy rain',
+  71: 'Snow', 73: 'Snow', 75: 'Heavy snow', 80: 'Showers', 81: 'Showers', 82: 'Heavy showers',
+  95: 'Thunderstorm', 96: 'Thunderstorm', 99: 'Thunderstorm',
+}
+
+// Keeps a response in localStorage for maxAge milliseconds, so a reload does not fetch again.
+const fetchCached = async (key, maxAge, url) => {
+  try {
+    const hit = JSON.parse(localStorage.getItem(key) || 'null')
+    if (hit && Date.now() - hit.at < maxAge) return hit.data
+  } catch {}
+  const data = await (await fetch(url)).json()
+  try { localStorage.setItem(key, JSON.stringify({ at: Date.now(), data })) } catch {}
+  return data
+}
+
+const weatherRow = (...cells) => {
+  const row = document.createElement('div')
+  row.className = 'weather-row'
+  row.append(...cells.map((cell) => Object.assign(document.createElement('span'), { textContent: cell })))
+  return row
+}
+
+const showWeather = async () => {
+  try {
+    const place = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
+    if (typeof place.latitude !== 'number') throw new Error('no location')
+    const url = 'https://api.open-meteo.com/v1/forecast' +
+      `?latitude=${place.latitude}&longitude=${place.longitude}` +
+      '&current=temperature_2m,weather_code&hourly=temperature_2m,precipitation_probability' +
+      '&timezone=auto&forecast_hours=24'
+    const forecast = await fetchCached('weatherData', 30 * 60e3, url)
+    const now = forecast.current
+    const start = forecast.hourly.time.indexOf(now.time)
+    const next = forecast.hourly.time.slice(start + 1, start + 7).map((time, i) => weatherRow(
+      time.slice(11, 16),
+      `${Math.round(forecast.hourly.temperature_2m[start + 1 + i])}°`,
+      `${forecast.hourly.precipitation_probability[start + 1 + i]}%`
+    ))
+    weatherButton.textContent = `${Math.round(now.temperature_2m)}°`
+    weatherDetail.replaceChildren(
+      weatherRow(`${place.city}, ${place.country_name}`),
+      weatherRow(weatherWords[now.weather_code] || 'Weather', `${Math.round(now.temperature_2m)}°`),
+      ...next,
+      Object.assign(document.createElement('button'), { type: 'button', className: 'weather-off', textContent: 'Hide weather' })
+    )
+    ipLine.textContent = place.ip
+    ipLine.hidden = false
+  } catch {
+    weatherButton.textContent = 'Weather unavailable'
+  }
+}
+
+const hideWeather = () => {
+  weatherOn = false
+  try { localStorage.setItem('weather', 'off') } catch {}
+  weatherButton.textContent = 'Show weather'
+  weatherButton.setAttribute('aria-expanded', 'false')
+  weatherDetail.replaceChildren()
+  weatherDetail.classList.remove('open')
+  ipLine.hidden = true
+}
+
+weatherButton.addEventListener('click', () => {
+  if (!weatherOn) {
+    weatherOn = true
+    try { localStorage.setItem('weather', 'on') } catch {}
+    weatherButton.textContent = 'Loading…'
+    showWeather()
+    return
+  }
+  const open = weatherDetail.classList.toggle('open')
+  weatherButton.setAttribute('aria-expanded', String(open))
+})
+
+weatherDetail.addEventListener('click', (e) => {
+  if (e.target.classList.contains('weather-off')) hideWeather()
+})
+
+if (weatherOn) showWeather()
+
 // A new quote every six hours, so the same one stays put for that window.
 const quoteText = document.getElementById('quote-text')
 const quoteBy = document.getElementById('quote-by')

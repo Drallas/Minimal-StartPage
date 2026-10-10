@@ -46,6 +46,7 @@
 - **Quote.** A short quote from a philosopher or teacher, changing every six hours. There are 50 quotes, shown in your browser's language (English, Dutch, German, French, Spanish or Chinese, falling back to English). Click the quote to see the next one.
 - **Shortcuts.** A Wikipedia link in the top left, and links to Claude, ChatGPT, Grok and Duck.ai below the search bar under the caption "Ask AI".
 - **Background.** The wallpaper is on by default. The round button in the bottom right turns it off or on again, and your choice is remembered. Without the wallpaper, the slider in the bottom left gives the background a subtle tint in any hue (drag back to the far left for the neutral look). The background adapts to light and dark mode. On a phone the slider is hidden and the wallpaper button sits just above the browser's bottom bar.
+- **Weather.** Off by default. Click "Show weather" at the top to turn it on. The temperature then sits in the top middle; hover over it, or click it, to see your city, the current conditions and the next six hours. The details are in [Your data](#your-data).
 - **Hidden details.** A few small details are tucked away in the page. Look closely and explore.
 
 ## Use it
@@ -58,7 +59,9 @@ There are three ways to use it, from easiest to most control. You do not need to
 
 ## Your data
 
-Searches go straight to the search engine you chose. The page only stores your choices for the search engine, theme, wallpaper, clock and date format in your browser. Nothing is sent anywhere else.
+Searches go straight to the search engine you chose. The page only stores your choices for the search engine, theme, wallpaper, clock, date format and weather in your browser.
+
+The weather is off by default. When you turn it on, the page does two things: it sends your IP address to [ipapi.co](https://ipapi.co) to find your approximate city, and it sends that city's coordinates to [Open-Meteo](https://open-meteo.com) to get the forecast. Your IP address is then shown just under the footer, so you can see what the page sees. Responses are kept in your browser for 24 hours (location) and 30 minutes (forecast). Nothing else leaves the page.
 
 ## Customise
 
