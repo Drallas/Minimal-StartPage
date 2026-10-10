@@ -708,11 +708,10 @@ html[data-wallpaper-on] .controls {
 }
 
 .settings-button {
-  width: 28px;
-  height: 28px;
+  display: flex;
+  padding: 6px;
   border-radius: 6px;
-  color: var(--color-fg-2);
-  font-size: 13px;
+  color: var(--color-fg-1);
   transition: color .2s ease-in-out;
 }
 
