@@ -211,6 +211,15 @@ const zonesText = {
 }
 const ipPrivacy = {'en': 'Showing your IP address asks ipify.org for it.', 'nl': 'Het tonen van je IP-adres vraagt het op bij ipify.org.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie bei ipify.org abgefragt.', 'fr': 'Afficher votre adresse IP la demande à ipify.org.', 'es': 'Mostrar tu IP la pide a ipify.org.', 'zh': '显示 IP 地址时，会向 ipify.org 查询。'}
 for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const weatherWording = {
+  en: { lookup: 'Find my location from my IP address (for the weather)', noSource: 'Choose a place', needPlace: 'The weather needs a place: turn on the IP lookup below, or enter a city.' },
+  nl: { lookup: 'Mijn plaats zoeken via mijn IP-adres (voor het weer)', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: zet hieronder het zoeken via IP aan, of vul een plaats in.' },
+  de: { lookup: 'Meinen Ort über meine IP-Adresse finden (für das Wetter)', noSource: 'Ort wählen', needPlace: 'Das Wetter braucht einen Ort: schalte unten die IP-Suche ein oder gib einen Ort ein.' },
+  fr: { lookup: 'Trouver ma position via mon adresse IP (pour la météo)', noSource: 'Choisir un lieu', needPlace: 'La météo a besoin d’un lieu : activez la recherche par IP ci-dessous, ou saisissez une ville.' },
+  es: { lookup: 'Buscar mi ubicación por IP (para el tiempo)', noSource: 'Elige un lugar', needPlace: 'El tiempo necesita un lugar: activa la búsqueda por IP abajo o escribe una ciudad.' },
+  zh: { lookup: '通过 IP 地址查找我的位置（用于天气）', noSource: '选择地点', needPlace: '天气需要一个地点：请在下方开启 IP 查找，或输入城市。' },
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[lang])
 const t = text[uiLang] || text.en
 const words = weatherWords[uiLang] || weatherWords.en
 
@@ -400,11 +409,22 @@ const hideWeather = () => {
   current = null
 }
 
+const hasSource = () => ipLookupOn || !!city
+
+// The settings say when weather is on but has no place to look up.
+const updateWeatherHint = () => {
+  const hint = document.getElementById('weather-hint')
+  hint.textContent = t.needPlace
+  hint.hidden = !(weatherOn && !hasSource())
+}
+
 const setWeather = (on) => {
   weatherOn = on
   writeKey('weather', on ? 'on' : 'off')
+  updateWeatherHint()
   if (on) {
     weatherButton.classList.remove('idle')
+    weatherButton.removeAttribute('title')
     weatherButton.textContent = t.loading
     showWeather()
   } else {
@@ -430,7 +450,7 @@ const closeForecast = () => {
 }
 
 weatherButton.addEventListener('click', () => {
-  if (!weatherOn) {
+  if (!weatherOn || !hasSource()) {
     openSettings()
     return
   }
@@ -480,6 +500,7 @@ const syncSettings = () => {
   settingsFields.quote.checked = quoteOn
   settingsFields.zones.checked = zonesOn
   settingsFields.cityClear.hidden = !city
+  updateWeatherHint()
   settingsFields.cityMessage.textContent = ''
 }
 
@@ -536,6 +557,7 @@ settingsFields.showIp.addEventListener('change', () => {
 settingsFields.ip.addEventListener('change', () => {
   ipLookupOn = settingsFields.ip.checked
   writeKey('ipLookup', ipLookupOn ? 'on' : 'off')
+  updateWeatherHint()
   if (weatherOn) showWeather()
 })
 
@@ -564,6 +586,7 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
       return
     }
     city = { name: hit.name, country: hit.country, latitude: hit.latitude, longitude: hit.longitude }
+    updateWeatherHint()
     writeKey('city', JSON.stringify(city))
     settingsFields.cityClear.hidden = false
     settingsFields.cityMessage.textContent = ''
@@ -577,6 +600,7 @@ settingsFields.cityForm.addEventListener('submit', async (e) => {
 settingsFields.cityClear.addEventListener('click', () => {
   city = null
   try { localStorage.removeItem('city') } catch {}
+  updateWeatherHint()
   settingsFields.cityClear.hidden = true
   if (weatherOn) showWeather()
 })
@@ -725,6 +749,7 @@ setInterval(() => {
 
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
+updateWeatherHint()
 fetchMyIp()
 if (weatherOn) weatherButton.textContent = t.loading
 else showIdle()
