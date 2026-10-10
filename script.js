@@ -154,7 +154,14 @@ window.onload = () => {
 // Wallpaper mode: one photo, on or off. Remembered in localStorage.
 const wallpaper = document.getElementById('wallpaper')
 const wallpaperToggle = document.getElementById('wallpaper-toggle')
-const wallpaperUrl = wallpaperToggle.dataset.wallpaper
+// Local copies in three sizes, so a phone does not download the largest one.
+const wallpaperSizes = [
+  { width: 800, url: 'assets/wallpaper-800.jpg' },
+  { width: 1280, url: 'assets/wallpaper-1280.jpg' },
+  { width: 2000, url: 'assets/wallpaper-2000.jpg' },
+]
+const wantedWidth = window.innerWidth * (window.devicePixelRatio || 1)
+const wallpaperUrl = (wallpaperSizes.find((s) => s.width >= wantedWidth) || wallpaperSizes[wallpaperSizes.length - 1]).url
 
 const applyWallpaper = (on) => {
   wallpaper.style.backgroundImage = on ? `url("${wallpaperUrl}")` : ''
