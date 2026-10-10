@@ -151,48 +151,24 @@ window.onload = () => {
   document.getElementsByTagName('body')[0].removeAttribute('class')
 }
 
-// Wallpaper and background tint. Both are optional and remembered in localStorage.
+// Wallpaper mode: one photo, on or off. Remembered in localStorage.
 const wallpaper = document.getElementById('wallpaper')
-const hueSlider = document.getElementById('hue')
-const wallpaperButtons = document.querySelectorAll('[data-wallpaper]')
+const wallpaperToggle = document.getElementById('wallpaper-toggle')
+const wallpaperUrl = wallpaperToggle.dataset.wallpaper
 
-const applyWallpaper = (value) => {
-  const on = value && value !== 'none'
-  wallpaper.style.backgroundImage = on ? `url("${value}")` : ''
-  root.toggleAttribute('data-wallpaper-on', Boolean(on))
-  wallpaperButtons.forEach((button) => {
-    button.setAttribute('aria-pressed', String(button.dataset.wallpaper === (on ? value : 'none')))
-  })
+const applyWallpaper = (on) => {
+  wallpaper.style.backgroundImage = on ? `url("${wallpaperUrl}")` : ''
+  root.toggleAttribute('data-wallpaper-on', on)
+  wallpaperToggle.setAttribute('aria-pressed', String(on))
+  wallpaperToggle.title = on ? 'Hide wallpaper' : 'Show wallpaper'
 }
 
-const applyHue = (value) => {
-  const hue = Number(value)
-  hueSlider.value = hue
-  if (hue > 0) {
-    root.dataset.tint = ''
-    root.style.setProperty('--hue', hue)
-  } else {
-    delete root.dataset.tint
-    root.style.removeProperty('--hue')
-  }
-}
+let wallpaperOn = false
+try { wallpaperOn = localStorage.getItem('wallpaper') === 'on' } catch {}
+applyWallpaper(wallpaperOn)
 
-try {
-  applyWallpaper(localStorage.getItem('wallpaper') || 'none')
-  applyHue(localStorage.getItem('hue') || 0)
-} catch {
-  applyWallpaper('none')
-  applyHue(0)
-}
-
-wallpaperButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    applyWallpaper(button.dataset.wallpaper)
-    try { localStorage.setItem('wallpaper', button.dataset.wallpaper) } catch {}
-  })
-})
-
-hueSlider.addEventListener('input', () => {
-  applyHue(hueSlider.value)
-  try { localStorage.setItem('hue', hueSlider.value) } catch {}
+wallpaperToggle.addEventListener('click', () => {
+  wallpaperOn = !wallpaperOn
+  applyWallpaper(wallpaperOn)
+  try { localStorage.setItem('wallpaper', wallpaperOn ? 'on' : 'off') } catch {}
 })
