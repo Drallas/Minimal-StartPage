@@ -1154,13 +1154,12 @@ document.getElementById('export-data').addEventListener('click', async () => {
       if (error.name === 'AbortError') return
     }
   }
-  // Elsewhere, a normal download. Safari needs the link to stay valid until the download has started.
-  const url = URL.createObjectURL(file)
-  const link = Object.assign(document.createElement('a'), { href: url, download: file.name })
+  // Elsewhere, a normal download. A data address is used rather than a blob, because Safari can lose a blob
+  // address before the download starts (WebKitBlobResource error 1). A data address needs no clean-up.
+  const link = Object.assign(document.createElement('a'), { href: `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(payload, null, 2))}`, download: file.name })
   document.body.append(link)
   link.click()
   link.remove()
-  setTimeout(() => URL.revokeObjectURL(url), 60000)
 })
 const importFile = document.getElementById('import-file')
 document.getElementById('import-data').addEventListener('click', () => importFile.click())
