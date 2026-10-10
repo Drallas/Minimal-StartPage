@@ -397,6 +397,9 @@ weatherButton.addEventListener('click', () => {
   openForecast()
 })
 
+// Clicking the preview, including its hint line, opens the full forecast.
+weatherDetail.addEventListener('click', openForecast)
+
 document.getElementById('forecast-close').addEventListener('click', closeForecast)
 forecastDialog.addEventListener('click', (e) => { if (e.target === forecastDialog) closeForecast() })
 

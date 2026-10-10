@@ -317,7 +317,8 @@ footer a:focus-visible svg {
 .weather-detail {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  top: 100%;
+  margin-top: 8px;
   left: 50%;
   transform: translateX(-50%);
   min-width: 280px;
@@ -332,6 +333,20 @@ footer a:focus-visible svg {
 
 .weather-detail:empty {
   display: none !important;
+}
+
+/* Invisible bridge over the gap, so the preview stays open while the pointer moves down into it. */
+.weather-detail::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.weather-detail {
+  cursor: pointer;
 }
 
 .weather:hover .weather-detail,
@@ -439,7 +454,7 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 16px;
+  bottom: 28px;
   text-align: center;
   font-size: 10px;
   letter-spacing: .06em;
@@ -553,7 +568,7 @@ html[data-wallpaper-on] .controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  bottom: 16px;
+  bottom: 28px;
   z-index: 1;
   opacity: .3;
   transition: opacity .3s ease-in-out;
@@ -620,12 +635,12 @@ html[data-wallpaper-on] .controls {
 /* Phones: lift the controls above the browser's bottom bar and enlarge their touch area. */
 @media (max-width: 600px) {
   .controls {
-    bottom: 110px;
+    bottom: 118px;
   }
 
   /* Phones: footer and controls move above the browser's bottom bar, and stay on one line. */
   footer {
-    bottom: 110px;
+    bottom: 118px;
   }
 
   .controls button {
