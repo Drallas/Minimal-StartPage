@@ -47,7 +47,7 @@ Searches go straight to the search engine you chose. The page only stores two se
 
 ## Credits
 
-The Claude, ChatGPT and Grok icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The logos are trademarks of their owners.
+The Claude, ChatGPT, Grok, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon comes from [Simple Icons](https://simpleicons.org) (CC0). The logos are trademarks of their owners.
 
 ## License
 
