@@ -1322,3 +1322,11 @@ html[data-quote-off] #quote {
 .links-button[hidden] {
   display: none;
 }
+
+/* The UTC label of a time zone: small and quiet, next to its name. */
+.zone-tag {
+  margin-left: 6px;
+  font-size: 10px;
+  letter-spacing: .04em;
+  opacity: .6;
+}

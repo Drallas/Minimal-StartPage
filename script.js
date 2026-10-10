@@ -79,6 +79,11 @@ const isLeap = (y) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0
 // Each colon is its own element, so the full time can blink it.
 const colon = () => Object.assign(document.createElement('span'), { className: 'colon', textContent: ':' })
 
+// The date and the week title follow the browser language. Kept here, before the text tables.
+const pageLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
+const dateLocales = { en: 'en-GB', nl: 'nl-NL', de: 'de-DE', fr: 'fr-FR', es: 'es-ES', zh: 'zh-CN' }
+const weekWords = { en: ['Week', 'day', 'of'], nl: ['Week', 'dag', 'van'], de: ['Woche', 'Tag', 'von'], fr: ['Semaine', 'jour', 'sur'], es: ['Semana', 'día', 'de'], zh: ['第', '天，共', '天'] }
+const [weekWord, dayWord, ofWord] = weekWords[pageLang] || weekWords.en
 const updateClock = () => {
   const now = new Date()
   const full = clockMode === 'full'
@@ -90,7 +95,7 @@ const updateClock = () => {
   )
   const date = dateNumeric
     ? [String(now.getDate()).padStart(2, '0'), String(now.getMonth() + 1).padStart(2, '0'), now.getFullYear()].join('-')
-    : now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
+    : now.toLocaleDateString(dateLocales[pageLang] || 'en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
   const offset = -now.getTimezoneOffset()
   const sign = offset >= 0 ? '+' : '-'
   const hh = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0')
@@ -105,7 +110,7 @@ const updateClock = () => {
   clockTime.dateTime = now.toISOString()
   clockTime.title = `${zone} (UTC${sign}${hh}:${mm})`
   clockDate.textContent = date
-  clockDate.title = `Week ${isoWeek(now)} · day ${dayOfYear(now)} of ${isLeap(now.getFullYear()) ? 366 : 365}`
+  clockDate.title = `${weekWord} ${isoWeek(now)} · ${dayWord} ${dayOfYear(now)} ${ofWord} ${isLeap(now.getFullYear()) ? 366 : 365}`
 }
 updateClock()
 // Once a second, so the seconds in full time tick; the other modes only change once a minute.
@@ -387,13 +392,6 @@ const renderForecast = () => {
   nowIcon.innerHTML = weatherIcon(key)
   const nowRow = el('div', 'forecast-now')
   nowRow.append(nowIcon, el('span', 'forecast-temp', temp(now.temperature_2m)), el('span', 'forecast-word', key ? words[key] : ''))
-  let localLine = null
-  if (forecast.timezone) {
-    try {
-      const time = new Date().toLocaleTimeString(clockMode === '12' ? 'en-US' : 'en-GB', { timeZone: forecast.timezone, hour: '2-digit', minute: '2-digit', hour12: clockMode === '12' })
-      localLine = el('div', 'forecast-meta', `${t.placeTime}: ${time} · ${cityOf(forecast.timezone)}`)
-    } catch {}
-  }
   const meta = el('div', 'forecast-meta', `${t.feels} ${temp(now.apparent_temperature)} · ${t.wind} ${Math.round(now.wind_speed_10m)} km/h · ${t.humidity} ${now.relative_humidity_2m}%`)
 
   const start = forecast.hourly.time.indexOf(now.time)
@@ -428,7 +426,7 @@ const renderForecast = () => {
 
   document.getElementById('forecast-title').textContent = place.label
   document.getElementById('forecast-body').replaceChildren(
-    section(t.now, [nowRow, meta, ...(localLine ? [localLine] : [])]),
+    section(t.now, [nowRow, meta]),
     section(t.hours, hourRows),
     section(t.days, dayRows)
   )
@@ -729,7 +727,7 @@ const dayDifference = (zone, now) => {
   const ymd = (tz) => new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(now)
   return Math.round((Date.parse(ymd(zone)) - Date.parse(ymd(localZone))) / 864e5)
 }
-const dayWord = (diff) => (diff === 0 ? '' : new Intl.RelativeTimeFormat(uiLang, { numeric: 'auto' }).format(diff, 'day'))
+const dayWordFor = (diff) => (diff === 0 ? '' : new Intl.RelativeTimeFormat(uiLang, { numeric: 'auto' }).format(diff, 'day'))
 
 // The hover preview under the globe, like the weather preview: the chosen zones at a glance.
 const zonesPreview = document.getElementById('zones-preview')
@@ -740,7 +738,7 @@ const renderPreview = () => {
   }
   const now = new Date()
   zonesPreview.replaceChildren(...sortedZones(now).map((zone) => {
-    const row = weatherRow(cityOf(zone), zoneClock(zone, now), dayWord(dayDifference(zone, now)))
+    const row = weatherRow(zoneName(zone, now), zoneClock(zone, now), dayWordFor(dayDifference(zone, now)))
     row.classList.add('zone-line')
     return row
   }))
@@ -748,13 +746,13 @@ const renderPreview = () => {
 
 const renderZones = () => {
   const now = new Date()
-  zonesLocalLine.textContent = `${t.zonesLocal}: ${cityOf(localZone)} ${zoneClock(localZone, now)}`
+  zonesLocalLine.textContent = `${t.zonesLocal}: ${cityOf(localZone)} ${zoneClock(localZone, now)} · ${utcLabel(localZone, now)}`
   const rows = sortedZones(now).map((zone) => {
     const row = el('div', 'zone-row')
     const remove = Object.assign(document.createElement('button'), { type: 'button', className: 'zone-remove', textContent: '×' })
     remove.setAttribute('aria-label', `${t.remove} ${cityOf(zone)}`)
     remove.dataset.zone = zone
-    row.append(el('span', '', cityOf(zone)), el('span', '', zoneClock(zone, now)), el('span', 'zone-day', dayWord(dayDifference(zone, now))), remove)
+    row.append(zoneName(zone, now), el('span', '', zoneClock(zone, now)), el('span', 'zone-day', dayWordFor(dayDifference(zone, now))), remove)
     return row
   })
   zonesList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.zonesEmpty)]))
@@ -766,6 +764,19 @@ const renderZones = () => {
 }
 
 const saveZones = () => writeKey('zones', JSON.stringify(zones))
+// A short label such as UTC+1 or UTC−5:30, shown small next to the zone name.
+const utcLabel = (zone, now) => {
+  const minutes = utcOffset(zone, now)
+  if (minutes === 0) return 'UTC'
+  const abs = Math.abs(minutes)
+  const clock = `${Math.floor(abs / 60)}${abs % 60 ? `:${String(abs % 60).padStart(2, '0')}` : ''}`
+  return `UTC${minutes > 0 ? '+' : '−'}${clock}`
+}
+const zoneName = (zone, now) => {
+  const name = el('span', '', cityOf(zone))
+  name.append(el('small', 'zone-tag', utcLabel(zone, now)))
+  return name
+}
 
 const openZones = () => {
   zonesFrom = document.activeElement
