@@ -604,6 +604,14 @@ const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
 const zoneNames = (() => {
   try { return Intl.supportedValuesOf('timeZone') } catch { return ['Europe/Amsterdam', 'Europe/London', 'America/New_York', 'America/Los_Angeles', 'Asia/Tokyo', 'Australia/Sydney'] }
 })()
+const zoneAliases = {
+  beijing: 'Asia/Shanghai',
+  peking: 'Asia/Shanghai',
+  mumbai: 'Asia/Kolkata',
+  'new delhi': 'Asia/Kolkata',
+  saigon: 'Asia/Ho_Chi_Minh',
+  'ho chi minh city': 'Asia/Ho_Chi_Minh',
+}
 let zones = []
 try { zones = (JSON.parse(localStorage.getItem('zones') || '[]') || []).filter((z) => zoneNames.includes(z)).slice(0, 5) } catch {}
 
@@ -684,7 +692,9 @@ document.getElementById('zone-form').addEventListener('submit', (e) => {
   e.preventDefault()
   const typed = zoneInput.value.trim().toLowerCase()
   if (!typed) return
-  const match = zoneNames.find((z) => z.toLowerCase() === typed.replace(/ /g, '_')) ||
+  // Some cities share a zone with another city (Beijing is in Asia/Shanghai), so they are listed here too.
+  const match = zoneAliases[typed] ||
+    zoneNames.find((z) => z.toLowerCase() === typed.replace(/ /g, '_')) ||
     zoneNames.find((z) => cityOf(z).toLowerCase() === typed)
   if (!match) {
     zoneMsg.textContent = t.zoneNotFound
@@ -700,7 +710,7 @@ document.getElementById('zone-form').addEventListener('submit', (e) => {
   renderZones()
 })
 
-zoneOptions.replaceChildren(...zoneNames.map((z) => Object.assign(document.createElement('option'), { value: cityOf(z) })))
+zoneOptions.replaceChildren(...[...zoneNames.map(cityOf), ...Object.keys(zoneAliases).map((name) => name.replace(/\b\w/g, (c) => c.toUpperCase()))].map((value) => Object.assign(document.createElement('option'), { value })))
 
 const applyZonesVisibility = () => {
   zonesButton.hidden = !zonesOn
