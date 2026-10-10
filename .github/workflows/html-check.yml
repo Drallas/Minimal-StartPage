@@ -1,0 +1,16 @@
+name: HTML check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  html-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate index.html
+        run: npx --yes html-validate@10.17.0 index.html

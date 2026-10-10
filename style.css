@@ -257,6 +257,12 @@ footer a {
   text-decoration: none;
 }
 
+footer svg {
+  display: inline-block;
+  vertical-align: -1px;
+  margin: 0 3px;
+}
+
 footer a:hover,
 footer a:focus-visible {
   text-decoration: underline;
@@ -469,6 +475,7 @@ html[data-wallpaper-on] .controls {
   display: block;
   width: 100%;
   height: 100%;
+  background-image: url("assets/wallpaper-thumb.jpg");
   background-size: cover;
   background-position: center;
 }
