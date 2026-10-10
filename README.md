@@ -62,7 +62,9 @@ There are three ways to use it, from easiest to most control. You do not need to
 
 Searches go straight to the search engine you chose. The page only stores your choices for the search engine, theme, wallpaper, clock, date format and weather in your browser.
 
-The weather is off by default. When you turn it on, the page finds your place in one of two ways. By default it sends your IP address to [ipapi.co](https://ipapi.co) to find your approximate city; your IP address is then shown just under the footer. If you turn that lookup off and enter a city instead, only that city name is sent to [Open-Meteo](https://open-meteo.com) to find its coordinates, and no IP address is sent at all. In both cases the coordinates go to Open-Meteo to get the forecast. Responses are kept in your browser for 24 hours (location) and 30 minutes (forecast). Nothing else leaves the page.
+The weather is off by default. When you turn it on, the page finds your place in one of two ways. By default it sends your IP address to [ipapi.co](https://ipapi.co) to find your approximate city; your IP address is then shown just under the footer. If you turn that lookup off and enter a city instead, only that city name is sent to [Open-Meteo](https://open-meteo.com) to find its coordinates, and no IP address is sent at all. In both cases the coordinates go to Open-Meteo to get the forecast. Responses are kept in your browser for 24 hours (location) and 30 minutes (forecast).
+
+Showing your IP address is a separate choice, off by default. When it is on, the page asks [ipify.org](https://www.ipify.org) for your address on each visit and shows it just under the footer. Nothing else leaves the page.
 
 ## Customise
 

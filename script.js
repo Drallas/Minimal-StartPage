@@ -151,12 +151,26 @@ const writeKey = (key, value) => { try { localStorage.setItem(key, value) } catc
 let weatherOn = readFlag('weather', false)
 let ipLookupOn = readFlag('ipLookup', true)
 let quoteOn = readFlag('quote', true)
-let showIpOn = readFlag('showIp', true)
+let showIpOn = readFlag('showIp', false)
 let lastIp = null
 // The IP address line under the footer: only when we have one and it is wanted.
 const updateIpLine = () => {
   ipLine.textContent = lastIp && showIpOn ? `${t.ip}: ${lastIp}` : ''
   ipLine.hidden = !(lastIp && showIpOn)
+}
+// Showing the IP address is its own choice, separate from the weather. It asks ipify.org only when it is on.
+const fetchMyIp = async () => {
+  if (!showIpOn) {
+    lastIp = null
+    updateIpLine()
+    return
+  }
+  try {
+    lastIp = (await fetchCached('myIp', 24 * 3600e3, 'https://api.ipify.org?format=json')).ip
+  } catch {
+    lastIp = null
+  }
+  updateIpLine()
 }
 let city = null
 try { city = JSON.parse(localStorage.getItem('city') || 'null') } catch {}
@@ -195,7 +209,8 @@ const zonesText = {
   es: { zonesToggle: 'Mostrar zonas horarias (globo junto a la fecha)', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo tres)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta tres.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
   zh: { zonesToggle: '显示时区（日期旁的地球图标）', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多三个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示三个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang])
+const ipPrivacy = {'en': 'Showing your IP address asks ipify.org for it.', 'nl': 'Het tonen van je IP-adres vraagt het op bij ipify.org.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie bei ipify.org abgefragt.', 'fr': 'Afficher votre adresse IP la demande à ipify.org.', 'es': 'Mostrar tu IP la pide a ipify.org.', 'zh': '显示 IP 地址时，会向 ipify.org 查询。'}
+for (const lang of Object.keys(text)) Object.assign(text[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const t = text[uiLang] || text.en
 const words = weatherWords[uiLang] || weatherWords.en
 
@@ -282,9 +297,7 @@ const showWeather = async () => {
     if (!place) {
       weatherButton.textContent = t.noSource
       current = null
-      lastIp = null
       weatherDetail.replaceChildren()
-      updateIpLine()
       return
     }
     const forecast = await fetchCached(`weather:v2:${place.latitude},${place.longitude}`, 30 * 60e3, forecastUrl(place))
@@ -306,14 +319,10 @@ const showWeather = async () => {
       ...next,
       el('div', 'preview-hint', t.more)
     )
-    lastIp = place.ip
-    updateIpLine()
   } catch {
     weatherButton.textContent = t.unavailable
     current = null
-    lastIp = null
     weatherDetail.replaceChildren()
-    updateIpLine()
   }
 }
 
@@ -389,8 +398,6 @@ const hideWeather = () => {
   weatherDetail.replaceChildren()
   weatherDetail.classList.remove('open')
   current = null
-  lastIp = null
-  updateIpLine()
 }
 
 const setWeather = (on) => {
@@ -458,7 +465,7 @@ const applySettingsText = () => {
   document.getElementById('zones-close').setAttribute('aria-label', t.close)
   zonesButton.setAttribute('aria-label', t.zonesButton)
   zonesButton.title = t.zonesButton
-  document.getElementById('privacy').textContent = t.privacy
+  document.getElementById('privacy').textContent = `${t.privacy} ${t.ipPrivacy}`
   settingsFields.reset.textContent = t.reset
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
   document.getElementById('forecast-close').setAttribute('aria-label', t.close)
@@ -523,7 +530,7 @@ settingsFields.weather.addEventListener('change', () => setWeather(settingsField
 settingsFields.showIp.addEventListener('change', () => {
   showIpOn = settingsFields.showIp.checked
   writeKey('showIp', showIpOn ? 'on' : 'off')
-  updateIpLine()
+  fetchMyIp()
 })
 
 settingsFields.ip.addEventListener('change', () => {
@@ -681,6 +688,7 @@ setInterval(() => { if (!zonesDialog.hidden) renderZones() }, 1000)
 
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
+fetchMyIp()
 if (weatherOn) weatherButton.textContent = t.loading
 else showIdle()
 if (weatherOn) showWeather()
