@@ -277,6 +277,14 @@ const footerText = {
   es: { pre: 'Hecho con', post: 'por Allards', title: 'Ver el README en GitHub' },
   zh: { pre: '用', post: '由 Allards 制作', title: '在 GitHub 上查看 README' }
 }
+const dataText = {
+  en: { exportData: 'Export data', importData: 'Import data', importInvalid: 'This file is not a Minimal-StartPage export.', importConfirm: 'Replace your current settings and data with the ones in this file?' },
+  nl: { exportData: 'Gegevens exporteren', importData: 'Gegevens importeren', importInvalid: 'Dit bestand is geen export van Minimal-StartPage.', importConfirm: 'Je huidige instellingen en gegevens vervangen door die in dit bestand?' },
+  de: { exportData: 'Daten exportieren', importData: 'Daten importieren', importInvalid: 'Diese Datei ist kein Export von Minimal-StartPage.', importConfirm: 'Deine aktuellen Einstellungen und Daten durch die in dieser Datei ersetzen?' },
+  fr: { exportData: 'Exporter les données', importData: 'Importer les données', importInvalid: 'Ce fichier n’est pas un export de Minimal-StartPage.', importConfirm: 'Remplacer vos réglages et données actuels par ceux de ce fichier ?' },
+  es: { exportData: 'Exportar datos', importData: 'Importar datos', importInvalid: 'Este archivo no es una exportación de Minimal-StartPage.', importConfirm: '¿Sustituir tus ajustes y datos actuales por los de este archivo?' },
+  zh: { exportData: '导出数据', importData: '导入数据', importInvalid: '此文件不是 Minimal-StartPage 的导出文件。', importConfirm: '用此文件中的设置和数据替换当前的设置和数据？' }
+}
 const linksOwnText = {
   en: { linksOwn: 'Own links' },
   nl: { linksOwn: 'Eigen links' },
@@ -349,7 +357,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -839,6 +847,8 @@ const applySettingsText = () => {
   helpLink.addEventListener('click', () => openHelp())
   document.getElementById('privacy').replaceChildren(beforeHelp, helpLink, afterHelp)
   settingsFields.resetSettings.textContent = t.resetSettings
+  document.getElementById('export-data').textContent = t.exportData
+  document.getElementById('import-data').textContent = t.importData
   settingsFields.resetData.textContent = t.resetData
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
   document.getElementById('forecast-close').setAttribute('aria-label', t.close)
@@ -1103,6 +1113,40 @@ settingsFields.resetSettings.addEventListener('click', () => {
 settingsFields.resetData.addEventListener('click', () => {
   if (!confirm(t.resetDataConfirm)) return
   clearKeys(personalKeys)
+  location.reload()
+})
+
+// Export and import: one JSON file with the settings and the personal data. Caches are left out.
+// The file is for the user to keep (for example in iCloud Drive) and open on another device.
+const EXPORT_SETTINGS = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
+const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
+document.getElementById('export-data').addEventListener('click', () => {
+  const payload = { app: 'Minimal-StartPage', version: 1, exported: new Date().toISOString(), settings: {}, data: {} }
+  EXPORT_SETTINGS.forEach((key) => { const value = localStorage.getItem(key); if (value !== null) payload.settings[key] = value })
+  EXPORT_DATA.forEach((key) => { try { const value = localStorage.getItem(key); if (value !== null) payload.data[key] = JSON.parse(value) } catch {} })
+  const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }))
+  const link = Object.assign(document.createElement('a'), { href: url, download: 'minimal-startpage.json' })
+  document.body.append(link)
+  link.click()
+  link.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+})
+const importFile = document.getElementById('import-file')
+document.getElementById('import-data').addEventListener('click', () => importFile.click())
+importFile.addEventListener('change', async () => {
+  const file = importFile.files[0]
+  importFile.value = ''
+  if (!file) return
+  let payload = null
+  try { payload = JSON.parse(await file.text()) } catch {}
+  if (!payload || payload.app !== 'Minimal-StartPage' || typeof payload.settings !== 'object' || typeof payload.data !== 'object') {
+    alert(t.importInvalid)
+    return
+  }
+  if (!confirm(t.importConfirm)) return
+  clearKeys([...EXPORT_SETTINGS, ...EXPORT_DATA])
+  Object.entries(payload.settings).forEach(([key, value]) => { if (EXPORT_SETTINGS.includes(key) && typeof value === 'string') writeKey(key, value) })
+  Object.entries(payload.data).forEach(([key, value]) => { if (EXPORT_DATA.includes(key)) writeKey(key, JSON.stringify(value)) })
   location.reload()
 })
 

@@ -70,6 +70,8 @@ Searches go straight to the search engine you chose. The page keeps your choices
 - **Extra places** on the weather send their name to [Open-Meteo](https://open-meteo.com) to find them. Up to three can be added in the Data panel, under Weather.
 - **Your IP address** under the footer asks [ipapi.co](https://ipapi.co) for your address, whether or not the weather is on.
 
+In the Advanced settings, **Export data** saves your choices and your own links, AI shortcuts, time zones and places to one JSON file that you keep yourself (for example in iCloud Drive). **Import data** loads that file on another device. Nothing is sent anywhere when you export or import.
+
 Your IP address is looked up again at most every ten minutes, so a VPN change shows after a refresh, and clicking the address under the footer checks it straight away; forecasts are kept for 30 minutes. "Reset settings" in the settings brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and asks first.
 
 ## Customise
