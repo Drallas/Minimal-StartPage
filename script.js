@@ -176,7 +176,7 @@ const fetchMyIp = async () => {
     return
   }
   try {
-    const info = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
+    const info = await fetchCached('ipInfo', 10 * 60e3, 'https://ipapi.co/json/')
     lastIp = info.ip
     lastInfo = [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ')
   } catch {
@@ -444,7 +444,7 @@ const iconCell = (key, label, className) => {
 // The city you entered wins; otherwise the IP lookup, if you allow it.
 const getPlace = async () => {
   if (locationMode === 'city') return city ? { label: `${city.name}, ${city.country}`, latitude: city.latitude, longitude: city.longitude, ip: null } : null
-  const info = await fetchCached('ipInfo', 24 * 3600e3, 'https://ipapi.co/json/')
+  const info = await fetchCached('ipInfo', 10 * 60e3, 'https://ipapi.co/json/')
   if (typeof info.latitude !== 'number') return null
   return { label: `${info.city}, ${info.country_name}`, latitude: info.latitude, longitude: info.longitude, ip: info.ip, detail: [`${info.city}, ${info.country_name}`, info.org].filter(Boolean).join(' · ') }
 }
