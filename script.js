@@ -805,11 +805,32 @@ const renderPlaces = () => {
 const placeMsg = document.getElementById('place-msg')
 // City suggestions while typing, the same kind of lookup the time zone box does. Only the typed name is sent.
 // Results are ranked by population, so the big city wins a shared name; the region tells apart the rest.
-// The region is shown only when it adds something: 'Shanghai Shi' under Shanghai is left out.
-const cityLabel = (r) => [r.name, r.admin1 && !r.name.toLowerCase().includes(r.admin1.toLowerCase()) ? r.admin1 : '', r.country].filter(Boolean).join(', ')
+// The region tells apart two places with the same name, and is left out when it repeats the name.
+const cityLabel = (r) => {
+  const known = [r.name, ...(r.names || [])].map((n) => n.toLowerCase())
+  const region = r.sameName && r.admin1 && !known.some((n) => n.includes(r.admin1.toLowerCase())) ? r.admin1 : ''
+  return [r.name, region, r.country].filter(Boolean).join(', ')
+}
 const fetchCities = async (query, count, language) => (await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${count}&language=${language}&format=json`)).json()).results || []
-// English names: the spelling people type (Shanghai, not the Dutch transliteration), in every language of the page.
-const geocode = async (query, count) => (await fetchCities(query, count, 'en')).sort((x, y) => (y.population || 0) - (x.population || 0))
+// Both English and Dutch names are searched, and a place appears once. Its name is the one that matches
+// what was typed, so 'Keulen' shows Keulen and 'Cologne' shows Cologne; otherwise the English name.
+const geocode = async (query, count) => {
+  const [en, nl] = await Promise.all([fetchCities(query, count, 'en'), fetchCities(query, count, 'nl')])
+  const q = query.toLowerCase()
+  const places = new Map()
+  for (const r of [...en, ...nl]) {
+    const key = r.id ?? `${r.latitude},${r.longitude}`
+    if (!places.has(key)) places.set(key, { r, names: [] })
+    places.get(key).names.push(r.name)
+  }
+  const found = [...places.values()].map(({ r, names }) => {
+    const typed = names.find((n) => n.toLowerCase().startsWith(q))
+    return { ...r, name: typed || r.name, names }
+  })
+  // A region is shown only to tell apart two places with the same name.
+  for (const r of found) r.sameName = found.filter((o) => o.name === r.name).length > 1
+  return found.sort((x, y) => (y.population || 0) - (x.population || 0))
+}
 const suggestCities = (input, datalist, hits) => {
   let timer = null
   input.addEventListener('input', () => {
