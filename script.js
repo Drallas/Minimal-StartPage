@@ -137,6 +137,7 @@ const settingsFields = {
   showIp: document.getElementById('set-showip'),
   quote: document.getElementById('set-quote'),
   zones: document.getElementById('set-zones'),
+  links: document.getElementById('set-links'),
   cityForm: document.getElementById('city-form'),
   cityInput: document.getElementById('city-input'),
   cityClear: document.getElementById('city-clear'),
@@ -223,7 +224,15 @@ const sectionText = {
   es: { secWeather: 'Tiempo', secLook: 'Vista', secPrivacy: 'Privacidad', placeTime: 'Hora local' },
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const linkToggleText = {
+  en: { linksToggle: 'Show the links button' },
+  nl: { linksToggle: 'Linkknop tonen' },
+  de: { linksToggle: 'Link-Schaltfläche anzeigen' },
+  fr: { linksToggle: 'Afficher le bouton des liens' },
+  es: { linksToggle: 'Mostrar el botón de enlaces' },
+  zh: { linksToggle: '显示链接按钮' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My IP address (finds my city)', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn IP-adres (zoekt mijn plaats)', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -524,6 +533,7 @@ const applySettingsText = () => {
   settingsFields.cityClear.textContent = t.clearCity
   document.getElementById('lbl-quote').textContent = t.quote
   document.getElementById('lbl-zones').textContent = t.zonesToggle
+  document.getElementById('lbl-links').textContent = t.linksToggle
   document.getElementById('zones-title').textContent = t.zonesTitle
   document.getElementById('zone-label').textContent = t.zonesAdd
   document.getElementById('zone-add-btn').textContent = t.zoneAddBtn
@@ -552,6 +562,7 @@ const syncSettings = () => {
   settingsFields.showIp.checked = showIpOn
   settingsFields.quote.checked = quoteOn
   settingsFields.zones.checked = zonesOn
+  settingsFields.links.checked = linksOn
   settingsFields.cityClear.hidden = !city
   updateWeatherHint()
   settingsFields.cityMessage.textContent = ''
@@ -671,7 +682,7 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
@@ -815,11 +826,12 @@ setInterval(() => {
   if (!zonesDialog.hidden) renderZones()
 }, 1000)
 
-// Links: up to 15 web links in the top left. Wikipedia is the first default; it returns on reset.
+// Links. Permanent links are built in: Wikipedia, in the browser's language. They cannot be removed.
+// Custom links are added by the visitor, up to 15. The whole links button can be switched off in settings.
 const linksButton = document.getElementById('links-button')
-const linksDot = document.getElementById('links-dot')
 const linksPreview = document.getElementById('links-preview')
 const linksWindow = document.getElementById('links')
+const linksIcons = document.getElementById('link-icons')
 const linksList = document.getElementById('links-list')
 const linkForm = document.getElementById('link-form')
 const linkName = document.getElementById('link-name')
@@ -830,6 +842,7 @@ const linkCancel = document.getElementById('link-cancel')
 const linkSave = document.getElementById('link-save')
 const linkFormTitle = document.getElementById('link-form-title')
 const LINK_LIMIT = 15
+const globeIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>'
 
 // Only http and https addresses are accepted, so nothing like javascript: can be stored.
 const safeUrl = (value) => {
@@ -843,15 +856,19 @@ const safeUrl = (value) => {
 const hostOf = (value) => {
   try { return new URL(value).host } catch { return '' }
 }
-const isValidLink = (link) => !!link && typeof link.title === 'string' && typeof link.url === 'string' && safeUrl(link.url)
 
 // The Wikipedia edition follows the browser language, with English as the fallback.
-const defaultLinks = () => [{ title: 'Wikipedia', url: `https://${['nl', 'de', 'fr', 'es', 'zh'].includes(uiLang) ? uiLang : 'en'}.wikipedia.org/`, description: '' }]
-let links = defaultLinks()
+const wikiCode = ['nl', 'de', 'fr', 'es', 'zh'].includes(uiLang) ? uiLang : 'en'
+const permanentLinks = () => [{ title: 'Wikipedia', url: `https://${wikiCode}.wikipedia.org/`, description: '', icon: globeIcon }]
+const isPermanent = (url) => permanentLinks().some((link) => link.url === url)
+const isValidLink = (link) => !!link && typeof link.title === 'string' && typeof link.url === 'string' && safeUrl(link.url) && !isPermanent(link.url)
+
+let links = []
 try {
   const saved = JSON.parse(localStorage.getItem('links') || 'null')
   if (Array.isArray(saved)) links = saved.filter(isValidLink).slice(0, LINK_LIMIT)
 } catch {}
+let linksOn = readFlag('linksOn', true)
 let editing = null
 let linksFrom = null
 
@@ -867,17 +884,25 @@ const linkAnchor = (link, withDescription) => {
 }
 
 const renderLinks = () => {
-  linksDot.hidden = links.length === 0
-  linksPreview.replaceChildren(...links.map((link) => linkAnchor(link, false)))
+  linksButton.hidden = !linksOn
+  linksPreview.replaceChildren(...[...permanentLinks(), ...links].map((link) => linkAnchor(link, false)))
+
+  // Permanent links as a row of icons at the top of the window.
+  linksIcons.replaceChildren(...permanentLinks().map((link) => {
+    const icon = Object.assign(document.createElement('a'), { href: link.url, target: '_blank', rel: 'noopener', className: 'link-icon', title: link.title })
+    icon.setAttribute('aria-label', link.title)
+    icon.innerHTML = link.icon
+    return icon
+  }))
 
   const rows = links.map((link, index) => {
     const row = el('div', 'link-row')
-    const remove = el('button', 'row-btn', t.linkRemove)
-    remove.type = 'button'
-    remove.dataset.remove = String(index)
     const edit = el('button', 'row-btn', t.linkEditBtn)
     edit.type = 'button'
     edit.dataset.edit = String(index)
+    const remove = el('button', 'row-btn', t.linkRemove)
+    remove.type = 'button'
+    remove.dataset.remove = String(index)
     row.append(linkAnchor(link, true), edit, remove)
     return row
   })
@@ -906,7 +931,7 @@ linkForm.addEventListener('submit', (e) => {
   // A bare host such as example.com gets https:// in front of it.
   let url = linkUrl.value.trim()
   if (url && !/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = `https://${url}`
-  if (!safeUrl(url)) {
+  if (!safeUrl(url) || isPermanent(url)) {
     linkMsg.textContent = t.linkInvalid
     return
   }
@@ -959,6 +984,14 @@ const closeLinks = () => {
 linksButton.addEventListener('click', openLinks)
 document.getElementById('links-close').addEventListener('click', closeLinks)
 linksWindow.addEventListener('click', (e) => { if (e.target === linksWindow) closeLinks() })
+
+// The links button can be switched off in settings; the window closes with it.
+settingsFields.links.addEventListener('change', () => {
+  linksOn = settingsFields.links.checked
+  writeKey('linksOn', linksOn ? 'on' : 'off')
+  if (!linksOn && !linksWindow.hidden) closeLinks()
+  renderLinks()
+})
 renderLinks()
 
 root.toggleAttribute('data-quote-off', !quoteOn)

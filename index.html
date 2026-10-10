@@ -19,7 +19,6 @@
       <div class="links-wrap">
         <button type="button" class="icon-link links-button" id="links-button" aria-haspopup="dialog" aria-label="Links" title="Links">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-          <span class="links-dot" id="links-dot" hidden></span>
         </button>
         <div class="links-preview" id="links-preview"></div>
       </div>
@@ -94,6 +93,7 @@
         </form>
       </div>
       <p class="location-title" id="sec-look">Display</p>
+      <label class="setting"><input type="checkbox" id="set-links"> <span id="lbl-links">Show the links button</span></label>
       <label class="setting"><input type="checkbox" id="set-quote"> <span id="lbl-quote">Show the quote</span></label>
       <label class="setting"><input type="checkbox" id="set-zones"> <span id="lbl-zones">Show time zones (globe next to the date)</span></label>
       <p class="location-title" id="sec-privacy">Privacy</p>
@@ -137,6 +137,7 @@
         <h2 id="links-title">Links</h2>
         <button type="button" id="links-close" class="settings-close" aria-label="Close">×</button>
       </div>
+      <div class="link-icons" id="link-icons"></div>
       <div class="links-list" id="links-list"></div>
       <form class="link-form" id="link-form">
         <p class="link-form-title" id="link-form-title">Add link</p>

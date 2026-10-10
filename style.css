@@ -1181,16 +1181,6 @@ html[data-quote-off] #quote {
   position: relative;
 }
 
-.links-dot {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--color-fg-2);
-}
-
 .links-preview {
   display: none;
   position: absolute;
@@ -1299,4 +1289,36 @@ html[data-quote-off] #quote {
 .link-form input:disabled,
 .link-form button:disabled {
   opacity: .5;
+}
+
+/* Permanent links as a row of icons at the top of the links window. */
+.link-icons {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-fg-2);
+  transition: color .2s ease-in-out, border-color .2s ease-in-out;
+}
+
+.link-icon:hover,
+.link-icon:focus-visible {
+  color: var(--color-fg-1);
+  border-color: var(--color-border-hover);
+}
+
+/* The hidden attribute must win over the icon-link display rule. */
+.links-button[hidden] {
+  display: none;
 }

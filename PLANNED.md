@@ -104,3 +104,29 @@ Changes to make:
 
 ## Questions to settle before building
 
+
+## Permanent links: candidates
+
+Built in, shown as icons in a row at the top of the links window, not removable. Wikipedia is in place, in the browser's language. Candidates for a few more, to choose from:
+
+- **Buienradar** (Dutch rain radar): useful for a Dutch visitor who checks the weather.
+- **Windy**: a global weather and wind map.
+- **DeepL**: translation, better than most for European languages.
+- **OpenStreetMap**: maps without an account.
+
+Pick the ones you want; each one is a single line in `permanentLinks()`.
+
+## Page density: minimal, standard, full
+
+**Idea:** one setting that chooses how much is on the page.
+
+- **Minimal:** clock, date, search and the links icons only. No quote, no Ask AI row, no globe, no weather icon.
+- **Standard:** the current default.
+- **Full:** everything on, including the time zone list and the weather preview.
+
+**Points to watch:** the presets only switch the existing options; each option stays available on its own in settings.
+
+## Decided
+
+- Wikipedia is a permanent link, not part of the custom list. It follows the browser language and cannot be removed.
+- The dot on the links button is removed. The button can be switched off in settings; when it is off, nothing is shown.
