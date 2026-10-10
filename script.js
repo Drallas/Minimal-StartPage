@@ -359,12 +359,12 @@ const linkToggleText = {
   zh: { linksToggle: '链接按钮' }
 }
 const disclaimerText = {
-  en: { privacy: 'Weather and your IP address send data to outside services.' },
-  nl: { privacy: 'Weer en je IP-adres sturen gegevens naar externe diensten.' },
-  de: { privacy: 'Wetter und IP-Adresse senden Daten an externe Dienste.' },
-  fr: { privacy: 'La météo et votre adresse IP envoient des données à des services externes.' },
-  es: { privacy: 'El tiempo y tu IP envían datos a servicios externos.' },
-  zh: { privacy: '天气和 IP 地址会向外部服务发送数据。' }
+  en: { privacy: 'Sends your IP address to outside services.' },
+  nl: { privacy: 'Stuurt je IP-adres naar externe diensten.' },
+  de: { privacy: 'Sendet deine IP-Adresse an externe Dienste.' },
+  fr: { privacy: 'Envoie votre adresse IP à des services externes.' },
+  es: { privacy: 'Envía tu IP a servicios externos.' },
+  zh: { privacy: '会向外部服务发送你的 IP 地址。' }
 }
 const wallpaperText = {
   en: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaper button' },
@@ -940,6 +940,8 @@ const setAdvanced = (open) => {
   // Data beheren and IP details live in the basic view only; one place is enough.
   manageOpenButton.hidden = open
   ipOpen.hidden = open
+  // The privacy line is basic-only: it is not repeated in advanced settings.
+  document.getElementById('privacy').hidden = open
 }
 advancedToggle.addEventListener('click', () => setAdvanced(advancedBlock.hidden))
 
