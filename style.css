@@ -1266,7 +1266,13 @@ html[data-quote-off] #quote {
   height: 8px;
 }
 
-.zones-wrap:hover .zones-preview,
+/* Previews open on hover with a mouse. A touch screen keeps the hover after a tap, so there the tap opens the panel instead. */
+@media (hover: hover) and (pointer: fine) {
+  .zones-wrap:hover .zones-preview {
+    display: block;
+  }
+}
+
 .zones-button:focus-visible ~ .zones-preview {
   display: block;
 }
@@ -1367,9 +1373,14 @@ html[data-quote-off] #quote {
   height: 8px;
 }
 
-.links-wrap:hover .links-preview,
 .links-button:focus-visible ~ .links-preview {
   display: block;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .links-wrap:hover .links-preview {
+    display: block;
+  }
 }
 
 .link-main {
