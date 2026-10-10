@@ -6,6 +6,19 @@ const clockTime = document.getElementById('time')
 const clockDate = document.getElementById('date')
 const modeButtons = document.querySelectorAll('[data-theme-value]')
 
+const quotes = [
+  { text: "Learning without thought is labour lost; thought without learning is perilous.", by: "Confucius, Analects 2.15" },
+  { text: "What you do not wish for yourself, do not impose on others.", by: "Confucius, Analects 15.24" },
+  { text: "Hatred is never ended by hatred. It is ended by love.", by: "Buddha, Dhammapada 5" },
+  { text: "We are what we think. All that we are arises with our thoughts.", by: "Buddha, Dhammapada 1" },
+  { text: "It is not things that disturb us, but our judgements about things.", by: "Epictetus, Enchiridion 5" },
+  { text: "You cannot step twice into the same river.", by: "Heraclitus" },
+  { text: "The unexamined life is not worth living.", by: "Socrates, Plato's Apology" },
+  { text: "The journey of a thousand miles begins with a single step.", by: "Laozi, Tao Te Ching 64" },
+  { text: "Those who know do not speak. Those who speak do not know.", by: "Laozi, Tao Te Ching 56" },
+  { text: "Know thyself.", by: "Inscription at Delphi" }
+]
+
 const engines = [
   { name: 'Kagi', url: 'https://kagi.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M14.498 18.392h-5.14c-1.39 0-1.632-1.508-1.39-2.11.12-.302.423-.724.664-1.026a6.81 6.81 0 003.326.845 6.945 6.945 0 006.954-6.935c0-2.05-.907-3.86-2.298-5.186l.181-.181c.363-.362.907-.603 1.451-.543l.847.06V0h-1.451c-1.693 0-3.084 1.025-3.689 2.472a6.83 6.83 0 00-1.934-.301 6.945 6.945 0 00-6.954 6.935c0 1.507.484 2.954 1.33 4.1a1.84 1.84 0 01-.423.302l-.181.18c-1.391 1.327-2.056 3.015-1.693 4.945.181 1.025 1.088 2.11 1.995 2.714.605.422 1.39.603 2.177.603l5.804-.242c.665 0 1.27.302 1.633.905L16.432 24 20 22.794l-.605-1.327a5.425 5.425 0 00-4.897-3.075zm-2.48-12.543c1.814 0 3.326 1.508 3.326 3.317 0 1.809-1.512 3.316-3.325 3.316-1.814 0-3.326-1.507-3.326-3.316 0-1.87 1.451-3.317 3.325-3.317z"></path></svg>` },
   { name: 'Brave', url: 'https://search.brave.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M17.544 2.375c.017-.005 1.844-.5 2.712.361.872.872 1.588 1.642 1.588 1.642l-.565 1.38v-.003.006-.003L22 7.8c-.014.05-2.112 7.983-2.357 8.954-.488 1.924-.819 2.663-2.202 3.638a212.634 212.634 0 01-4.305 2.917c-.41.252-.92.691-1.383.691-.463 0-.974-.439-1.383-.691a213.099 213.099 0 01-4.306-2.917c-1.383-.975-1.72-1.714-2.2-3.632-.246-.977-2.35-8.904-2.364-8.96l.722-2.045-.566-1.383s.722-.764 1.594-1.63c.866-.872 2.712-.36 2.712-.36L8.066 0h7.373l2.105 2.375zm-5.797 12.557c-.138 0-1.04.318-1.762.691l-.457.234c-.487.253-.823.428-.956.506-.168.108-.066.306.09.414.15.103 2.195 1.684 2.394 1.865l.09.078c.186.168.432.391.607.391.174 0 .415-.223.607-.391l.084-.078c.2-.169 2.244-1.756 2.394-1.865.15-.108.258-.3.09-.408-.133-.084-.475-.253-.956-.506h-.006l-.457-.24c-.722-.373-1.623-.691-1.762-.691zm.006-11.276c-.35.02-.694.092-1.023.211l-.378.126c-.493.169-.969.331-1.21.331-.312 0-2.554-.428-2.584-.433 0 0-2.706 3.26-2.706 3.957 0 .577.228.805.504 1.07l.174.175 2.033 2.152.06.067c.204.204.5.498.29.998l-.043.102c-.228.535-.511 1.203-.15 1.876.384.716 1.046 1.19 1.467 1.118.42-.084 1.419-.601 1.78-.841.367-.229 1.52-1.19 1.521-1.551 0-.307-.829-.812-1.238-1.053l-.18-.12-.199-.12c-.367-.229-1.035-.644-1.047-.825-.018-.228-.017-.294.283-.853l.21-.379c.289-.487.602-1.029.536-1.426-.085-.433-.777-.685-1.36-.901l-.21-.078-.613-.229c-.583-.222-1.232-.463-1.34-.511-.145-.073-.11-.132.335-.174l.223-.025c.553-.06 1.582-.168 2.08-.03l.32.09c.564.145 1.25.337 1.316.445l.03.048c.067.09.109.145.037.53l-.121.607c-.15.806-.391 2.069-.421 2.351l-.012.115c-.042.312-.066.529.301.613.438.119.884.206 1.335.259.216 0 .824-.144 1.24-.24l.095-.025c.367-.078.343-.289.3-.602l-.011-.12c-.03-.282-.27-1.54-.42-2.345l-.122-.614c-.072-.384-.024-.439.036-.529l.03-.048c.067-.108.753-.294 1.318-.444l.318-.091c.5-.138 1.528-.03 2.081.03l.216.018c.451.048.493.108.343.18-.11.049-.758.29-1.341.512-.273.108-.547.21-.823.307-.583.216-1.275.468-1.36.907-.066.391.247.939.535 1.42l.21.379c.301.56.308.625.284.854-.012.18-.68.595-1.053.824l-.192.126-.181.108c-.41.247-1.238.758-1.238 1.059 0 .367 1.16 1.316 1.521 1.55.367.235 1.36.758 1.78.836.421.078 1.082-.396 1.467-1.112.36-.673.078-1.335-.15-1.876l-.042-.102c-.21-.5.084-.794.289-1.004l.065-.06 2.02-2.147.181-.181c.271-.265.505-.493.505-1.07 0-.698-2.706-3.957-2.706-3.957-.03.006-2.275.44-2.586.44l.007-.007c-.252 0-.722-.156-1.215-.337l-.379-.12c-.612-.21-1.02-.21-1.022-.21z"></path></svg>` },
@@ -60,6 +73,12 @@ const updateClock = () => {
 }
 updateClock()
 setInterval(updateClock, 30000)
+
+// One quote per day, picked by day of the year so it stays the same all day.
+const quoteEl = document.getElementById('quote')
+const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 864e5)
+const todaysQuote = quotes[dayOfYear % quotes.length]
+quoteEl.textContent = `${todaysQuote.text} — ${todaysQuote.by}`
 
 const showTheme = () => {
   const stored = root.dataset.theme || 'auto'

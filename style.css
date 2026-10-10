@@ -274,6 +274,21 @@ button {
   color: var(--color-fg-1);
 }
 
+/* Quote of the day sits between the AI row and the footer, out of the column's flow. */
+.quote {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 180px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--color-fg-2);
+  opacity: .7;
+}
+
 footer {
   position: absolute;
   left: 0;
