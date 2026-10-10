@@ -711,7 +711,7 @@ html[data-wallpaper-on] .controls {
   display: flex;
   padding: 6px;
   border-radius: 6px;
-  color: var(--color-fg-1);
+  color: var(--color-fg-2);
   transition: color .2s ease-in-out;
 }
 
