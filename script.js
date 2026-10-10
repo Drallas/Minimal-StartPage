@@ -210,12 +210,12 @@ const weatherWords = {
   zh: { clear: '晴', mostly: '大部晴朗', partly: '局部多云', cloudy: '多云', fog: '雾', drizzle: '毛毛雨', rain: '雨', heavyRain: '大雨', snow: '雪', heavySnow: '大雪', showers: '阵雨', heavyShowers: '强阵雨', storm: '雷暴' },
 }
 const text = {
-  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'Show weather', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Show the quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', reset: 'Reset all choices', close: 'Close', open: 'Settings' , showIp: 'Show my IP address under the footer'},
-  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Weer tonen', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat tonen', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', reset: 'Alle keuzes resetten', close: 'Sluiten', open: 'Instellingen' , showIp: 'Mijn IP-adres onder de footer tonen'},
-  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'Wetter anzeigen', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat anzeigen', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', reset: 'Alle Einstellungen zurücksetzen', close: 'Schließen', open: 'Einstellungen' , showIp: 'Meine IP-Adresse unter der Fußzeile anzeigen'},
-  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Afficher la météo', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Afficher la citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', reset: 'Réinitialiser tous les choix', close: 'Fermer', open: 'Paramètres' , showIp: 'Afficher mon adresse IP sous le pied de page'},
-  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Mostrar el tiempo', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Mostrar la cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes' , showIp: 'Mostrar mi IP debajo del pie'},
-  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '显示天气', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '显示名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置' , showIp: '在页脚下方显示我的 IP 地址'},
+  en: { show: 'Show weather', hide: 'Hide weather', loading: 'Loading…', unavailable: 'Weather unavailable', noSource: 'Set a city in settings', ip: 'Internet IP', title: 'Settings', hint: 'Press ? to open this panel and Esc to close it.', weather: 'On', lookup: 'Find my city from my IP address', cityLabel: 'Or enter a city', cityPlaceholder: 'For example Utrecht', save: 'Save', clearCity: 'Use my IP address instead', notFound: 'City not found', quote: 'Quote', privacy: 'Weather sends your IP address to ipapi.co, or the city you enter to Open-Meteo, and only while weather is on. Nothing else leaves the page.', reset: 'Reset all choices', close: 'Close', open: 'Settings' , showIp: 'My IP address under the footer'},
+  nl: { show: 'Toon weer', hide: 'Verberg weer', loading: 'Laden…', unavailable: 'Weer niet beschikbaar', noSource: 'Stel een plaats in bij instellingen', ip: 'Internet-IP', title: 'Instellingen', hint: 'Druk op ? om dit venster te openen en op Esc om het te sluiten.', weather: 'Aan', lookup: 'Mijn plaats zoeken op basis van mijn IP-adres', cityLabel: 'Of vul een plaats in', cityPlaceholder: 'Bijvoorbeeld Utrecht', save: 'Opslaan', clearCity: 'Liever mijn IP-adres gebruiken', notFound: 'Plaats niet gevonden', quote: 'Citaat', privacy: 'Het weer stuurt je IP-adres naar ipapi.co, of de plaats die je invult naar Open-Meteo, en alleen als het weer aanstaat. Er gaat verder niets naar buiten.', reset: 'Alle keuzes resetten', close: 'Sluiten', open: 'Instellingen' , showIp: 'Mijn IP-adres onder de footer'},
+  de: { show: 'Wetter anzeigen', hide: 'Wetter ausblenden', loading: 'Lädt…', unavailable: 'Wetter nicht verfügbar', noSource: 'Ort in den Einstellungen festlegen', ip: 'Internet-IP', title: 'Einstellungen', hint: 'Drücke ?, um dieses Fenster zu öffnen, und Esc, um es zu schließen.', weather: 'An', lookup: 'Meinen Ort über meine IP-Adresse suchen', cityLabel: 'Oder einen Ort eingeben', cityPlaceholder: 'Zum Beispiel Utrecht', save: 'Speichern', clearCity: 'Stattdessen meine IP-Adresse verwenden', notFound: 'Ort nicht gefunden', quote: 'Zitat', privacy: 'Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den eingegebenen Ort an Open-Meteo, und nur wenn das Wetter aktiv ist. Sonst verlässt nichts die Seite.', reset: 'Alle Einstellungen zurücksetzen', close: 'Schließen', open: 'Einstellungen' , showIp: 'Meine IP-Adresse unter der Fußzeile'},
+  fr: { show: 'Afficher la météo', hide: 'Masquer la météo', loading: 'Chargement…', unavailable: 'Météo indisponible', noSource: 'Réglez une ville dans les paramètres', ip: 'IP internet', title: 'Paramètres', hint: 'Appuyez sur ? pour ouvrir ce panneau et sur Échap pour le fermer.', weather: 'Activé', lookup: 'Trouver ma ville à partir de mon adresse IP', cityLabel: 'Ou saisissez une ville', cityPlaceholder: 'Par exemple Utrecht', save: 'Enregistrer', clearCity: 'Utiliser plutôt mon adresse IP', notFound: 'Ville introuvable', quote: 'Citation', privacy: 'La météo envoie votre adresse IP à ipapi.co, ou la ville saisie à Open-Meteo, et seulement lorsqu’elle est activée. Rien d’autre ne quitte la page.', reset: 'Réinitialiser tous les choix', close: 'Fermer', open: 'Paramètres' , showIp: 'Mon adresse IP sous le pied de page'},
+  es: { show: 'Mostrar el tiempo', hide: 'Ocultar el tiempo', loading: 'Cargando…', unavailable: 'Tiempo no disponible', noSource: 'Elige una ciudad en los ajustes', ip: 'IP de internet', title: 'Ajustes', hint: 'Pulsa ? para abrir este panel y Esc para cerrarlo.', weather: 'Activado', lookup: 'Buscar mi ciudad a partir de mi IP', cityLabel: 'O introduce una ciudad', cityPlaceholder: 'Por ejemplo Utrecht', save: 'Guardar', clearCity: 'Usar mi IP en su lugar', notFound: 'Ciudad no encontrada', quote: 'Cita', privacy: 'El tiempo envía tu IP a ipapi.co, o la ciudad que escribas a Open-Meteo, y solo mientras esté activado. Nada más sale de la página.', reset: 'Restablecer todas las opciones', close: 'Cerrar', open: 'Ajustes' , showIp: 'Mi IP debajo del pie'},
+  zh: { show: '显示天气', hide: '隐藏天气', loading: '加载中…', unavailable: '天气不可用', noSource: '请在设置中填写城市', ip: '互联网 IP', title: '设置', hint: '按 ? 打开此面板，按 Esc 关闭。', weather: '开启', lookup: '根据 IP 地址查找我的城市', cityLabel: '或输入城市', cityPlaceholder: '例如 乌得勒支', save: '保存', clearCity: '改用我的 IP 地址', notFound: '未找到该城市', quote: '名言', privacy: '开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你输入的城市发送到 Open-Meteo。除此之外，页面不会发送任何内容。', reset: '重置所有设置', close: '关闭', open: '设置' , showIp: '页脚下方的我的 IP 地址'},
 }
 const forecastText = {
   en: { now: 'Now', hours: 'Next 24 hours', days: 'Next 7 days', feels: 'Feels like', wind: 'Wind', humidity: 'Humidity', more: 'Click for the full forecast', windy: 'Full forecast on Windy', rain: 'Rain' },
@@ -227,12 +227,12 @@ const forecastText = {
 }
 const hourHeads = { en: ['Time', 'Temp', 'Rain', 'Wind'], nl: ['Tijd', 'Temp', 'Regen', 'Wind'], de: ['Zeit', 'Temp.', 'Regen', 'Wind'], fr: ['Heure', 'Temp.', 'Pluie', 'Vent'], es: ['Hora', 'Temp.', 'Lluvia', 'Viento'], zh: ['时间', '气温', '降水', '风'] }
 const zonesText = {
-  en: { zonesToggle: 'Show time zones', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to five)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to five.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
-  nl: { zonesToggle: 'Tijdzones tonen', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal vijf)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal vijf tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
-  de: { zonesToggle: 'Zeitzonen anzeigen', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu fünf)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens fünf anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
-  fr: { zonesToggle: 'Afficher les fuseaux horaires', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (cinq maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher cinq au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
-  es: { zonesToggle: 'Mostrar zonas horarias', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
-  zh: { zonesToggle: '显示时区', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
+  en: { zonesToggle: 'Time zones', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to five)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to five.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
+  nl: { zonesToggle: 'Tijdzones', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal vijf)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal vijf tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
+  de: { zonesToggle: 'Zeitzonen', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu fünf)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens fünf anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
+  fr: { zonesToggle: 'Fuseaux horaires', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (cinq maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher cinq au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
+  es: { zonesToggle: 'Zonas horarias', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
+  zh: { zonesToggle: '时区', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
 }
 const ipPrivacy = {'en': 'Showing your IP address also asks ipapi.co for it.', 'nl': 'Het tonen van je IP-adres vraagt het ook op bij ipapi.co.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie ebenfalls bei ipapi.co abgefragt.', 'fr': 'Afficher votre adresse IP la demande aussi à ipapi.co.', 'es': 'Mostrar tu IP también la pide a ipapi.co.', 'zh': '显示 IP 地址时，同样会向 ipapi.co 查询。'}
 const linksText = {
@@ -244,20 +244,20 @@ const linksText = {
   zh: { linksButton: '链接', linksTitle: '链接', linksEmpty: '还没有链接。', linkAdd: '添加链接', linkEdit: '编辑链接', lblName: '名称', lblUrl: '地址', lblDesc: '说明（可选）', linkSave: '保存', linkCancel: '取消', linksFull: '最多可以添加 15 个链接。', linkInvalid: '请输入有效的地址，例如 https://example.com', linkEditBtn: '编辑', linkRemove: '移除' }
 }
 const sectionText = {
-  en: { secWeather: 'Weather', secLook: 'Display', secPrivacy: 'Privacy', placeTime: 'Local time' },
-  nl: { secWeather: 'Weer', secLook: 'Weergave', secPrivacy: 'Privacy', placeTime: 'Lokale tijd' },
-  de: { secWeather: 'Wetter', secLook: 'Anzeige', secPrivacy: 'Datenschutz', placeTime: 'Ortszeit' },
-  fr: { secWeather: 'Météo', secLook: 'Affichage', secPrivacy: 'Confidentialité', placeTime: 'Heure locale' },
-  es: { secWeather: 'Tiempo', secLook: 'Vista', secPrivacy: 'Privacidad', placeTime: 'Hora local' },
+  en: { secWeather: 'Weather', secLook: 'Show', secPrivacy: 'Privacy', placeTime: 'Local time' },
+  nl: { secWeather: 'Weer', secLook: 'Tonen', secPrivacy: 'Privacy', placeTime: 'Lokale tijd' },
+  de: { secWeather: 'Wetter', secLook: 'Anzeigen', secPrivacy: 'Datenschutz', placeTime: 'Ortszeit' },
+  fr: { secWeather: 'Météo', secLook: 'Afficher', secPrivacy: 'Confidentialité', placeTime: 'Heure locale' },
+  es: { secWeather: 'Tiempo', secLook: 'Mostrar', secPrivacy: 'Privacidad', placeTime: 'Hora local' },
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const linkToggleText = {
-  en: { linksToggle: 'Show the links button' },
-  nl: { linksToggle: 'Linkknop tonen' },
-  de: { linksToggle: 'Link-Schaltfläche anzeigen' },
-  fr: { linksToggle: 'Afficher le bouton des liens' },
-  es: { linksToggle: 'Mostrar el botón de enlaces' },
-  zh: { linksToggle: '显示链接按钮' }
+  en: { linksToggle: 'Links button' },
+  nl: { linksToggle: 'Linkknop' },
+  de: { linksToggle: 'Link-Schaltfläche' },
+  fr: { linksToggle: 'Bouton des liens' },
+  es: { linksToggle: 'Botón de enlaces' },
+  zh: { linksToggle: '链接按钮' }
 }
 const disclaimerText = {
   en: { privacy: 'Weather can find your place from your IP address, and weather and your IP address send data to outside services. See {help} for details.' },
@@ -268,12 +268,12 @@ const disclaimerText = {
   zh: { privacy: '天气会根据你的 IP 地址查找位置；天气和 IP 地址会向外部服务发送数据。详见{help}。' }
 }
 const wallpaperText = {
-  en: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Show the wallpaper button' },
-  nl: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaperknop tonen' },
-  de: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaper-Schaltfläche anzeigen' },
-  fr: { wallpaperToggle: 'Fond d’écran', wallpaperButton: 'Afficher le bouton du fond d’écran' },
-  es: { wallpaperToggle: 'Fondo de pantalla', wallpaperButton: 'Mostrar el botón del fondo' },
-  zh: { wallpaperToggle: '壁纸', wallpaperButton: '显示壁纸按钮' }
+  en: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaper button' },
+  nl: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaperknop' },
+  de: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaper-Schaltfläche' },
+  fr: { wallpaperToggle: 'Fond d’écran', wallpaperButton: 'Bouton du fond d’écran' },
+  es: { wallpaperToggle: 'Fondo de pantalla', wallpaperButton: 'Botón del fondo' },
+  zh: { wallpaperToggle: '壁纸', wallpaperButton: '壁纸按钮' }
 }
 const tintText = {
   en: { tintToggle: 'Background tint' },
@@ -292,12 +292,12 @@ const bgTitleText = {
   zh: { secBackground: '背景' }
 }
 const pageText = {
-  en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Full', askAi: 'Show the Ask AI links' },
-  nl: { secPage: 'Pagina', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetFull: 'Volledig', askAi: 'Ask AI-links tonen' },
-  de: { secPage: 'Seite', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Voll', askAi: 'KI-Links anzeigen' },
-  fr: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Complet', askAi: 'Afficher les liens IA' },
-  es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetFull: 'Completo', askAi: 'Mostrar los enlaces de IA' },
-  zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetFull: '完整', askAi: '显示 AI 链接' }
+  en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Full', askAi: 'Ask AI links' },
+  nl: { secPage: 'Pagina', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetFull: 'Volledig', askAi: 'Ask AI-links' },
+  de: { secPage: 'Seite', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Voll', askAi: 'KI-Links' },
+  fr: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Complet', askAi: 'Liens IA' },
+  es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetFull: 'Completo', askAi: 'Enlaces de IA' },
+  zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetFull: '完整', askAi: 'AI 链接' }
 }
 const recheckText = {
   en: { ipRecheck: 'Click to check again' },
@@ -878,6 +878,8 @@ const applyPreset = (name) => {
   syncSettings()
 }
 settingsFields.preset.forEach((radio) => radio.addEventListener('change', () => applyPreset(radio.value)))
+// Changing an option in the advanced view can make a preset match or stop matching, so the page radio follows it.
+advancedBlock.addEventListener('change', () => settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() }))
 
 settingsFields.quote.addEventListener('change', () => {
   quoteOn = settingsFields.quote.checked
