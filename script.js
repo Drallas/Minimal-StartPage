@@ -264,12 +264,12 @@ const disclaimerText = {
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
-  en: { location: 'Location', locIp: 'My IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
-  nl: { location: 'Locatie', locIp: 'Mijn IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
-  de: { location: 'Standort', locIp: 'Meine IP-Adresse', locCity: 'Eine Stadt, die ich wähle', noSource: 'Ort wählen', needPlace: 'Das Wetter braucht einen Ort: wähle unten deine IP-Adresse oder eine Stadt.' },
-  fr: { location: 'Position', locIp: 'Mon adresse IP', locCity: 'Une ville que je choisis', noSource: 'Choisir un lieu', needPlace: 'La météo a besoin d’un lieu : choisissez ci-dessous votre adresse IP ou une ville.' },
-  es: { location: 'Ubicación', locIp: 'Mi IP', locCity: 'Una ciudad que elijo', noSource: 'Elige un lugar', needPlace: 'El tiempo necesita un lugar: elige abajo tu IP o una ciudad.' },
-  zh: { location: '位置', locIp: '我的 IP 地址', locCity: '我选择的城市', noSource: '选择地点', needPlace: '天气需要一个地点：请在下方选择你的 IP 地址或一个城市。' },
+  en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
+  nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
+  de: { location: 'Standort', locIp: 'Mein Ort per IP-Adresse', locCity: 'Eine Stadt, die ich wähle', noSource: 'Ort wählen', needPlace: 'Das Wetter braucht einen Ort: wähle unten deine IP-Adresse oder eine Stadt.' },
+  fr: { location: 'Position', locIp: 'Ma position via IP', locCity: 'Une ville que je choisis', noSource: 'Choisir un lieu', needPlace: 'La météo a besoin d’un lieu : choisissez ci-dessous votre adresse IP ou une ville.' },
+  es: { location: 'Ubicación', locIp: 'Mi lugar por IP', locCity: 'Una ciudad que elijo', noSource: 'Elige un lugar', needPlace: 'El tiempo necesita un lugar: elige abajo tu IP o una ciudad.' },
+  zh: { location: '位置', locIp: '通过 IP 地址定位', locCity: '我选择的城市', noSource: '选择地点', needPlace: '天气需要一个地点：请在下方选择你的 IP 地址或一个城市。' },
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[lang])
 // Help: the settings window's help. The same content as the README, without screenshots.
