@@ -34,15 +34,17 @@
 ## Features
 
 - **Search.** Type a query and press Enter, or click the magnifier on the right of the search bar. An empty search shows a short hint instead of doing nothing.
-- **Search engine.** The icon on the left of the search bar shows the current engine (DuckDuckGo by default, or Kagi, Brave or Google). Click it to cycle to the next one. Your choice is remembered.
-- **Theme.** Follows your system's light or dark setting by default. The icons in the top right switch to a fixed Light or Dark theme, and that choice is remembered too. Choose the monitor icon to go back to following the system.
-- **Clock.** The time sits above the search bar, with the date underneath.
-- **Quote.** A short quote from a philosopher or teacher, changing every six hours. There are 50 quotes in English, chosen from widely cited sources; click the quote to see the next one. It is shown in your browser's language (English, Dutch, German, French, Spanish or Chinese) and falls back to English.
+- **Search engine.** The icon on the left of the search bar shows the current engine. DuckDuckGo is the default; click the icon to cycle through Kagi, Brave and Google. Your choice is remembered.
+- **Theme.** Follows your system's light or dark setting by default. The icons in the top right switch to a fixed Light or Dark theme, and that choice is remembered too.
+- **Clock.** The time sits above the search bar, with the date underneath. Hover over the time to see your time zone and its offset from UTC. Click the time to switch between 24-hour and 12-hour (AM/PM) format.
+- **Date.** Hover over the date to see the ISO week number and the day of the year. Click the date to switch between the long form and DD-MM-YYYY.
+- **Quote.** A short quote from a philosopher or teacher, changing every six hours. There are 50 quotes, shown in your browser's language (English, Dutch, German, French, Spanish or Chinese, falling back to English). Click the quote to see the next one.
 - **Shortcuts.** A Wikipedia link in the top left, and links to Claude, ChatGPT, Grok and Duck.ai below the search bar under the caption "Ask AI".
+- **Hidden details.** A few small details are tucked away in the page. Look closely and explore.
 
 ## Your data
 
-Searches go straight to the search engine you chose. The page only stores two settings in your browser: the search engine and the theme. Nothing is sent anywhere else.
+Searches go straight to the search engine you chose. The page only stores your choices for the search engine, theme, clock and date format in your browser. Nothing is sent anywhere else.
 
 ## Customise
 
