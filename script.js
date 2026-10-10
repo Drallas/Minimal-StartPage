@@ -1141,7 +1141,7 @@ settingsFields.resetData.addEventListener('click', () => {
 const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so Safari treats the click as the user's download.
-// Where the share sheet exists (iPhone, iPad) the file goes there instead.
+// On iPhone and iPad the share sheet is used instead, where the file can go to Files.
 const exportLink = document.getElementById('export-data')
 exportLink.addEventListener('click', (e) => {
   const payload = { app: 'Minimal-StartPage', version: 1, exported: new Date().toISOString(), settings: {}, data: {} }
@@ -1149,7 +1149,9 @@ exportLink.addEventListener('click', (e) => {
   EXPORT_DATA.forEach((key) => { try { const value = localStorage.getItem(key); if (value !== null) payload.data[key] = JSON.parse(value) } catch {} })
   const json = JSON.stringify(payload, null, 2)
   const file = new File([json], 'minimal-startpage.json', { type: 'application/json' })
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+  // Only iPhone and iPad have a share sheet with Files; on a Mac the share sheet has no save option, so it downloads.
+  const touchApple = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  if (touchApple && navigator.canShare && navigator.canShare({ files: [file] })) {
     e.preventDefault()
     navigator.share({ files: [file], title: 'Minimal-StartPage' }).catch(() => {})
     return
