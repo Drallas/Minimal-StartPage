@@ -141,6 +141,7 @@ const settingsFields = {
   locCity: document.getElementById('loc-city'),
   showIp: document.getElementById('set-showip'),
   quote: document.getElementById('set-quote'),
+  greetName: document.getElementById('greet-name'),
   zones: document.getElementById('set-zones'),
   wallpaper: document.getElementById('set-wallpaper'),
   tint: document.getElementById('set-tint'),
@@ -285,6 +286,14 @@ const dataText = {
   es: { exportData: 'Exportar datos', importData: 'Importar datos', importInvalid: 'Este archivo no es una exportación de Minimal-StartPage.', importConfirm: '¿Sustituir tus ajustes y datos actuales por los de este archivo?' },
   zh: { exportData: '导出数据', importData: '导入数据', importInvalid: '此文件不是 Minimal-StartPage 的导出文件。', importConfirm: '用此文件中的设置和数据替换当前的设置和数据？' }
 }
+const greetText = {
+  en: { greetLabel: 'Name in the greeting' },
+  nl: { greetLabel: 'Naam in de begroeting' },
+  de: { greetLabel: 'Name in der Begrüßung' },
+  fr: { greetLabel: 'Prénom dans le message d’accueil' },
+  es: { greetLabel: 'Nombre en el saludo' },
+  zh: { greetLabel: '问候语中的名字' }
+}
 const linksOwnText = {
   en: { linksOwn: 'Own links' },
   nl: { linksOwn: 'Eigen links' },
@@ -357,7 +366,7 @@ const advancedText = {
   es: { advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], recheckText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], greetText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -821,6 +830,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
+  document.getElementById('lbl-greet').textContent = t.greetLabel
   const foot = footerText[uiLang] || footerText.en
   document.getElementById('foot-pre').textContent = foot.pre
   document.getElementById('foot-post').textContent = foot.post
@@ -862,6 +872,7 @@ const syncSettings = () => {
   settingsFields.locCity.checked = locationMode === 'city'
   settingsFields.showIp.checked = showIpOn
   settingsFields.quote.checked = quoteOn
+  settingsFields.greetName.value = greetName
   settingsFields.zones.checked = zonesOn
   settingsFields.wallpaper.checked = wallpaperOn
   settingsFields.tint.checked = tintOn
@@ -1105,7 +1116,7 @@ const clearKeys = (keys) => {
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
 }
-const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState']
+const personalKeys = ['greetName', 'links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState']
 settingsFields.resetSettings.addEventListener('click', () => {
   clearKeys(['personalState', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
   location.reload()
@@ -1118,7 +1129,7 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
+const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 document.getElementById('export-data').addEventListener('click', () => {
   const payload = { app: 'Minimal-StartPage', version: 1, exported: new Date().toISOString(), settings: {}, data: {} }
@@ -1149,6 +1160,23 @@ importFile.addEventListener('change', async () => {
   Object.entries(payload.data).forEach(([key, value]) => { if (EXPORT_DATA.includes(key)) writeKey(key, JSON.stringify(value)) })
   location.reload()
 })
+
+// Greeting: an optional line above the clock, such as "Hallo, Allard". Empty means no greeting.
+let greetName = ''
+try { greetName = localStorage.getItem('greetName') || '' } catch {}
+const greeting = document.getElementById('greeting')
+const greetHello = { en: 'Hello', nl: 'Hallo', de: 'Hallo', fr: 'Bonjour', es: 'Hola', zh: '你好' }
+const renderGreeting = () => {
+  const name = greetName.trim()
+  greeting.hidden = !name
+  greeting.textContent = name ? `${greetHello[uiLang] || greetHello.en}${uiLang === 'zh' ? '，' : ', '}${name}` : ''
+}
+settingsFields.greetName.addEventListener('input', () => {
+  greetName = settingsFields.greetName.value.slice(0, 40)
+  writeKey('greetName', greetName)
+  renderGreeting()
+})
+renderGreeting()
 
 // Time zones: optional. A small globe next to the date opens a window with up to five extra zones.
 const zonesButton = document.getElementById('zones-button')

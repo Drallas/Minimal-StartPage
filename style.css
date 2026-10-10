@@ -741,6 +741,19 @@ html[data-wallpaper-on] .modes button {
   color: var(--color-fg-1);
 }
 
+/* The greeting above the clock: small and quiet. */
+.greeting {
+  margin: 0 0 6px;
+  font-size: 14px;
+  letter-spacing: .02em;
+  color: var(--color-fg-2);
+  text-align: center;
+}
+
+.greeting[hidden] {
+  display: none;
+}
+
 /* Minimal links: the preview is off, so it stays hidden even on hover. */
 .links-preview[hidden] {
   display: none !important;
