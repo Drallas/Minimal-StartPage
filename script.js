@@ -254,12 +254,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiAdd: 'Add', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', aiInvalid: 'Enter a valid https address' },
-  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiAdd: 'Toevoegen', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiAdd: 'Hinzufügen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiAdd: 'Ajouter', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiAdd: 'Añadir', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiAdd: '添加', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiInvalid: '请输入有效的 https 地址' }
+  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiManage: 'Manage shortcuts', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', aiInvalid: 'Enter a valid https address' },
+  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiManage: 'Snelkoppelingen beheren', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiManage: 'Verknüpfungen verwalten', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiManage: 'Gérer les raccourcis', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiManage: 'Gestionar accesos', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiManage: '管理快捷方式', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiInvalid: '请输入有效的 https 地址' }
 }
 const linksOwnText = {
   en: { linksOwn: 'Own links' },
@@ -693,7 +693,13 @@ const applySettingsText = () => {
   document.getElementById('ai-name').setAttribute('aria-label', t.aiName)
   document.getElementById('ai-url').placeholder = 'https://'
   document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
-  document.getElementById('ai-add').textContent = t.aiAdd
+  document.getElementById('ai-open').textContent = t.aiManage
+  document.getElementById('ai-save').textContent = t.aiSave
+  document.getElementById('ai-cancel').textContent = t.aiCancel
+  document.getElementById('ai-form-title').textContent = t.aiAddTitle
+  document.getElementById('lbl-ai-name').textContent = t.aiName
+  document.getElementById('lbl-ai-url').textContent = t.aiUrl
+  document.getElementById('ai-title').textContent = t.aiSec
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
@@ -801,7 +807,7 @@ settings.addEventListener('click', (e) => { if (e.target === settings) closeSett
 
 document.addEventListener('keydown', (e) => {
   const zonesWindow = document.getElementById('zones')
-  const open = [helpWindow, forecastDialog, zonesWindow, document.getElementById('links'), settings].find((d) => !d.hidden) || null
+  const open = [helpWindow, forecastDialog, zonesWindow, document.getElementById('links'), document.getElementById('ai-window'), settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -814,6 +820,7 @@ document.addEventListener('keydown', (e) => {
     else if (open === forecastDialog) closeForecast()
     else if (open === zonesWindow) closeZones()
     else if (open === document.getElementById('links')) closeLinks()
+    else if (open === document.getElementById('ai-window')) closeAiWindow()
     else if (!advancedBlock.hidden) setAdvanced(false)
     else closeSettings()
     return
@@ -1396,25 +1403,67 @@ const renderAskAi = () => {
     row.append(
       aiButton(t.aiUp, '↑', move(-1), index === 0),
       aiButton(t.aiDown, '↓', move(1), index === askAiList.length - 1),
-      aiButton(t.aiRemove, '×', () => { askAiList = askAiList.filter((_, i) => i !== index); saveAskAi() }),
+      aiButton(t.aiEdit, '✎', () => startAiEdit(index)),
+      aiButton(t.aiRemove, '×', () => { askAiList = askAiList.filter((_, i) => i !== index); if (aiEditing === index) resetAiForm(); saveAskAi() }),
     )
     return row
   }))
 }
 
+let aiEditing = null
+const resetAiForm = () => {
+  aiEditing = null
+  aiForm.reset()
+  document.getElementById('ai-form-title').textContent = t.aiAddTitle
+  document.getElementById('ai-cancel').hidden = true
+  aiMsg.textContent = ''
+}
+const startAiEdit = (index) => {
+  const item = askAiList[index]
+  aiEditing = index
+  aiName.value = item.title
+  aiUrl.value = item.url
+  document.getElementById('ai-form-title').textContent = t.aiEditTitle
+  document.getElementById('ai-cancel').hidden = false
+  aiMsg.textContent = ''
+  renderAskAi()
+  aiName.focus()
+}
+document.getElementById('ai-cancel').addEventListener('click', resetAiForm)
 aiForm.addEventListener('submit', (e) => {
   e.preventDefault()
   // A bare host such as example.com gets https:// in front of it.
   let url = aiUrl.value.trim()
   if (url && !/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = `https://${url}`
   if (!safeUrl(url)) { aiMsg.textContent = t.aiInvalid; return }
-  if (askAiList.length >= ASK_AI_LIMIT) { aiMsg.textContent = t.aiMax; return }
-  askAiList = [...askAiList, { key: '', title: aiName.value.trim() || hostOf(url), url }]
-  aiName.value = ''
-  aiUrl.value = ''
-  aiMsg.textContent = ''
+  const title = aiName.value.trim() || hostOf(url)
+  if (aiEditing !== null) {
+    askAiList = askAiList.map((item, i) => (i === aiEditing ? { ...item, title, url } : item))
+  } else {
+    if (askAiList.length >= ASK_AI_LIMIT) { aiMsg.textContent = t.aiMax; return }
+    askAiList = [...askAiList, { key: '', title, url }]
+  }
+  resetAiForm()
   saveAskAi()
 })
+
+// The AI window: opened from the advanced settings, closed with Escape, the close button or a click outside.
+const aiWindow = document.getElementById('ai-window')
+const openAiWindow = () => {
+  aiWindowFrom = document.activeElement
+  resetAiForm()
+  renderAskAi()
+  aiWindow.hidden = false
+  aiWindow.querySelector('.settings-panel').focus()
+}
+let aiWindowFrom = null
+const closeAiWindow = () => {
+  aiWindow.hidden = true
+  if (aiWindowFrom && aiWindowFrom.focus) aiWindowFrom.focus()
+}
+document.getElementById('ai-open').addEventListener('click', openAiWindow)
+document.getElementById('ai-close').addEventListener('click', closeAiWindow)
+aiWindow.addEventListener('click', (e) => { if (e.target === aiWindow) closeAiWindow() })
 
 renderAskAi()
 root.toggleAttribute('data-quote-off', !quoteOn)

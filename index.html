@@ -107,13 +107,7 @@
         <section class="adv-group">
           <p class="location-title" id="sec-ai">AI shortcuts</p>
           <label class="setting"><input type="checkbox" id="set-askai"> <span id="lbl-askai">On</span></label>
-          <ul class="ai-list" id="ai-list"></ul>
-          <form class="ai-form" id="ai-form">
-            <input type="text" id="ai-name" autocomplete="off">
-            <input type="text" id="ai-url" autocomplete="off" inputmode="url">
-            <button type="submit" id="ai-add">Add</button>
-          </form>
-          <p class="city-msg" id="ai-msg" role="status"></p>
+          <button type="button" id="ai-open" class="text-button">Manage shortcuts</button>
         </section>
         <section class="adv-group">
           <p class="location-title" id="sec-bg">Background</p>
@@ -161,6 +155,28 @@
       </form>
     </div>
   </div>
+  <div class="settings" id="ai-window" hidden>
+    <div class="settings-panel ai-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="ai-title">
+      <div class="settings-head">
+        <h2 id="ai-title">AI shortcuts</h2>
+        <button type="button" id="ai-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <ul class="ai-list" id="ai-list"></ul>
+      <form class="link-form" id="ai-form">
+        <p class="link-form-title" id="ai-form-title">Add shortcut</p>
+        <label for="ai-name" id="lbl-ai-name">Name</label>
+        <input type="text" id="ai-name" autocomplete="off">
+        <label for="ai-url" id="lbl-ai-url">Address</label>
+        <input type="text" id="ai-url" inputmode="url" autocomplete="off" placeholder="https://">
+        <div class="link-form-actions">
+          <button type="submit" id="ai-save">Save</button>
+          <button type="button" id="ai-cancel" class="text-button" hidden>Cancel</button>
+        </div>
+        <p class="city-msg" id="ai-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+
   <div class="settings" id="links" hidden>
     <div class="settings-panel links-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="links-title">
       <div class="settings-head">
