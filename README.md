@@ -49,8 +49,6 @@ Searches go straight to the search engine you chose. The page only stores two se
 
 The Claude, ChatGPT and Grok icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The logos are trademarks of their owners.
 
-The globe and theme icons are from [Font Awesome Free](https://fontawesome.com) (CC BY 4.0).
-
 ## License
 
 Released under the [MIT License](LICENSE). Use, copy, modify and share it however you like. It comes without warranty, and the author is not liable for any damage.
