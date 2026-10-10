@@ -1136,10 +1136,6 @@ html[data-quote-off] #quote {
   color: var(--color-fg-2);
 }
 
-.nested {
-  margin-left: 24px;
-}
-
 /* Condition icons inside the pop-ups: small, next to the hour or the current state. */
 .hour-cell,
 .now-cell {
