@@ -1824,13 +1824,19 @@ const hueSlider = document.getElementById('hue')
 
 // The tint can be switched off in settings: the background is then neutral, and the slider is hidden.
 let tintOn = readFlag('tint', true)
+// The slider's middle (180) is the neutral background; the ends are the colours. Storage keeps the colour
+// hue, so the middle is hue 0 and the slider value is the hue turned by 180 degrees.
+const hueOf = (slider) => (Number(slider) + 180) % 360
+const sliderOf = (hue) => (Number(hue) + 180) % 360
 const applyHue = (value) => {
-  const hue = Number(value)
-  hueSlider.value = hue
+  const slider = Number(value)
+  const hue = hueOf(slider)
+  const neutral = slider === 180
+  hueSlider.value = slider
   hueSlider.hidden = !tintOn
   tintCycle.hidden = !tintOn
-  tintCycle.style.setProperty('--dot', hue > 0 && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)')
-  if (hue > 0 && tintOn) {
+  tintCycle.style.setProperty('--dot', !neutral && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)')
+  if (!neutral && tintOn) {
     root.dataset.tint = ''
     root.style.setProperty('--hue', hue)
   } else {
@@ -1839,11 +1845,11 @@ const applyHue = (value) => {
   }
 }
 
-try { applyHue(localStorage.getItem('hue') || 0) } catch { applyHue(0) }
+try { applyHue(sliderOf(localStorage.getItem('hue') || 0)) } catch { applyHue(180) }
 tintCycle.addEventListener('click', () => {
-  const index = Math.max(TINT_STEPS.indexOf(Number(hueSlider.value)), 0)
+  const index = Math.max(TINT_STEPS.indexOf(hueOf(hueSlider.value)), 0)
   const next = TINT_STEPS[(index + 1) % TINT_STEPS.length]
-  applyHue(next)
+  applyHue(sliderOf(next))
   try { localStorage.setItem('hue', String(next)) } catch {}
 })
 
@@ -1856,5 +1862,5 @@ settingsFields.tint.addEventListener('change', () => {
 
 hueSlider.addEventListener('input', () => {
   applyHue(hueSlider.value)
-  try { localStorage.setItem('hue', hueSlider.value) } catch {}
+  try { localStorage.setItem('hue', String(hueOf(hueSlider.value))) } catch {}
 })
