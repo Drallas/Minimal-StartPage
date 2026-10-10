@@ -143,6 +143,7 @@ const settingsFields = {
   quote: document.getElementById('set-quote'),
   zones: document.getElementById('set-zones'),
   wallpaper: document.getElementById('set-wallpaper'),
+  tint: document.getElementById('set-tint'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links'),
   cityForm: document.getElementById('city-form'),
@@ -272,7 +273,15 @@ const wallpaperText = {
   es: { wallpaperToggle: 'Fondo de pantalla', wallpaperButton: 'Mostrar el botón del fondo' },
   zh: { wallpaperToggle: '壁纸', wallpaperButton: '显示壁纸按钮' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const tintText = {
+  en: { tintToggle: 'Background tint' },
+  nl: { tintToggle: 'Achtergrondkleur (schuif)' },
+  de: { tintToggle: 'Hintergrundfarbe (Regler)' },
+  fr: { tintToggle: 'Teinte du fond (curseur)' },
+  es: { tintToggle: 'Tono del fondo (control)' },
+  zh: { tintToggle: '背景色调（滑块）' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -620,6 +629,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-quote').textContent = t.quote
   document.getElementById('lbl-zones').textContent = t.zonesToggle
   document.getElementById('lbl-wallpaper').textContent = t.wallpaperToggle
+  document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
   document.getElementById('zones-title').textContent = t.zonesTitle
@@ -654,6 +664,7 @@ const syncSettings = () => {
   settingsFields.quote.checked = quoteOn
   settingsFields.zones.checked = zonesOn
   settingsFields.wallpaper.checked = wallpaperOn
+  settingsFields.tint.checked = tintOn
   settingsFields.wallpaperButton.checked = wallpaperButtonOn
   settingsFields.links.checked = linksOn
   settingsFields.cityClear.hidden = !city
@@ -815,7 +826,7 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn', 'wallpaperButton']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn', 'wallpaperButton', 'tint']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}
@@ -1265,10 +1276,13 @@ wallpaperToggle.hidden = !wallpaperButtonOn
 // Background tint: a hue from the slider; zero keeps the neutral monochrome look.
 const hueSlider = document.getElementById('hue')
 
+// The tint can be switched off in settings: the background is then neutral, and the slider is hidden.
+let tintOn = readFlag('tint', true)
 const applyHue = (value) => {
   const hue = Number(value)
   hueSlider.value = hue
-  if (hue > 0) {
+  hueSlider.hidden = !tintOn
+  if (hue > 0 && tintOn) {
     root.dataset.tint = ''
     root.style.setProperty('--hue', hue)
   } else {
@@ -1278,6 +1292,13 @@ const applyHue = (value) => {
 }
 
 try { applyHue(localStorage.getItem('hue') || 0) } catch { applyHue(0) }
+
+// Settings: the tint on or off. The chosen hue is kept for when it is switched back on.
+settingsFields.tint.addEventListener('change', () => {
+  tintOn = settingsFields.tint.checked
+  writeKey('tint', tintOn ? 'on' : 'off')
+  applyHue(hueSlider.value)
+})
 
 hueSlider.addEventListener('input', () => {
   applyHue(hueSlider.value)
