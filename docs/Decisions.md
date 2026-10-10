@@ -7,7 +7,7 @@
 - The IP address and the IP-based weather location are advanced options. The basic view only carries the privacy note.
 - The hover list shows only the visitor's own links. The permanent ones live in the window.
 - Settings save straight away; there is no save button.
-- Page presets: Minimal, Standard and Full, chosen in the settings. They only switch display options.
+- Page presets: Minimal, Standard and Full, chosen in the settings. They only switch display options. Weather and the IP address are not part of the presets: turning either on shows Custom. The IP address is a power-user option and belongs with the custom choices.
 - Custom is shown when the choices match none of the presets. It is a state, not a choice, so it cannot be clicked.
 - Footer and IP line: no underline on hover; the pointer shows they are clickable.
 - Dialogs open with the panel focused, not a button, so nothing looks selected.
