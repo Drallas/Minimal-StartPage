@@ -260,12 +260,12 @@ const linkToggleText = {
   zh: { linksToggle: '链接按钮' }
 }
 const disclaimerText = {
-  en: { privacy: 'Weather can find your place from your IP address, and weather and your IP address send data to outside services. See {help} for details.' },
-  nl: { privacy: 'Het weer zoekt je plaats via je IP-adres, en het weer en je IP-adres sturen gegevens naar externe diensten. Zie {help} voor de details.' },
-  de: { privacy: 'Das Wetter findet deinen Ort über deine IP-Adresse; Wetter und IP-Adresse senden Daten an externe Dienste. Details siehe {help}.' },
-  fr: { privacy: 'La météo trouve votre lieu à partir de votre adresse IP ; la météo et votre adresse IP envoient des données à des services externes. Détails : {help}.' },
-  es: { privacy: 'El tiempo busca tu lugar a partir de tu IP; el tiempo y tu IP envían datos a servicios externos. Detalles en {help}.' },
-  zh: { privacy: '天气会根据你的 IP 地址查找位置；天气和 IP 地址会向外部服务发送数据。详见{help}。' }
+  en: { privacy: 'Weather and your IP address send data to outside services. Details in {help}.' },
+  nl: { privacy: 'Weer en je IP-adres sturen gegevens naar externe diensten. Details in {help}.' },
+  de: { privacy: 'Wetter und IP-Adresse senden Daten an externe Dienste. Details unter {help}.' },
+  fr: { privacy: 'La météo et votre adresse IP envoient des données à des services externes. Détails dans {help}.' },
+  es: { privacy: 'El tiempo y tu IP envían datos a servicios externos. Detalles en {help}.' },
+  zh: { privacy: '天气和 IP 地址会向外部服务发送数据。详见{help}。' }
 }
 const wallpaperText = {
   en: { wallpaperToggle: 'Wallpaper', wallpaperButton: 'Wallpaper button' },
@@ -653,6 +653,7 @@ const applySettingsText = () => {
   document.getElementById('sec-weather').textContent = t.secWeather
   document.getElementById('sec-look').textContent = t.secLook
   document.getElementById('sec-privacy').textContent = t.secPrivacy
+  document.getElementById('sec-privacy-basic').textContent = t.secPrivacy
   document.getElementById('lbl-loc-ip').textContent = t.locIp
   document.getElementById('lbl-loc-city').textContent = t.locCity
   document.getElementById('lbl-showip').textContent = t.showIp
@@ -738,6 +739,7 @@ const openSettings = () => {
 
 const closeSettings = () => {
   settings.hidden = true
+  setAdvanced(false)
   if (openedFrom.el && openedFrom.el.focus) openedFrom.el.focus()
 }
 
@@ -787,6 +789,7 @@ document.addEventListener('keydown', (e) => {
     else if (open === forecastDialog) closeForecast()
     else if (open === zonesWindow) closeZones()
     else if (open === document.getElementById('links')) closeLinks()
+    else if (!advancedBlock.hidden) setAdvanced(false)
     else closeSettings()
     return
   }

@@ -889,7 +889,7 @@ html[data-wallpaper-on] .controls {
 }
 
 .privacy {
-  margin-top: 16px;
+  margin-top: 4px;
   font-size: 12px;
   color: var(--color-fg-2);
 }
@@ -1458,8 +1458,22 @@ html[data-quote-off] #quote {
   margin-top: 14px;
 }
 
+/* Advanced is a button, not a link: it is an action that opens more options. */
 #advanced-toggle {
-  margin-top: 14px;
+  align-self: flex-start;
+  height: 32px;
+  margin: 14px 0 6px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-fg-1);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+#advanced-toggle:hover,
+#advanced-toggle:focus-visible {
+  border-color: var(--color-fg-2);
 }
 
 #reset-all {
