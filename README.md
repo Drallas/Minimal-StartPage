@@ -40,6 +40,7 @@
 - **Date.** Hover over the date to see the ISO week number and the day of the year. Click the date to switch between the long form and DD-MM-YYYY.
 - **Quote.** A short quote from a philosopher or teacher, changing every six hours. There are 50 quotes, shown in your browser's language (English, Dutch, German, French, Spanish or Chinese, falling back to English). Click the quote to see the next one.
 - **Shortcuts.** A Wikipedia link in the top left, and links to Claude, ChatGPT, Grok and Duck.ai below the search bar under the caption "Ask AI".
+- **Background.** Quiet controls sit in the bottom corners. The slider on the left gives the background a subtle tint in any hue (drag back to the far left for the neutral look). The circles on the right pick a wallpaper or none. Wallpapers adapt to light and dark mode, and your choice is remembered.
 - **Hidden details.** A few small details are tucked away in the page. Look closely and explore.
 
 ## Your data
@@ -53,6 +54,8 @@ Searches go straight to the search engine you chose. The page only stores your c
 - **Colours:** edit the tokens in `color.css`.
 
 ## Credits
+
+The wallpapers are photos from [Unsplash](https://unsplash.com), used under the Unsplash License.
 
 The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon comes from [Simple Icons](https://simpleicons.org) (CC0). The logos are trademarks of their owners.
 

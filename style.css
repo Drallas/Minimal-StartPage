@@ -333,7 +333,140 @@ footer {
   opacity: .6;
 }
 
+/* Wallpaper and tint: optional, quiet controls in the bottom corners. */
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity .6s ease-out;
+  pointer-events: none;
+}
+
+.wallpaper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+}
+
+html[data-wallpaper-on] .wallpaper {
+  opacity: 1;
+}
+
+html[data-wallpaper-on] .blob {
+  display: none;
+}
+
+/* A tint replaces the neutral background with one hue, in both themes. */
+:root[data-tint] {
+  --color-bg: hsl(var(--hue) 22% 94%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-tint]:not([data-theme="light"]) {
+    --color-bg: hsl(var(--hue) 24% 9%);
+  }
+}
+
+:root[data-theme="dark"][data-tint] {
+  --color-bg: hsl(var(--hue) 24% 9%);
+}
+
+.controls {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 16px;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: .45;
+  transition: opacity .3s ease-in-out;
+}
+
+.controls:hover,
+.controls:focus-within {
+  opacity: 1;
+}
+
+.hue {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 96px;
+  height: 16px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hue::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(to right, hsl(0 30% 60%), hsl(60 30% 60%), hsl(120 30% 60%), hsl(180 30% 60%), hsl(240 30% 60%), hsl(300 30% 60%), hsl(360 30% 60%));
+  border-radius: 1px;
+}
+
+.hue::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--color-fg-2);
+  border: none;
+}
+
+.hue::-moz-range-track {
+  height: 2px;
+  background: linear-gradient(to right, hsl(0 30% 60%), hsl(60 30% 60%), hsl(120 30% 60%), hsl(180 30% 60%), hsl(240 30% 60%), hsl(300 30% 60%), hsl(360 30% 60%));
+}
+
+.hue::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-fg-2);
+}
+
+.wallpapers {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.wallpapers button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.wallpapers button[aria-pressed="true"] {
+  outline: 1px solid var(--color-fg-2);
+  outline-offset: 2px;
+}
+
+.wallpapers span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.wallpapers .plain {
+  background: var(--color-bg);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .wallpaper,
   body,
   .topbar .icon-link,
   .modes button,
