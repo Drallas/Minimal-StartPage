@@ -222,12 +222,12 @@ const forecastText = {
 }
 const hourHeads = { en: ['Time', 'Temp', 'Rain', 'Wind'], nl: ['Tijd', 'Temp', 'Regen', 'Wind'], de: ['Zeit', 'Temp.', 'Regen', 'Wind'], fr: ['Heure', 'Temp.', 'Pluie', 'Vent'], es: ['Hora', 'Temp.', 'Lluvia', 'Viento'], zh: ['时间', '气温', '降水', '风'] }
 const zonesText = {
-  en: { zonesToggle: 'Show time zones (globe above the clock)', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to five)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to five.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
-  nl: { zonesToggle: 'Tijdzones tonen (bolletje boven de klok)', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal vijf)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal vijf tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
-  de: { zonesToggle: 'Zeitzonen anzeigen (Kugel über der Uhr)', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu fünf)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens fünf anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
-  fr: { zonesToggle: 'Afficher les fuseaux (globe au-dessus de l’horloge)', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (cinq maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher cinq au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
-  es: { zonesToggle: 'Mostrar zonas horarias (globo sobre el reloj)', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
-  zh: { zonesToggle: '显示时区（时钟上方的地球图标）', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
+  en: { zonesToggle: 'Show time zones', zonesTitle: 'Time zones', zonesLocal: 'This computer', zonesAdd: 'Add a time zone (up to five)', zoneAddBtn: 'Add', zonesEmpty: 'No extra time zones yet.', zonesMax: 'You can show up to five.', zoneNotFound: 'Time zone not found', zoneDuplicate: 'Already in the list', remove: 'Remove', zonesButton: 'Time zones' },
+  nl: { zonesToggle: 'Tijdzones tonen', zonesTitle: 'Tijdzones', zonesLocal: 'Deze computer', zonesAdd: 'Tijdzone toevoegen (maximaal vijf)', zoneAddBtn: 'Toevoegen', zonesEmpty: 'Nog geen extra tijdzones.', zonesMax: 'Je kunt er maximaal vijf tonen.', zoneNotFound: 'Tijdzone niet gevonden', zoneDuplicate: 'Staat al in de lijst', remove: 'Verwijderen', zonesButton: 'Tijdzones' },
+  de: { zonesToggle: 'Zeitzonen anzeigen', zonesTitle: 'Zeitzonen', zonesLocal: 'Dieser Computer', zonesAdd: 'Zeitzone hinzufügen (bis zu fünf)', zoneAddBtn: 'Hinzufügen', zonesEmpty: 'Noch keine zusätzlichen Zeitzonen.', zonesMax: 'Du kannst höchstens fünf anzeigen.', zoneNotFound: 'Zeitzone nicht gefunden', zoneDuplicate: 'Ist schon in der Liste', remove: 'Entfernen', zonesButton: 'Zeitzonen' },
+  fr: { zonesToggle: 'Afficher les fuseaux horaires', zonesTitle: 'Fuseaux horaires', zonesLocal: 'Cet ordinateur', zonesAdd: 'Ajouter un fuseau horaire (cinq maximum)', zoneAddBtn: 'Ajouter', zonesEmpty: 'Aucun fuseau supplémentaire.', zonesMax: 'Vous pouvez en afficher cinq au maximum.', zoneNotFound: 'Fuseau horaire introuvable', zoneDuplicate: 'Déjà dans la liste', remove: 'Supprimer', zonesButton: 'Fuseaux horaires' },
+  es: { zonesToggle: 'Mostrar zonas horarias', zonesTitle: 'Zonas horarias', zonesLocal: 'Este equipo', zonesAdd: 'Añadir una zona horaria (máximo cinco)', zoneAddBtn: 'Añadir', zonesEmpty: 'Aún no hay zonas adicionales.', zonesMax: 'Puedes mostrar hasta cinco.', zoneNotFound: 'Zona horaria no encontrada', zoneDuplicate: 'Ya está en la lista', remove: 'Quitar', zonesButton: 'Zonas horarias' },
+  zh: { zonesToggle: '显示时区', zonesTitle: '时区', zonesLocal: '本机', zonesAdd: '添加时区（最多五个）', zoneAddBtn: '添加', zonesEmpty: '还没有额外的时区。', zonesMax: '最多显示五个。', zoneNotFound: '未找到该时区', zoneDuplicate: '已在列表中', remove: '移除', zonesButton: '时区' }
 }
 const ipPrivacy = {'en': 'Showing your IP address also asks ipapi.co for it.', 'nl': 'Het tonen van je IP-adres vraagt het ook op bij ipapi.co.', 'de': 'Zum Anzeigen deiner IP-Adresse wird sie ebenfalls bei ipapi.co abgefragt.', 'fr': 'Afficher votre adresse IP la demande aussi à ipapi.co.', 'es': 'Mostrar tu IP también la pide a ipapi.co.', 'zh': '显示 IP 地址时，同样会向 ipapi.co 查询。'}
 const linksText = {
@@ -255,21 +255,21 @@ const linkToggleText = {
   zh: { linksToggle: '显示链接按钮' }
 }
 const disclaimerText = {
-  en: { privacy: 'Weather and your IP address send data to outside services. See Help for details.' },
-  nl: { privacy: 'Het weer en je IP-adres sturen gegevens naar externe diensten. Zie Help voor de details.' },
-  de: { privacy: 'Wetter und deine IP-Adresse senden Daten an externe Dienste. Details siehe Hilfe.' },
-  fr: { privacy: 'La météo et votre adresse IP envoient des données à des services externes. Détails dans l’aide.' },
-  es: { privacy: 'El tiempo y tu IP envían datos a servicios externos. Detalles en la ayuda.' },
-  zh: { privacy: '天气和 IP 地址会向外部服务发送数据。详见帮助。' }
+  en: { privacy: 'Weather can find your place from your IP address, and weather and your IP address send data to outside services. See Help for details.' },
+  nl: { privacy: 'Het weer zoekt je plaats via je IP-adres, en het weer en je IP-adres sturen gegevens naar externe diensten. Zie Help voor de details.' },
+  de: { privacy: 'Das Wetter findet deinen Ort über deine IP-Adresse; Wetter und IP-Adresse senden Daten an externe Dienste. Details siehe Hilfe.' },
+  fr: { privacy: 'La météo trouve votre lieu à partir de votre adresse IP ; la météo et votre adresse IP envoient des données à des services externes. Détails dans l’aide.' },
+  es: { privacy: 'El tiempo busca tu lugar a partir de tu IP; el tiempo y tu IP envían datos a servicios externos. Detalles en la ayuda.' },
+  zh: { privacy: '天气会根据你的 IP 地址查找位置；天气和 IP 地址会向外部服务发送数据。详见帮助。' }
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
-  en: { location: 'Location', locIp: 'My IP address (finds my city)', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
-  nl: { location: 'Locatie', locIp: 'Mijn IP-adres (zoekt mijn plaats)', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
-  de: { location: 'Standort', locIp: 'Meine IP-Adresse (findet meinen Ort)', locCity: 'Eine Stadt, die ich wähle', noSource: 'Ort wählen', needPlace: 'Das Wetter braucht einen Ort: wähle unten deine IP-Adresse oder eine Stadt.' },
-  fr: { location: 'Position', locIp: 'Mon adresse IP (trouve ma ville)', locCity: 'Une ville que je choisis', noSource: 'Choisir un lieu', needPlace: 'La météo a besoin d’un lieu : choisissez ci-dessous votre adresse IP ou une ville.' },
-  es: { location: 'Ubicación', locIp: 'Mi IP (busca mi ciudad)', locCity: 'Una ciudad que elijo', noSource: 'Elige un lugar', needPlace: 'El tiempo necesita un lugar: elige abajo tu IP o una ciudad.' },
-  zh: { location: '位置', locIp: '我的 IP 地址（查找我的城市）', locCity: '我选择的城市', noSource: '选择地点', needPlace: '天气需要一个地点：请在下方选择你的 IP 地址或一个城市。' },
+  en: { location: 'Location', locIp: 'My IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
+  nl: { location: 'Locatie', locIp: 'Mijn IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
+  de: { location: 'Standort', locIp: 'Meine IP-Adresse', locCity: 'Eine Stadt, die ich wähle', noSource: 'Ort wählen', needPlace: 'Das Wetter braucht einen Ort: wähle unten deine IP-Adresse oder eine Stadt.' },
+  fr: { location: 'Position', locIp: 'Mon adresse IP', locCity: 'Une ville que je choisis', noSource: 'Choisir un lieu', needPlace: 'La météo a besoin d’un lieu : choisissez ci-dessous votre adresse IP ou une ville.' },
+  es: { location: 'Ubicación', locIp: 'Mi IP', locCity: 'Una ciudad que elijo', noSource: 'Elige un lugar', needPlace: 'El tiempo necesita un lugar: elige abajo tu IP o una ciudad.' },
+  zh: { location: '位置', locIp: '我的 IP 地址', locCity: '我选择的城市', noSource: '选择地点', needPlace: '天气需要一个地点：请在下方选择你的 IP 地址或一个城市。' },
 }
 for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[lang])
 // Help: the settings window's help. The same content as the README, without screenshots.
