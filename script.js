@@ -281,7 +281,15 @@ const tintText = {
   es: { tintToggle: 'Tono del fondo (control)' },
   zh: { tintToggle: '背景色调（滑块）' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const bgTitleText = {
+  en: { secBackground: 'Background' },
+  nl: { secBackground: 'Achtergrond' },
+  de: { secBackground: 'Hintergrund' },
+  fr: { secBackground: 'Fond' },
+  es: { secBackground: 'Fondo' },
+  zh: { secBackground: '背景' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -629,6 +637,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-quote').textContent = t.quote
   document.getElementById('lbl-zones').textContent = t.zonesToggle
   document.getElementById('lbl-wallpaper').textContent = t.wallpaperToggle
+  document.getElementById('sec-bg').textContent = t.secBackground
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
