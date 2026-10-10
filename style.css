@@ -1127,6 +1127,11 @@ html[data-quote-off] #quote {
   cursor: default;
 }
 
+/* Custom is a state, not a choice: full strength when it is the one that applies. */
+.setting:has(input:checked:disabled) {
+  opacity: 1;
+}
+
 .location-title {
   margin-top: 6px;
   font-size: 11px;

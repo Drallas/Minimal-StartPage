@@ -19,25 +19,15 @@ What is built, what is still open, and what was decided. Nothing in "Open" is bu
 
 ### Wallpapers
 
-- Five curated wallpapers, chosen by hand and checked against the text colours in light and dark mode. Waiting for the images.
-- Upload of a visitor's own photo was considered but not decided. If built: a brightness check to pick the light or dark veil, a contrast check of the main text (at least 4.5:1), resizing to 2000 px JPEG, storage in IndexedDB, only JPEG, PNG and WebP, and a reset to the default.
+- Five curated wallpapers, checked against the text colours in light and dark mode. Waiting for the images.
+- Uploading a visitor's own photo: not decided (see the wiki).
 
 ### More permanent links
 
-Candidates, to choose from: Buienradar (Dutch rain radar), Windy (global weather map), DeepL (translation), OpenStreetMap (maps). The row holds nine now; more fit only if the window is widened.
+Candidates and the open question are in the wiki.
 
 ### Settings and help
 
 - A keyboard shortcut list in the Help guide, once the shortcuts are settled.
 
-## Decided
-
-- Wikipedia is a permanent link. It follows the browser language and cannot be removed.
-- Permanent links are logos where the open icon set has them; Microsoft and Reuters are shown by name.
-- Custom links: up to 15, optional description written by the visitor (not taken from the site), only http and https addresses.
-- Showing the IP address is separate from the weather, off by default, and uses the same service as the IP location.
-- The hover list shows only the visitor's own links; the permanent ones live in the window.
-- Settings save straight away; there is no save button.
-- Page presets: Minimal, Standard and Full, chosen in the settings, with Custom shown when the choices match none of them; they only switch display options.
-- Footer and IP line: no underline on hover; the pointer shows they are clickable.
-- Dialogs open with the panel focused, not a button, so nothing looks selected.
+The reasoning behind open items and past decisions is in the GitHub wiki.
