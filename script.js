@@ -6,18 +6,80 @@ const clockTime = document.getElementById('time')
 const clockDate = document.getElementById('date')
 const modeButtons = document.querySelectorAll('[data-theme-value]')
 
-const quotes = [
-  { text: "Learning without thought is labour lost; thought without learning is perilous.", by: "Confucius, Analects 2.15" },
-  { text: "What you do not wish for yourself, do not impose on others.", by: "Confucius, Analects 15.24" },
-  { text: "Hatred is never ended by hatred. It is ended by love.", by: "Buddha, Dhammapada 5" },
-  { text: "We are what we think. All that we are arises with our thoughts.", by: "Buddha, Dhammapada 1" },
-  { text: "It is not things that disturb us, but our judgements about things.", by: "Epictetus, Enchiridion 5" },
-  { text: "You cannot step twice into the same river.", by: "Heraclitus" },
-  { text: "The unexamined life is not worth living.", by: "Socrates, Plato's Apology" },
-  { text: "The journey of a thousand miles begins with a single step.", by: "Laozi, Tao Te Ching 64" },
-  { text: "Those who know do not speak. Those who speak do not know.", by: "Laozi, Tao Te Ching 56" },
-  { text: "Know thyself.", by: "Inscription at Delphi" }
-]
+const quotes = {
+  en: [
+    { text: "Learning without thought is labour lost; thought without learning is perilous.", by: "Confucius, Analects 2.15" },
+    { text: "What you do not wish for yourself, do not impose on others.", by: "Confucius, Analects 15.24" },
+    { text: "Hatred is never ended by hatred. It is ended by love.", by: "Buddha, Dhammapada 5" },
+    { text: "We are what we think. All that we are arises with our thoughts.", by: "Buddha, Dhammapada 1" },
+    { text: "It is not things that disturb us, but our judgements about things.", by: "Epictetus, Enchiridion 5" },
+    { text: "You cannot step twice into the same river.", by: "Heraclitus" },
+    { text: "The unexamined life is not worth living.", by: "Socrates, Plato's Apology" },
+    { text: "The journey of a thousand miles begins with a single step.", by: "Laozi, Tao Te Ching 64" },
+    { text: "Those who know do not speak. Those who speak do not know.", by: "Laozi, Tao Te Ching 56" },
+    { text: "Know thyself.", by: "Inscription at Delphi" },
+  ],
+  nl: [
+    { text: "Leren zonder nadenken levert niets op; nadenken zonder leren is gevaarlijk.", by: "Confucius, Analecten 2.15" },
+    { text: "Wat je zelf niet wilt, doe dat ook een ander niet.", by: "Confucius, Analecten 15.24" },
+    { text: "Haat stopt nooit door haat; haat stopt door liefde.", by: "Boeddha, Dhammapada 5" },
+    { text: "Wat we denken, dat worden we. Alles wat we zijn, komt voort uit onze gedachten.", by: "Boeddha, Dhammapada 1" },
+    { text: "Niet de dingen zelf verontrusten ons, maar onze opvattingen over de dingen.", by: "Epictetus, Handboekje 5" },
+    { text: "Je kunt niet twee keer in dezelfde rivier stappen.", by: "Heraclitus" },
+    { text: "Een leven zonder onderzoek is het leven niet waard.", by: "Socrates, Plato's Apologie" },
+    { text: "Een reis van duizend mijl begint met één stap.", by: "Laozi, Tao Te King 64" },
+    { text: "Wie weet, spreekt niet; wie spreekt, weet niet.", by: "Laozi, Tao Te King 56" },
+    { text: "Ken uzelf.", by: "Inscriptie in Delphi" },
+  ],
+  de: [
+    { text: "Lernen ohne Nachdenken bleibt vergeblich; Nachdenken ohne Lernen ist gefährlich.", by: "Konfuzius, Gespräche 2.15" },
+    { text: "Was du nicht willst, dass man dir tut, das füg auch keinem anderen zu.", by: "Konfuzius, Gespräche 15.24" },
+    { text: "Hass endet nie durch Hass. Hass endet durch Liebe.", by: "Buddha, Dhammapada 5" },
+    { text: "Was wir denken, das werden wir. Alles, was wir sind, entspringt unseren Gedanken.", by: "Buddha, Dhammapada 1" },
+    { text: "Nicht die Dinge selbst beunruhigen uns, sondern unsere Meinungen über die Dinge.", by: "Epiktet, Handbüchlein 5" },
+    { text: "Man kann nicht zweimal in denselben Fluss steigen.", by: "Heraklit" },
+    { text: "Ein ungeprüftes Leben ist nicht lebenswert.", by: "Sokrates, Platons Apologie" },
+    { text: "Die Reise von tausend Meilen beginnt mit einem einzigen Schritt.", by: "Laozi, Daodejing 64" },
+    { text: "Wer weiß, spricht nicht; wer spricht, weiß nicht.", by: "Laozi, Daodejing 56" },
+    { text: "Erkenne dich selbst.", by: "Inschrift von Delphi" },
+  ],
+  fr: [
+    { text: "Apprendre sans réfléchir est vain ; réfléchir sans apprendre est dangereux.", by: "Confucius, Entretiens 2.15" },
+    { text: "Ne fais pas à autrui ce que tu ne voudrais pas qu'on te fasse.", by: "Confucius, Entretiens 15.24" },
+    { text: "La haine ne s'apaise jamais par la haine ; elle s'apaise par l'amour.", by: "Bouddha, Dhammapada 5" },
+    { text: "Nous sommes ce que nous pensons. Tout ce que nous sommes naît de nos pensées.", by: "Bouddha, Dhammapada 1" },
+    { text: "Ce ne sont pas les choses qui nous troublent, mais les jugements que nous portons sur elles.", by: "Épictète, Manuel 5" },
+    { text: "On ne se baigne pas deux fois dans le même fleuve.", by: "Héraclite" },
+    { text: "Une vie sans examen ne vaut pas la peine d'être vécue.", by: "Socrate, Apologie de Platon" },
+    { text: "Le voyage de mille lieues commence par un seul pas.", by: "Lao-tseu, Tao Te King 64" },
+    { text: "Celui qui sait ne parle pas ; celui qui parle ne sait pas.", by: "Lao-tseu, Tao Te King 56" },
+    { text: "Connais-toi toi-même.", by: "Inscription de Delphes" },
+  ],
+  es: [
+    { text: "Aprender sin reflexionar es inútil; reflexionar sin aprender es peligroso.", by: "Confucio, Analectas 2.15" },
+    { text: "Lo que no quieras para ti, no lo hagas a los demás.", by: "Confucio, Analectas 15.24" },
+    { text: "El odio nunca se extingue con odio; se extingue con amor.", by: "Buda, Dhammapada 5" },
+    { text: "Somos lo que pensamos. Todo lo que somos surge de nuestros pensamientos.", by: "Buda, Dhammapada 1" },
+    { text: "No son las cosas las que nos perturban, sino las opiniones que tenemos sobre ellas.", by: "Epicteto, Enquiridión 5" },
+    { text: "No puedes bañarte dos veces en el mismo río.", by: "Heráclito" },
+    { text: "Una vida sin examen no merece la pena ser vivida.", by: "Sócrates, Apología de Platón" },
+    { text: "El viaje de mil millas comienza con un solo paso.", by: "Laozi, Tao Te King 64" },
+    { text: "El que sabe no habla; el que habla no sabe.", by: "Laozi, Tao Te King 56" },
+    { text: "Conócete a ti mismo.", by: "Inscripción de Delfos" },
+  ],
+  zh: [
+    { text: "学而不思则罔，思而不学则殆。", by: "孔子《论语》2.15" },
+    { text: "己所不欲，勿施于人。", by: "孔子《论语》15.24" },
+    { text: "恨不以恨止，唯以爱止。", by: "佛陀《法句经》5" },
+    { text: "心为法本，心尊心使。", by: "佛陀《法句经》1" },
+    { text: "使人烦恼的不是事物本身，而是人对事物的看法。", by: "爱比克泰德《手册》5" },
+    { text: "人不能两次踏入同一条河流。", by: "赫拉克利特" },
+    { text: "未经审视的人生不值得过。", by: "苏格拉底，柏拉图《申辩篇》" },
+    { text: "千里之行，始于足下。", by: "老子《道德经》64" },
+    { text: "知者不言，言者不知。", by: "老子《道德经》56" },
+    { text: "认识你自己。", by: "德尔斐神庙铭文" },
+  ],
+}
 
 const engines = [
   { name: 'Kagi', url: 'https://kagi.com/search?q=', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M14.498 18.392h-5.14c-1.39 0-1.632-1.508-1.39-2.11.12-.302.423-.724.664-1.026a6.81 6.81 0 003.326.845 6.945 6.945 0 006.954-6.935c0-2.05-.907-3.86-2.298-5.186l.181-.181c.363-.362.907-.603 1.451-.543l.847.06V0h-1.451c-1.693 0-3.084 1.025-3.689 2.472a6.83 6.83 0 00-1.934-.301 6.945 6.945 0 00-6.954 6.935c0 1.507.484 2.954 1.33 4.1a1.84 1.84 0 01-.423.302l-.181.18c-1.391 1.327-2.056 3.015-1.693 4.945.181 1.025 1.088 2.11 1.995 2.714.605.422 1.39.603 2.177.603l5.804-.242c.665 0 1.27.302 1.633.905L16.432 24 20 22.794l-.605-1.327a5.425 5.425 0 00-4.897-3.075zm-2.48-12.543c1.814 0 3.326 1.508 3.326 3.317 0 1.809-1.512 3.316-3.325 3.316-1.814 0-3.326-1.507-3.326-3.316 0-1.87 1.451-3.317 3.325-3.317z"></path></svg>` },
@@ -77,7 +139,9 @@ setInterval(updateClock, 30000)
 // One quote per day, picked by day of the year so it stays the same all day.
 const quoteEl = document.getElementById('quote')
 const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 864e5)
-const todaysQuote = quotes[dayOfYear % quotes.length]
+const quoteLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
+const quoteList = quotes[quoteLang] || quotes.en
+const todaysQuote = quoteList[dayOfYear % quoteList.length]
 quoteEl.textContent = `${todaysQuote.text} — ${todaysQuote.by}`
 
 const showTheme = () => {
