@@ -445,6 +445,7 @@ const applySettingsText = () => {
   document.getElementById('privacy').textContent = t.privacy
   settingsFields.reset.textContent = t.reset
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
+  document.getElementById('forecast-close').setAttribute('aria-label', t.close)
   settingsButton.setAttribute('aria-label', t.open)
   settingsButton.title = t.open
 }
