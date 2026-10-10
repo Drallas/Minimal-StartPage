@@ -1008,10 +1008,11 @@ try { zones = (JSON.parse(localStorage.getItem('zones') || '[]') || []).filter((
 
 const cityOf = (zone) => zone.split('/').pop().replace(/_/g, ' ')
 // The zone's offset from UTC in minutes, e.g. -300 for New York in winter.
+// Read from the zone's wall-clock parts, which older Safari versions support (the longOffset name is not).
 const utcOffset = (zone, now) => {
-  const name = new Intl.DateTimeFormat('en-US', { timeZone: zone, timeZoneName: 'longOffset' }).formatToParts(now).find((part) => part.type === 'timeZoneName').value
-  const match = /GMT([+-])(\d{2}):(\d{2})/.exec(name)
-  return match ? (match[1] === '-' ? -1 : 1) * (Number(match[2]) * 60 + Number(match[3])) : 0
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: zone, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }).formatToParts(now).map((part) => [part.type, Number(part.value)]))
+  const wallClock = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second)
+  return Math.round((wallClock - (now.getTime() - now.getMilliseconds())) / 60000)
 }
 // The chosen zones, ordered from the earliest offset (-12) to the latest (+14).
 const sortedZones = (now) => [...zones].sort((a, b) => utcOffset(a, now) - utcOffset(b, now) || cityOf(a).localeCompare(cityOf(b)))

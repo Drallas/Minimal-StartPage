@@ -824,6 +824,7 @@ html[data-wallpaper-on] .controls {
   place-items: center;
   padding: 16px;
   background: color-mix(in srgb, var(--color-bg) 70%, transparent);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
@@ -1227,6 +1228,12 @@ html[data-quote-off] #quote {
 
 .links-button {
   position: relative;
+}
+
+/* The Wikipedia logo in the button (when own links are off) is sized like the globe it replaces. */
+.links-button svg {
+  width: 16px;
+  height: 16px;
 }
 
 .links-preview {
