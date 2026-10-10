@@ -146,6 +146,8 @@ const settingsFields = {
   tint: document.getElementById('set-tint'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links'),
+  askai: document.getElementById('set-askai'),
+  preset: document.querySelectorAll('input[name="preset"]'),
   cityForm: document.getElementById('city-form'),
   cityInput: document.getElementById('city-input'),
   cityClear: document.getElementById('city-clear'),
@@ -289,7 +291,15 @@ const bgTitleText = {
   es: { secBackground: 'Fondo' },
   zh: { secBackground: '背景' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+const pageText = {
+  en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Full', askAi: 'Show the Ask AI links' },
+  nl: { secPage: 'Pagina', presetMinimal: 'Minimaal', presetStandard: 'Standaard', presetFull: 'Volledig', askAi: 'Ask AI-links tonen' },
+  de: { secPage: 'Seite', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Voll', askAi: 'KI-Links anzeigen' },
+  fr: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetFull: 'Complet', askAi: 'Afficher les liens IA' },
+  es: { secPage: 'Página', presetMinimal: 'Mínimo', presetStandard: 'Estándar', presetFull: 'Completo', askAi: 'Mostrar los enlaces de IA' },
+  zh: { secPage: '页面', presetMinimal: '极简', presetStandard: '标准', presetFull: '完整', askAi: '显示 AI 链接' }
+}
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -638,6 +648,11 @@ const applySettingsText = () => {
   document.getElementById('lbl-zones').textContent = t.zonesToggle
   document.getElementById('lbl-wallpaper').textContent = t.wallpaperToggle
   document.getElementById('sec-bg').textContent = t.secBackground
+  document.getElementById('sec-page').textContent = t.secPage
+  document.getElementById('lbl-preset-minimal').textContent = t.presetMinimal
+  document.getElementById('lbl-preset-standard').textContent = t.presetStandard
+  document.getElementById('lbl-preset-full').textContent = t.presetFull
+  document.getElementById('lbl-askai').textContent = t.askAi
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
@@ -676,6 +691,8 @@ const syncSettings = () => {
   settingsFields.tint.checked = tintOn
   settingsFields.wallpaperButton.checked = wallpaperButtonOn
   settingsFields.links.checked = linksOn
+  settingsFields.askai.checked = askaiOn
+  settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
   settingsFields.cityClear.hidden = !city
   updateWeatherHint()
   settingsFields.cityMessage.textContent = ''
@@ -790,6 +807,42 @@ settingsFields.zones.addEventListener('change', () => {
   if (!zonesOn && !zonesDialog.hidden) closeZones()
 })
 
+// Ask AI links below the search bar.
+let askaiOn = readFlag('askai', true)
+const askAi = document.getElementById('ask-ai')
+askAi.hidden = !askaiOn
+settingsFields.askai.addEventListener('change', () => {
+  askaiOn = settingsFields.askai.checked
+  writeKey('askai', askaiOn ? 'on' : 'off')
+  askAi.hidden = !askaiOn
+})
+
+// Pages: presets for how much is on the page. They only switch the display options; weather and the
+// IP address are never changed by a preset, since they send data.
+const presets = {
+  minimal: { quote: false, links: true, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false },
+  standard: { quote: false, links: true, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true },
+  full: { quote: true, links: true, zones: true, askai: true, wallpaper: true, wallpaperButton: true, tint: true },
+}
+const currentState = () => ({ quote: quoteOn, links: linksOn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn })
+// The preset that matches the current choices, or none once a single option differs.
+const matchPreset = () => {
+  const now = currentState()
+  return Object.keys(presets).find((name) => Object.keys(now).every((key) => now[key] === presets[name][key])) || ''
+}
+// Each option is changed through its own switch, so the same handlers and storage run as when clicked.
+const applyPreset = (name) => {
+  const choice = presets[name]
+  Object.keys(choice).forEach((key) => {
+    const field = key === 'wallpaper' ? settingsFields.wallpaper : settingsFields[key === 'wallpaperButton' ? 'wallpaperButton' : key]
+    field.checked = choice[key]
+    field.dispatchEvent(new Event('change'))
+  })
+  writeKey('preset', name)
+  syncSettings()
+}
+settingsFields.preset.forEach((radio) => radio.addEventListener('change', () => applyPreset(radio.value)))
+
 settingsFields.quote.addEventListener('change', () => {
   quoteOn = settingsFields.quote.checked
   writeKey('quote', quoteOn ? 'on' : 'off')
@@ -835,7 +888,7 @@ settingsFields.cityClear.addEventListener('click', () => {
 
 settingsFields.reset.addEventListener('click', () => {
   try {
-    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn', 'wallpaperButton', 'tint']
+    const keys = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'city', 'ipInfo', 'timeZones', 'zones', 'links', 'linksOn', 'wallpaperButton', 'tint', 'askai', 'preset']
     keys.forEach((key) => localStorage.removeItem(key))
     Object.keys(localStorage).filter((key) => key.startsWith('weather:')).forEach((key) => localStorage.removeItem(key))
   } catch {}

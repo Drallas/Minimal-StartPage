@@ -1392,3 +1392,14 @@ html[data-quote-off] #quote {
 .controls button[hidden] {
   display: none;
 }
+
+/* The page presets sit side by side, above the other settings. */
+.presets {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 4px;
+}
+
+.presets .setting {
+  padding: 6px 0;
+}

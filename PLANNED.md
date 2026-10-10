@@ -11,20 +11,11 @@ What is built, what is still open, and what was decided. Nothing in "Open" is bu
 - Links: a button at the top left. Permanent links as logos in a row (Wikipedia, Google, Apple, Facebook, X, Instagram, Microsoft, GitHub, Reuters); up to 15 of your own. Hovering the button shows your own links only. The button can be switched off.
 - Background: a wallpaper switch, an option to hide its button, and a tint switch that hides the slider.
 - Settings: grouped into Weather, Display, Background and Privacy. Gear icon, Help guide in six languages, Escape closes the top window.
+- Pages: Minimal, Standard and Full presets in the settings. They change only the display options; weather and the IP address are never changed by a preset.
 - Privacy: everything is off by default. Only weather and the IP address send data, and a short disclaimer points to Help.
 - Phones: the bottom controls sit above the browser's bar; the tint slider and the wallpaper button are adjusted for touch.
 
 ## Open
-
-### Page density: minimal, standard, full
-
-One switch that chooses how much is on the page.
-
-- **Minimal:** clock, date, search and the links button. No quote, no Ask AI row, no globe, no weather icon.
-- **Standard:** the default for a new visitor.
-- **Full:** everything on, including the time zones and the weather preview.
-
-Each option stays available on its own in the settings; the switch only changes the presets.
 
 ### Canvas
 
@@ -51,4 +42,5 @@ Candidates, to choose from: Buienradar (Dutch rain radar), Windy (global weather
 - Showing the IP address is separate from the weather, off by default, and uses the same service as the IP location.
 - The hover list shows only the visitor's own links; the permanent ones live in the window.
 - Settings save straight away; there is no save button.
+- Page presets: Minimal, Standard and Full, chosen in the settings; they only switch display options.
 - Dialogs open with the panel focused, not a button, so nothing looks selected.
