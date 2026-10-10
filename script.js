@@ -1140,24 +1140,14 @@ settingsFields.resetData.addEventListener('click', () => {
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
 const EXPORT_SETTINGS = ['greetName', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'showIp', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
-// The export is a real link with a download name, so Safari treats the click as the user's download.
-// On iPhone and iPad the share sheet is used instead, where the file can go to Files.
+// The export is a real link with a download name, so every browser treats the click as the user's download.
 const exportLink = document.getElementById('export-data')
-exportLink.addEventListener('click', (e) => {
+exportLink.addEventListener('click', () => {
   const payload = { app: 'Minimal-StartPage', version: 1, exported: new Date().toISOString(), settings: {}, data: {} }
   EXPORT_SETTINGS.forEach((key) => { const value = localStorage.getItem(key); if (value !== null) payload.settings[key] = value })
   EXPORT_DATA.forEach((key) => { try { const value = localStorage.getItem(key); if (value !== null) payload.data[key] = JSON.parse(value) } catch {} })
-  const json = JSON.stringify(payload, null, 2)
-  const file = new File([json], 'minimal-startpage.json', { type: 'application/json' })
-  // Only iPhone and iPad have a share sheet with Files; on a Mac the share sheet has no save option, so it downloads.
-  const touchApple = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-  if (touchApple && navigator.canShare && navigator.canShare({ files: [file] })) {
-    e.preventDefault()
-    navigator.share({ files: [file], title: 'Minimal-StartPage' }).catch(() => {})
-    return
-  }
   // Set in the same click, so the browser downloads the link as it is followed.
-  exportLink.href = `data:application/json;charset=utf-8,${encodeURIComponent(json)}`
+  exportLink.href = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(payload, null, 2))}`
 })
 const importFile = document.getElementById('import-file')
 document.getElementById('import-data').addEventListener('click', () => importFile.click())
