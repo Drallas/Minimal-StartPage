@@ -30,7 +30,7 @@
 ## Features
 
 - **Search.** Type a query and press Enter, or click the magnifier on the right of the search bar. An empty search shows a short hint instead of doing nothing.
-- **Search engine.** The icon on the left of the search bar shows the current engine (Brave, Google or DuckDuckGo). Click it to cycle to the next one. Your choice is remembered.
+- **Search engine.** The icon on the left of the search bar shows the current engine (Kagi by default, or Brave, Google or DuckDuckGo). Click it to cycle to the next one. Your choice is remembered.
 - **Theme.** Follows your system's light or dark setting by default. The icons in the top right switch to a fixed Light or Dark theme, and that choice is remembered too. Choose the monitor icon to go back to following the system.
 - **Clock.** The time sits above the search bar, with the date underneath.
 - **Shortcuts.** A Wikipedia link in the top left, and links to Claude, ChatGPT and Grok below the search bar under the caption "Ask AI".
@@ -47,7 +47,7 @@ Searches go straight to the search engine you chose. The page only stores two se
 
 ## Credits
 
-The Claude, ChatGPT, Grok, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon comes from [Simple Icons](https://simpleicons.org) (CC0). The logos are trademarks of their owners.
+The Claude, ChatGPT, Grok, Kagi, Brave and Google icons come from [LobeHub Icons](https://github.com/lobehub/lobe-icons) (MIT). The DuckDuckGo icon comes from [Simple Icons](https://simpleicons.org) (CC0). The logos are trademarks of their owners.
 
 ## License
 
