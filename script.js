@@ -352,9 +352,16 @@ const renderForecast = () => {
   link.href = `https://www.windy.com/?${place.latitude},${place.longitude},8`
 }
 
+// Weather off: only a faint icon stays in the top bar, and it opens settings.
+const showIdle = () => {
+  weatherButton.classList.add('idle')
+  weatherButton.innerHTML = weatherIcon(null)
+  weatherButton.setAttribute('aria-label', t.show)
+  weatherButton.title = t.show
+}
+
 const hideWeather = () => {
-  weatherButton.textContent = t.show
-  weatherButton.removeAttribute('aria-label')
+  showIdle()
   weatherButton.setAttribute('aria-expanded', 'false')
   weatherDetail.replaceChildren()
   weatherDetail.classList.remove('open')
@@ -365,6 +372,7 @@ const setWeather = (on) => {
   weatherOn = on
   writeKey('weather', on ? 'on' : 'off')
   if (on) {
+    weatherButton.classList.remove('idle')
     weatherButton.textContent = t.loading
     showWeather()
   } else {
@@ -391,7 +399,7 @@ const closeForecast = () => {
 
 weatherButton.addEventListener('click', () => {
   if (!weatherOn) {
-    setWeather(true)
+    openSettings()
     return
   }
   openForecast()
@@ -526,7 +534,8 @@ settingsFields.reset.addEventListener('click', () => {
 
 root.toggleAttribute('data-quote-off', !quoteOn)
 applySettingsText()
-weatherButton.textContent = weatherOn ? t.loading : t.show
+if (weatherOn) weatherButton.textContent = t.loading
+else showIdle()
 if (weatherOn) showWeather()
 
 // A new quote every six hours, so the same one stays put for that window.

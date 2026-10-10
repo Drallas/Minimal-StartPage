@@ -979,3 +979,13 @@ html[data-quote-off] #quote {
   font-size: 11px;
   color: var(--color-fg-2);
 }
+
+/* Weather off: a faint icon in the top bar, so the feature is still there to find. */
+.weather button.idle {
+  opacity: .45;
+}
+
+.weather button.idle:hover,
+.weather button.idle:focus-visible {
+  opacity: 1;
+}
