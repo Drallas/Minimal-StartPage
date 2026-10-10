@@ -269,7 +269,7 @@ footer a:focus-visible svg {
 /* Your IP address, just under the footer line. */
 .ip {
   display: block;
-  margin-top: 2px;
+  margin-top: 10px;
   font-size: 9px;
   letter-spacing: .04em;
   opacity: .8;
