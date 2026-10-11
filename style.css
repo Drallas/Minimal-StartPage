@@ -168,6 +168,31 @@ button {
   max-width: 360px;
 }
 
+/* The search sits in the middle; the clock is placed above it and the AI row below, so neither moves it. */
+.centre {
+  position: relative;
+}
+
+.centre > #clock {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+}
+
+/* On a computer the quote stays near the bottom of the page, as before. */
+.centre > .quote {
+  position: fixed;
+}
+
+.centre > .links {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 24px;
+}
+
 #main {
   transform: translateY(-56px);
 }
@@ -640,10 +665,16 @@ html[data-wallpaper-on] .modes button {
 
 /* Phones: lift the controls above the browser's bottom bar and enlarge their touch area. */
 @media (max-width: 600px) {
-  /* The quote is part of the column on a phone, under the AI shortcuts, instead of floating over them. */
-  .quote {
-    position: static;
-    margin-top: 20px;
+  /* On a phone the quote sits under the AI shortcuts, or under the search when there are none. */
+  .centre > .quote {
+    position: absolute;
+    top: 100%;
+    bottom: auto;
+    margin-top: 24px;
+  }
+
+  .centre > .links:not([hidden]) ~ .quote {
+    margin-top: 92px;
   }
 
   /* As close to the bottom edge as the browser allows: the safe area on iPhone, and the small toolbar. */
