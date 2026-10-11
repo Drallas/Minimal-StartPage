@@ -405,12 +405,12 @@ const wallpaperText = {
   zh: { wallpaperToggle: '壁纸', wallpaperButton: '壁纸按钮' }
 }
 const tintText = {
-  en: { tintToggle: 'Background tint' },
-  nl: { tintToggle: 'Achtergrondkleur (schuif)' },
-  de: { tintToggle: 'Hintergrundfarbe (Regler)' },
-  fr: { tintToggle: 'Teinte du fond (curseur)' },
-  es: { tintToggle: 'Tono del fondo (control)' },
-  zh: { tintToggle: '背景色调（滑块）' }
+  en: { tintToggle: 'Background colour button' },
+  nl: { tintToggle: 'Achtergrondkleur-knop' },
+  de: { tintToggle: 'Hintergrundfarbe-Knopf' },
+  fr: { tintToggle: 'Bouton couleur du fond' },
+  es: { tintToggle: 'Botón de color del fondo' },
+  zh: { tintToggle: '背景颜色按钮' }
 }
 const bgTitleText = {
   en: { wallBy: 'Photo by', wallDunes: 'Pink dunes', wallMountains: 'Mountain haze', wallNote: 'Each press of the background button goes to the next one that is on.', wallNext: 'Next background', wallNone: 'No background', wallPhoto: 'Misty forest', wallOn: 'On', tabWallpaper: 'Background' },
@@ -2318,7 +2318,7 @@ wallpaperToggle.hidden = !wallpaperButtonOn
 // Background tint: a hue from the slider; zero keeps the neutral monochrome look.
 const hueSlider = document.getElementById('hue')
 
-// The tint can be switched off in settings: the background is then neutral, and the slider is hidden.
+// The colour button can be hidden in settings: the background is then neutral, and the button is hidden.
 let tintOn = readFlag('tint', true)
 // The slider's middle (180) is the neutral background; the ends are the colours. Storage keeps the colour
 // hue, so the middle is hue 0 and the slider value is the hue turned by 180 degrees.
