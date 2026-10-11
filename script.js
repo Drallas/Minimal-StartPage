@@ -76,7 +76,7 @@ const isoWeek = (d) => {
 const dayOfYear = (d) => Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(d.getFullYear(), 0, 0)) / 864e5)
 const isLeap = (y) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0
 
-// Each colon is its own element, so the full time can blink it.
+// Each colon is its own element, so the full time can style them separately.
 const colon = () => Object.assign(document.createElement('span'), { className: 'colon', textContent: ':' })
 
 // The date and the week title follow the browser language. Kept here, before the text tables.
