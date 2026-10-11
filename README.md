@@ -63,7 +63,7 @@
 
 Everything is optional. The settings start with a choice of page:
 
-**Minimal** shows only the search, the clock and the date, plus the colour button at the bottom left.
+**Minimal** shows only the search and the clock, plus the colour button at the bottom left. **Standard** adds the date.
 
 **Standard** is the default. It adds the Wikipedia button, the colour button at the bottom left and the wallpaper button at the bottom right. The AI shortcuts, time zones and the rest are there to discover in the settings.
 

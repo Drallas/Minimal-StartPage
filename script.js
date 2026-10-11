@@ -68,6 +68,9 @@ try { dateNumeric = localStorage.getItem('dateFormat') === 'numeric' } catch {}
 const dateOrders = ['auto', 'dmy', 'mdy', 'ymd']
 const dateOrderLocale = { auto: null, dmy: 'en-GB', mdy: 'en-US', ymd: 'sv-SE' }
 let dateOrder = 'auto'
+// Whether the date is shown at all; Minimal leaves it out.
+let dateOn = true
+try { dateOn = localStorage.getItem('showDate') !== 'off' } catch {}
 try { if (dateOrders.includes(localStorage.getItem('dateNotation'))) dateOrder = localStorage.getItem('dateNotation') } catch {}
 
 const isoWeek = (d) => {
@@ -122,6 +125,7 @@ const updateClock = () => {
   clockTime.dateTime = now.toISOString()
   clockTime.title = `${zone} (UTC${sign}${hh}:${mm})`
   clockDate.textContent = date
+  clockDate.hidden = !dateOn
   clockDate.title = `${weekWord} ${isoWeek(now)} · ${dayWord} ${dayOfYear(now)} ${ofWord} ${isLeap(now.getFullYear()) ? 366 : 365}`
 }
 updateClock()
@@ -150,6 +154,7 @@ const setClockMode = (mode) => {
   settingsFields.clock.value = clockMode
   settingsFields.dateStyle.value = dateNumeric ? 'short' : 'long'
   settingsFields.dateOrder.value = dateOrder
+  settingsFields.date.checked = dateOn
   updateClock()
 }
 clockTime.addEventListener('click', () => setClockMode(clockModes[(clockModes.indexOf(clockMode) + 1) % clockModes.length]))
@@ -179,6 +184,7 @@ const settingsFields = {
   searchNewTab: document.getElementById('set-search-newtab'),
   aiNewTab: document.getElementById('set-ai-newtab'),
   clock: document.getElementById('set-clock'),
+  date: document.getElementById('set-date'),
   dateStyle: document.getElementById('set-date-style'),
   dateOrder: document.getElementById('set-date-order'),
   preset: document.querySelectorAll('input[name="preset"]'),
@@ -319,12 +325,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long, e.g. Sunday 11 October', dateShort: 'Short, in numbers', dateOrderLbl: 'Order of the short date', dateAuto: 'Automatic, from your browser', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
-  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang, bijvoorbeeld zondag 11 oktober', dateShort: 'Kort, in cijfers', dateOrderLbl: 'Volgorde van de korte datum', dateAuto: 'Automatisch, van je browser', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang, z. B. Sonntag, 11. Oktober', dateShort: 'Kurz, mit Zahlen', dateOrderLbl: 'Reihenfolge des kurzen Datums', dateAuto: 'Automatisch, aus dem Browser', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long, par ex. dimanche 11 octobre', dateShort: 'Court, en chiffres', dateOrderLbl: 'Ordre de la date courte', dateAuto: 'Automatique, selon le navigateur', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga, por ejemplo domingo 11 de octubre', dateShort: 'Corta, en números', dateOrderLbl: 'Orden de la fecha corta', dateAuto: 'Automático, según el navegador', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', dateSec: '日期', dateShow: '显示', dateLong: '长格式，例如 10 月 11 日 星期日', dateShort: '短格式，用数字', dateOrderLbl: '短日期的顺序', dateAuto: '自动，跟随浏览器', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
+  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', dateOnLbl: 'Show the date', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long, e.g. Sunday 11 October', dateShort: 'Short, in numbers', dateOrderLbl: 'Order of the short date', dateAuto: 'Automatic, from your browser', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
+  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', dateOnLbl: 'Datum tonen', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang, bijvoorbeeld zondag 11 oktober', dateShort: 'Kort, in cijfers', dateOrderLbl: 'Volgorde van de korte datum', dateAuto: 'Automatisch, van je browser', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', dateOnLbl: 'Datum anzeigen', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang, z. B. Sonntag, 11. Oktober', dateShort: 'Kurz, mit Zahlen', dateOrderLbl: 'Reihenfolge des kurzen Datums', dateAuto: 'Automatisch, aus dem Browser', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', dateOnLbl: 'Afficher la date', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long, par ex. dimanche 11 octobre', dateShort: 'Court, en chiffres', dateOrderLbl: 'Ordre de la date courte', dateAuto: 'Automatique, selon le navigateur', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', dateOnLbl: 'Mostrar la fecha', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga, por ejemplo domingo 11 de octubre', dateShort: 'Corta, en números', dateOrderLbl: 'Orden de la fecha corta', dateAuto: 'Automático, según el navegador', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', dateOnLbl: '显示日期', dateSec: '日期', dateShow: '显示', dateLong: '长格式，例如 10 月 11 日 星期日', dateShort: '短格式，用数字', dateOrderLbl: '短日期的顺序', dateAuto: '自动，跟随浏览器', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to five cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -980,6 +986,7 @@ const applySettingsText = () => {
   document.getElementById('lbl-askai').textContent = t.aiOn
   document.getElementById('sec-time').textContent = t.timeSec
   document.getElementById('sec-date').textContent = t.dateSec
+  document.getElementById('lbl-date-on').textContent = t.dateOnLbl
   document.getElementById('lbl-date-style').textContent = t.dateShow
   document.getElementById('lbl-date-order').textContent = t.dateOrderLbl
   settingsFields.dateStyle.options[0].textContent = t.dateLong
@@ -1068,6 +1075,7 @@ const syncSettings = () => {
   settingsFields.clock.value = clockMode
   settingsFields.dateStyle.value = dateNumeric ? 'short' : 'long'
   settingsFields.dateOrder.value = dateOrder
+  settingsFields.date.checked = dateOn
   settingsFields.searchNewTab.checked = searchNewTab
   settingsFields.aiNewTab.checked = aiNewTab
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
@@ -1223,6 +1231,11 @@ settingsFields.searchNewTab.addEventListener('change', () => {
 })
 settingsFields.clock.addEventListener('change', () => setClockMode(settingsFields.clock.value))
 settingsFields.dateStyle.addEventListener('change', () => setDateStyle(settingsFields.dateStyle.value === 'short'))
+settingsFields.date.addEventListener('change', () => {
+  dateOn = settingsFields.date.checked
+  writeKey('showDate', dateOn ? 'on' : 'off')
+  updateClock()
+})
 settingsFields.dateOrder.addEventListener('change', () => setDateOrder(settingsFields.dateOrder.value))
 settingsFields.aiNewTab.addEventListener('change', () => {
   aiNewTab = settingsFields.aiNewTab.checked
@@ -1244,11 +1257,11 @@ settingsFields.askai.addEventListener('change', () => {
 const presets = {
   // Minimal starts with nothing extra, but keeps the colour button at the bottom left. Standard adds the Wikipedia button and the colour and wallpaper buttons;
   // AI shortcuts, time zones and the rest are found later, in the settings.
-  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: false, wallpaperButton: false, tint: true },
-  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: true, wallpaperButton: true, tint: true },
+  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: false, wallpaperButton: false, tint: true, date: false },
+  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: true, wallpaperButton: true, tint: true, date: true },
 }
 // Weather is off in both presets. A preset only ever switches weather off, never on, so choosing one never starts a lookup.
-const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, weather: weatherOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn })
+const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, weather: weatherOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn, date: dateOn })
 // The preset that matches the current choices: only the keys a preset names are compared.
 const matchPreset = () => {
   const now = currentState()
@@ -1341,7 +1354,7 @@ settingsFields.lang.addEventListener('change', () => {
 })
 settingsFields.resetSettings.addEventListener('click', () => {
   if (!confirm(t.resetSettingsConfirm)) return
-  clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'preset'])
+  clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset'])
   location.reload()
 })
 settingsFields.resetData.addEventListener('click', () => {
@@ -1352,7 +1365,7 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'preset', 'personalState']
+const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'showDate', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
