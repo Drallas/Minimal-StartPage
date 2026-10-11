@@ -1918,9 +1918,6 @@ html[data-quote-off] #quote {
   border-bottom: 1px solid var(--color-border);
 }
 
-.wallpaper-row:hover {
-  z-index: 1;
-}
 
 .wallpaper-names {
   display: flex;
@@ -1951,7 +1948,7 @@ html[data-quote-off] #quote {
   background-position: center;
 }
 
-/* Hover on a row shows the wallpaper larger, beside its swatch; the name and switch stay readable underneath. */
+/* Hovering a swatch shows the wallpaper larger beside it. It only appears over the swatch, so the name and links stay clickable. */
 .wallpaper-swatch {
   position: relative;
 }
@@ -1973,7 +1970,7 @@ html[data-quote-off] #quote {
   transition: opacity .15s ease;
 }
 
-.wallpaper-row:hover .wallpaper-swatch::after {
+.wallpaper-swatch:hover::after {
   opacity: 1;
 }
 
