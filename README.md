@@ -75,7 +75,7 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **Time zones.** Optional. A small clock icon above the time opens up to five extra time zones, each with its UTC offset and a day difference when it is not today. **Edit time zones** in that window is where you change them.
 
-- **Date.** Hover over the date for the ISO week and the day of the year. Click it to switch between the long form and a short numeric date, in the order of the page language. The date follows your browser's language.
+- **Date.** Hover over the date for the ISO week and the day of the year. Click it to switch between the long form and a short numeric date, in the order of your browser. Under **Advanced** you can choose the order (day-month-year, month-day-year or year-month-day) and whether the date is long or short; the choices and clicking the date stay in step. The date follows your browser's language.
 
 - **Quote.** Optional. A short quote from a philosopher or teacher, changing every six hours, in your browser's language. Click it for the next one.
 
