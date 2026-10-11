@@ -140,7 +140,6 @@ Inspired by [Nimplex/Minimal-StartPage](https://github.com/Nimplex/Minimal-Start
 The wallpapers are photos from [Unsplash](https://unsplash.com), used under the Unsplash License:
 
 - Misty forest: [Dave Hoefler](https://unsplash.com/@iamthedave)
-- Snow tree: [Cristina Gottardi](https://unsplash.com/@cristina_gottardi)
 
 The weather forecast comes from [Open-Meteo](https://open-meteo.com), licensed under CC BY 4.0.
 
