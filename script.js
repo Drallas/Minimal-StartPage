@@ -42,7 +42,9 @@ searchForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const value = searchBox.value.trim()
   if (value.length > 0) {
-    location.href = engines[engine].url + encodeURIComponent(value)
+    const url = engines[engine].url + encodeURIComponent(value)
+    if (searchNewTab) window.open(url, '_blank', 'noopener')
+    else location.href = url
     return
   }
   searchBox.value = ''
@@ -154,6 +156,8 @@ const settingsFields = {
   links: document.getElementById('set-links'),
   linksOwn: document.getElementById('set-links-own'),
   askai: document.getElementById('set-askai'),
+  searchNewTab: document.getElementById('set-search-newtab'),
+  aiNewTab: document.getElementById('set-ai-newtab'),
   preset: document.querySelectorAll('input[name="preset"]'),
   cityForm: document.getElementById('city-form'),
   cityInput: document.getElementById('city-input'),
@@ -292,12 +296,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
-  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
+  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
+  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to five cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -939,6 +943,9 @@ const applySettingsText = () => {
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
   document.getElementById('sec-ai').textContent = t.aiSec
   document.getElementById('lbl-askai').textContent = t.aiOn
+  document.getElementById('sec-search').textContent = t.searchSec
+  document.getElementById('lbl-search-newtab').textContent = t.searchNewTab
+  document.getElementById('lbl-ai-newtab').textContent = t.aiNewTab
   document.getElementById('ai-name').setAttribute('aria-label', t.aiName)
   document.getElementById('ai-url').setAttribute('aria-label', t.aiUrl)
   document.getElementById('manage-open').textContent = t.manageOpen
@@ -1010,6 +1017,8 @@ const syncSettings = () => {
   settingsFields.links.checked = linksOn
   settingsFields.linksOwn.checked = linksOwn
   settingsFields.askai.checked = askaiOn
+  settingsFields.searchNewTab.checked = searchNewTab
+  settingsFields.aiNewTab.checked = aiNewTab
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
   settingsFields.cityClear.hidden = !city
   updateWeatherHint()
@@ -1154,6 +1163,19 @@ settingsFields.zones.addEventListener('change', () => {
   if (!zonesOn && !zonesWindow.hidden) closeZones()
 })
 
+// Where the search and the AI links open: the same tab, or a new one. Search stays in the same tab by default; AI links open a new one.
+let searchNewTab = readFlag('searchNewTab', false)
+let aiNewTab = readFlag('aiNewTab', true)
+settingsFields.searchNewTab.addEventListener('change', () => {
+  searchNewTab = settingsFields.searchNewTab.checked
+  writeKey('searchNewTab', searchNewTab ? 'on' : 'off')
+})
+settingsFields.aiNewTab.addEventListener('change', () => {
+  aiNewTab = settingsFields.aiNewTab.checked
+  writeKey('aiNewTab', aiNewTab ? 'on' : 'off')
+  renderAskAi()
+})
+
 // Ask AI links below the search bar.
 let askaiOn = readFlag('askai', false)
 const askAi = document.getElementById('ask-ai')
@@ -1265,7 +1287,7 @@ settingsFields.lang.addEventListener('change', () => {
 })
 settingsFields.resetSettings.addEventListener('click', () => {
   if (!confirm(t.resetSettingsConfirm)) return
-  clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
+  clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'preset'])
   location.reload()
 })
 settingsFields.resetData.addEventListener('click', () => {
@@ -1276,7 +1298,7 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
+const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
@@ -1981,6 +2003,7 @@ const renderAskAi = () => {
   renderAiCatalog()
   askAiRow.replaceChildren(...askAiList.map((item) => {
     const link = Object.assign(document.createElement('a'), { href: item.url })
+    if (aiNewTab) { link.target = '_blank'; link.rel = 'noopener' }
     link.title = item.title
     link.setAttribute('aria-label', item.title)
     if (askAiIcons[item.key]) link.innerHTML = askAiIcons[item.key]
