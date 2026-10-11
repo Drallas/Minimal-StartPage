@@ -417,7 +417,7 @@ footer a:focus-visible {
   position: absolute;
   left: 24px;
   right: 24px;
-  bottom: 220px;
+  bottom: 164px;
   max-width: 360px;
   margin: 0 auto;
   padding: 4px 8px;
@@ -633,6 +633,12 @@ html[data-wallpaper-on] .modes button {
 
 /* Phones: lift the controls above the browser's bottom bar and enlarge their touch area. */
 @media (max-width: 600px) {
+  /* The quote is part of the column on a phone, under the AI shortcuts, instead of floating over them. */
+  .quote {
+    position: static;
+    margin-top: 20px;
+  }
+
   /* As close to the bottom edge as the browser allows: the safe area on iPhone, and the small toolbar. */
   .controls {
     bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
