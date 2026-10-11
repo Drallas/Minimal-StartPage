@@ -1864,18 +1864,15 @@ html[data-quote-off] #quote {
   border-color: var(--color-fg-2);
 }
 
-.reset-row {
-  grid-column: 1 / -1;
+/* The resets sit in the action row beside Advanced, and only show while Advanced is open. */
+.settings-actions .reset-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 8px;
-  margin-top: 24px;
+  gap: 0 12px;
 }
 
-/* The resets are ordinary buttons, so they read as actions and not as hidden links. */
-.reset-row .ghost-button {
-  margin: 0;
+.settings-actions .reset-row[hidden] {
+  display: none;
 }
 
 /* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
