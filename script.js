@@ -944,7 +944,7 @@ const applySettingsText = () => {
   document.getElementById('manage-open').textContent = t.manageOpen
   document.getElementById('manage-title').textContent = t.manageOpen
   document.getElementById('ai-save').textContent = t.aiSave
-  aiCatalogNone.textContent = t.aiPick
+  document.getElementById('ai-pick-label').textContent = t.aiPick
   document.getElementById('ai-cancel').textContent = t.aiCancel
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('lbl-ai-name').textContent = t.aiName
@@ -1892,8 +1892,7 @@ const aiForm = document.getElementById('ai-form')
 const aiName = document.getElementById('ai-name')
 const aiUrl = document.getElementById('ai-url')
 const aiMsg = document.getElementById('ai-msg')
-const aiCatalogSelect = document.getElementById('ai-catalog')
-const aiCatalogNone = document.getElementById('ai-catalog-none')
+const aiCatalogBox = document.getElementById('ai-catalog')
 
 const saveAskAi = () => {
   writeKey('askAiList', JSON.stringify(askAiList))
@@ -1914,7 +1913,7 @@ const syncAiLimit = () => {
   limitCount('ai-count', askAiList.length, ASK_AI_LIMIT)
   aiName.disabled = full
   aiUrl.disabled = full
-  aiCatalogSelect.disabled = full
+  aiCatalogBox.querySelectorAll('button').forEach((pick) => { pick.disabled = full })
   document.getElementById('ai-save').disabled = full
   if (full) aiMsg.textContent = t.aiMax
   else if (aiMsg.textContent === t.aiMax) aiMsg.textContent = ''
@@ -1948,19 +1947,24 @@ const askAiIconNode = (item) => {
   img.onerror = () => img.remove()
   return img
 }
-// The picker in the AI form lists the services that are not in the list yet.
+// Services not in the list yet, shown with their icons so each one can be checked before it is added.
 const renderAiCatalog = () => {
   const missing = aiCatalog.filter((service) => !askAiList.some((item) => normalizeUrl(item.url) === normalizeUrl(service.url)))
-  aiCatalogSelect.replaceChildren(aiCatalogNone, ...missing.map((service) => Object.assign(document.createElement('option'), { value: service.url, textContent: service.title })))
-  aiCatalogSelect.value = ''
+  aiCatalogBox.replaceChildren(...missing.map((service) => {
+    const pick = el('button', 'service-pick')
+    pick.type = 'button'
+    pick.disabled = askAiList.length >= ASK_AI_LIMIT && aiEditing === null
+    const icon = askAiIconNode(service)
+    if (icon) pick.append(icon)
+    pick.append(el('span', '', service.title))
+    pick.addEventListener('click', () => {
+      aiName.value = service.title
+      aiUrl.value = service.url
+      aiName.focus()
+    })
+    return pick
+  }))
 }
-aiCatalogSelect.addEventListener('change', () => {
-  const service = aiCatalog.find((item) => item.url === aiCatalogSelect.value)
-  if (!service) return
-  aiName.value = service.title
-  aiUrl.value = service.url
-  aiCatalogSelect.value = ''
-})
 const renderAskAi = () => {
   askAi.hidden = !askaiOn
   askAiRow.hidden = askAiList.length === 0
