@@ -1009,6 +1009,17 @@ html[data-wallpaper-on] .modes button {
   font: inherit;
 }
 
+.lang-select {
+  margin-left: auto;
+  height: 36px;
+  padding: 0 10px;
+  background: var(--color-bg);
+  color: var(--color-fg-1);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit;
+}
+
 #city-save,
 #zone-add-btn {
   height: 36px;

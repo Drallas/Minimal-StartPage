@@ -78,7 +78,13 @@ const isLeap = (y) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0
 const colon = () => Object.assign(document.createElement('span'), { className: 'colon', textContent: ':' })
 
 // The date and the week title follow the browser language. Kept here, before the text tables.
-const pageLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
+const LANG_CHOICES = ['nl', 'en', 'de', 'fr', 'es', 'zh']
+// A language chosen in Advanced settings wins; with no saved choice the page follows the browser.
+const pageLang = (() => {
+  let saved = null
+  try { saved = localStorage.getItem('lang') } catch {}
+  return LANG_CHOICES.includes(saved) ? saved : (navigator.language || 'en').slice(0, 2).toLowerCase()
+})()
 const dateLocales = { en: 'en-GB', nl: 'nl-NL', de: 'de-DE', fr: 'fr-FR', es: 'es-ES', zh: 'zh-CN' }
 const weekWords = { en: ['Week', 'day', 'of'], nl: ['Week', 'dag', 'van'], de: ['Woche', 'Tag', 'von'], fr: ['Semaine', 'jour', 'sur'], es: ['Semana', 'día', 'de'], zh: ['第', '天，共', '天'] }
 const [weekWord, dayWord, ofWord] = weekWords[pageLang] || weekWords.en
@@ -140,6 +146,7 @@ const settingsFields = {
   locIp: document.getElementById('loc-ip'),
   locCity: document.getElementById('loc-city'),
   quote: document.getElementById('set-quote'),
+  lang: document.getElementById('set-lang'),
   zones: document.getElementById('set-zones'),
   wallpaper: document.getElementById('set-wallpaper'),
   tint: document.getElementById('set-tint'),
@@ -233,7 +240,7 @@ try {
   if (saved === 'ip' || saved === 'city') locationMode = saved
 } catch {}
 
-const uiLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
+const uiLang = pageLang
 const weatherWords = {
   en: { clear: 'Clear', mostly: 'Mostly clear', partly: 'Partly cloudy', cloudy: 'Cloudy', fog: 'Fog', drizzle: 'Drizzle', rain: 'Rain', heavyRain: 'Heavy rain', snow: 'Snow', heavySnow: 'Heavy snow', showers: 'Showers', heavyShowers: 'Heavy showers', storm: 'Thunderstorm' },
   nl: { clear: 'Helder', mostly: 'Overwegend helder', partly: 'Deels bewolkt', cloudy: 'Bewolkt', fog: 'Mist', drizzle: 'Motregen', rain: 'Regen', heavyRain: 'Zware regen', snow: 'Sneeuw', heavySnow: 'Zware sneeuw', showers: 'Buien', heavyShowers: 'Zware buien', storm: 'Onweer' },
@@ -309,12 +316,12 @@ const footerText = {
   zh: { pre: '用', post: '由 Allards 制作', title: '在 GitHub 上查看 README' }
 }
 const dataText = {
-  en: { importTitle: 'Import data', importBody: 'Merging adds new links, places and time zones and keeps what you have. Replacing overwrites everything.', importMerge: 'Merge', importReplace: 'Replace', importCancel: 'Cancel', importSummary: 'Added: {added}. Already there: {dupes}. Skipped because of the limit: {skipped}.', exportData: 'Export data', importData: 'Import data', importInvalid: 'This file is not a Minimal-StartPage export.', },
-  nl: { importTitle: 'Gegevens importeren', importBody: 'Samenvoegen voegt nieuwe links, plaatsen en tijdzones toe en laat wat je al hebt staan. Vervangen overschrijft alles.', importMerge: 'Samenvoegen', importReplace: 'Vervangen', importCancel: 'Annuleren', importSummary: 'Toegevoegd: {added}. Stond er al: {dupes}. Overgeslagen door de limiet: {skipped}.', exportData: 'Gegevens exporteren', importData: 'Gegevens importeren', importInvalid: 'Dit bestand is geen export van Minimal-StartPage.', },
-  de: { importTitle: 'Daten importieren', importBody: 'Zusammenführen ergänzt neue Links, Orte und Zeitzonen und behält, was du hast. Ersetzen überschreibt alles.', importMerge: 'Zusammenführen', importReplace: 'Ersetzen', importCancel: 'Abbrechen', importSummary: 'Hinzugefügt: {added}. Schon vorhanden: {dupes}. Wegen des Limits übersprungen: {skipped}.', exportData: 'Daten exportieren', importData: 'Daten importieren', importInvalid: 'Diese Datei ist kein Export von Minimal-StartPage.', },
-  fr: { importTitle: 'Importer les données', importBody: 'Fusionner ajoute les nouveaux liens, lieux et fuseaux et garde ce que vous avez. Remplacer écrase tout.', importMerge: 'Fusionner', importReplace: 'Remplacer', importCancel: 'Annuler', importSummary: 'Ajoutés : {added}. Déjà présents : {dupes}. Ignorés à cause de la limite : {skipped}.', exportData: 'Exporter les données', importData: 'Importer les données', importInvalid: 'Ce fichier n’est pas un export de Minimal-StartPage.', },
-  es: { importTitle: 'Importar datos', importBody: 'Combinar añade los nuevos enlaces, lugares y zonas horarias y conserva lo que ya tienes. Reemplazar sobrescribe todo.', importMerge: 'Combinar', importReplace: 'Reemplazar', importCancel: 'Cancelar', importSummary: 'Añadidos: {added}. Ya estaban: {dupes}. Omitidos por el límite: {skipped}.', exportData: 'Exportar datos', importData: 'Importar datos', importInvalid: 'Este archivo no es una exportación de Minimal-StartPage.', },
-  zh: { importTitle: '导入数据', importBody: '合并会添加新的链接、地点和时区，并保留现有内容。替换会覆盖全部内容。', importMerge: '合并', importReplace: '替换', importCancel: '取消', importSummary: '已添加：{added}。已存在：{dupes}。因上限跳过：{skipped}。', exportData: '导出数据', importData: '导入数据', importInvalid: '此文件不是 Minimal-StartPage 的导出文件。', }
+  en: { langSection: 'Language', langAuto: 'Automatic', importTitle: 'Import data', importBody: 'Merging adds new links, places and time zones and keeps what you have. Replacing overwrites everything.', importMerge: 'Merge', importReplace: 'Replace', importCancel: 'Cancel', importSummary: 'Added: {added}. Already there: {dupes}. Skipped because of the limit: {skipped}.', exportData: 'Export data', importData: 'Import data', importInvalid: 'This file is not a Minimal-StartPage export.', },
+  nl: { langSection: 'Taal', langAuto: 'Automatisch', importTitle: 'Gegevens importeren', importBody: 'Samenvoegen voegt nieuwe links, plaatsen en tijdzones toe en laat wat je al hebt staan. Vervangen overschrijft alles.', importMerge: 'Samenvoegen', importReplace: 'Vervangen', importCancel: 'Annuleren', importSummary: 'Toegevoegd: {added}. Stond er al: {dupes}. Overgeslagen door de limiet: {skipped}.', exportData: 'Gegevens exporteren', importData: 'Gegevens importeren', importInvalid: 'Dit bestand is geen export van Minimal-StartPage.', },
+  de: { langSection: 'Sprache', langAuto: 'Automatisch', importTitle: 'Daten importieren', importBody: 'Zusammenführen ergänzt neue Links, Orte und Zeitzonen und behält, was du hast. Ersetzen überschreibt alles.', importMerge: 'Zusammenführen', importReplace: 'Ersetzen', importCancel: 'Abbrechen', importSummary: 'Hinzugefügt: {added}. Schon vorhanden: {dupes}. Wegen des Limits übersprungen: {skipped}.', exportData: 'Daten exportieren', importData: 'Daten importieren', importInvalid: 'Diese Datei ist kein Export von Minimal-StartPage.', },
+  fr: { langSection: 'Langue', langAuto: 'Automatique', importTitle: 'Importer les données', importBody: 'Fusionner ajoute les nouveaux liens, lieux et fuseaux et garde ce que vous avez. Remplacer écrase tout.', importMerge: 'Fusionner', importReplace: 'Remplacer', importCancel: 'Annuler', importSummary: 'Ajoutés : {added}. Déjà présents : {dupes}. Ignorés à cause de la limite : {skipped}.', exportData: 'Exporter les données', importData: 'Importer les données', importInvalid: 'Ce fichier n’est pas un export de Minimal-StartPage.', },
+  es: { langSection: 'Idioma', langAuto: 'Automático', importTitle: 'Importar datos', importBody: 'Combinar añade los nuevos enlaces, lugares y zonas horarias y conserva lo que ya tienes. Reemplazar sobrescribe todo.', importMerge: 'Combinar', importReplace: 'Reemplazar', importCancel: 'Cancelar', importSummary: 'Añadidos: {added}. Ya estaban: {dupes}. Omitidos por el límite: {skipped}.', exportData: 'Exportar datos', importData: 'Importar datos', importInvalid: 'Este archivo no es una exportación de Minimal-StartPage.', },
+  zh: { langSection: '语言', langAuto: '自动', importTitle: '导入数据', importBody: '合并会添加新的链接、地点和时区，并保留现有内容。替换会覆盖全部内容。', importMerge: '合并', importReplace: '替换', importCancel: '取消', importSummary: '已添加：{added}。已存在：{dupes}。因上限跳过：{skipped}。', exportData: '导出数据', importData: '导入数据', importInvalid: '此文件不是 Minimal-StartPage 的导出文件。', }
 }
 const tintCycleText = {
   en: { tintCycle: 'Change colour' }, nl: { tintCycle: 'Kleur wisselen' }, de: { tintCycle: 'Farbe wechseln' },
@@ -963,6 +970,8 @@ const applySettingsText = () => {
   settingsFields.resetSettings.textContent = t.resetSettings
   document.getElementById('export-data').textContent = t.exportData
   document.getElementById('import-data').textContent = t.importData
+  document.getElementById('sec-lang').textContent = t.langSection
+  document.getElementById('set-lang-auto').textContent = t.langAuto
   document.getElementById('import-title').textContent = t.importTitle
   document.getElementById('import-body').textContent = t.importBody
   document.getElementById('import-merge').textContent = t.importMerge
@@ -980,6 +989,7 @@ const syncSettings = () => {
   settingsFields.locIp.checked = locationMode === 'ip'
   settingsFields.locCity.checked = locationMode === 'city'
   settingsFields.quote.checked = quoteOn
+  settingsFields.lang.value = localStorage.getItem('lang') || 'auto'
   renderIp()
   settingsFields.zones.checked = zonesOn
   settingsFields.wallpaper.checked = wallpaperOn
@@ -1226,8 +1236,15 @@ const clearKeys = (keys) => {
   } catch {}
 }
 const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState']
+settingsFields.lang.addEventListener('change', () => {
+  try {
+    if (settingsFields.lang.value === 'auto') localStorage.removeItem('lang')
+    else localStorage.setItem('lang', settingsFields.lang.value)
+  } catch {}
+  location.reload()
+})
 settingsFields.resetSettings.addEventListener('click', () => {
-  clearKeys(['personalState', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
+  clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
   location.reload()
 })
 settingsFields.resetData.addEventListener('click', () => {
@@ -1238,7 +1255,7 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['wallpaperEnabled', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
+const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
@@ -1943,7 +1960,7 @@ if (weatherOn) showWeather()
 const quoteText = document.getElementById('quote-text')
 const quoteBy = document.getElementById('quote-by')
 const quotes = window.QUOTES
-const quoteLang = (navigator.language || 'en').slice(0, 2).toLowerCase()
+const quoteLang = pageLang
 const translated = quotes[quoteLang] || []
 const quoteList = quotes.en.map((q, i) => translated[i] || q)
 
