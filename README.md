@@ -45,9 +45,9 @@
 
 Everything is optional. The settings start with a choice of page:
 
-**Minimal** shows the search, the clock, the date and a plain Wikipedia button.
+**Minimal** shows only the search, the clock and the date.
 
-**Standard** is the default. It adds the AI shortcuts and the wallpaper.
+**Standard** is the default. It adds the Wikipedia button, the colour button at the bottom left and the wallpaper button at the bottom right. The AI shortcuts, time zones and the rest are there to discover in the settings.
 
 Each option can still be changed on its own. When your choices match neither page, the page shows **Personal**. A page never switches weather or your IP address on, since they send data.
 

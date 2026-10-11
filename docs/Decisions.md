@@ -18,3 +18,4 @@
 - Wallpapers are a list in Data beheren, with a switch each. The photo and the three new ones are on by default; a switch turns one off for good.
 - The quote sits in the page column, so it always comes after the AI shortcuts on a phone and never over them.
 - The README stays short and airy; the questions people ask go to docs/FAQ.md, which the README links to.
+- The pages start minimal: Minimal has nothing extra, and Standard is the default for a new visitor. The AI shortcuts and time zones are off there, so their value is found, not forced.

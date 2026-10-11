@@ -1101,7 +1101,7 @@ settingsFields.zones.addEventListener('change', () => {
 })
 
 // Ask AI links below the search bar.
-let askaiOn = readFlag('askai', true)
+let askaiOn = readFlag('askai', false)
 const askAi = document.getElementById('ask-ai')
 settingsFields.askai.addEventListener('change', () => {
   askaiOn = settingsFields.askai.checked
@@ -1112,8 +1112,10 @@ settingsFields.askai.addEventListener('change', () => {
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
 // IP address are never changed by a preset, since they send data.
 const presets = {
-  minimal: { quote: false, links: true, linksOwn: false, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false },
-  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: true, wallpaper: true, wallpaperButton: true, tint: true },
+  // Minimal starts with nothing extra. Standard adds the Wikipedia button and the colour and wallpaper buttons;
+  // AI shortcuts, time zones and the rest are found later, in the settings.
+  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false },
+  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: false, wallpaper: true, wallpaperButton: true, tint: true },
 }
 // Weather and the IP display are off in both presets, so choosing one never starts a lookup.
 // Weather is not part of the presets at all.
