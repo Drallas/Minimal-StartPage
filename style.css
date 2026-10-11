@@ -1951,6 +1951,7 @@ html[data-quote-off] #quote {
 /* Hovering a swatch shows the wallpaper larger beside it. It only appears over the swatch, so the name and links stay clickable. */
 .wallpaper-swatch {
   position: relative;
+  z-index: 2;
 }
 
 .wallpaper-swatch::after {
