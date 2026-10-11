@@ -1653,11 +1653,17 @@ html[data-quote-off] #quote {
 /* Help: the guide from the settings window. */
 .help-panel {
   width: min(100%, var(--panel-md));
+  /* The title stays put; only the guide below it scrolls, so there is one scrollbar. */
+  display: flex;
+  flex-direction: column;
+  max-height: 86vh;
+  overflow: hidden;
 }
 
 /* The guide is one column, like the settings: every topic is a block of the same width, so no uneven gaps. */
 .help-body {
-  max-height: 80vh;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: auto;
 }
 
@@ -1875,8 +1881,8 @@ html[data-quote-off] #quote {
     max-height: 90vh;
   }
 
-  .help-body {
-    max-height: 72vh;
+  .help-panel {
+    max-height: 90vh;
   }
 
   .help-section p,

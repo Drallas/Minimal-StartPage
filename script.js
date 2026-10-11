@@ -1056,14 +1056,20 @@ const renderHelp = () => {
   const faqLink = Object.assign(document.createElement('a'), { href: 'https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md', target: '_blank', rel: 'noopener', className: 'help-link', textContent: helpCopy.faq })
   helpBody.append(faqLink)
 }
+// Help opens over the settings; the settings are hidden meanwhile so their scrollbar does not show through.
+let helpOverSettings = false
 const openHelp = () => {
   helpFrom = document.activeElement
   renderHelp()
+  helpOverSettings = !settings.hidden
+  settings.hidden = true
   helpWindow.hidden = false
   helpWindow.querySelector('.settings-panel').focus()
 }
 const closeHelp = () => {
   helpWindow.hidden = true
+  if (helpOverSettings) settings.hidden = false
+  helpOverSettings = false
   if (helpFrom && helpFrom.focus) helpFrom.focus()
 }
 document.getElementById('help-open').addEventListener('click', openHelp)
