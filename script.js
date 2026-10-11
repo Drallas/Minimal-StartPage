@@ -1026,6 +1026,8 @@ const setAdvanced = (open) => {
   advancedBlock.closest('.settings-panel').classList.toggle('is-wide', open)
   advancedToggle.setAttribute('aria-expanded', String(open))
   advancedToggle.textContent = open ? t.advancedClosed : t.advancedOpen
+  // The resets sit next to the toggle, and only matter in Advanced.
+  document.getElementById('reset-row').hidden = !open
   document.getElementById('settings-title').textContent = open ? t.advTitle : t.title
   // Data beheren and IP details live in the basic view only; one place is enough.
   manageOpenButton.hidden = open
