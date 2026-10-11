@@ -128,11 +128,14 @@ clockDate.addEventListener('click', () => {
   updateClock()
 })
 
-clockTime.addEventListener('click', () => {
-  clockMode = clockModes[(clockModes.indexOf(clockMode) + 1) % clockModes.length]
+// The clock format can be changed by clicking the time, or chosen in Advanced; both keep the same setting.
+const setClockMode = (mode) => {
+  clockMode = mode
   try { localStorage.setItem('clockFormat', clockMode) } catch {}
+  settingsFields.clock.value = clockMode
   updateClock()
-})
+}
+clockTime.addEventListener('click', () => setClockMode(clockModes[(clockModes.indexOf(clockMode) + 1) % clockModes.length]))
 
 // Weather is off until you turn it on. It finds your place from your IP address (ipapi.co) or from a city
 // you enter (Open-Meteo search), then asks Open-Meteo for the forecast. Both send data outside this page.
@@ -158,6 +161,7 @@ const settingsFields = {
   askai: document.getElementById('set-askai'),
   searchNewTab: document.getElementById('set-search-newtab'),
   aiNewTab: document.getElementById('set-ai-newtab'),
+  clock: document.getElementById('set-clock'),
   preset: document.querySelectorAll('input[name="preset"]'),
   cityForm: document.getElementById('city-form'),
   cityInput: document.getElementById('city-input'),
@@ -296,12 +300,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
-  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
+  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
+  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to five cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -955,6 +959,10 @@ const applySettingsText = () => {
   document.getElementById('lbl-preset-custom').textContent = t.presetCustom
   document.getElementById('sec-ai').textContent = t.aiSec
   document.getElementById('lbl-askai').textContent = t.aiOn
+  document.getElementById('sec-time').textContent = t.timeSec
+  settingsFields.clock.options[0].textContent = t.time24
+  settingsFields.clock.options[1].textContent = t.time12
+  settingsFields.clock.options[2].textContent = t.timeFull
   document.getElementById('sec-search').textContent = t.searchSec
   document.getElementById('lbl-search-newtab').textContent = t.searchNewTab
   document.getElementById('lbl-ai-newtab').textContent = t.aiNewTab
@@ -1029,6 +1037,7 @@ const syncSettings = () => {
   settingsFields.links.checked = linksOn
   settingsFields.linksOwn.checked = linksOwn
   settingsFields.askai.checked = askaiOn
+  settingsFields.clock.value = clockMode
   settingsFields.searchNewTab.checked = searchNewTab
   settingsFields.aiNewTab.checked = aiNewTab
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
@@ -1182,6 +1191,7 @@ settingsFields.searchNewTab.addEventListener('change', () => {
   searchNewTab = settingsFields.searchNewTab.checked
   writeKey('searchNewTab', searchNewTab ? 'on' : 'off')
 })
+settingsFields.clock.addEventListener('change', () => setClockMode(settingsFields.clock.value))
 settingsFields.aiNewTab.addEventListener('change', () => {
   aiNewTab = settingsFields.aiNewTab.checked
   writeKey('aiNewTab', aiNewTab ? 'on' : 'off')
