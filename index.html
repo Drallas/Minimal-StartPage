@@ -56,7 +56,7 @@
     <div class="controls">
       <button type="button" id="tint-cycle" class="tint-cycle" hidden aria-label="Change colour" title="Change colour"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle class="dot" cx="12" cy="12" r="4.5"/></svg></button>
       <input id="hue" class="hue" type="range" min="0" max="360" value="180" aria-label="Background tint (the middle is neutral)" title="Background tint">
-      <button type="button" id="wallpaper-toggle" aria-label="Hide wallpaper" title="Hide wallpaper" aria-pressed="true"><span></span><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></button>
+      <button type="button" id="wallpaper-toggle" aria-label="Wallpaper" title="Next background" aria-pressed="true"><span></span><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></button>
     </div>
 
     <footer><a href="https://github.com/Drallas/Minimal-StartPage#readme" id="foot-link" title="View the README on GitHub"><span id="foot-pre">Vibe coded with</span> <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg> <span id="foot-post">by Allards</span></a></footer>
@@ -136,6 +136,7 @@
         <button type="button" role="tab" class="manage-tab-button" data-tab="zones" id="tab-zones" aria-controls="section-zones">Time zones</button>
         <button type="button" role="tab" class="manage-tab-button" data-tab="ai" id="tab-ai" aria-controls="section-ai">AI</button>
         <button type="button" role="tab" class="manage-tab-button" data-tab="weather" id="tab-weather" aria-controls="section-weather">Weather</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="wallpapers" id="tab-wallpapers" aria-controls="section-wallpapers">Background</button>
       </div>
       <section class="manage-section" data-tab="links" id="section-links" role="tabpanel" aria-labelledby="tab-links" tabindex="0" hidden>
       <div class="links-list" id="links-list"></div>
@@ -194,6 +195,10 @@
           </div>
           <p class="city-msg" id="place-msg" role="status"></p>
         </form>
+      </section>
+      <section class="manage-section" data-tab="wallpapers" id="section-wallpapers" role="tabpanel" aria-labelledby="tab-wallpapers" tabindex="0" hidden>
+        <p class="manage-note" id="wallpaper-note"></p>
+        <div id="wallpaper-list"></div>
       </section>
       <div class="manage-io">
           <button type="button" id="export-data" class="text-button">Export data</button>

@@ -332,14 +332,6 @@ const ipText = {
   es: { ipNone: 'Aún no consultada', ipFailed: 'No se pudo comprobar', ipWindowTitle: 'Detalles de la IP', ipCheckFirst: 'Consultar', ipCheckAgain: 'Consultar de nuevo', ipFieldPlace: 'Lugar', ipFieldRegion: 'Región', ipFieldCountry: 'País', ipFieldPostal: 'Código postal', ipFieldProvider: 'Proveedor', ipFieldAsn: 'Número AS', ipFieldNetwork: 'Red', ipFieldTimezone: 'Zona horaria', ipFieldCoords: 'Coordenadas', ipFieldAt: 'Consultada' },
   zh: { ipNone: '尚未查询', ipFailed: '无法检查', ipWindowTitle: 'IP 详情', ipCheckFirst: '查询', ipCheckAgain: '重新查询', ipFieldPlace: '地点', ipFieldRegion: '地区', ipFieldCountry: '国家', ipFieldPostal: '邮编', ipFieldProvider: '服务商', ipFieldAsn: 'AS 号', ipFieldNetwork: '网络', ipFieldTimezone: '时区', ipFieldCoords: '坐标', ipFieldAt: '查询时间' }
 }
-const wallText = {
-  en: { wallShow: 'Show wallpaper', wallHide: 'Hide wallpaper' },
-  nl: { wallShow: 'Achtergrond aanzetten', wallHide: 'Achtergrond uitzetten' },
-  de: { wallShow: 'Hintergrund einblenden', wallHide: 'Hintergrund ausblenden' },
-  fr: { wallShow: 'Afficher le fond', wallHide: 'Masquer le fond' },
-  es: { wallShow: 'Mostrar el fondo', wallHide: 'Ocultar el fondo' },
-  zh: { wallShow: '显示壁纸', wallHide: '隐藏壁纸' }
-}
 const linksOwnText = {
   en: { linksOwn: 'Own links' },
   nl: { linksOwn: 'Eigen links' },
@@ -381,12 +373,12 @@ const tintText = {
   zh: { tintToggle: '背景色调（滑块）' }
 }
 const bgTitleText = {
-  en: { secBackground: 'Background' },
-  nl: { secBackground: 'Achtergrond' },
-  de: { secBackground: 'Hintergrund' },
-  fr: { secBackground: 'Fond' },
-  es: { secBackground: 'Fondo' },
-  zh: { secBackground: '背景' }
+  en: { wallNote: 'Each press of the background button goes to the next one that is on.', wallNext: 'Next background', wallNone: 'No background', wallPhoto: 'Misty forest', wallPlaceholder: 'Placeholder', wallOn: 'On', tabWallpaper: 'Background' },
+  nl: { wallNote: 'Elke druk op de achtergrondknop gaat naar de volgende die aan staat.', wallNext: 'Volgende achtergrond', wallNone: 'Geen achtergrond', wallPhoto: 'Mistig bos', wallPlaceholder: 'Placeholder', wallOn: 'Aan', tabWallpaper: 'Achtergrond' },
+  de: { wallNote: 'Jeder Druck auf die Hintergrund-Schaltfläche wechselt zum nächsten eingeschalteten Hintergrund.', wallNext: 'Nächster Hintergrund', wallNone: 'Kein Hintergrund', wallPhoto: 'Nebliger Wald', wallPlaceholder: 'Platzhalter', wallOn: 'An', tabWallpaper: 'Hintergrund' },
+  fr: { wallNote: 'Chaque pression sur le bouton du fond passe au fond suivant activé.', wallNext: 'Fond suivant', wallNone: 'Aucun fond', wallPhoto: 'Forêt brumeuse', wallPlaceholder: 'Espace réservé', wallOn: 'Activé', tabWallpaper: 'Fond' },
+  es: { wallNote: 'Cada pulsación del botón de fondo pasa al siguiente fondo activado.', wallNext: 'Siguiente fondo', wallNone: 'Sin fondo', wallPhoto: 'Bosque brumoso', wallPlaceholder: 'Marcador', wallOn: 'Activado', tabWallpaper: 'Fondo' },
+  zh: { wallNote: '每次点击背景按钮，会切换到下一个已开启的背景。', wallNext: '下一个背景', wallNone: '无背景', wallPhoto: '雾中的森林', wallPlaceholder: '占位', wallOn: '开启', tabWallpaper: '背景' }
 }
 const pageText = {
   en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personal' },
@@ -404,7 +396,7 @@ const advancedText = {
   es: { advTitle: 'Ajustes avanzados', advancedOpen: 'Avanzado', advancedClosed: '← Volver a los ajustes básicos' },
   zh: { advTitle: '高级设置', advancedOpen: '高级', advancedClosed: '← 返回基本设置' }
 }
-for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], wallText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
+for (const lang of Object.keys(text)) Object.assign(text[lang], linksText[lang], advancedText[lang], pageText[lang], bgTitleText[lang], tintText[lang], wallpaperText[lang], disclaimerText[lang], linkToggleText[lang], linksOwnText[lang], aiText[lang], manageText[lang], dataText[lang], tintCycleText[lang], quoteTitleText[lang], ipText[lang], sectionText[lang], forecastText[lang], { hourHeads: hourHeads[lang] }, zonesText[lang], { ipPrivacy: ipPrivacy[lang] })
 const weatherWording = {
   en: { location: 'Location', locIp: 'My place via IP address', locCity: 'A city I choose', noSource: 'Choose a place', needPlace: 'The weather needs a place: choose your IP address or a city below.' },
   nl: { location: 'Locatie', locIp: 'Mijn plaats via IP-adres', locCity: 'Een stad die ik kies', noSource: 'Kies een plaats', needPlace: 'Het weer heeft een plaats nodig: kies hieronder je IP-adres of een stad.' },
@@ -422,7 +414,7 @@ const helpText = {
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY.'],
     ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added in Manage, under Weather; choose one in this window to see its forecast.'],
-    ['Background', 'The round button at the bottom right turns the wallpaper on or off. The slider at the bottom left tints the background; on a phone, the button there steps through the colours.'],
+    ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on in Data beheren. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
     ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal and Standard) sit at the top of the settings. Personal shows when your choices match neither. Advanced lists every option in four groups; its link goes back to the basic settings.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset settings" brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and nothing else. Extra places send their name to Open-Meteo to find them and fetch their forecast.'],
   ] },
@@ -432,7 +424,7 @@ const helpText = {
     ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en DD-MM-JJJJ.'],
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
     ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Je kunt in Beheren onder Weer tot vijf extra plaatsen toevoegen; kies er in dit venster een om die voorspelling te zien.'],
-    ['Achtergrond', 'De ronde knop rechtsonder zet de wallpaper aan of uit. De schuif linksonder kleurt de achtergrond; op de telefoon wissel je met de knop daar door de kleuren.'],
+    ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je in Data beheren hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
     ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal en Standaard. Persoonlijk verschijnt als je keuzes bij geen van beide passen. Geavanceerd toont alle opties in vier groepen; de link ernaast brengt je terug naar de basisinstellingen.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Instellingen resetten" zet de standaard terug. "Eigen links, AI-snelkoppelingen en plaatsen wissen" verwijdert alleen je eigen links, AI-snelkoppelingen, tijdzones, je stad en extra plaatsen. Extra plaatsen sturen hun naam naar Open-Meteo om ze te vinden en hun verwachting op te halen.'],
   ] },
@@ -442,7 +434,7 @@ const helpText = {
     ['Datum', 'Fahre mit der Maus über das Datum, um die ISO-Woche und den Tag des Jahres zu sehen. Ein Klick wechselt zwischen langer Form und TT-MM-JJJJ.'],
     ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen. Ist Eigene Links aus, öffnet die Schaltfläche direkt Wikipedia.'],
     ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 6 Stunden und sieben Tagen. Unter Verwalten, Wetter kannst du bis zu fünf weitere Orte hinzufügen; wähle hier einen aus, um dessen Vorhersage zu sehen.'],
-    ['Hintergrund', 'Die runde Schaltfläche unten rechts schaltet das Hintergrundbild ein oder aus. Der Regler unten links färbt den Hintergrund; am Telefon wechselst du mit der Schaltfläche dort die Farben.'],
+    ['Hintergrund', 'Jeder Druck auf den runden Knopf unten rechts wechselt zum nächsten Hintergrund: zuerst keiner, dann die in „Daten verwalten“ eingeschalteten. Der Knopf unten links wechselt die Hintergrundfarbe in Stufen; am Computer ist das ebenfalls ein Knopf.'],
     ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal und Standard. Persönlich erscheint, wenn deine Auswahl zu keiner passt. Erweitert zeigt alle Optionen in vier Gruppen; der Link führt zurück zu den Grundeinstellungen.'],
     ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Einstellungen zurücksetzen“ stellt die Standards wieder her. „Eigene Links, KI-Verknüpfungen und Orte löschen“ entfernt nur deine eigenen Links, KI-Verknüpfungen, Zeitzonen, deine Stadt und weitere Orte. Zusätzliche Orte senden ihren Namen an Open-Meteo, um sie zu finden und ihre Vorhersage abzurufen.'],
   ] },
@@ -452,7 +444,7 @@ const helpText = {
     ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à JJ-MM-AAAA.'],
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 6 heures et sept jours. Vous pouvez ajouter jusqu’à cinq lieux de plus dans Gérer, sous Météo ; choisissez-en un dans cette fenêtre pour voir sa prévision.'],
-    ['Fond', 'Le bouton rond en bas à droite active ou désactive le fond d’écran. Le curseur en bas à gauche teinte le fond ; sur téléphone, le bouton à cet endroit fait défiler les couleurs.'],
+    ['Fond', 'Chaque pression sur le bouton rond en bas à droite passe au fond suivant : d’abord aucun, puis ceux activés dans « Gérer les données ». Le bouton en bas à gauche change la couleur du fond par étapes ; sur ordinateur, c’est aussi un bouton.'],
     ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal et Standard. Personnalisé s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options en quatre groupes ; le lien ramène aux réglages de base.'],
     ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser les réglages » rétablit les valeurs par défaut. « Supprimer mes liens, raccourcis IA et lieux » retire seulement vos liens personnels, raccourcis IA, fuseaux, votre ville et les lieux supplémentaires. Les lieux supplémentaires envoient leur nom à Open-Meteo pour les trouver et récupérer leur prévision.'],
   ] },
@@ -462,7 +454,7 @@ const helpText = {
     ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y DD-MM-AAAA.'],
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 6 horas y siete días. Puedes añadir hasta cinco lugares más en Gestionar, en Tiempo; elige uno en esta ventana para ver su previsión.'],
-    ['Fondo', 'El botón redondo de abajo a la derecha activa o desactiva el fondo. El control de abajo a la izquierda tiñe el fondo; en el móvil, el botón de ahí cambia de color.'],
+    ['Fondo', 'Cada pulsación del botón redondo de abajo a la derecha pasa al siguiente fondo: primero ninguno, luego los activados en «Gestionar datos». El botón de abajo a la izquierda cambia el color del fondo por pasos; en el ordenador también es un botón.'],
     ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo y Estándar. Personal aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones en cuatro grupos; el enlace vuelve a los ajustes básicos.'],
     ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer ajustes» devuelve los valores por defecto. «Borrar mis enlaces, accesos de IA y lugares» quita solo tus enlaces propios, accesos de IA, zonas horarias, tu ciudad y los lugares adicionales. Los lugares adicionales envían su nombre a Open-Meteo para encontrarlos y obtener su previsión.'],
   ] },
@@ -472,7 +464,7 @@ const helpText = {
     ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和 DD-MM-YYYY 之间切换。'],
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 6 小时和七天的完整预报。 在“管理”的“天气”中最多可添加五个其他地点；在此窗口中选择一个即可查看其预报。'],
-    ['背景', '右下角的圆形按钮可开启或关闭壁纸。左下角的滑块会给背景染色；手机上，那里的按钮可切换颜色。'],
+    ['背景', '点击右下角的圆形按钮会切换到下一个背景：先是无背景，然后是在“管理数据”里开启的背景。左下角的按钮按步骤改变背景颜色；电脑上也是按钮。'],
     ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简和标准。选择与两者都不符时显示“个性化”。“高级”按四组显示全部选项，链接可返回基本设置。'],
     ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo。显示 IP 地址使用同一查询。除此之外，页面不会发送任何内容。“重置设置”会恢复默认值。“删除我的链接、AI 快捷方式和地点”只删除你的自定义链接、AI 快捷方式、时区和城市。 额外地点会把名称发送到 Open-Meteo 以查找位置并获取预报。'],
   ] },
@@ -945,6 +937,8 @@ const applySettingsText = () => {
   document.getElementById('tab-zones').textContent = t.tabZones
   document.getElementById('tab-ai').textContent = t.tabAi
   document.getElementById('tab-weather').textContent = t.tabWeather
+  document.getElementById('tab-wallpapers').textContent = t.tabWallpaper
+  document.getElementById('wallpaper-note').textContent = t.wallNote
   document.getElementById('lbl-place').textContent = t.placeLabel
   document.getElementById('place-add').textContent = t.placeAdd
   labelLinksButton()
@@ -1079,9 +1073,8 @@ settingsFields.weather.addEventListener('change', () => setWeather(settingsField
 
 // Wallpaper on or off, and whether its button shows, from settings.
 settingsFields.wallpaper.addEventListener('change', () => {
-  wallpaperOn = settingsFields.wallpaper.checked
-  applyWallpaper(wallpaperOn)
-  writeKey('wallpaper', wallpaperOn ? 'on' : 'off')
+  const first = wallpapers.find(isOn)
+  setWallpaper(settingsFields.wallpaper.checked && first ? first.id : 'none')
 })
 settingsFields.wallpaperButton.addEventListener('change', () => {
   wallpaperButtonOn = settingsFields.wallpaperButton.checked
@@ -1209,7 +1202,7 @@ const clearKeys = (keys) => {
 }
 const personalKeys = ['links', 'askAiList', 'city', 'zones', 'location', 'weatherPlaces', 'personalState']
 settingsFields.resetSettings.addEventListener('click', () => {
-  clearKeys(['personalState', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
+  clearKeys(['personalState', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset'])
   location.reload()
 })
 settingsFields.resetData.addEventListener('click', () => {
@@ -1220,7 +1213,7 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
+const EXPORT_SETTINGS = ['wallpaperEnabled', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
@@ -1371,6 +1364,7 @@ const showManageTab = (tab) => {
   if (tab === 'zones') renderZones()
   if (tab === 'ai') resetAiForm()
   if (tab === 'weather') renderPlaces()
+  if (tab === 'wallpapers') renderWallpapers()
 }
 const openManage = (tab) => {
   manageFrom = document.activeElement
@@ -1881,9 +1875,11 @@ window.onload = () => {
   document.getElementsByTagName('body')[0].removeAttribute('class')
 }
 
-// Wallpaper mode: one photo, on or off. Remembered in localStorage.
+// Background: a cycle of wallpapers. The button steps through 'none' and every wallpaper switched on in
+// Data beheren. The placeholders are gradients until real images exist: give one a thumb and src to use a photo.
 const wallpaper = document.getElementById('wallpaper')
 const wallpaperToggle = document.getElementById('wallpaper-toggle')
+const wallpaperThumb = wallpaperToggle.querySelector('span')
 // Local copies in three sizes, so a phone does not download the largest one.
 const wallpaperSizes = [
   { width: 800, url: 'assets/wallpaper-800.jpg' },
@@ -1892,27 +1888,76 @@ const wallpaperSizes = [
 ]
 const wantedWidth = window.innerWidth * (window.devicePixelRatio || 1)
 const wallpaperUrl = (wallpaperSizes.find((s) => s.width >= wantedWidth) || wallpaperSizes[wallpaperSizes.length - 1]).url
-
-const applyWallpaper = (on) => {
-  wallpaper.style.backgroundImage = on ? `url("${wallpaperUrl}")` : ''
-  root.toggleAttribute('data-wallpaper-on', on)
-  wallpaperToggle.setAttribute('aria-pressed', String(on))
-  wallpaperToggle.title = on ? t.wallHide : t.wallShow
-  wallpaperToggle.setAttribute('aria-label', wallpaperToggle.title)
-}
-
-// On by default; a saved choice ('on' or 'off') overrides it.
+const wallpapers = [
+  { id: 'photo', src: wallpaperUrl, thumb: 'assets/wallpaper-thumb.jpg', on: true },
+  { id: 'placeholder-1', src: null, css: 'linear-gradient(160deg, #dfe4e7, #9aa6ad)', on: false },
+  { id: 'placeholder-2', src: null, css: 'linear-gradient(200deg, #ece6da, #b9ad97)', on: false },
+  { id: 'placeholder-3', src: null, css: 'linear-gradient(135deg, #34424a, #11181c)', on: false },
+]
+// Switched on or off in Data beheren; a wallpaper without a saved switch keeps its default.
+let wallpaperSwitches = {}
+try { wallpaperSwitches = JSON.parse(localStorage.getItem('wallpaperEnabled') || '{}') || {} } catch {}
+const isOn = (item) => (item.id in wallpaperSwitches ? Boolean(wallpaperSwitches[item.id]) : item.on)
+const findWallpaper = (id) => wallpapers.find((item) => item.id === id) || null
+const labelOf = (item) => (item.src ? t.wallPhoto : `${t.wallPlaceholder} ${wallpapers.indexOf(item)}`)
+const paintOf = (item) => (item.src ? `url("${item.src}")` : item.css)
+let wallpaperChoice = 'photo'
 let wallpaperOn = true
+
+const applyWallpaper = (choice) => {
+  const item = findWallpaper(choice)
+  wallpaper.style.backgroundImage = item ? paintOf(item) : ''
+  wallpaperThumb.style.backgroundImage = item ? (item.thumb ? `url("${item.thumb}")` : item.css) : ''
+  root.toggleAttribute('data-wallpaper-on', Boolean(item))
+  wallpaperToggle.setAttribute('aria-pressed', String(Boolean(item)))
+  wallpaperToggle.title = t.wallNext
+  wallpaperToggle.setAttribute('aria-label', `${t.wallpaperToggle}: ${item ? labelOf(item) : t.wallNone}`)
+  wallpaperOn = Boolean(item)
+}
+// A saved choice is a wallpaper id or 'none'; the old 'on' and 'off' still mean the photo and none.
 try {
   const saved = localStorage.getItem('wallpaper')
-  if (saved) wallpaperOn = saved === 'on'
+  if (saved === 'off') wallpaperChoice = 'none'
+  else if (saved === 'on') wallpaperChoice = 'photo'
+  else if (saved) wallpaperChoice = saved
 } catch {}
-applyWallpaper(wallpaperOn)
+if (wallpaperChoice !== 'none' && !(findWallpaper(wallpaperChoice) && isOn(findWallpaper(wallpaperChoice)))) wallpaperChoice = 'none'
+applyWallpaper(wallpaperChoice)
 
-wallpaperToggle.addEventListener('click', () => {
-  wallpaperOn = !wallpaperOn
-  applyWallpaper(wallpaperOn)
-  try { localStorage.setItem('wallpaper', wallpaperOn ? 'on' : 'off') } catch {}
+const setWallpaper = (choice) => {
+  wallpaperChoice = choice
+  applyWallpaper(choice)
+  writeKey('wallpaper', choice)
+  settingsFields.wallpaper.checked = wallpaperOn
+}
+// Each press goes to the next one switched on, and then back to none.
+const nextChoice = () => {
+  const order = ['none', ...wallpapers.filter(isOn).map((item) => item.id)]
+  return order[(order.indexOf(wallpaperChoice) + 1) % order.length]
+}
+wallpaperToggle.addEventListener('click', () => setWallpaper(nextChoice()))
+
+// The list in Data beheren: a swatch, the name and a switch for each wallpaper.
+const wallpaperList = document.getElementById('wallpaper-list')
+const renderWallpapers = () => {
+  wallpaperList.replaceChildren(...wallpapers.map((item) => {
+    const row = el('div', 'wallpaper-row')
+    const swatch = el('span', 'wallpaper-swatch')
+    swatch.style.backgroundImage = item.thumb ? `url("${item.thumb}")` : item.css
+    const box = Object.assign(document.createElement('input'), { type: 'checkbox', checked: isOn(item) })
+    box.dataset.wallpaper = item.id
+    const switchLabel = el('label', 'wallpaper-switch')
+    switchLabel.append(box, ` ${t.wallOn}`)
+    row.append(swatch, el('span', 'wallpaper-name', labelOf(item)), switchLabel)
+    return row
+  }))
+}
+wallpaperList.addEventListener('change', (e) => {
+  const id = e.target.dataset.wallpaper
+  if (!id) return
+  wallpaperSwitches[id] = e.target.checked
+  writeKey('wallpaperEnabled', JSON.stringify(wallpaperSwitches))
+  if (!e.target.checked && wallpaperChoice === id) setWallpaper('none')
 })
 
 // The wallpaper button itself can be hidden in settings; the wallpaper keeps its last state.
@@ -1939,7 +1984,9 @@ const applyHue = (value) => {
   hueSlider.value = slider
   hueSlider.hidden = !tintOn
   tintCycle.hidden = !tintOn
-  tintCycle.style.setProperty('--dot', !neutral && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)')
+  const colour = !neutral && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)'
+  tintCycle.style.setProperty('--dot', colour)
+  tintCycle.style.setProperty('--swatch', colour)
   if (!neutral && tintOn) {
     root.dataset.tint = ''
     root.style.setProperty('--hue', hue)

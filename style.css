@@ -516,6 +516,7 @@ html[data-wallpaper-on] .modes button {
 }
 
 .hue {
+  display: none;
   -webkit-appearance: none;
   appearance: none;
   /* No tap highlight: on iOS it shows as a white disc around the thumb. */
@@ -719,9 +720,19 @@ html[data-wallpaper-on] .modes button {
 
 /* The two icon buttons: a colour button on the left and a background button on the right. Desktop keeps
    the slider and the wallpaper thumbnail, so the icons only show on phones. */
-.controls .tint-cycle,
 #wallpaper-toggle .glyph {
   display: none;
+}
+
+/* On a computer the colour button is a round swatch in the current tint, like the wallpaper thumbnail. */
+@media (min-width: 601px) {
+  .controls .tint-cycle .glyph {
+    display: none;
+  }
+}
+
+.controls .tint-cycle {
+  background: var(--swatch, var(--color-fg-2));
 }
 
 .glyph {
@@ -1894,4 +1905,30 @@ html[data-quote-off] #quote {
   .forecast-row {
     padding: 1px 0;
   }
+}
+
+/* Data beheren, the background tab: one row per wallpaper with a swatch, its name and a switch. */
+.wallpaper-row {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.wallpaper-swatch {
+  width: 40px;
+  height: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+}
+
+.wallpaper-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
 }
