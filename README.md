@@ -18,44 +18,41 @@
 <table>
   <tr>
     <td align="center">
-      <img src="assets/screenshot_light.webp" width="800" alt="Standard, light theme"/>
+      <img src="assets/screenshot_light.webp" width="800" alt="Standard page, light theme"/>
       <br/>
       <sub><b>Standard page, light theme</b></sub>
     </td>
   </tr>
-</table>
-
-<table>
   <tr>
-    <td align="center" width="33%">
-      <img src="assets/screenshot_dunes.webp" width="150" alt="Pink dunes"/>
+    <td align="center">
+      <img src="assets/screenshot_dark.webp" width="800" alt="Standard page, dark theme"/>
       <br/>
-      <sub><b>Pink dunes</b></sub>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/screenshot_mountains.webp" width="150" alt="Mountain haze"/>
-      <br/>
-      <sub><b>Mountain haze</b></sub>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/screenshot_tint_blue.webp" width="150" alt="Blue tint"/>
-      <br/>
-      <sub><b>Blue tint</b></sub>
+      <sub><b>Standard page, dark theme</b></sub>
     </td>
   </tr>
 </table>
 
 <table>
   <tr>
-    <td align="center" width="50%">
-      <img src="assets/screenshot_phone.webp" width="260" alt="Standard page on a phone"/>
+    <td align="center" width="25%">
+      <img src="assets/screenshot_light.webp" width="170" alt="Misty forest"/>
       <br/>
-      <sub><b>On a phone</b></sub>
+      <sub><b>Misty forest</b></sub>
     </td>
-    <td align="center" width="50%">
-      <img src="assets/screenshot_help.webp" width="360" alt="The Help window"/>
+    <td align="center" width="25%">
+      <img src="assets/screenshot_dunes.webp" width="170" alt="Pink dunes"/>
       <br/>
-      <sub><b>The Help window</b></sub>
+      <sub><b>Pink dunes</b></sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/screenshot_mountains.webp" width="170" alt="Mountain haze"/>
+      <br/>
+      <sub><b>Mountain haze</b></sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/screenshot_tint_blue.webp" width="170" alt="No image, blue tint"/>
+      <br/>
+      <sub><b>No image, blue tint</b></sub>
     </td>
   </tr>
 </table>
