@@ -1634,17 +1634,13 @@ html[data-quote-off] #quote {
 
 /* Help: the guide from the settings window. */
 .help-panel {
-  width: min(100%, 760px);
+  width: min(100%, 560px);
 }
 
-/* The guide in two columns on a wide window, so more fits without scrolling. */
+/* The guide is one column, like the settings: every topic is a block of the same width, so no uneven gaps. */
 .help-body {
   max-height: 80vh;
   overflow: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 40px;
-  align-items: stretch;
 }
 
 /* Each topic has a divider under it, as the advanced groups do; the first row has no space above. */
@@ -1653,7 +1649,7 @@ html[data-quote-off] #quote {
   border-bottom: 1px solid var(--color-border);
 }
 
-.help-section:nth-child(-n + 2) {
+.help-section:first-child {
   padding-top: 0;
 }
 
@@ -1681,6 +1677,7 @@ html[data-quote-off] #quote {
 }
 
 .help-section p {
+  max-width: 62ch;
   font-size: 13px;
   line-height: 1.6;
   color: var(--color-fg-1);
@@ -1847,8 +1844,7 @@ html[data-quote-off] #quote {
 
 /* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
 @media (max-width: 600px) {
-  .advanced,
-  .help-body {
+  .advanced {
     grid-template-columns: 1fr;
   }
 
@@ -1870,7 +1866,7 @@ html[data-quote-off] #quote {
     font-size: 14px;
   }
 
-  .help-section:nth-child(n) {
+  .help-section {
     padding-top: 16px;
   }
 
