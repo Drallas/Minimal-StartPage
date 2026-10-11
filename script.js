@@ -177,7 +177,6 @@ const settingsFields = {
   zones: document.getElementById('set-zones'),
   wallpaper: document.getElementById('set-wallpaper'),
   tint: document.getElementById('set-tint'),
-  colour: document.getElementById('set-colour'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links'),
   linksOwn: document.getElementById('set-links-own'),
@@ -1012,7 +1011,6 @@ const applySettingsText = () => {
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('lbl-ai-name').textContent = t.aiName
   document.getElementById('lbl-ai-url').textContent = t.aiUrl
-  settingsFields.colour.textContent = t.tintCycle
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
@@ -2332,7 +2330,6 @@ const applyHue = (value) => {
   const neutral = slider === 180
   hueSlider.value = slider
   hueSlider.hidden = !tintOn
-  settingsFields.colour.hidden = !tintOn
   tintCycle.hidden = !tintOn
   const colour = !neutral && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)'
   tintCycle.style.setProperty('--dot', colour)
@@ -2355,7 +2352,6 @@ const nextColour = () => {
   try { localStorage.setItem('hue', String(next)) } catch {}
 }
 tintCycle.addEventListener('click', nextColour)
-settingsFields.colour.addEventListener('click', nextColour)
 
 // Settings: the tint on or off. The chosen hue is kept for when it is switched back on.
 settingsFields.tint.addEventListener('change', () => {
