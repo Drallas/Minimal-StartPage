@@ -1,0 +1,11 @@
+{
+  "name": "minimal-startpage-tests",
+  "private": true,
+  "description": "Smoke tests for index.html. See README.md.",
+  "scripts": {
+    "test": "node smoke.js"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}
