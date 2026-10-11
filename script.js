@@ -563,6 +563,9 @@ const getPlace = async () => {
 let current = null
 // Extra places next to the own one: five at most, shown as chips in the forecast window.
 const PLACE_LIMIT = 5
+const ZONE_LIMIT = 5
+// Shows how many of a list's allowed items are in use, e.g. 3/5, above each list in Data beheren.
+const limitCount = (id, count, max) => { document.getElementById(id).textContent = `${count}/${max}` }
 let extraPlaces = []
 try {
   const saved = JSON.parse(localStorage.getItem('weatherPlaces') || 'null')
@@ -800,6 +803,12 @@ const sortPlaces = () => {
 const renderPlaces = () => {
   sortPlaces()
   document.getElementById('weather-own').textContent = `${t.placeOwn}: ${current ? current.place.label : t.placeNone}`
+  const full = extraPlaces.length >= PLACE_LIMIT
+  limitCount('place-count', extraPlaces.length, PLACE_LIMIT)
+  document.getElementById('place-input').disabled = full
+  document.getElementById('place-add').disabled = full
+  if (full) placeMsg.textContent = t.placeLimit
+  else if (placeMsg.textContent === t.placeLimit) placeMsg.textContent = ''
   document.getElementById('place-list').replaceChildren(...extraPlaces.map((place, index) => {
     const row = document.createElement('li')
     row.append(el('span', '', place.label))
@@ -1326,7 +1335,7 @@ const mergeImport = (payload) => {
   listOf(data.zones).forEach((zone) => {
     if (typeof zone !== 'string' || !zone) return
     if (zones.includes(zone)) { result.dupes++; return }
-    if (zones.length >= 5) { result.skipped++; return }
+    if (zones.length >= ZONE_LIMIT) { result.skipped++; return }
     zones = [...zones, zone]
     result.added++
   })
@@ -1414,7 +1423,7 @@ const zoneAliases = {
   'ho chi minh city': 'Asia/Ho_Chi_Minh',
 }
 let zones = []
-try { zones = (JSON.parse(localStorage.getItem('zones') || '[]') || []).filter((z) => zoneNames.includes(z)).slice(0, 5) } catch {}
+try { zones = (JSON.parse(localStorage.getItem('zones') || '[]') || []).filter((z) => zoneNames.includes(z)).slice(0, ZONE_LIMIT) } catch {}
 
 const cityOf = (zone) => zone.split('/').pop().replace(/_/g, ' ')
 // The zone's offset from UTC in minutes, e.g. -300 for New York in winter.
@@ -1465,7 +1474,8 @@ const renderZones = () => {
   zonesLocalLine.textContent = `${t.zonesLocal}: ${cityOf(localZone)} ${zoneClock(localZone, now)} · ${utcLabel(localZone, now)}`
   const rows = zoneRows(now, true)
   zonesList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.zonesEmpty)]))
-  const full = zones.length >= 5
+  const full = zones.length >= ZONE_LIMIT
+  limitCount('zones-count', zones.length, ZONE_LIMIT)
   renderPreview()
   zoneInput.disabled = full
   zoneAddButton.disabled = full
@@ -1744,6 +1754,7 @@ const renderLinks = () => {
   linksOwnBox.replaceChildren(...(ownRows.length ? ownRows : [el('p', 'zones-empty', t.linksEmpty)]))
 
   const full = links.length >= LINK_LIMIT && editing === null
+  limitCount('links-count', links.length, LINK_LIMIT)
   linkName.disabled = full
   linkUrl.disabled = full
   linkDesc.disabled = full
@@ -1882,9 +1893,20 @@ const aiButton = (label, glyph, onClick, disabled = false) => {
   return button
 }
 
+// At the limit the add form is greyed out and says why; editing an existing shortcut stays possible.
+const syncAiLimit = () => {
+  const full = askAiList.length >= ASK_AI_LIMIT && aiEditing === null
+  limitCount('ai-count', askAiList.length, ASK_AI_LIMIT)
+  aiName.disabled = full
+  aiUrl.disabled = full
+  document.getElementById('ai-save').disabled = full
+  if (full) aiMsg.textContent = t.aiMax
+  else if (aiMsg.textContent === t.aiMax) aiMsg.textContent = ''
+}
 const renderAskAi = () => {
   askAi.hidden = !askaiOn
   askAiRow.hidden = askAiList.length === 0
+  syncAiLimit()
   askAiRow.replaceChildren(...askAiList.map((item) => {
     const link = Object.assign(document.createElement('a'), { href: item.url })
     link.title = item.title
@@ -1921,6 +1943,7 @@ const resetAiForm = () => {
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('ai-cancel').hidden = true
   aiMsg.textContent = ''
+  syncAiLimit()
 }
 const startAiEdit = (index) => {
   const item = askAiList[index]
