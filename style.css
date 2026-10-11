@@ -1,6 +1,5 @@
-/* Overlay widths: small for single windows, medium for reading and the forecast, large for two columns. */
+/* Overlay widths: one width for every single-column window, and a wider one only where two columns sit side by side. */
 :root {
-  --panel-sm: 520px;
   --panel-md: 640px;
   --panel-lg: 820px;
 }
@@ -915,7 +914,7 @@ html[data-wallpaper-on] .modes button {
 }
 
 .settings-panel {
-  width: min(100%, var(--panel-sm));
+  width: min(100%, var(--panel-md));
   max-height: 86vh;
   overflow: auto;
   padding: 24px;
@@ -1304,7 +1303,8 @@ html[data-quote-off] #quote {
 }
 
 .setting:has(input:disabled) {
-  opacity: .5;
+  /* Dimmed but still readable: about 6:1 against the panel, where half opacity fell under 3:1. */
+  opacity: .7;
   cursor: default;
 }
 
