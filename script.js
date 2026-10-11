@@ -292,12 +292,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', aiInvalid: 'Enter a valid https address' },
-  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiInvalid: '请输入有效的 https 地址' }
+  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', aiDuplicate: 'Already in the list.', aiPick: 'Choose a service', aiInvalid: 'Enter a valid https address' },
+  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies een dienst', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienst wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir un service', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elegir un servicio', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to five cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -944,6 +944,7 @@ const applySettingsText = () => {
   document.getElementById('manage-open').textContent = t.manageOpen
   document.getElementById('manage-title').textContent = t.manageOpen
   document.getElementById('ai-save').textContent = t.aiSave
+  document.getElementById('ai-pick-label').textContent = t.aiPick
   document.getElementById('ai-cancel').textContent = t.aiCancel
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('lbl-ai-name').textContent = t.aiName
@@ -1873,6 +1874,13 @@ const defaultAskAi = [
   { key: 'grok', title: 'Grok', url: 'https://grok.com/' },
   { key: 'duck', title: 'Duck.ai', url: 'https://duck.ai/' },
 ]
+// Services that can be picked from the list in the AI form; the built-in ones keep their icon.
+const aiCatalog = [
+  ...defaultAskAi,
+  { key: '', title: 'Lumo', url: 'https://lumo.proton.me/' },
+  { key: '', title: 'Kagi', url: 'https://assistant.kagi.com/' },
+  { key: '', title: 'Meta AI', url: 'https://www.meta.ai/' },
+]
 let askAiList = defaultAskAi.map((item) => ({ ...item }))
 try {
   const saved = JSON.parse(localStorage.getItem('askAiList') || 'null')
@@ -1884,6 +1892,7 @@ const aiForm = document.getElementById('ai-form')
 const aiName = document.getElementById('ai-name')
 const aiUrl = document.getElementById('ai-url')
 const aiMsg = document.getElementById('ai-msg')
+const aiCatalogBox = document.getElementById('ai-catalog')
 
 const saveAskAi = () => {
   writeKey('askAiList', JSON.stringify(askAiList))
@@ -1904,6 +1913,7 @@ const syncAiLimit = () => {
   limitCount('ai-count', askAiList.length, ASK_AI_LIMIT)
   aiName.disabled = full
   aiUrl.disabled = full
+  aiCatalogBox.querySelectorAll('button').forEach((pick) => { pick.disabled = full })
   document.getElementById('ai-save').disabled = full
   if (full) aiMsg.textContent = t.aiMax
   else if (aiMsg.textContent === t.aiMax) aiMsg.textContent = ''
@@ -1912,6 +1922,18 @@ const syncAiLimit = () => {
 const faviconOf = (url) => {
   try { return `${new URL(url).origin}/favicon.ico` } catch { return '' }
 }
+// Looks for the site's icon once when a shortcut is added; the answer is kept, so later page loads do not ask again.
+const checkIconOnce = (url) => {
+  const probe = new Image()
+  const keep = (ok) => {
+    askAiList = askAiList.map((item) => (item.key === '' && item.url === url && item.icon === undefined ? { ...item, icon: ok } : item))
+    saveAskAi()
+  }
+  probe.onload = () => keep(true)
+  probe.onerror = () => keep(false)
+  probe.src = faviconOf(url)
+}
+
 // The built-in icon, or the site's icon for a custom shortcut; null when there is none to show.
 const askAiIconNode = (item) => {
   if (askAiIcons[item.key]) {
@@ -1919,16 +1941,35 @@ const askAiIconNode = (item) => {
     svg.innerHTML = askAiIcons[item.key]
     return svg
   }
-  const icon = faviconOf(item.url)
+  const icon = item.icon === false ? '' : faviconOf(item.url)
   if (!icon) return null
   const img = Object.assign(document.createElement('img'), { src: icon, alt: '', width: 18, height: 18, className: 'ai-icon' })
   img.onerror = () => img.remove()
   return img
 }
+// Services not in the list yet, shown with their icons so each one can be checked before it is added.
+const renderAiCatalog = () => {
+  const missing = aiCatalog.filter((service) => !askAiList.some((item) => normalizeUrl(item.url) === normalizeUrl(service.url)))
+  aiCatalogBox.replaceChildren(...missing.map((service) => {
+    const pick = el('button', 'service-pick')
+    pick.type = 'button'
+    pick.disabled = askAiList.length >= ASK_AI_LIMIT && aiEditing === null
+    const icon = askAiIconNode(service)
+    if (icon) pick.append(icon)
+    pick.append(el('span', '', service.title))
+    pick.addEventListener('click', () => {
+      aiName.value = service.title
+      aiUrl.value = service.url
+      aiName.focus()
+    })
+    return pick
+  }))
+}
 const renderAskAi = () => {
   askAi.hidden = !askaiOn
   askAiRow.hidden = askAiList.length === 0
   syncAiLimit()
+  renderAiCatalog()
   askAiRow.replaceChildren(...askAiList.map((item) => {
     const link = Object.assign(document.createElement('a'), { href: item.url })
     link.title = item.title
@@ -1936,7 +1977,7 @@ const renderAskAi = () => {
     if (askAiIcons[item.key]) link.innerHTML = askAiIcons[item.key]
     else {
       // A custom shortcut shows the site's icon; if there is none, its name stays.
-      const icon = faviconOf(item.url)
+      const icon = item.icon === false ? '' : faviconOf(item.url)
       if (icon) {
         const img = Object.assign(document.createElement('img'), { src: icon, alt: '', width: 18, height: 18 })
         img.onerror = () => { link.textContent = item.title }
@@ -1997,14 +2038,24 @@ aiForm.addEventListener('submit', (e) => {
   if (url && !/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = `https://${url}`
   if (!safeUrl(url)) { aiMsg.textContent = t.aiInvalid; return }
   const title = aiName.value.trim() || hostOf(url)
+  const known = aiCatalog.find((service) => normalizeUrl(service.url) === normalizeUrl(url))
+  const clash = askAiList.some((item, i) => i !== aiEditing && normalizeUrl(item.url) === normalizeUrl(url))
+  if (clash) { aiMsg.textContent = t.aiDuplicate; return }
+  let checked = null
   if (aiEditing !== null) {
-    askAiList = askAiList.map((item, i) => (i === aiEditing ? { ...item, title, url } : item))
+    const before = askAiList[aiEditing]
+    // A new address may have another icon, so it is checked again.
+    const changed = before.key === '' && before.url !== url
+    askAiList = askAiList.map((item, i) => (i === aiEditing ? { ...item, key: known ? known.key : item.key, title, url, ...(changed ? { icon: undefined } : {}) } : item))
+    if (changed) checked = url
   } else {
     if (askAiList.length >= ASK_AI_LIMIT) { aiMsg.textContent = t.aiMax; return }
-    askAiList = [...askAiList, { key: '', title, url }]
+    askAiList = [...askAiList, { key: known ? known.key : '', title, url }]
+    if (!known) checked = url
   }
   resetAiForm()
   saveAskAi()
+  if (checked) checkIconOnce(checked)
 })
 
 
