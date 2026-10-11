@@ -64,6 +64,11 @@ try {
 // Date: click to switch between the long date and a short numeric date in the page language; hover shows the ISO week and day of the year.
 let dateNumeric = false
 try { dateNumeric = localStorage.getItem('dateFormat') === 'numeric' } catch {}
+// The order of the short date: from the browser's own setting, or one the visitor chose in Advanced.
+const dateOrders = ['auto', 'dmy', 'mdy', 'ymd']
+const dateOrderLocale = { auto: null, dmy: 'en-GB', mdy: 'en-US', ymd: 'sv-SE' }
+let dateOrder = 'auto'
+try { if (dateOrders.includes(localStorage.getItem('dateNotation'))) dateOrder = localStorage.getItem('dateNotation') } catch {}
 
 const isoWeek = (d) => {
   const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))
@@ -101,7 +106,7 @@ const updateClock = () => {
   )
   // The short date follows the page language: 11-10-2026 in Dutch, 11.10.2026 in German, 2026/10/11 in Chinese.
   const date = dateNumeric
-    ? now.toLocaleDateString(dateLocales[pageLang] || 'en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    ? now.toLocaleDateString(dateOrderLocale[dateOrder] || navigator.language || 'en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
     : now.toLocaleDateString(dateLocales[pageLang] || 'en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
   const offset = -now.getTimezoneOffset()
   const sign = offset >= 0 ? '+' : '-'
@@ -123,17 +128,28 @@ updateClock()
 // Once a second, so the seconds in full time tick; the other modes only change once a minute.
 setInterval(updateClock, 1000)
 
-clockDate.addEventListener('click', () => {
-  dateNumeric = !dateNumeric
+// Setting the date style or order from the page and from Advanced is the same setting.
+const setDateStyle = (numeric) => {
+  dateNumeric = numeric
   try { localStorage.setItem('dateFormat', dateNumeric ? 'numeric' : 'long') } catch {}
+  settingsFields.dateStyle.value = dateNumeric ? 'short' : 'long'
   updateClock()
-})
+}
+const setDateOrder = (order) => {
+  dateOrder = order
+  try { localStorage.setItem('dateNotation', dateOrder) } catch {}
+  settingsFields.dateOrder.value = dateOrder
+  updateClock()
+}
+clockDate.addEventListener('click', () => setDateStyle(!dateNumeric))
 
 // The clock format can be changed by clicking the time, or chosen in Advanced; both keep the same setting.
 const setClockMode = (mode) => {
   clockMode = mode
   try { localStorage.setItem('clockFormat', clockMode) } catch {}
   settingsFields.clock.value = clockMode
+  settingsFields.dateStyle.value = dateNumeric ? 'short' : 'long'
+  settingsFields.dateOrder.value = dateOrder
   updateClock()
 }
 clockTime.addEventListener('click', () => setClockMode(clockModes[(clockModes.indexOf(clockMode) + 1) % clockModes.length]))
@@ -163,6 +179,8 @@ const settingsFields = {
   searchNewTab: document.getElementById('set-search-newtab'),
   aiNewTab: document.getElementById('set-ai-newtab'),
   clock: document.getElementById('set-clock'),
+  dateStyle: document.getElementById('set-date-style'),
+  dateOrder: document.getElementById('set-date-order'),
   preset: document.querySelectorAll('input[name="preset"]'),
   cityForm: document.getElementById('city-form'),
   cityInput: document.getElementById('city-input'),
@@ -301,12 +319,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
-  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
+  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', dateSec: 'Date', dateShow: 'Show', dateLong: 'Long, e.g. Sunday 11 October', dateShort: 'Short, in numbers', dateOrderLbl: 'Order of the short date', dateAuto: 'Automatic, from your browser', dateDmy: 'Day-month-year', dateMdy: 'Month-day-year', dateYmd: 'Year-month-day', timeSec: 'Time format', time24: '24 hours', time12: '12 hours (AM/PM)', timeFull: 'Full, with seconds', searchSec: 'Search', searchNewTab: 'Open search in a new tab', aiNewTab: 'Open AI links in a new tab', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
+  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', dateSec: 'Datum', dateShow: 'Weergave', dateLong: 'Lang, bijvoorbeeld zondag 11 oktober', dateShort: 'Kort, in cijfers', dateOrderLbl: 'Volgorde van de korte datum', dateAuto: 'Automatisch, van je browser', dateDmy: 'Dag-maand-jaar', dateMdy: 'Maand-dag-jaar', dateYmd: 'Jaar-maand-dag', timeSec: 'Tijdnotatie', time24: '24 uur', time12: '12 uur (AM/PM)', timeFull: 'Volledig, met seconden', searchSec: 'Zoeken', searchNewTab: 'Zoeken openen in een nieuw tabblad', aiNewTab: 'AI-links openen in een nieuw tabblad', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', dateSec: 'Datum', dateShow: 'Anzeige', dateLong: 'Lang, z. B. Sonntag, 11. Oktober', dateShort: 'Kurz, mit Zahlen', dateOrderLbl: 'Reihenfolge des kurzen Datums', dateAuto: 'Automatisch, aus dem Browser', dateDmy: 'Tag-Monat-Jahr', dateMdy: 'Monat-Tag-Jahr', dateYmd: 'Jahr-Monat-Tag', timeSec: 'Zeitformat', time24: '24 Stunden', time12: '12 Stunden (AM/PM)', timeFull: 'Vollständig, mit Sekunden', searchSec: 'Suche', searchNewTab: 'Suche in einem neuen Tab öffnen', aiNewTab: 'KI-Links in einem neuen Tab öffnen', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', dateSec: 'Date', dateShow: 'Affichage', dateLong: 'Long, par ex. dimanche 11 octobre', dateShort: 'Court, en chiffres', dateOrderLbl: 'Ordre de la date courte', dateAuto: 'Automatique, selon le navigateur', dateDmy: 'Jour-mois-année', dateMdy: 'Mois-jour-année', dateYmd: 'Année-mois-jour', timeSec: 'Format de l’heure', time24: '24 heures', time12: '12 heures (AM/PM)', timeFull: 'Complet, avec secondes', searchSec: 'Recherche', searchNewTab: 'Ouvrir la recherche dans un nouvel onglet', aiNewTab: 'Ouvrir les liens IA dans un nouvel onglet', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', dateSec: 'Fecha', dateShow: 'Mostrar', dateLong: 'Larga, por ejemplo domingo 11 de octubre', dateShort: 'Corta, en números', dateOrderLbl: 'Orden de la fecha corta', dateAuto: 'Automático, según el navegador', dateDmy: 'Día-mes-año', dateMdy: 'Mes-día-año', dateYmd: 'Año-mes-día', timeSec: 'Formato de hora', time24: '24 horas', time12: '12 horas (AM/PM)', timeFull: 'Completo, con segundos', searchSec: 'Búsqueda', searchNewTab: 'Abrir la búsqueda en una pestaña nueva', aiNewTab: 'Abrir los accesos de IA en una pestaña nueva', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', dateSec: '日期', dateShow: '显示', dateLong: '长格式，例如 10 月 11 日 星期日', dateShort: '短格式，用数字', dateOrderLbl: '短日期的顺序', dateAuto: '自动，跟随浏览器', dateDmy: '日-月-年', dateMdy: '月-日-年', dateYmd: '年-月-日', timeSec: '时间格式', time24: '24 小时制', time12: '12 小时制 (AM/PM)', timeFull: '完整，含秒', searchSec: '搜索', searchNewTab: '在新标签页中打开搜索', aiNewTab: '在新标签页中打开 AI 快捷方式', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to five cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -429,7 +447,7 @@ const helpText = {
     ['Search', 'Type and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered. Under Advanced you can also open search in a new tab.'],
     ['AI shortcuts', 'Shortcuts below the search bar. In Manage data you tick the AI services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Advanced.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
-    ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date.'],
+    ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date. The order follows your browser unless you choose one under Advanced.'],
     ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added in Manage, under Weather; choose one in this window to see its forecast.'],
     ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on in Data beheren. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
@@ -442,7 +460,7 @@ const helpText = {
     ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden. Onder Geavanceerd kun je zoeken ook in een nieuw tabblad laten openen.'],
     ['AI-snelkoppelingen', 'Snelkoppelingen onder de zoekbalk. In Data beheren vink je de AI-diensten aan die je wilt, maximaal vijf; je eigen snelkoppelingen tellen mee in die vijf. Elke snelkoppeling toont het icoon van de dienst. AI-links openen standaard in een nieuw tabblad; dat kun je aanpassen onder Geavanceerd.'],
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent het klokje boven de tijd de zones die je koos.'],
-    ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en een korte datum.'],
+    ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en een korte datum. De volgorde volgt je browser, tenzij je er onder Geavanceerd een kiest.'],
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
     ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Je kunt in Beheren onder Weer tot vijf extra plaatsen toevoegen; kies er in dit venster een om die voorspelling te zien.'],
     ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je in Data beheren hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
@@ -468,7 +486,7 @@ const helpText = {
     ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé. Dans Avancé, vous pouvez aussi ouvrir la recherche dans un nouvel onglet.'],
     ['Raccourcis IA', 'Raccourcis sous la barre de recherche. Dans Gérer les données, cochez les services IA voulus, cinq au maximum ; vos propres raccourcis comptent dans ces cinq. Chaque raccourci affiche l’icône de son service. Les liens IA s’ouvrent par défaut dans un nouvel onglet ; cela se règle dans Avancé.'],
     ['Horloge', 'Passez la souris sur l’heure pour voir votre fuseau. Cliquez sur l’heure pour passer de 24 heures à 12 heures, puis à l’heure complète avec les secondes. Si les fuseaux sont activés, l’icône d’horloge au-dessus de l’heure ouvre les fuseaux choisis.'],
-    ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à une date courte.'],
+    ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à une date courte. L’ordre suit votre navigateur, sauf si vous en choisissez un dans Avancé.'],
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 6 heures et sept jours. Vous pouvez ajouter jusqu’à cinq lieux de plus dans Gérer, sous Météo ; choisissez-en un dans cette fenêtre pour voir sa prévision.'],
     ['Fond', 'Chaque pression sur le bouton rond en bas à droite passe au fond suivant : d’abord aucun, puis ceux activés dans « Gérer les données ». Le bouton en bas à gauche change la couleur du fond par étapes ; sur ordinateur, c’est aussi un bouton.'],
@@ -481,7 +499,7 @@ const helpText = {
     ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda. En Avanzado también puedes abrir la búsqueda en una pestaña nueva.'],
     ['Accesos de IA', 'Accesos debajo de la barra de búsqueda. En Gestionar datos marca los servicios de IA que quieras, hasta cinco; tus accesos propios cuentan dentro de esos cinco. Cada acceso muestra el icono de su servicio. Los enlaces de IA se abren por defecto en una pestaña nueva; se cambia en Avanzado.'],
     ['Reloj', 'Pasa el ratón sobre la hora para ver tu zona horaria. Haz clic en la hora para cambiar entre 24 horas, 12 horas y hora completa con segundos. Si las zonas horarias están activas, el globo sobre la hora abre las zonas que elegiste.'],
-    ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y una fecha corta.'],
+    ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y una fecha corta. El orden sigue a tu navegador, salvo que elijas uno en Avanzado.'],
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 6 horas y siete días. Puedes añadir hasta cinco lugares más en Gestionar, en Tiempo; elige uno en esta ventana para ver su previsión.'],
     ['Fondo', 'Cada pulsación del botón redondo de abajo a la derecha pasa al siguiente fondo: primero ninguno, luego los activados en «Gestionar datos». El botón de abajo a la izquierda cambia el color del fondo por pasos; en el ordenador también es un botón.'],
@@ -494,7 +512,7 @@ const helpText = {
     ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。 在“高级”中，也可以让搜索在新标签页中打开。'],
     ['AI 快捷方式', '搜索框下方的快捷方式。在“管理数据”中勾选想要的 AI 服务，最多五个；你自己添加的快捷方式也计入这五个。每个快捷方式显示其服务的图标。AI 链接默认在新标签页中打开，可在“高级”中更改。'],
     ['时钟', '把鼠标移到时间上可看到你的时区。点击时间可在 24 小时制、12 小时制和带秒的完整时间之间切换。开启时区后，时间上方的地球图标会打开你选择的时区。'],
-    ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和短日期之间切换。'],
+    ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和短日期之间切换。顺序默认跟随浏览器，也可以在“高级”中选择。'],
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 6 小时和七天的完整预报。 在“管理”的“天气”中最多可添加五个其他地点；在此窗口中选择一个即可查看其预报。'],
     ['背景', '点击右下角的圆形按钮会切换到下一个背景：先是无背景，然后是在“管理数据”里开启的背景。左下角的按钮按步骤改变背景颜色；电脑上也是按钮。'],
@@ -961,6 +979,15 @@ const applySettingsText = () => {
   document.getElementById('sec-ai').textContent = t.aiSec
   document.getElementById('lbl-askai').textContent = t.aiOn
   document.getElementById('sec-time').textContent = t.timeSec
+  document.getElementById('sec-date').textContent = t.dateSec
+  document.getElementById('lbl-date-style').textContent = t.dateShow
+  document.getElementById('lbl-date-order').textContent = t.dateOrderLbl
+  settingsFields.dateStyle.options[0].textContent = t.dateLong
+  settingsFields.dateStyle.options[1].textContent = t.dateShort
+  settingsFields.dateOrder.options[0].textContent = t.dateAuto
+  settingsFields.dateOrder.options[1].textContent = t.dateDmy
+  settingsFields.dateOrder.options[2].textContent = t.dateMdy
+  settingsFields.dateOrder.options[3].textContent = t.dateYmd
   settingsFields.clock.options[0].textContent = t.time24
   settingsFields.clock.options[1].textContent = t.time12
   settingsFields.clock.options[2].textContent = t.timeFull
@@ -1039,6 +1066,8 @@ const syncSettings = () => {
   settingsFields.linksOwn.checked = linksOwn
   settingsFields.askai.checked = askaiOn
   settingsFields.clock.value = clockMode
+  settingsFields.dateStyle.value = dateNumeric ? 'short' : 'long'
+  settingsFields.dateOrder.value = dateOrder
   settingsFields.searchNewTab.checked = searchNewTab
   settingsFields.aiNewTab.checked = aiNewTab
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
@@ -1193,6 +1222,8 @@ settingsFields.searchNewTab.addEventListener('change', () => {
   writeKey('searchNewTab', searchNewTab ? 'on' : 'off')
 })
 settingsFields.clock.addEventListener('change', () => setClockMode(settingsFields.clock.value))
+settingsFields.dateStyle.addEventListener('change', () => setDateStyle(settingsFields.dateStyle.value === 'short'))
+settingsFields.dateOrder.addEventListener('change', () => setDateOrder(settingsFields.dateOrder.value))
 settingsFields.aiNewTab.addEventListener('change', () => {
   aiNewTab = settingsFields.aiNewTab.checked
   writeKey('aiNewTab', aiNewTab ? 'on' : 'off')
@@ -1310,7 +1341,7 @@ settingsFields.lang.addEventListener('change', () => {
 })
 settingsFields.resetSettings.addEventListener('click', () => {
   if (!confirm(t.resetSettingsConfirm)) return
-  clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'preset'])
+  clearKeys(['personalState', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'wallpaperEnabled', 'hue', 'weather', 'location', 'quote', 'ipInfo', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'preset'])
   location.reload()
 })
 settingsFields.resetData.addEventListener('click', () => {
@@ -1321,7 +1352,7 @@ settingsFields.resetData.addEventListener('click', () => {
 
 // Export and import: one JSON file with the settings and the personal data. Caches are left out.
 // The file is for the user to keep (for example in iCloud Drive) and open on another device.
-const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'preset', 'personalState']
+const EXPORT_SETTINGS = ['wallpaperEnabled', 'lang', 'engine', 'theme', 'clockFormat', 'dateFormat', 'wallpaper', 'hue', 'weather', 'location', 'quote', 'timeZones', 'linksOn', 'linksOwn', 'wallpaperButton', 'tint', 'askai', 'searchNewTab', 'aiNewTab', 'dateNotation', 'preset', 'personalState']
 const EXPORT_DATA = ['links', 'askAiList', 'city', 'zones', 'weatherPlaces']
 // The export is a real link with a download name, so every browser treats the click as the user's download.
 // Export: the file is made in the click and saved through a fresh download link, which is the pattern Safari
