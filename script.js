@@ -1912,6 +1912,19 @@ const syncAiLimit = () => {
 const faviconOf = (url) => {
   try { return `https://icons.duckduckgo.com/ip3/${new URL(url).hostname}.ico` } catch { return '' }
 }
+// The built-in icon, or the site's icon for a custom shortcut; null when there is none to show.
+const askAiIconNode = (item) => {
+  if (askAiIcons[item.key]) {
+    const svg = el('span', 'ai-icon')
+    svg.innerHTML = askAiIcons[item.key]
+    return svg
+  }
+  const icon = faviconOf(item.url)
+  if (!icon) return null
+  const img = Object.assign(document.createElement('img'), { src: icon, alt: '', width: 18, height: 18, className: 'ai-icon' })
+  img.onerror = () => img.remove()
+  return img
+}
 const renderAskAi = () => {
   askAi.hidden = !askaiOn
   askAiRow.hidden = askAiList.length === 0
@@ -1936,6 +1949,9 @@ const renderAskAi = () => {
   }))
   aiList.replaceChildren(...askAiList.map((item, index) => {
     const row = document.createElement('li')
+    // The same icon as in the row above the search bar, so the list shows what the visitor sees.
+    const icon = askAiIconNode(item)
+    if (icon) row.append(icon)
     row.append(el('span', '', item.title))
     const move = (step) => () => {
       const next = [...askAiList]

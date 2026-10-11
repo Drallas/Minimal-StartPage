@@ -689,6 +689,18 @@ html[data-wallpaper-on] .modes button {
   gap: 6px;
 }
 
+.ai-list .ai-icon {
+  display: inline-flex;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.ai-list .ai-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
 .ai-list li span {
   flex: 1;
   min-width: 0;
