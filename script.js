@@ -1908,6 +1908,9 @@ const syncAiLimit = () => {
   if (full) aiMsg.textContent = t.aiMax
   else if (aiMsg.textContent === t.aiMax) aiMsg.textContent = ''
 }
+const faviconOf = (url) => {
+  try { return `${new URL(url).origin}/favicon.ico` } catch { return '' }
+}
 const renderAskAi = () => {
   askAi.hidden = !askaiOn
   askAiRow.hidden = askAiList.length === 0
@@ -1917,7 +1920,15 @@ const renderAskAi = () => {
     link.title = item.title
     link.setAttribute('aria-label', item.title)
     if (askAiIcons[item.key]) link.innerHTML = askAiIcons[item.key]
-    else link.textContent = item.title
+    else {
+      // A custom shortcut shows the site's own icon; if the site has none, its name stays.
+      const icon = faviconOf(item.url)
+      if (icon) {
+        const img = Object.assign(document.createElement('img'), { src: icon, alt: '', width: 18, height: 18 })
+        img.onerror = () => { link.textContent = item.title }
+        link.append(img)
+      } else link.textContent = item.title
+    }
     const li = document.createElement('li')
     li.append(link)
     return li
