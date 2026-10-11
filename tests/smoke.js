@@ -95,7 +95,7 @@ const emptyForecast = {
   await page.click('#import-replace');
   await page.waitForTimeout(800);
   let links = await page.evaluate(() => JSON.parse(localStorage.getItem('links') || '[]'));
-  check(links.length === 2 && links[0].url === 'https://example.com/', 'replace restores the exported links');
+  check(JSON.stringify(links.map((l) => l.url)) === JSON.stringify(exported.data.links.map((l) => l.url)), 'replace restores the exported links in the same order');
 
   // Merge: the same address with different case, a www and a trailing slash must not duplicate.
   await page.evaluate(() => localStorage.setItem('links', JSON.stringify([
