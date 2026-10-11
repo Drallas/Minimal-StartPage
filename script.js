@@ -1322,10 +1322,19 @@ const mergeImport = (payload) => {
   return result
 }
 const closeImport = () => { importWindow.hidden = true; pendingImport = null }
+// Only the first items of each list are loaded, in file order, as far as the page allows.
+const capImport = (data) => ({
+  ...data,
+  ...(Array.isArray(data.links) ? { links: data.links.slice(0, LINK_LIMIT) } : {}),
+  ...(Array.isArray(data.askAiList) ? { askAiList: data.askAiList.slice(0, ASK_AI_LIMIT) } : {}),
+  ...(Array.isArray(data.zones) ? { zones: data.zones.slice(0, 5) } : {}),
+  ...(Array.isArray(data.weatherPlaces) ? { weatherPlaces: data.weatherPlaces.slice(0, PLACE_LIMIT) } : {}),
+})
 const replaceImport = (payload) => {
   clearKeys([...EXPORT_SETTINGS, ...EXPORT_DATA])
   Object.entries(payload.settings).forEach(([key, value]) => { if (EXPORT_SETTINGS.includes(key) && typeof value === 'string') writeKey(key, value) })
-  Object.entries(payload.data).forEach(([key, value]) => { if (EXPORT_DATA.includes(key)) writeKey(key, JSON.stringify(value)) })
+  const data = capImport(payload.data)
+  Object.entries(data).forEach(([key, value]) => { if (EXPORT_DATA.includes(key)) writeKey(key, JSON.stringify(value)) })
   location.reload()
 }
 document.getElementById('import-data').addEventListener('click', () => importFile.click())
