@@ -1114,12 +1114,11 @@ settingsFields.askai.addEventListener('change', () => {
 const presets = {
   // Minimal starts with nothing extra. Standard adds the Wikipedia button and the colour and wallpaper buttons;
   // AI shortcuts, time zones and the rest are found later, in the settings.
-  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, wallpaper: false, wallpaperButton: false, tint: false },
-  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: false, wallpaper: true, wallpaperButton: true, tint: true },
+  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: false, wallpaperButton: false, tint: false },
+  standard: { quote: false, links: true, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: true, wallpaperButton: true, tint: true },
 }
-// Weather and the IP display are off in both presets, so choosing one never starts a lookup.
-// Weather is not part of the presets at all.
-const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn })
+// Weather is off in both presets. A preset only ever switches weather off, never on, so choosing one never starts a lookup.
+const currentState = () => ({ quote: quoteOn, links: linksOn, linksOwn: linksOwn, zones: zonesOn, askai: askaiOn, weather: weatherOn, wallpaper: wallpaperOn, wallpaperButton: wallpaperButtonOn, tint: tintOn })
 // The preset that matches the current choices: only the keys a preset names are compared.
 const matchPreset = () => {
   const now = currentState()

@@ -19,3 +19,4 @@
 - The quote sits in the page column, so it always comes after the AI shortcuts on a phone and never over them.
 - The README stays short and airy; the questions people ask go to docs/FAQ.md, which the README links to.
 - The pages start minimal: Minimal has nothing extra, and Standard is the default for a new visitor. The AI shortcuts and time zones are off there, so their value is found, not forced.
+- Weather is part of the presets only as a switch-off: Minimal turns it off, and no preset turns it on, since weather sends the IP address.
