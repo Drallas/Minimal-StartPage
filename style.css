@@ -1,3 +1,10 @@
+/* Overlay widths: small for single windows, medium for reading and the forecast, large for two columns. */
+:root {
+  --panel-sm: 520px;
+  --panel-md: 640px;
+  --panel-lg: 820px;
+}
+
 @font-face {
   font-family: "Open Sans";
   src: url("./assets/OpenSans-Regular.ttf") format("truetype");
@@ -908,7 +915,7 @@ html[data-wallpaper-on] .modes button {
 }
 
 .settings-panel {
-  width: min(100%, 440px);
+  width: min(100%, var(--panel-sm));
   max-height: 86vh;
   overflow: auto;
   padding: 24px;
@@ -1034,7 +1041,7 @@ html[data-quote-off] #quote {
 
 /* Full forecast: opens when the weather is clicked. */
 .forecast-panel {
-  width: min(100%, 560px);
+  width: min(100%, var(--panel-md));
 }
 
 .forecast-now {
@@ -1634,7 +1641,7 @@ html[data-quote-off] #quote {
 
 /* Help: the guide from the settings window. */
 .help-panel {
-  width: min(100%, 560px);
+  width: min(100%, var(--panel-md));
 }
 
 /* The guide is one column, like the settings: every topic is a block of the same width, so no uneven gaps. */
@@ -1677,7 +1684,7 @@ html[data-quote-off] #quote {
 }
 
 .help-section p {
-  max-width: 62ch;
+  max-width: 70ch;
   font-size: 13px;
   line-height: 1.6;
   color: var(--color-fg-1);
@@ -1782,7 +1789,7 @@ html[data-quote-off] #quote {
 
 /* Advanced: a wider window. The options sit in four groups, two per row, so each group keeps its own column. */
 .settings-panel.is-wide {
-  width: min(100%, 760px);
+  width: min(100%, var(--panel-lg));
 }
 
 .advanced {
