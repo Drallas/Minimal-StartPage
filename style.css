@@ -716,10 +716,12 @@ html[data-wallpaper-on] .modes button {
   border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 13px;
+  cursor: pointer;
 }
 
-.service-pick:disabled {
+.service-pick:has(input:disabled) {
   opacity: .5;
+  cursor: default;
 }
 
 .service-pick .ai-icon {

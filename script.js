@@ -292,12 +292,12 @@ const sectionText = {
   zh: { secWeather: '天气', secLook: '显示', secPrivacy: '隐私', placeTime: '当地时间' }
 }
 const aiText = {
-  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', aiDuplicate: 'Already in the list.', aiPick: 'Choose a service', aiInvalid: 'Enter a valid https address' },
-  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies een dienst', aiInvalid: 'Vul een geldig https-adres in' },
-  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Dienst wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
-  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir un service', aiInvalid: 'Saisissez une adresse https valide' },
-  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elegir un servicio', aiInvalid: 'Escribe una dirección https válida' },
-  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiDuplicate: '已在列表中。', aiPick: '选择服务', aiInvalid: '请输入有效的 https 地址' }
+  en: { aiSec: 'AI shortcuts', aiOn: 'On', aiName: 'Name', aiUrl: 'Address', aiEdit: 'Edit', aiAddTitle: 'Add shortcut', aiEditTitle: 'Edit shortcut', aiSave: 'Save', aiCancel: 'Cancel', aiUp: 'Move up', aiDown: 'Move down', aiRemove: 'Remove', aiMax: 'You can show up to five.', aiDuplicate: 'Already in the list.', aiPick: 'Pick up to five', aiInvalid: 'Enter a valid https address' },
+  nl: { aiSec: 'AI-snelkoppelingen', aiOn: 'Aan', aiName: 'Naam', aiUrl: 'Adres', aiEdit: 'Bewerken', aiAddTitle: 'Snelkoppeling toevoegen', aiEditTitle: 'Snelkoppeling bewerken', aiSave: 'Opslaan', aiCancel: 'Annuleren', aiUp: 'Omhoog', aiDown: 'Omlaag', aiRemove: 'Verwijderen', aiMax: 'Je kunt er maximaal vijf tonen.', aiDuplicate: 'Staat al in de lijst.', aiPick: 'Kies er maximaal vijf', aiInvalid: 'Vul een geldig https-adres in' },
+  de: { aiSec: 'KI-Verknüpfungen', aiOn: 'An', aiName: 'Name', aiUrl: 'Adresse', aiEdit: 'Bearbeiten', aiAddTitle: 'Verknüpfung hinzufügen', aiEditTitle: 'Verknüpfung bearbeiten', aiSave: 'Speichern', aiCancel: 'Abbrechen', aiUp: 'Nach oben', aiDown: 'Nach unten', aiRemove: 'Entfernen', aiMax: 'Du kannst höchstens fünf anzeigen.', aiDuplicate: 'Ist schon in der Liste.', aiPick: 'Bis zu fünf wählen', aiInvalid: 'Gib eine gültige https-Adresse ein' },
+  fr: { aiSec: 'Raccourcis IA', aiOn: 'Activé', aiName: 'Nom', aiUrl: 'Adresse', aiEdit: 'Modifier', aiAddTitle: 'Ajouter un raccourci', aiEditTitle: 'Modifier le raccourci', aiSave: 'Enregistrer', aiCancel: 'Annuler', aiUp: 'Monter', aiDown: 'Descendre', aiRemove: 'Supprimer', aiMax: 'Vous pouvez en afficher cinq au maximum.', aiDuplicate: 'Déjà dans la liste.', aiPick: 'Choisir jusqu’à cinq', aiInvalid: 'Saisissez une adresse https valide' },
+  es: { aiSec: 'Accesos de IA', aiOn: 'Activado', aiName: 'Nombre', aiUrl: 'Dirección', aiEdit: 'Editar', aiAddTitle: 'Añadir acceso', aiEditTitle: 'Editar acceso', aiSave: 'Guardar', aiCancel: 'Cancelar', aiUp: 'Subir', aiDown: 'Bajar', aiRemove: 'Quitar', aiMax: 'Puedes mostrar hasta cinco.', aiDuplicate: 'Ya está en la lista.', aiPick: 'Elige hasta cinco', aiInvalid: 'Escribe una dirección https válida' },
+  zh: { aiSec: 'AI 快捷方式', aiOn: '开启', aiName: '名称', aiUrl: '地址', aiEdit: '编辑', aiAddTitle: '添加快捷方式', aiEditTitle: '编辑快捷方式', aiSave: '保存', aiCancel: '取消', aiUp: '上移', aiDown: '下移', aiRemove: '移除', aiMax: '最多显示五个。', aiDuplicate: '已在列表中。', aiPick: '最多选五个', aiInvalid: '请输入有效的 https 地址' }
 }
 const manageText = {
   en: { linkUp: 'Move up', linkDown: 'Move down', manageOpen: 'Manage data', tabLinks: 'Links', tabZones: 'Time zones', tabAi: 'AI', tabWeather: 'Weather', placeLabel: 'Add a city', placeAdd: 'Add', placeOwn: 'Your place', placeNone: 'No place yet', placeLimit: 'You can add up to five cities.', placeDuplicate: 'Already in the list', placeRemove: 'Remove' },
@@ -1913,7 +1913,7 @@ const syncAiLimit = () => {
   limitCount('ai-count', askAiList.length, ASK_AI_LIMIT)
   aiName.disabled = full
   aiUrl.disabled = full
-  aiCatalogBox.querySelectorAll('button').forEach((pick) => { pick.disabled = full })
+  renderAiCatalog()
   document.getElementById('ai-save').disabled = full
   if (full) aiMsg.textContent = t.aiMax
   else if (aiMsg.textContent === t.aiMax) aiMsg.textContent = ''
@@ -1947,22 +1947,28 @@ const askAiIconNode = (item) => {
   img.onerror = () => img.remove()
   return img
 }
-// Services not in the list yet, shown with their icons so each one can be checked before it is added.
+// The providers as a checklist: a tick adds the service to the bar, a second tick removes it. Five at most, with custom shortcuts.
 const renderAiCatalog = () => {
-  const missing = aiCatalog.filter((service) => !askAiList.some((item) => normalizeUrl(item.url) === normalizeUrl(service.url)))
-  aiCatalogBox.replaceChildren(...missing.map((service) => {
-    const pick = el('button', 'service-pick')
-    pick.type = 'button'
-    pick.disabled = askAiList.length >= ASK_AI_LIMIT && aiEditing === null
-    const icon = askAiIconNode(service)
-    if (icon) pick.append(icon)
-    pick.append(el('span', '', service.title))
-    pick.addEventListener('click', () => {
-      aiName.value = service.title
-      aiUrl.value = service.url
-      aiName.focus()
+  const full = askAiList.length >= ASK_AI_LIMIT
+  aiCatalogBox.replaceChildren(...aiCatalog.map((service) => {
+    const ticked = askAiList.some((item) => normalizeUrl(item.url) === normalizeUrl(service.url))
+    const box = Object.assign(document.createElement('input'), { type: 'checkbox', checked: ticked, disabled: aiEditing !== null || (!ticked && full) })
+    box.addEventListener('change', () => {
+      if (box.checked) {
+        if (askAiList.length >= ASK_AI_LIMIT) { box.checked = false; aiMsg.textContent = t.aiMax; return }
+        askAiList = [...askAiList, { key: service.key, title: service.title, url: service.url }]
+        if (!service.key) checkIconOnce(service.url)
+      } else {
+        askAiList = askAiList.filter((item) => normalizeUrl(item.url) !== normalizeUrl(service.url))
+      }
+      saveAskAi()
     })
-    return pick
+    const label = el('label', 'service-pick')
+    label.append(box)
+    const icon = askAiIconNode(service)
+    if (icon) label.append(icon)
+    label.append(el('span', '', service.title))
+    return label
   }))
 }
 const renderAskAi = () => {
