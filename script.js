@@ -1912,6 +1912,18 @@ const syncAiLimit = () => {
 const faviconOf = (url) => {
   try { return `${new URL(url).origin}/favicon.ico` } catch { return '' }
 }
+// Looks for the site's icon once when a shortcut is added; the answer is kept, so later page loads do not ask again.
+const checkIconOnce = (url) => {
+  const probe = new Image()
+  const keep = (ok) => {
+    askAiList = askAiList.map((item) => (item.key === '' && item.url === url && item.icon === undefined ? { ...item, icon: ok } : item))
+    saveAskAi()
+  }
+  probe.onload = () => keep(true)
+  probe.onerror = () => keep(false)
+  probe.src = faviconOf(url)
+}
+
 // The built-in icon, or the site's icon for a custom shortcut; null when there is none to show.
 const askAiIconNode = (item) => {
   if (askAiIcons[item.key]) {
@@ -1919,7 +1931,7 @@ const askAiIconNode = (item) => {
     svg.innerHTML = askAiIcons[item.key]
     return svg
   }
-  const icon = faviconOf(item.url)
+  const icon = item.icon === false ? '' : faviconOf(item.url)
   if (!icon) return null
   const img = Object.assign(document.createElement('img'), { src: icon, alt: '', width: 18, height: 18, className: 'ai-icon' })
   img.onerror = () => img.remove()
@@ -1936,7 +1948,7 @@ const renderAskAi = () => {
     if (askAiIcons[item.key]) link.innerHTML = askAiIcons[item.key]
     else {
       // A custom shortcut shows the site's icon; if there is none, its name stays.
-      const icon = faviconOf(item.url)
+      const icon = item.icon === false ? '' : faviconOf(item.url)
       if (icon) {
         const img = Object.assign(document.createElement('img'), { src: icon, alt: '', width: 18, height: 18 })
         img.onerror = () => { link.textContent = item.title }
@@ -1997,14 +2009,21 @@ aiForm.addEventListener('submit', (e) => {
   if (url && !/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = `https://${url}`
   if (!safeUrl(url)) { aiMsg.textContent = t.aiInvalid; return }
   const title = aiName.value.trim() || hostOf(url)
+  let checked = null
   if (aiEditing !== null) {
-    askAiList = askAiList.map((item, i) => (i === aiEditing ? { ...item, title, url } : item))
+    const before = askAiList[aiEditing]
+    // A new address may have another icon, so it is checked again.
+    const changed = before.key === '' && before.url !== url
+    askAiList = askAiList.map((item, i) => (i === aiEditing ? (changed ? { ...item, title, url, icon: undefined } : { ...item, title, url }) : item))
+    if (changed) checked = url
   } else {
     if (askAiList.length >= ASK_AI_LIMIT) { aiMsg.textContent = t.aiMax; return }
     askAiList = [...askAiList, { key: '', title, url }]
+    checked = url
   }
   resetAiForm()
   saveAskAi()
+  if (checked) checkIconOnce(checked)
 })
 
 
