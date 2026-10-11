@@ -105,7 +105,7 @@ Nothing leaves the page unless you switch on one of these:
 
 In the Advanced settings, **Export data** saves your choices and your own links, AI shortcuts, time zones and places to one JSON file that you keep yourself. **Import data** loads that file on another device. You choose **Merge** (the default: adds what is new and keeps what you have, with links matched by address) or **Replace** (overwrites everything). Nothing is sent anywhere when you export or import.
 
-For more on this, see the [questions and answers](docs/FAQ.md).
+Import is limited to the same amounts the page allows: 15 links, 5 AI shortcuts, 5 time zones and 5 places. For more on this, see the [questions and answers](docs/FAQ.md).
 
 ---
 

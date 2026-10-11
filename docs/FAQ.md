@@ -75,3 +75,11 @@ Yes, if you are comfortable editing text files. The [README](../README.md#custom
 ## What happens when I import a file?
 
 You choose. **Merge** adds the links, AI shortcuts, time zones and places that are new, and keeps what you already have. A link is the same link when its address matches, so a different title does not make a copy. **Replace** overwrites everything with the file. Cancel changes nothing.
+
+---
+
+## How do I export and import my data?
+
+In the Advanced settings, **Export data** saves your choices, links, AI shortcuts, time zones and places to one JSON file. Keep that file somewhere safe, such as iCloud Drive.
+
+**Import data** asks what to do with the file. **Merge** adds what is new and keeps what you already have. **Replace** overwrites everything. Only the first 15 links, 5 AI shortcuts, 5 time zones and 5 places in the file are loaded.
