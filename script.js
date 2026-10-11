@@ -1194,9 +1194,9 @@ settingsFields.askai.addEventListener('change', () => {
 // Pages: presets for how much is on the page. They only switch the display options; weather and the
 // IP address are never changed by a preset, since they send data.
 const presets = {
-  // Minimal starts with nothing extra. Standard adds the Wikipedia button and the colour and wallpaper buttons;
+  // Minimal starts with nothing extra, but keeps the colour button at the bottom left. Standard adds the Wikipedia button and the colour and wallpaper buttons;
   // AI shortcuts, time zones and the rest are found later, in the settings.
-  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: false, wallpaperButton: false, tint: false },
+  minimal: { quote: false, links: false, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: false, wallpaperButton: false, tint: true },
   standard: { quote: false, links: true, linksOwn: false, zones: false, askai: false, weather: false, wallpaper: true, wallpaperButton: true, tint: true },
 }
 // Weather is off in both presets. A preset only ever switches weather off, never on, so choosing one never starts a lookup.
