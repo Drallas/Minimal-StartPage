@@ -61,7 +61,7 @@ try {
   if (clockModes.includes(saved)) clockMode = saved
 } catch {}
 
-// Date: click to switch between the long date and DD-MM-YYYY; hover shows the ISO week and day of the year.
+// Date: click to switch between the long date and a short numeric date in the page language; hover shows the ISO week and day of the year.
 let dateNumeric = false
 try { dateNumeric = localStorage.getItem('dateFormat') === 'numeric' } catch {}
 
@@ -99,8 +99,9 @@ const updateClock = () => {
       ? { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }
       : { hour: '2-digit', minute: '2-digit', hour12: clockMode === '12' }
   )
+  // The short date follows the page language: 11-10-2026 in Dutch, 11.10.2026 in German, 2026/10/11 in Chinese.
   const date = dateNumeric
-    ? [String(now.getDate()).padStart(2, '0'), String(now.getMonth() + 1).padStart(2, '0'), now.getFullYear()].join('-')
+    ? now.toLocaleDateString(dateLocales[pageLang] || 'en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
     : now.toLocaleDateString(dateLocales[pageLang] || 'en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
   const offset = -now.getTimezoneOffset()
   const sign = offset >= 0 ? '+' : '-'
@@ -428,7 +429,7 @@ const helpText = {
     ['Search', 'Type and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered. Under Advanced you can also open search in a new tab.'],
     ['AI shortcuts', 'Shortcuts below the search bar. In Manage data you tick the AI services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Advanced.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
-    ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY.'],
+    ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and a short numeric date.'],
     ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added in Manage, under Weather; choose one in this window to see its forecast.'],
     ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on in Data beheren. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
@@ -441,7 +442,7 @@ const helpText = {
     ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden. Onder Geavanceerd kun je zoeken ook in een nieuw tabblad laten openen.'],
     ['AI-snelkoppelingen', 'Snelkoppelingen onder de zoekbalk. In Data beheren vink je de AI-diensten aan die je wilt, maximaal vijf; je eigen snelkoppelingen tellen mee in die vijf. Elke snelkoppeling toont het icoon van de dienst. AI-links openen standaard in een nieuw tabblad; dat kun je aanpassen onder Geavanceerd.'],
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent het klokje boven de tijd de zones die je koos.'],
-    ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en DD-MM-JJJJ.'],
+    ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en een korte datum.'],
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
     ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Je kunt in Beheren onder Weer tot vijf extra plaatsen toevoegen; kies er in dit venster een om die voorspelling te zien.'],
     ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je in Data beheren hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
@@ -467,7 +468,7 @@ const helpText = {
     ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé. Dans Avancé, vous pouvez aussi ouvrir la recherche dans un nouvel onglet.'],
     ['Raccourcis IA', 'Raccourcis sous la barre de recherche. Dans Gérer les données, cochez les services IA voulus, cinq au maximum ; vos propres raccourcis comptent dans ces cinq. Chaque raccourci affiche l’icône de son service. Les liens IA s’ouvrent par défaut dans un nouvel onglet ; cela se règle dans Avancé.'],
     ['Horloge', 'Passez la souris sur l’heure pour voir votre fuseau. Cliquez sur l’heure pour passer de 24 heures à 12 heures, puis à l’heure complète avec les secondes. Si les fuseaux sont activés, l’icône d’horloge au-dessus de l’heure ouvre les fuseaux choisis.'],
-    ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à JJ-MM-AAAA.'],
+    ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à une date courte.'],
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 6 heures et sept jours. Vous pouvez ajouter jusqu’à cinq lieux de plus dans Gérer, sous Météo ; choisissez-en un dans cette fenêtre pour voir sa prévision.'],
     ['Fond', 'Chaque pression sur le bouton rond en bas à droite passe au fond suivant : d’abord aucun, puis ceux activés dans « Gérer les données ». Le bouton en bas à gauche change la couleur du fond par étapes ; sur ordinateur, c’est aussi un bouton.'],
@@ -480,7 +481,7 @@ const helpText = {
     ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda. En Avanzado también puedes abrir la búsqueda en una pestaña nueva.'],
     ['Accesos de IA', 'Accesos debajo de la barra de búsqueda. En Gestionar datos marca los servicios de IA que quieras, hasta cinco; tus accesos propios cuentan dentro de esos cinco. Cada acceso muestra el icono de su servicio. Los enlaces de IA se abren por defecto en una pestaña nueva; se cambia en Avanzado.'],
     ['Reloj', 'Pasa el ratón sobre la hora para ver tu zona horaria. Haz clic en la hora para cambiar entre 24 horas, 12 horas y hora completa con segundos. Si las zonas horarias están activas, el globo sobre la hora abre las zonas que elegiste.'],
-    ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y DD-MM-AAAA.'],
+    ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y una fecha corta.'],
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 6 horas y siete días. Puedes añadir hasta cinco lugares más en Gestionar, en Tiempo; elige uno en esta ventana para ver su previsión.'],
     ['Fondo', 'Cada pulsación del botón redondo de abajo a la derecha pasa al siguiente fondo: primero ninguno, luego los activados en «Gestionar datos». El botón de abajo a la izquierda cambia el color del fondo por pasos; en el ordenador también es un botón.'],
@@ -493,7 +494,7 @@ const helpText = {
     ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。 在“高级”中，也可以让搜索在新标签页中打开。'],
     ['AI 快捷方式', '搜索框下方的快捷方式。在“管理数据”中勾选想要的 AI 服务，最多五个；你自己添加的快捷方式也计入这五个。每个快捷方式显示其服务的图标。AI 链接默认在新标签页中打开，可在“高级”中更改。'],
     ['时钟', '把鼠标移到时间上可看到你的时区。点击时间可在 24 小时制、12 小时制和带秒的完整时间之间切换。开启时区后，时间上方的地球图标会打开你选择的时区。'],
-    ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和 DD-MM-YYYY 之间切换。'],
+    ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和短日期之间切换。'],
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 6 小时和七天的完整预报。 在“管理”的“天气”中最多可添加五个其他地点；在此窗口中选择一个即可查看其预报。'],
     ['背景', '点击右下角的圆形按钮会切换到下一个背景：先是无背景，然后是在“管理数据”里开启的背景。左下角的按钮按步骤改变背景颜色；电脑上也是按钮。'],
