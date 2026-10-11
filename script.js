@@ -1985,7 +1985,7 @@ const renderAskAi = () => {
       // A custom shortcut shows the site's icon; if there is none, its name stays.
       const icon = item.icon === false ? '' : faviconOf(item.url)
       if (icon) {
-        const img = Object.assign(document.createElement('img'), { src: icon, alt: '', width: 18, height: 18 })
+        const img = Object.assign(document.createElement('img'), { src: icon, alt: '', width: 18, height: 18, className: 'ai-icon' })
         img.onerror = () => { link.textContent = item.title }
         link.append(img)
       } else link.textContent = item.title

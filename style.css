@@ -689,6 +689,11 @@ html[data-wallpaper-on] .modes button {
   gap: 6px;
 }
 
+/* A site's own icon is often coloured; the page is monochrome, so it is shown in greys like the built-in icons. */
+img.ai-icon {
+  filter: grayscale(1);
+}
+
 .ai-list .ai-icon {
   display: inline-flex;
   flex: none;
