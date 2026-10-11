@@ -177,7 +177,7 @@ const settingsFields = {
   zones: document.getElementById('set-zones'),
   wallpaper: document.getElementById('set-wallpaper'),
   tint: document.getElementById('set-tint'),
-  hue: document.getElementById('set-hue'),
+  colour: document.getElementById('set-colour'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links'),
   linksOwn: document.getElementById('set-links-own'),
@@ -1012,6 +1012,7 @@ const applySettingsText = () => {
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('lbl-ai-name').textContent = t.aiName
   document.getElementById('lbl-ai-url').textContent = t.aiUrl
+  settingsFields.colour.textContent = t.tintCycle
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
@@ -2331,8 +2332,7 @@ const applyHue = (value) => {
   const neutral = slider === 180
   hueSlider.value = slider
   hueSlider.hidden = !tintOn
-  settingsFields.hue.value = slider
-  settingsFields.hue.closest('label').hidden = !tintOn
+  settingsFields.colour.hidden = !tintOn
   tintCycle.hidden = !tintOn
   const colour = !neutral && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)'
   tintCycle.style.setProperty('--dot', colour)
@@ -2347,12 +2347,15 @@ const applyHue = (value) => {
 }
 
 try { applyHue(sliderOf(localStorage.getItem('hue') || 0)) } catch { applyHue(180) }
-tintCycle.addEventListener('click', () => {
+// One step to the next colour; the page button and the Advanced button both do this.
+const nextColour = () => {
   const index = Math.max(TINT_STEPS.indexOf(hueOf(hueSlider.value)), 0)
   const next = TINT_STEPS[(index + 1) % TINT_STEPS.length]
   applyHue(sliderOf(next))
   try { localStorage.setItem('hue', String(next)) } catch {}
-})
+}
+tintCycle.addEventListener('click', nextColour)
+settingsFields.colour.addEventListener('click', nextColour)
 
 // Settings: the tint on or off. The chosen hue is kept for when it is switched back on.
 settingsFields.tint.addEventListener('change', () => {
@@ -2364,9 +2367,4 @@ settingsFields.tint.addEventListener('change', () => {
 hueSlider.addEventListener('input', () => {
   applyHue(hueSlider.value)
   try { localStorage.setItem('hue', String(hueOf(hueSlider.value))) } catch {}
-})
-// The same slider in Advanced drives the page slider, and the other way round.
-settingsFields.hue.addEventListener('input', () => {
-  hueSlider.value = settingsFields.hue.value
-  hueSlider.dispatchEvent(new Event('input'))
 })
