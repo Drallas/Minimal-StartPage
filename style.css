@@ -1861,9 +1861,14 @@ html[data-quote-off] #quote {
   grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 24px;
-  margin-top: 16px;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+/* The resets are ordinary buttons, so they read as actions and not as hidden links. */
+.reset-row .ghost-button {
+  margin: 0;
 }
 
 /* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
