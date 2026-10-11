@@ -1892,6 +1892,21 @@ html[data-quote-off] #quote {
 }
 
 /* Advanced: a wider window. The options sit in four groups, two per row, so each group keeps its own column. */
+/* The colour slider in Advanced is the same control as the one on the page, with its full width. */
+.setting-slider {
+  padding: 4px 0 8px;
+}
+
+.setting-slider[hidden] {
+  display: none;
+}
+
+.setting-slider .hue {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
 .settings-panel.is-wide {
   width: min(100%, var(--panel-lg));
 }

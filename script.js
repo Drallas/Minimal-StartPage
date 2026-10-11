@@ -177,6 +177,7 @@ const settingsFields = {
   zones: document.getElementById('set-zones'),
   wallpaper: document.getElementById('set-wallpaper'),
   tint: document.getElementById('set-tint'),
+  hue: document.getElementById('set-hue'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links'),
   linksOwn: document.getElementById('set-links-own'),
@@ -2330,6 +2331,8 @@ const applyHue = (value) => {
   const neutral = slider === 180
   hueSlider.value = slider
   hueSlider.hidden = !tintOn
+  settingsFields.hue.value = slider
+  settingsFields.hue.closest('label').hidden = !tintOn
   tintCycle.hidden = !tintOn
   const colour = !neutral && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)'
   tintCycle.style.setProperty('--dot', colour)
@@ -2361,4 +2364,9 @@ settingsFields.tint.addEventListener('change', () => {
 hueSlider.addEventListener('input', () => {
   applyHue(hueSlider.value)
   try { localStorage.setItem('hue', String(hueOf(hueSlider.value))) } catch {}
+})
+// The same slider in Advanced drives the page slider, and the other way round.
+settingsFields.hue.addEventListener('input', () => {
+  hueSlider.value = settingsFields.hue.value
+  hueSlider.dispatchEvent(new Event('input'))
 })
