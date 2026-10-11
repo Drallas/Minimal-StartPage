@@ -177,6 +177,7 @@ const settingsFields = {
   zones: document.getElementById('set-zones'),
   wallpaper: document.getElementById('set-wallpaper'),
   tint: document.getElementById('set-tint'),
+  colour: document.getElementById('set-colour'),
   wallpaperButton: document.getElementById('set-wallpaper-btn'),
   links: document.getElementById('set-links'),
   linksOwn: document.getElementById('set-links-own'),
@@ -457,7 +458,7 @@ const helpText = {
     ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
     ['Weather', 'Off by default. Turn it on in Settings and choose where to find the weather: your IP address, or a city you pick. Hover over the temperature for a short preview; click it for the full forecast with the next 6 hours and seven days. Up to five more places can be added in Manage, under Weather; choose one in this window to see its forecast.'],
     ['Background', 'Each press of the round button at the bottom right goes to the next background: none first, then the ones switched on in Data beheren. The button at the bottom left changes the background colour in steps; on a computer that is the button too.'],
-    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal and Standard) sit at the top of the settings. Personal shows when your choices match neither. Advanced lists every option in four groups; its link goes back to the basic settings. "Reset settings" brings back the defaults. "Delete my links, AI shortcuts and places" removes only your own data.'],
+    ['Settings', 'Open them with the gear at the top right, or press ?. Press Esc to close. Options that depend on another option are greyed out until that one is on. The page presets (Minimal and Standard) sit at the top of the settings. Personal shows when your choices match neither. Advanced lists every option, in groups; its link goes back to the basic settings. "Reset settings" brings back the defaults. "Delete my links, AI shortcuts and places" removes only your own data.'],
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, only while weather is on; showing your IP address uses the same lookup. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.'],
     ['Export and import', 'Export data saves your choices, links and places to a file you keep. Import data loads such a file: Merge adds what is new and keeps the rest, Replace overwrites everything.'],
   ] },
@@ -470,7 +471,7 @@ const helpText = {
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
     ['Weer', 'Standaard uit. Zet het aan in de instellingen en kies waar het weer vandaan komt: je IP-adres, of een stad die je kiest. Ga met de muis over de temperatuur voor een korte voorspelling; klik erop voor de volledige verwachting met de komende 6 uur en zeven dagen. Je kunt in Beheren onder Weer tot vijf extra plaatsen toevoegen; kies er in dit venster een om die voorspelling te zien.'],
     ['Achtergrond', 'Elke druk op de ronde knop rechtsonder gaat naar de volgende achtergrond: eerst geen, daarna de achtergronden die je in Data beheren hebt aangezet. De knop linksonder wisselt de achtergrondkleur in stappen; op de computer is dat ook een knop.'],
-    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal en Standaard. Persoonlijk verschijnt als je keuzes bij geen van beide passen. Geavanceerd toont alle opties in vier groepen; de link ernaast brengt je terug naar de basisinstellingen. "Instellingen resetten" zet de standaard terug. "Eigen links, AI-snelkoppelingen en plaatsen wissen" verwijdert alleen je eigen gegevens.'],
+    ['Instellingen', 'Open ze met het tandwiel rechtsboven, of druk op ?. Druk op Esc om te sluiten. Opties die van een andere optie afhangen, zijn grijs tot die aan staat. Bovenaan staan de paginakeuzes Minimaal en Standaard. Persoonlijk verschijnt als je keuzes bij geen van beide passen. Geavanceerd toont alle opties, in groepen; de link ernaast brengt je terug naar de basisinstellingen. "Instellingen resetten" zet de standaard terug. "Eigen links, AI-snelkoppelingen en plaatsen wissen" verwijdert alleen je eigen gegevens.'],
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, alleen als het weer aanstaat; het tonen van je IP-adres gebruikt dezelfde opzoeking. Extra plaatsen sturen hun naam naar Open-Meteo. Eigen AI-snelkoppelingen laden hun icoon van hun eigen site. Er gaat verder niets naar buiten.'],
     ['Gegevens exporteren', 'Gegevens exporteren slaat je keuzes, links en plaatsen op in een bestand dat bij jou blijft. Gegevens importeren laadt zo’n bestand: Samenvoegen voegt toe wat nieuw is en laat de rest staan, Vervangen overschrijft alles.'],
   ] },
@@ -483,7 +484,7 @@ const helpText = {
     ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen. Ist Eigene Links aus, öffnet die Schaltfläche direkt Wikipedia.'],
     ['Wetter', 'Standardmäßig aus. Schalte es in den Einstellungen ein und wähle, woher das Wetter kommt: deine IP-Adresse oder eine Stadt, die du wählst. Fahre mit der Maus über die Temperatur für eine kurze Vorschau; klicke für die vollständige Vorhersage mit den nächsten 6 Stunden und sieben Tagen. Unter Verwalten, Wetter kannst du bis zu fünf weitere Orte hinzufügen; wähle hier einen aus, um dessen Vorhersage zu sehen.'],
     ['Hintergrund', 'Jeder Druck auf den runden Knopf unten rechts wechselt zum nächsten Hintergrund: zuerst keiner, dann die in „Daten verwalten“ eingeschalteten. Der Knopf unten links wechselt die Hintergrundfarbe in Stufen; am Computer ist das ebenfalls ein Knopf.'],
-    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal und Standard. Persönlich erscheint, wenn deine Auswahl zu keiner passt. Erweitert zeigt alle Optionen in vier Gruppen; der Link führt zurück zu den Grundeinstellungen. „Einstellungen zurücksetzen“ stellt die Standards wieder her. „Eigene Links, KI-Verknüpfungen und Orte löschen“ entfernt nur deine eigenen Daten.'],
+    ['Einstellungen', 'Öffne sie mit dem Zahnrad oben rechts oder drücke ?. Esc schließt sie. Optionen, die von einer anderen abhängen, sind grau, bis diese eingeschaltet ist. Oben stehen die Seitenvorlagen Minimal und Standard. Persönlich erscheint, wenn deine Auswahl zu keiner passt. Erweitert zeigt alle Optionen, in Gruppen; der Link führt zurück zu den Grundeinstellungen. „Einstellungen zurücksetzen“ stellt die Standards wieder her. „Eigene Links, KI-Verknüpfungen und Orte löschen“ entfernt nur deine eigenen Daten.'],
     ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, nur wenn das Wetter aktiv ist; das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Zusätzliche Orte senden ihren Namen an Open-Meteo. Eigene KI-Verknüpfungen laden ihr Symbol von ihrer eigenen Seite. Sonst verlässt nichts die Seite.'],
     ['Daten exportieren und importieren', 'Daten exportieren speichert deine Einstellungen, Links und Orte in einer Datei, die bei dir bleibt. Daten importieren lädt so eine Datei: Zusammenführen ergänzt, was neu ist, und behält den Rest; Ersetzen überschreibt alles.'],
   ] },
@@ -496,7 +497,7 @@ const helpText = {
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
     ['Météo', 'Désactivée par défaut. Activez-la dans les paramètres et choisissez d’où vient la météo : votre adresse IP, ou une ville de votre choix. Survolez la température pour un aperçu ; cliquez pour la prévision complète sur 6 heures et sept jours. Vous pouvez ajouter jusqu’à cinq lieux de plus dans Gérer, sous Météo ; choisissez-en un dans cette fenêtre pour voir sa prévision.'],
     ['Fond', 'Chaque pression sur le bouton rond en bas à droite passe au fond suivant : d’abord aucun, puis ceux activés dans « Gérer les données ». Le bouton en bas à gauche change la couleur du fond par étapes ; sur ordinateur, c’est aussi un bouton.'],
-    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal et Standard. Personnalisé s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options en quatre groupes ; le lien ramène aux réglages de base. « Réinitialiser les réglages » rétablit les valeurs par défaut. « Supprimer mes liens, raccourcis IA et lieux » retire seulement vos données personnelles.'],
+    ['Paramètres', 'Ouvrez-les avec l’engrenage en haut à droite, ou appuyez sur ?. Échap ferme. Les options qui dépendent d’une autre sont grisées tant que celle-ci n’est pas activée. En haut se trouvent les pages Minimal et Standard. Personnalisé s’affiche si vos choix ne correspondent à aucune. Avancé affiche toutes les options, par groupes ; le lien ramène aux réglages de base. « Réinitialiser les réglages » rétablit les valeurs par défaut. « Supprimer mes liens, raccourcis IA et lieux » retire seulement vos données personnelles.'],
     ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, seulement si la météo est activée ; afficher votre adresse IP utilise la même requête. Les lieux supplémentaires envoient leur nom à Open-Meteo. Les raccourcis IA personnels chargent leur icône depuis leur propre site. Rien d’autre ne quitte la page.'],
     ['Exporter et importer', 'Exporter les données enregistre vos choix, liens et lieux dans un fichier qui reste chez vous. Importer les données charge ce fichier : Fusionner ajoute ce qui est nouveau et garde le reste ; Remplacer écrase tout.'],
   ] },
@@ -509,7 +510,7 @@ const helpText = {
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
     ['Tiempo', 'Desactivado por defecto. Actívalo en los ajustes y elige de dónde viene: tu IP, o una ciudad que elijas. Pasa el ratón sobre la temperatura para una vista previa; haz clic para la previsión completa de 6 horas y siete días. Puedes añadir hasta cinco lugares más en Gestionar, en Tiempo; elige uno en esta ventana para ver su previsión.'],
     ['Fondo', 'Cada pulsación del botón redondo de abajo a la derecha pasa al siguiente fondo: primero ninguno, luego los activados en «Gestionar datos». El botón de abajo a la izquierda cambia el color del fondo por pasos; en el ordenador también es un botón.'],
-    ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo y Estándar. Personal aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones en cuatro grupos; el enlace vuelve a los ajustes básicos. «Restablecer ajustes» devuelve los valores por defecto. «Borrar mis enlaces, accesos de IA y lugares» quita solo tus datos propios.'],
+    ['Ajustes', 'Ábrelos con el engranaje de arriba a la derecha, o pulsa ?. Esc cierra. Las opciones que dependen de otra aparecen en gris hasta que esa esté activa. Arriba están las páginas Mínimo y Estándar. Personal aparece si tus opciones no coinciden con ninguna. Avanzado muestra todas las opciones, en grupos; el enlace vuelve a los ajustes básicos. «Restablecer ajustes» devuelve los valores por defecto. «Borrar mis enlaces, accesos de IA y lugares» quita solo tus datos propios.'],
     ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, solo mientras esté activado; mostrar tu IP usa la misma consulta. Los lugares adicionales envían su nombre a Open-Meteo. Los accesos de IA propios cargan su icono desde su propio sitio. Nada más sale de la página.'],
     ['Exportar e importar', 'Exportar datos guarda tus opciones, enlaces y lugares en un archivo que se queda contigo. Importar datos carga ese archivo: Combinar añade lo nuevo y conserva el resto; Reemplazar sobrescribe todo.'],
   ] },
@@ -522,7 +523,7 @@ const helpText = {
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
     ['天气', '默认关闭。在设置中开启，并选择天气的来源：你的 IP 地址，或你选择的城市。把鼠标移到温度上可看到简短预报；点击可查看未来 6 小时和七天的完整预报。 在“管理”的“天气”中最多可添加五个其他地点；在此窗口中选择一个即可查看其预报。'],
     ['背景', '点击右下角的圆形按钮会切换到下一个背景：先是无背景，然后是在“管理数据”里开启的背景。左下角的按钮按步骤改变背景颜色；电脑上也是按钮。'],
-    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简和标准。选择与两者都不符时显示“个性化”。“高级”按四组显示全部选项，链接可返回基本设置。 “重置设置”会恢复默认值。“删除我的链接、AI 快捷方式和地点”只删除你的个人数据。'],
+    ['设置', '点击右上角的齿轮打开，或按 ?。按 Esc 关闭。依赖其他选项的选项会变灰，直到那个选项开启。 设置顶部是页面预设：极简和标准。选择与两者都不符时显示“个性化”。“高级”按组显示全部选项，链接可返回基本设置。 “重置设置”会恢复默认值。“删除我的链接、AI 快捷方式和地点”只删除你的个人数据。'],
     ['你的数据', '你的选择只保存在这个浏览器中。开启天气时，页面会把你的 IP 地址发送到 ipapi.co，或把你选择的城市发送到 Open-Meteo；显示 IP 地址使用同一查询。额外地点会把名称发送到 Open-Meteo。自定义 AI 快捷方式会从各自的网站加载图标。除此之外，页面不会发送任何内容。'],
     ['导出和导入', '导出数据会把你的选择、链接和地点保存到一个由你保管的文件中。导入数据会加载该文件：合并会添加新内容并保留其余部分，替换会覆盖全部内容。'],
   ] },
@@ -1011,6 +1012,7 @@ const applySettingsText = () => {
   document.getElementById('ai-form-title').textContent = t.aiAddTitle
   document.getElementById('lbl-ai-name').textContent = t.aiName
   document.getElementById('lbl-ai-url').textContent = t.aiUrl
+  settingsFields.colour.textContent = t.tintCycle
   document.getElementById('lbl-tint').textContent = t.tintToggle
   document.getElementById('lbl-wallpaper-btn').textContent = t.wallpaperButton
   document.getElementById('lbl-links').textContent = t.linksToggle
@@ -2330,6 +2332,7 @@ const applyHue = (value) => {
   const neutral = slider === 180
   hueSlider.value = slider
   hueSlider.hidden = !tintOn
+  settingsFields.colour.hidden = !tintOn
   tintCycle.hidden = !tintOn
   const colour = !neutral && tintOn ? `hsl(${hue} 40% 55%)` : 'var(--color-fg-2)'
   tintCycle.style.setProperty('--dot', colour)
@@ -2344,12 +2347,15 @@ const applyHue = (value) => {
 }
 
 try { applyHue(sliderOf(localStorage.getItem('hue') || 0)) } catch { applyHue(180) }
-tintCycle.addEventListener('click', () => {
+// One step to the next colour; the page button and the Advanced button both do this.
+const nextColour = () => {
   const index = Math.max(TINT_STEPS.indexOf(hueOf(hueSlider.value)), 0)
   const next = TINT_STEPS[(index + 1) % TINT_STEPS.length]
   applyHue(sliderOf(next))
   try { localStorage.setItem('hue', String(next)) } catch {}
-})
+}
+tintCycle.addEventListener('click', nextColour)
+settingsFields.colour.addEventListener('click', nextColour)
 
 // Settings: the tint on or off. The chosen hue is kept for when it is switched back on.
 settingsFields.tint.addEventListener('change', () => {

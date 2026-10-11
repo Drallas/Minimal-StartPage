@@ -1892,6 +1892,7 @@ html[data-quote-off] #quote {
 }
 
 /* Advanced: a wider window. The options sit in four groups, two per row, so each group keeps its own column. */
+
 .settings-panel.is-wide {
   width: min(100%, var(--panel-lg));
 }
