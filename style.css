@@ -1909,12 +1909,17 @@ html[data-quote-off] #quote {
 
 /* Data beheren, the background tab: one row per wallpaper with a swatch, its name and a switch. */
 .wallpaper-row {
+  position: relative;
   display: grid;
   grid-template-columns: 40px minmax(0, 1fr) auto;
   gap: 12px;
   align-items: center;
   padding: 8px 0;
   border-bottom: 1px solid var(--color-border);
+}
+
+.wallpaper-row:hover {
+  z-index: 1;
 }
 
 .wallpaper-swatch {
@@ -1924,6 +1929,32 @@ html[data-quote-off] #quote {
   border-radius: 8px;
   background-size: cover;
   background-position: center;
+}
+
+/* Hover on a row shows the wallpaper larger, beside its swatch; the name and switch stay readable underneath. */
+.wallpaper-swatch {
+  position: relative;
+}
+
+.wallpaper-swatch::after {
+  content: '';
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  width: 200px;
+  height: 112px;
+  transform: translateY(-50%);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--preview) center / cover no-repeat;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease;
+}
+
+.wallpaper-row:hover .wallpaper-swatch::after {
+  opacity: 1;
 }
 
 .wallpaper-switch {

@@ -1940,6 +1940,8 @@ const renderWallpapers = () => {
     const row = el('div', 'wallpaper-row')
     const swatch = el('span', 'wallpaper-swatch')
     swatch.style.backgroundImage = `url("${item.thumb}")`
+    // The bigger preview shows on hover; it is set here so the image loads only when the row is in use.
+    swatch.style.setProperty('--preview', `url("${item.src}")`)
     const box = Object.assign(document.createElement('input'), { type: 'checkbox', checked: isOn(item) })
     box.dataset.wallpaper = item.id
     const switchLabel = el('label', 'wallpaper-switch')
