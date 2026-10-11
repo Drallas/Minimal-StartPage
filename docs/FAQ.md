@@ -84,3 +84,15 @@ You choose. **Merge** adds the links, AI shortcuts, time zones and places that a
 In the Advanced settings, **Export data** saves your choices, links, AI shortcuts, time zones and places to one JSON file. Keep that file somewhere safe, such as iCloud Drive.
 
 **Import data** asks what to do with the file. **Merge** adds what is new and keeps what you already have. **Replace** overwrites everything. Only the first 15 links, 5 AI shortcuts, 5 time zones and 5 places in the file are loaded.
+
+---
+
+## Why are there only five AI shortcuts?
+
+The bar under the search stays short on purpose. In Manage data you tick the services you want, up to five, and your own shortcuts count toward the same five. When the five are full, the rest greys out until you untick one.
+
+---
+
+## Why is there no date on Minimal?
+
+Minimal shows only the search, the clock and the colour button. Standard adds the date. Under Advanced you can show the date on any page with **Show the date**.
