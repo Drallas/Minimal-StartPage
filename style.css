@@ -612,6 +612,11 @@ html[data-wallpaper-on] .modes button {
   pointer-events: auto;
 }
 
+/* The wallpaper button stays at the right edge, also when the colour button is hidden and it is the only one left. */
+.controls #wallpaper-toggle {
+  margin-left: auto;
+}
+
 .controls:hover,
 .controls:focus-within {
   opacity: .9;
