@@ -1666,6 +1666,20 @@ html[data-quote-off] #quote {
   color: var(--color-fg-2);
 }
 
+.help-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--color-fg-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.help-link:hover,
+.help-link:focus-visible {
+  color: var(--color-fg-1);
+}
+
 .help-section p {
   font-size: 13px;
   line-height: 1.6;

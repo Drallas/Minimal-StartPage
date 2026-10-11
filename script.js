@@ -409,6 +409,7 @@ for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[l
 // Help: the settings window's help. The same content as the README, without screenshots.
 const helpText = {
   en: { title: 'Help', settings: 'Settings', close: 'Close', sections: [
+    ['About this page', 'A quiet start page, built with Claude Code as an experiment in vibe coding. I wanted to see how far plain language gets you with a small web app. My opinion: a start page should be nearly empty; extras earn their place by being found, not by staring back at you.', 'https://github.com/Drallas/Minimal-StartPage'],
     ['Search', 'Type and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY.'],
@@ -419,6 +420,7 @@ const helpText = {
     ['Your data', 'Your choices are stored only in this browser. Weather sends your IP address to ipapi.co, or the city you pick to Open-Meteo, and only while weather is on. Showing your IP address uses the same lookup. Nothing else leaves the page. "Reset settings" brings back the defaults. "Delete my links, AI shortcuts and places" removes your own links, AI shortcuts, time zones and city, and nothing else. Extra places send their name to Open-Meteo to find them and fetch their forecast.'],
   ] },
   nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', sections: [
+    ['Over deze pagina', 'Een rustige startpagina, gebouwd met Claude Code als experiment in vibe coding. Ik wilde zien hoe ver gewone taal je brengt met een kleine webapp. Mijn mening: een startpagina hoort bijna leeg te zijn; de extra’s verdienen hun plek doordat je ze vindt, niet doordat ze je aankijken.', 'https://github.com/Drallas/Minimal-StartPage'],
     ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden.'],
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent het klokje boven de tijd de zones die je koos.'],
     ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en DD-MM-JJJJ.'],
@@ -429,6 +431,7 @@ const helpText = {
     ['Je gegevens', 'Je keuzes worden alleen in deze browser bewaard. Het weer stuurt je IP-adres naar ipapi.co, of de stad die je kiest naar Open-Meteo, en alleen als het weer aanstaat. Het tonen van je IP-adres gebruikt dezelfde opzoeking. Er gaat verder niets naar buiten. "Instellingen resetten" zet de standaard terug. "Eigen links, AI-snelkoppelingen en plaatsen wissen" verwijdert alleen je eigen links, AI-snelkoppelingen, tijdzones, je stad en extra plaatsen. Extra plaatsen sturen hun naam naar Open-Meteo om ze te vinden en hun verwachting op te halen.'],
   ] },
   de: { title: 'Hilfe', settings: 'Einstellungen', close: 'Schließen', sections: [
+    ['Über diese Seite', 'Eine ruhige Startseite, mit Claude Code gebaut als Experiment in Vibe Coding. Ich wollte sehen, wie weit normale Sprache eine kleine Web-App bringt. Meine Meinung: Eine Startseite sollte fast leer sein; Extras verdienen ihren Platz, weil man sie findet, nicht weil sie einen anstarren.', 'https://github.com/Drallas/Minimal-StartPage'],
     ['Suche', 'Tippe und drücke Enter, oder klicke auf die Lupe. Das Symbol links zeigt die Suchmaschine: Klick darauf, um zwischen DuckDuckGo (Standard), Kagi, Brave und Google zu wechseln. Deine Wahl wird gespeichert.'],
     ['Uhr', 'Fahre mit der Maus über die Zeit, um deine Zeitzone zu sehen. Ein Klick auf die Zeit wechselt zwischen 24-Stunden-, 12-Stunden- und voller Zeit mit Sekunden. Sind Zeitzonen aktiv, öffnet die Kugel über der Zeit die gewählten Zonen.'],
     ['Datum', 'Fahre mit der Maus über das Datum, um die ISO-Woche und den Tag des Jahres zu sehen. Ein Klick wechselt zwischen langer Form und TT-MM-JJJJ.'],
@@ -439,6 +442,7 @@ const helpText = {
     ['Deine Daten', 'Deine Einstellungen werden nur in diesem Browser gespeichert. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. die gewählte Stadt an Open-Meteo, und nur wenn das Wetter aktiv ist. Das Anzeigen deiner IP-Adresse nutzt dieselbe Abfrage. Sonst verlässt nichts die Seite. „Einstellungen zurücksetzen“ stellt die Standards wieder her. „Eigene Links, KI-Verknüpfungen und Orte löschen“ entfernt nur deine eigenen Links, KI-Verknüpfungen, Zeitzonen, deine Stadt und weitere Orte. Zusätzliche Orte senden ihren Namen an Open-Meteo, um sie zu finden und ihre Vorhersage abzurufen.'],
   ] },
   fr: { title: 'Aide', settings: 'Paramètres', close: 'Fermer', sections: [
+    ['À propos de cette page', 'Une page d’accueil sobre, construite avec Claude Code dans le cadre d’une expérience de vibe coding. Je voulais voir jusqu’où le langage naturel mène une petite application web. Mon avis : une page d’accueil doit rester presque vide ; les extras méritent leur place parce qu’on les trouve, pas parce qu’ils s’imposent.', 'https://github.com/Drallas/Minimal-StartPage'],
     ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé.'],
     ['Horloge', 'Passez la souris sur l’heure pour voir votre fuseau. Cliquez sur l’heure pour passer de 24 heures à 12 heures, puis à l’heure complète avec les secondes. Si les fuseaux sont activés, l’icône d’horloge au-dessus de l’heure ouvre les fuseaux choisis.'],
     ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à JJ-MM-AAAA.'],
@@ -449,6 +453,7 @@ const helpText = {
     ['Vos données', 'Vos choix ne sont conservés que dans ce navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, et seulement si la météo est activée. Afficher votre adresse IP utilise la même requête. Rien d’autre ne quitte la page. « Réinitialiser les réglages » rétablit les valeurs par défaut. « Supprimer mes liens, raccourcis IA et lieux » retire seulement vos liens personnels, raccourcis IA, fuseaux, votre ville et les lieux supplémentaires. Les lieux supplémentaires envoient leur nom à Open-Meteo pour les trouver et récupérer leur prévision.'],
   ] },
   es: { title: 'Ayuda', settings: 'Ajustes', close: 'Cerrar', sections: [
+    ['Sobre esta página', 'Una página de inicio tranquila, creada con Claude Code como experimento de vibe coding. Quería ver hasta dónde llega el lenguaje natural con una pequeña aplicación web. Mi opinión: una página de inicio debería estar casi vacía; los extras se ganan su sitio porque se encuentran, no porque te miren.', 'https://github.com/Drallas/Minimal-StartPage'],
     ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda.'],
     ['Reloj', 'Pasa el ratón sobre la hora para ver tu zona horaria. Haz clic en la hora para cambiar entre 24 horas, 12 horas y hora completa con segundos. Si las zonas horarias están activas, el globo sobre la hora abre las zonas que elegiste.'],
     ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y DD-MM-AAAA.'],
@@ -459,6 +464,7 @@ const helpText = {
     ['Tus datos', 'Tus elecciones solo se guardan en este navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Mostrar tu IP usa la misma consulta. Nada más sale de la página. «Restablecer ajustes» devuelve los valores por defecto. «Borrar mis enlaces, accesos de IA y lugares» quita solo tus enlaces propios, accesos de IA, zonas horarias, tu ciudad y los lugares adicionales. Los lugares adicionales envían su nombre a Open-Meteo para encontrarlos y obtener su previsión.'],
   ] },
   zh: { title: '帮助', settings: '设置', close: '关闭', sections: [
+    ['关于此页', '一个安静的起始页，用 Claude Code 构建，是一次 vibe coding 的实验。我想看看自然语言能把一个小型网页应用带到多远。我的看法：起始页应该几乎是空的；附加功能应该靠被发现赢得位置，而不是一直盯着你。', 'https://github.com/Drallas/Minimal-StartPage'],
     ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。'],
     ['时钟', '把鼠标移到时间上可看到你的时区。点击时间可在 24 小时制、12 小时制和带秒的完整时间之间切换。开启时区后，时间上方的地球图标会打开你选择的时区。'],
     ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和 DD-MM-YYYY 之间切换。'],
@@ -1024,9 +1030,11 @@ let helpFrom = null
 const renderHelp = () => {
   document.getElementById('help-title').textContent = helpCopy.title
   document.getElementById('help-close').setAttribute('aria-label', helpCopy.close)
-  helpBody.replaceChildren(...helpCopy.sections.map(([heading, body]) => {
+  helpBody.replaceChildren(...helpCopy.sections.map(([heading, body, link]) => {
     const section = el('section', 'help-section')
     section.append(el('h3', '', heading), el('p', '', body))
+    // An optional link, shown by its address, for the About section.
+    if (link) section.append(Object.assign(document.createElement('a'), { href: link, target: '_blank', rel: 'noopener', className: 'help-link', textContent: link.replace('https://', '') }))
     return section
   }))
 }
