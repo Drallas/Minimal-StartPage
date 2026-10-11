@@ -141,6 +141,7 @@ The wallpapers are photos from [Unsplash](https://unsplash.com), used under the 
 
 - Misty forest: [Dave Hoefler](https://unsplash.com/@iamthedave)
 - Pink dunes: [John Fowler](https://unsplash.com/@wildhoney)
+- Mountain haze: [Paul Earle](https://unsplash.com/@paulearlephotography)
 
 The weather forecast comes from [Open-Meteo](https://open-meteo.com), licensed under CC BY 4.0.
 

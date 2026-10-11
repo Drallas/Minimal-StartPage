@@ -1922,6 +1922,26 @@ html[data-quote-off] #quote {
   z-index: 1;
 }
 
+.wallpaper-names {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.wallpaper-credit {
+  justify-self: start;
+  font-size: 12px;
+  color: var(--color-fg-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wallpaper-credit:hover,
+.wallpaper-credit:focus-visible {
+  color: var(--color-fg-1);
+}
+
 .wallpaper-swatch {
   width: 40px;
   height: 28px;

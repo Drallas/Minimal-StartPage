@@ -373,12 +373,12 @@ const tintText = {
   zh: { tintToggle: '背景色调（滑块）' }
 }
 const bgTitleText = {
-  en: { wallDunes: 'Pink dunes', wallMountains: 'Mountain haze', wallNote: 'Each press of the background button goes to the next one that is on.', wallNext: 'Next background', wallNone: 'No background', wallPhoto: 'Misty forest', wallOn: 'On', tabWallpaper: 'Background' },
-  nl: { wallDunes: 'Roze duinen', wallMountains: 'Bergen in de mist', wallNote: 'Elke druk op de achtergrondknop gaat naar de volgende die aan staat.', wallNext: 'Volgende achtergrond', wallNone: 'Geen achtergrond', wallPhoto: 'Mistig bos', wallOn: 'Aan', tabWallpaper: 'Achtergrond' },
-  de: { wallDunes: 'Rosa Dünen', wallMountains: 'Berge im Dunst', wallNote: 'Jeder Druck auf die Hintergrund-Schaltfläche wechselt zum nächsten eingeschalteten Hintergrund.', wallNext: 'Nächster Hintergrund', wallNone: 'Kein Hintergrund', wallPhoto: 'Nebliger Wald', wallOn: 'An', tabWallpaper: 'Hintergrund' },
-  fr: { wallDunes: 'Dunes roses', wallMountains: 'Montagnes dans la brume', wallNote: 'Chaque pression sur le bouton du fond passe au fond suivant activé.', wallNext: 'Fond suivant', wallNone: 'Aucun fond', wallPhoto: 'Forêt brumeuse', wallOn: 'Activé', tabWallpaper: 'Fond' },
-  es: { wallDunes: 'Dunas rosas', wallMountains: 'Montañas en la bruma', wallNote: 'Cada pulsación del botón de fondo pasa al siguiente fondo activado.', wallNext: 'Siguiente fondo', wallNone: 'Sin fondo', wallPhoto: 'Bosque brumoso', wallOn: 'Activado', tabWallpaper: 'Fondo' },
-  zh: { wallDunes: '粉色沙丘', wallMountains: '薄雾中的群山', wallNote: '每次点击背景按钮，会切换到下一个已开启的背景。', wallNext: '下一个背景', wallNone: '无背景', wallPhoto: '雾中的森林', wallOn: '开启', tabWallpaper: '背景' }
+  en: { wallBy: 'Photo by', wallDunes: 'Pink dunes', wallMountains: 'Mountain haze', wallNote: 'Each press of the background button goes to the next one that is on.', wallNext: 'Next background', wallNone: 'No background', wallPhoto: 'Misty forest', wallOn: 'On', tabWallpaper: 'Background' },
+  nl: { wallBy: 'Foto van', wallDunes: 'Roze duinen', wallMountains: 'Bergen in de mist', wallNote: 'Elke druk op de achtergrondknop gaat naar de volgende die aan staat.', wallNext: 'Volgende achtergrond', wallNone: 'Geen achtergrond', wallPhoto: 'Mistig bos', wallOn: 'Aan', tabWallpaper: 'Achtergrond' },
+  de: { wallBy: 'Foto von', wallDunes: 'Rosa Dünen', wallMountains: 'Berge im Dunst', wallNote: 'Jeder Druck auf die Hintergrund-Schaltfläche wechselt zum nächsten eingeschalteten Hintergrund.', wallNext: 'Nächster Hintergrund', wallNone: 'Kein Hintergrund', wallPhoto: 'Nebliger Wald', wallOn: 'An', tabWallpaper: 'Hintergrund' },
+  fr: { wallBy: 'Photo de', wallDunes: 'Dunes roses', wallMountains: 'Montagnes dans la brume', wallNote: 'Chaque pression sur le bouton du fond passe au fond suivant activé.', wallNext: 'Fond suivant', wallNone: 'Aucun fond', wallPhoto: 'Forêt brumeuse', wallOn: 'Activé', tabWallpaper: 'Fond' },
+  es: { wallBy: 'Foto de', wallDunes: 'Dunas rosas', wallMountains: 'Montañas en la bruma', wallNote: 'Cada pulsación del botón de fondo pasa al siguiente fondo activado.', wallNext: 'Siguiente fondo', wallNone: 'Sin fondo', wallPhoto: 'Bosque brumoso', wallOn: 'Activado', tabWallpaper: 'Fondo' },
+  zh: { wallBy: '摄影：', wallDunes: '粉色沙丘', wallMountains: '薄雾中的群山', wallNote: '每次点击背景按钮，会切换到下一个已开启的背景。', wallNext: '下一个背景', wallNone: '无背景', wallPhoto: '雾中的森林', wallOn: '开启', tabWallpaper: '背景' }
 }
 const pageText = {
   en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personal' },
@@ -1886,9 +1886,9 @@ const wantedWidth = window.innerWidth * (window.devicePixelRatio || 1)
 const wallpaperWidth = wallpaperWidths.find((w) => w >= wantedWidth) || wallpaperWidths[wallpaperWidths.length - 1]
 // Each photo is a base name: assets/<base>-800.jpg, -1280.jpg and -2000.jpg, plus assets/<base>-thumb.jpg.
 const wallpapers = [
-  { id: 'photo', base: 'wallpaper', name: 'wallPhoto', on: true },
-  { id: 'dunes', base: 'wallpaper-dunes', name: 'wallDunes', on: true },
-  { id: 'mountains', base: 'wallpaper-mountains', name: 'wallMountains', on: true },
+  { id: 'photo', base: 'wallpaper', name: 'wallPhoto', on: true, by: { name: 'Dave Hoefler', url: 'https://unsplash.com/@iamthedave' } },
+  { id: 'dunes', base: 'wallpaper-dunes', name: 'wallDunes', on: true, by: { name: 'John Fowler', url: 'https://unsplash.com/@wildhoney' } },
+  { id: 'mountains', base: 'wallpaper-mountains', name: 'wallMountains', on: true, by: { name: 'Paul Earle', url: 'https://unsplash.com/@paulearlephotography' } },
 ].map((item) => ({ ...item, src: `assets/${item.base}-${wallpaperWidth}.jpg`, thumb: `assets/${item.base}-thumb.jpg` }))
 // Switched on or off in Data beheren; a wallpaper without a saved switch keeps its default.
 let wallpaperSwitches = {}
@@ -1946,7 +1946,12 @@ const renderWallpapers = () => {
     box.dataset.wallpaper = item.id
     const switchLabel = el('label', 'wallpaper-switch')
     switchLabel.append(box, ` ${t.wallOn}`)
-    row.append(swatch, el('span', 'wallpaper-name', labelOf(item)), switchLabel)
+    const names = el('div', 'wallpaper-names')
+    names.append(el('span', 'wallpaper-name', labelOf(item)))
+    const credit = el('a', 'wallpaper-credit', `${t.wallBy} ${item.by.name}`)
+    Object.assign(credit, { href: item.by.url, target: '_blank', rel: 'noopener' })
+    names.append(credit)
+    row.append(swatch, names, switchLabel)
     return row
   }))
 }
