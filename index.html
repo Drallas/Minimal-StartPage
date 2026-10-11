@@ -97,9 +97,9 @@
               <div class="city-row">
                 <input type="text" id="city-input" list="city-options" autocomplete="off">
                 <datalist id="city-options"></datalist>
-                <button type="submit" id="city-save">Save</button>
+                <button type="submit" id="city-save" class="ghost-button">Save</button>
               </div>
-              <button type="button" id="city-clear" class="text-button" hidden>Use my IP address instead</button>
+              <button type="button" id="city-clear" class="ghost-button" hidden>Use my IP address instead</button>
               <p class="city-msg" id="city-msg" role="status"></p>
             </form>
           </div>
@@ -164,8 +164,8 @@
         <label for="link-desc" id="lbl-link-desc">Description (optional)</label>
         <input type="text" id="link-desc" maxlength="120" autocomplete="off">
         <div class="link-form-actions">
-          <button type="submit" id="link-save">Save</button>
-          <button type="button" id="link-cancel" class="text-button" hidden>Cancel</button>
+          <button type="submit" id="link-save" class="ghost-button">Save</button>
+          <button type="button" id="link-cancel" class="ghost-button" hidden>Cancel</button>
         </div>
         <p class="city-msg" id="link-msg" role="status"></p>
       </form>
@@ -178,7 +178,7 @@
         <label for="zone-input" id="zone-label">Add a time zone (up to five)</label>
         <div class="city-row">
           <input type="text" id="zone-input" list="zone-options" autocomplete="off">
-          <button type="submit" id="zone-add-btn">Add</button>
+          <button type="submit" id="zone-add-btn" class="ghost-button">Add</button>
         </div>
         <datalist id="zone-options"></datalist>
         <p class="city-msg" id="zone-msg" role="status"></p>
@@ -194,8 +194,8 @@
         <label for="ai-url" id="lbl-ai-url">Address</label>
         <input type="text" id="ai-url" inputmode="url" autocomplete="off">
         <div class="link-form-actions">
-          <button type="submit" id="ai-save">Save</button>
-          <button type="button" id="ai-cancel" class="text-button" hidden>Cancel</button>
+          <button type="submit" id="ai-save" class="ghost-button">Save</button>
+          <button type="button" id="ai-cancel" class="ghost-button" hidden>Cancel</button>
         </div>
         <p class="city-msg" id="ai-msg" role="status"></p>
       </form>
@@ -209,7 +209,7 @@
           <div class="city-row">
             <input type="text" id="place-input" list="place-options" autocomplete="off">
             <datalist id="place-options"></datalist>
-            <button type="submit" id="place-add">Add</button>
+            <button type="submit" id="place-add" class="ghost-button">Add</button>
           </div>
           <p class="city-msg" id="place-msg" role="status"></p>
         </form>
@@ -219,8 +219,8 @@
         <div id="wallpaper-list"></div>
       </section>
       <div class="manage-io">
-          <button type="button" id="export-data" class="text-button">Export data</button>
-          <button type="button" id="import-data" class="text-button">Import data</button>
+          <button type="button" id="export-data" class="ghost-button">Export data</button>
+          <button type="button" id="import-data" class="ghost-button">Import data</button>
           <input type="file" id="import-file" accept="application/json,.json" hidden>
       </div>
     </div>

@@ -994,10 +994,12 @@ html[data-wallpaper-on] .modes button {
 
 #city-input,
 #zone-input,
+#place-input,
 #link-name,
 #link-url,
-#link-desc {
-  flex: 1;
+#link-desc,
+#ai-name,
+#ai-url {
   min-width: 0;
   height: 36px;
   padding: 0 10px;
@@ -1019,13 +1021,21 @@ html[data-wallpaper-on] .modes button {
   font: inherit;
 }
 
-#city-save,
-#zone-add-btn {
+/* The field beside a button takes the room left; in the link and AI forms the fields keep their height. */
+.city-row input {
+  flex: 1;
+}
+
+/* Buttons beside a field match its height; in the forms they are buttons, not text. */
+.city-row .ghost-button {
   height: 36px;
-  padding: 0 14px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  font-size: 13px;
+  margin: 0;
+  align-self: stretch;
+}
+
+.link-form-actions .ghost-button {
+  height: 36px;
+  margin: 0;
 }
 
 .text-button {
