@@ -308,12 +308,12 @@ const manageText = {
   zh: { linkUp: '上移', linkDown: '下移', manageOpen: '管理数据', tabLinks: '链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeLimit: '最多添加五个城市。', placeDuplicate: '已在列表中', placeRemove: '移除' }
 }
 const footerText = {
-  en: { pre: 'Vibe coded with', post: 'by Allards', title: 'View the README on GitHub' },
-  nl: { pre: 'Gemaakt met', post: 'door Allards', title: 'Bekijk de README op GitHub' },
-  de: { pre: 'Gebaut mit', post: 'von Allards', title: 'README auf GitHub ansehen' },
-  fr: { pre: 'Créé avec', post: 'par Allards', title: 'Voir le README sur GitHub' },
-  es: { pre: 'Hecho con', post: 'por Allards', title: 'Ver el README en GitHub' },
-  zh: { pre: '用', post: '由 Allards 制作', title: '在 GitHub 上查看 README' }
+  en: { pre: 'Vibe coded with', post: 'by Drallas', title: 'View the README on GitHub' },
+  nl: { pre: 'Gemaakt met', post: 'door Drallas', title: 'Bekijk de README op GitHub' },
+  de: { pre: 'Gebaut mit', post: 'von Drallas', title: 'README auf GitHub ansehen' },
+  fr: { pre: 'Créé avec', post: 'par Drallas', title: 'Voir le README sur GitHub' },
+  es: { pre: 'Hecho con', post: 'por Drallas', title: 'Ver el README en GitHub' },
+  zh: { pre: '用', post: '由 Drallas 制作', title: '在 GitHub 上查看 README' }
 }
 const dataText = {
   en: { langSection: 'Language', langAuto: 'Automatic', importTitle: 'Import data', importBody: 'Merging adds new links, places and time zones and keeps what you have. Replacing overwrites everything.', importMerge: 'Merge', importReplace: 'Replace', importCancel: 'Cancel', importSummary: 'Added: {added}. Already there: {dupes}. Skipped because of the limit: {skipped}.', exportData: 'Export data', importData: 'Import data', importInvalid: 'This file is not a Minimal-StartPage export.', },
