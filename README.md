@@ -113,11 +113,13 @@ There are three ways to use it, from easiest to most control. You do not need to
 
 Searches go straight to the search engine you chose. The page keeps your choices in your browser only, not on a server.
 
-Nothing leaves the page unless you switch on one of these:
+Nothing leaves the page unless you switch on one of these, or add your own AI shortcut:
 
 - **Weather** sends your IP address to [ipapi.co](https://ipapi.co) to find your city, or the city you choose to [Open-Meteo](https://open-meteo.com) to find its coordinates. The forecast itself comes from Open-Meteo. Only while weather is on.
 
 - **Extra places** on the weather send their name to [Open-Meteo](https://open-meteo.com) to find them.
+
+- **Custom AI shortcuts** load their icon from their own website (`/favicon.ico`) when the page opens, so that site sees your visit. Shortcuts without an icon show their name.
 
 - **Your IP address** is only looked up when you press the check button in IP details, or when the weather uses it. It asks [ipapi.co](https://ipapi.co).
 

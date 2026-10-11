@@ -12,11 +12,12 @@ No. The page keeps your choices in your browser. There is no sign-in and no serv
 
 ## What leaves the page?
 
-Only what you switch on:
+Only what you switch on, or add yourself:
 
 - Weather sends your IP address to ipapi.co, or the city you chose to Open-Meteo.
 - Extra weather places send their name to Open-Meteo.
 - The IP details button, and nothing else, asks ipapi.co for your address.
+- A custom AI shortcut loads its icon from its own site (`/favicon.ico`) when the page opens, so that site sees your visit.
 
 Searches go straight to the search engine you chose. The AI links open the AI service you click.
 
