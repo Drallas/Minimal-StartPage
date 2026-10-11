@@ -780,17 +780,19 @@ const choosePlace = async (index) => {
 const renderPlaceChips = () => {
   sortPlaces()
   const box = document.getElementById('forecast-places')
-  if (!weatherOn || !current || extraPlaces.length === 0) {
+  if (!weatherOn || !current) {
     box.replaceChildren()
     return
   }
-  box.replaceChildren(...[current.place.label, ...extraPlaces.map((place) => place.label)].map((label, index) => {
+  const chips = [current.place.label, ...extraPlaces.map((place) => place.label)].map((label, index) => {
     const chip = el('button', 'place-chip', label)
     chip.type = 'button'
     chip.setAttribute('aria-pressed', String(index === viewIndex))
     chip.addEventListener('click', () => choosePlace(index))
     return chip
-  }))
+  })
+  // How many of the extra places are in use, out of the five allowed.
+  box.replaceChildren(...chips, el('span', 'limit-count', `${extraPlaces.length}/${PLACE_LIMIT}`))
 }
 
 // Extra places in time-zone order, the same order as the time zones: earliest UTC offset first.
