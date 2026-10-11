@@ -1143,6 +1143,10 @@ html[data-quote-off] #quote {
 }
 
 /* Weather off: a faint icon in the top bar, so the feature is still there to find. */
+.weather button[hidden] {
+  display: none;
+}
+
 .weather button.idle {
   opacity: .45;
 }

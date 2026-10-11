@@ -673,6 +673,11 @@ const showIdle = (label = t.show) => {
   weatherButton.title = label
 }
 
+// Minimal shows nothing extra, so the faint weather icon goes too; any other page keeps it to be found.
+const syncWeatherButton = () => {
+  weatherButton.hidden = !weatherOn && matchPreset() === 'minimal'
+}
+
 const hideWeather = () => {
   showIdle()
   weatherButton.setAttribute('aria-expanded', 'false')
@@ -693,6 +698,7 @@ const setWeather = (on) => {
   weatherOn = on
   writeKey('weather', on ? 'on' : 'off')
   updateWeatherHint()
+  syncWeatherButton()
   if (on) {
     weatherButton.classList.remove('idle')
     weatherButton.removeAttribute('title')
@@ -974,6 +980,7 @@ const syncSettings = () => {
   settingsFields.preset.forEach((radio) => { radio.checked = radio.value === matchPreset() })
   settingsFields.cityClear.hidden = !city
   updateWeatherHint()
+  syncWeatherButton()
   settingsFields.cityMessage.textContent = ''
 }
 
