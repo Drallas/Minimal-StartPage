@@ -69,7 +69,7 @@ Everything is optional. The settings start with a choice of page:
 
 Each option can still be changed on its own. When your choices match neither page, the page shows **Personal**. A page never switches weather or your IP address on, since they send data.
 
-- **Search.** Type a query and press Enter, or click the magnifier. The icon on the left shows the search engine; click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.
+- **Search.** Type a query and press Enter, or click the magnifier. It opens in the same tab; under **Advanced** you can choose a new tab instead. The icon on the left shows the search engine; click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.
 
 - **Clock.** The time sits above the search bar, with the date underneath. Click the time to cycle through 24-hour, 12-hour (AM/PM) and full time with seconds. The colons blink, unless your system asks for reduced motion. Hover over the time to see your time zone and its UTC offset.
 
@@ -81,7 +81,7 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **Links.** The globe at the top left opens a Links window. It shows the permanent links as icons (Wikipedia, Google, Reuters, Apple, Microsoft, GitHub, Facebook, Instagram, X and Reddit) and your own links below, each with an optional description. **Edit links** takes you to where you add, order and edit them; you can keep up to 15. Hover the globe to see your own links. With **Own links** off, the globe is a plain Wikipedia link in your browser's language.
 
-- **AI shortcuts.** Shortcuts below the search bar. The default set is Claude, ChatGPT, Grok and Duck.ai. In the settings you can change them: up to five, in any order, or none at all.
+- **AI shortcuts.** Shortcuts below the search bar. In **Manage data** you tick the AI services you want: Claude, ChatGPT, Grok, Duck.ai, Lumo, Kagi and Meta AI. Up to five in total, your own shortcuts included, in any order, or none at all. Each shortcut shows its service icon, and the links open in a new tab by default (change this under Advanced).
 
 - **Weather.** Optional, off by default. Up to five extra places can be added, shown as chips in the forecast window. Typing a city suggests matches, so you can pick the right one. Hover over the temperature for a short preview of the next six hours; click it for the full forecast, with the next seven days and a link to Windy.
 
@@ -89,7 +89,7 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **Background.** The round button at the bottom right steps through the backgrounds: none, then each wallpaper you have switched on, and back again. The button at the bottom left changes the background colour in steps. In Data beheren, the Background tab shows the wallpapers and lets you switch each one on or off. The tint can be switched off, and the background adapts to light and dark mode.
 
-- **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages and the privacy note. **Advanced** opens the rest, grouped into Weather, Display, AI shortcuts, Background and Privacy. Under **Language** in the Advanced settings you can choose the page language; **Automatic** follows your browser. The **Help** button opens a guide to every feature. Press `Esc` to close.
+- **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages and the privacy note. **Advanced** opens the rest, grouped into Weather, Display, Search, AI shortcuts, Background and Privacy. Under **Language** in the Advanced settings you can choose the page language; **Automatic** follows your browser. The **Help** button opens a guide to every feature. Press `Esc` to close.
 
 - **Phones.** The bottom controls sit above the browser's bar, and the layout fits landscape phones too.
 

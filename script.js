@@ -421,7 +421,8 @@ for (const lang of Object.keys(text)) Object.assign(text[lang], weatherWording[l
 const helpText = {
   en: { title: 'Help', settings: 'Settings', close: 'Close', faq: 'Frequently asked questions', sections: [
     ['About this page', 'A quiet start page, built with Claude Code as an experiment in vibe coding. I wanted to see how far plain language gets you with a small web app. My opinion: a start page should be nearly empty; extras earn their place by being found, not by staring back at you.', 'https://github.com/Drallas/Minimal-StartPage'],
-    ['Search', 'Type and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.'],
+    ['Search', 'Type and press Enter, or click the magnifier. The icon on the left shows the search engine: click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered. Under Advanced you can also open search in a new tab.'],
+    ['AI shortcuts', 'Shortcuts below the search bar. In Manage data you tick the AI services you want, up to five; your own shortcuts count toward the same five. Each shortcut shows its service icon. AI links open in a new tab by default, and you can change that under Advanced.'],
     ['Clock', 'Hover over the time to see your time zone. Click the time to cycle through 24-hour, 12-hour and full time with seconds. When time zones are on, the clock icon above the time opens the zones you chose.'],
     ['Date', 'Hover over the date to see the ISO week and the day of the year. Click it to switch between the long form and DD-MM-YYYY.'],
     ['Links', 'The button at the top left opens your links. The icons at the top of that window are permanent. Hovering the button shows your own links. You can add up to 15 links of your own, each with an optional description, and remove or edit them. With Own links off, the button opens Wikipedia directly.'],
@@ -432,7 +433,8 @@ const helpText = {
   ] },
   nl: { title: 'Help', settings: 'Instellingen', close: 'Sluiten', faq: 'Veelgestelde vragen', sections: [
     ['Over deze pagina', 'Een rustige startpagina, gebouwd met Claude Code als experiment in vibe coding. Ik wilde zien hoe ver gewone taal je brengt met een kleine webapp. Mijn mening: een startpagina hoort bijna leeg te zijn; de extra’s verdienen hun plek doordat je ze vindt, niet doordat ze je aankijken.', 'https://github.com/Drallas/Minimal-StartPage'],
-    ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden.'],
+    ['Zoeken', 'Typ en druk op Enter, of klik op het vergrootglas. Het icoon links toont de zoekmachine: klik erop om te wisselen tussen DuckDuckGo (de standaard), Kagi, Brave en Google. Je keuze wordt onthouden. Onder Geavanceerd kun je zoeken ook in een nieuw tabblad laten openen.'],
+    ['AI-snelkoppelingen', 'Snelkoppelingen onder de zoekbalk. In Data beheren vink je de AI-diensten aan die je wilt, maximaal vijf; je eigen snelkoppelingen tellen mee in die vijf. Elke snelkoppeling toont het icoon van de dienst. AI-links openen standaard in een nieuw tabblad; dat kun je aanpassen onder Geavanceerd.'],
     ['Klok', 'Ga met de muis over de tijd om je tijdzone te zien. Klik op de tijd om te wisselen tussen 24 uur, 12 uur en volledige tijd met seconden. Staan de tijdzones aan, dan opent het klokje boven de tijd de zones die je koos.'],
     ['Datum', 'Ga met de muis over de datum om de ISO-week en de dag van het jaar te zien. Klik erop om te wisselen tussen de lange vorm en DD-MM-JJJJ.'],
     ['Links', 'De knop linksboven opent je links. De icoontjes bovenaan dat venster zijn vast. Met de muis over de knop zie je je eigen links. Je kunt er maximaal 15 toevoegen, elk met een optionele beschrijving, en ze bewerken of verwijderen. Staat Eigen links uit, dan opent de knop direct Wikipedia.'],
@@ -443,7 +445,8 @@ const helpText = {
   ] },
   de: { title: 'Hilfe', settings: 'Einstellungen', close: 'Schließen', faq: 'Häufige Fragen', sections: [
     ['Über diese Seite', 'Eine ruhige Startseite, mit Claude Code gebaut als Experiment in Vibe Coding. Ich wollte sehen, wie weit normale Sprache eine kleine Web-App bringt. Meine Meinung: Eine Startseite sollte fast leer sein; Extras verdienen ihren Platz, weil man sie findet, nicht weil sie einen anstarren.', 'https://github.com/Drallas/Minimal-StartPage'],
-    ['Suche', 'Tippe und drücke Enter, oder klicke auf die Lupe. Das Symbol links zeigt die Suchmaschine: Klick darauf, um zwischen DuckDuckGo (Standard), Kagi, Brave und Google zu wechseln. Deine Wahl wird gespeichert.'],
+    ['Suche', 'Tippe und drücke Enter, oder klicke auf die Lupe. Das Symbol links zeigt die Suchmaschine: Klick darauf, um zwischen DuckDuckGo (Standard), Kagi, Brave und Google zu wechseln. Deine Wahl wird gespeichert. Unter Erweitert kannst du die Suche auch in einem neuen Tab öffnen lassen.'],
+    ['KI-Verknüpfungen', 'Verknüpfungen unter dem Suchfeld. In Daten verwalten wählst du die KI-Dienste aus, bis zu fünf; eigene Verknüpfungen zählen zu diesen fünf. Jede Verknüpfung zeigt das Symbol ihres Dienstes. KI-Links öffnen standardmäßig in einem neuen Tab; das lässt sich unter Erweitert ändern.'],
     ['Uhr', 'Fahre mit der Maus über die Zeit, um deine Zeitzone zu sehen. Ein Klick auf die Zeit wechselt zwischen 24-Stunden-, 12-Stunden- und voller Zeit mit Sekunden. Sind Zeitzonen aktiv, öffnet die Kugel über der Zeit die gewählten Zonen.'],
     ['Datum', 'Fahre mit der Maus über das Datum, um die ISO-Woche und den Tag des Jahres zu sehen. Ein Klick wechselt zwischen langer Form und TT-MM-JJJJ.'],
     ['Links', 'Die Schaltfläche oben links öffnet deine Links. Die Symbole oben im Fenster sind fest. Mit der Maus über der Schaltfläche siehst du deine eigenen Links. Du kannst bis zu 15 eigene Links hinzufügen, mit optionaler Beschreibung, und sie bearbeiten oder entfernen. Ist Eigene Links aus, öffnet die Schaltfläche direkt Wikipedia.'],
@@ -454,7 +457,8 @@ const helpText = {
   ] },
   fr: { title: 'Aide', settings: 'Paramètres', close: 'Fermer', faq: 'Questions fréquentes', sections: [
     ['À propos de cette page', 'Une page d’accueil sobre, construite avec Claude Code dans le cadre d’une expérience de vibe coding. Je voulais voir jusqu’où le langage naturel mène une petite application web. Mon avis : une page d’accueil doit rester presque vide ; les extras méritent leur place parce qu’on les trouve, pas parce qu’ils s’imposent.', 'https://github.com/Drallas/Minimal-StartPage'],
-    ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé.'],
+    ['Recherche', 'Tapez et appuyez sur Entrée, ou cliquez sur la loupe. L’icône à gauche indique le moteur : cliquez dessus pour passer de DuckDuckGo (par défaut) à Kagi, Brave ou Google. Votre choix est mémorisé. Dans Avancé, vous pouvez aussi ouvrir la recherche dans un nouvel onglet.'],
+    ['Raccourcis IA', 'Raccourcis sous la barre de recherche. Dans Gérer les données, cochez les services IA voulus, cinq au maximum ; vos propres raccourcis comptent dans ces cinq. Chaque raccourci affiche l’icône de son service. Les liens IA s’ouvrent par défaut dans un nouvel onglet ; cela se règle dans Avancé.'],
     ['Horloge', 'Passez la souris sur l’heure pour voir votre fuseau. Cliquez sur l’heure pour passer de 24 heures à 12 heures, puis à l’heure complète avec les secondes. Si les fuseaux sont activés, l’icône d’horloge au-dessus de l’heure ouvre les fuseaux choisis.'],
     ['Date', 'Passez la souris sur la date pour voir la semaine ISO et le jour de l’année. Cliquez pour passer de la forme longue à JJ-MM-AAAA.'],
     ['Liens', 'Le bouton en haut à gauche ouvre vos liens. Les icônes en haut de cette fenêtre sont permanentes. Survoler le bouton affiche vos propres liens. Vous pouvez en ajouter jusqu’à 15, avec une description facultative, et les modifier ou les supprimer. Si Liens personnels est désactivé, le bouton ouvre directement Wikipédia.'],
@@ -465,7 +469,8 @@ const helpText = {
   ] },
   es: { title: 'Ayuda', settings: 'Ajustes', close: 'Cerrar', faq: 'Preguntas frecuentes', sections: [
     ['Sobre esta página', 'Una página de inicio tranquila, creada con Claude Code como experimento de vibe coding. Quería ver hasta dónde llega el lenguaje natural con una pequeña aplicación web. Mi opinión: una página de inicio debería estar casi vacía; los extras se ganan su sitio porque se encuentran, no porque te miren.', 'https://github.com/Drallas/Minimal-StartPage'],
-    ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda.'],
+    ['Búsqueda', 'Escribe y pulsa Intro, o haz clic en la lupa. El icono de la izquierda muestra el buscador: haz clic para cambiar entre DuckDuckGo (por defecto), Kagi, Brave y Google. Tu elección se recuerda. En Avanzado también puedes abrir la búsqueda en una pestaña nueva.'],
+    ['Accesos de IA', 'Accesos debajo de la barra de búsqueda. En Gestionar datos marca los servicios de IA que quieras, hasta cinco; tus accesos propios cuentan dentro de esos cinco. Cada acceso muestra el icono de su servicio. Los enlaces de IA se abren por defecto en una pestaña nueva; se cambia en Avanzado.'],
     ['Reloj', 'Pasa el ratón sobre la hora para ver tu zona horaria. Haz clic en la hora para cambiar entre 24 horas, 12 horas y hora completa con segundos. Si las zonas horarias están activas, el globo sobre la hora abre las zonas que elegiste.'],
     ['Fecha', 'Pasa el ratón sobre la fecha para ver la semana ISO y el día del año. Haz clic para cambiar entre la forma larga y DD-MM-AAAA.'],
     ['Enlaces', 'El botón de arriba a la izquierda abre tus enlaces. Los iconos de la parte superior de esa ventana son fijos. Al pasar el ratón sobre el botón ves tus propios enlaces. Puedes añadir hasta 15, cada uno con una descripción opcional, y editarlos o quitarlos. Con Enlaces propios desactivado, el botón abre Wikipedia directamente.'],
@@ -476,7 +481,8 @@ const helpText = {
   ] },
   zh: { title: '帮助', settings: '设置', close: '关闭', faq: '常见问题', sections: [
     ['关于此页', '一个安静的起始页，用 Claude Code 构建，是一次 vibe coding 的实验。我想看看自然语言能把一个小型网页应用带到多远。我的看法：起始页应该几乎是空的；附加功能应该靠被发现赢得位置，而不是一直盯着你。', 'https://github.com/Drallas/Minimal-StartPage'],
-    ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。'],
+    ['搜索', '输入后按 Enter，或点击放大镜。左侧图标显示搜索引擎：点击可在 DuckDuckGo（默认）、Kagi、Brave 和 Google 之间切换。你的选择会被记住。 在“高级”中，也可以让搜索在新标签页中打开。'],
+    ['AI 快捷方式', '搜索框下方的快捷方式。在“管理数据”中勾选想要的 AI 服务，最多五个；你自己添加的快捷方式也计入这五个。每个快捷方式显示其服务的图标。AI 链接默认在新标签页中打开，可在“高级”中更改。'],
     ['时钟', '把鼠标移到时间上可看到你的时区。点击时间可在 24 小时制、12 小时制和带秒的完整时间之间切换。开启时区后，时间上方的地球图标会打开你选择的时区。'],
     ['日期', '把鼠标移到日期上可看到 ISO 周数和一年中的第几天。点击可在长格式和 DD-MM-YYYY 之间切换。'],
     ['链接', '左上角的按钮打开你的链接。该窗口顶部的图标是固定的。把鼠标移到按钮上可看到你自己的链接。你最多可以添加 15 个链接，每个都可以有可选说明，并可编辑或删除。关闭“自定义链接”后，按钮会直接打开维基百科。'],
