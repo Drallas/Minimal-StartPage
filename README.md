@@ -103,7 +103,7 @@ Nothing leaves the page unless you switch on one of these:
 
 - **Your IP address** is only looked up when you press the check button in IP details, or when the weather uses it. It asks [ipapi.co](https://ipapi.co).
 
-In the Advanced settings, **Export data** saves your choices and your own links, AI shortcuts, time zones and places to one JSON file that you keep yourself. **Import data** loads that file on another device. Nothing is sent anywhere when you export or import.
+In the Advanced settings, **Export data** saves your choices and your own links, AI shortcuts, time zones and places to one JSON file that you keep yourself. **Import data** loads that file on another device. You choose **Merge** (the default: adds what is new and keeps what you have, with links matched by address) or **Replace** (overwrites everything). Nothing is sent anywhere when you export or import.
 
 For more on this, see the [questions and answers](docs/FAQ.md).
 

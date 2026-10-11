@@ -69,3 +69,9 @@ Yes, once the files are on your computer. Only searches, the weather, the IP det
 ## Can I change the permanent links or the search engines?
 
 Yes, if you are comfortable editing text files. The [README](../README.md#customise) says where.
+
+---
+
+## What happens when I import a file?
+
+You choose. **Merge** adds the links, AI shortcuts, time zones and places that are new, and keeps what you already have. A link is the same link when its address matches, so a different title does not make a copy. **Replace** overwrites everything with the file. Cancel changes nothing.

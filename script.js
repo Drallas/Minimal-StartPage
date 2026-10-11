@@ -309,12 +309,12 @@ const footerText = {
   zh: { pre: '用', post: '由 Allards 制作', title: '在 GitHub 上查看 README' }
 }
 const dataText = {
-  en: { exportData: 'Export data', importData: 'Import data', importInvalid: 'This file is not a Minimal-StartPage export.', importConfirm: 'Replace your current settings and data with the ones in this file?' },
-  nl: { exportData: 'Gegevens exporteren', importData: 'Gegevens importeren', importInvalid: 'Dit bestand is geen export van Minimal-StartPage.', importConfirm: 'Je huidige instellingen en gegevens vervangen door die in dit bestand?' },
-  de: { exportData: 'Daten exportieren', importData: 'Daten importieren', importInvalid: 'Diese Datei ist kein Export von Minimal-StartPage.', importConfirm: 'Deine aktuellen Einstellungen und Daten durch die in dieser Datei ersetzen?' },
-  fr: { exportData: 'Exporter les données', importData: 'Importer les données', importInvalid: 'Ce fichier n’est pas un export de Minimal-StartPage.', importConfirm: 'Remplacer vos réglages et données actuels par ceux de ce fichier ?' },
-  es: { exportData: 'Exportar datos', importData: 'Importar datos', importInvalid: 'Este archivo no es una exportación de Minimal-StartPage.', importConfirm: '¿Sustituir tus ajustes y datos actuales por los de este archivo?' },
-  zh: { exportData: '导出数据', importData: '导入数据', importInvalid: '此文件不是 Minimal-StartPage 的导出文件。', importConfirm: '用此文件中的设置和数据替换当前的设置和数据？' }
+  en: { importTitle: 'Import data', importBody: 'Merging adds new links, places and time zones and keeps what you have. Replacing overwrites everything.', importMerge: 'Merge', importReplace: 'Replace', importCancel: 'Cancel', importSummary: 'Added: {added}. Already there: {dupes}. Skipped because of the limit: {skipped}.', exportData: 'Export data', importData: 'Import data', importInvalid: 'This file is not a Minimal-StartPage export.', },
+  nl: { importTitle: 'Gegevens importeren', importBody: 'Samenvoegen voegt nieuwe links, plaatsen en tijdzones toe en laat wat je al hebt staan. Vervangen overschrijft alles.', importMerge: 'Samenvoegen', importReplace: 'Vervangen', importCancel: 'Annuleren', importSummary: 'Toegevoegd: {added}. Stond er al: {dupes}. Overgeslagen door de limiet: {skipped}.', exportData: 'Gegevens exporteren', importData: 'Gegevens importeren', importInvalid: 'Dit bestand is geen export van Minimal-StartPage.', },
+  de: { importTitle: 'Daten importieren', importBody: 'Zusammenführen ergänzt neue Links, Orte und Zeitzonen und behält, was du hast. Ersetzen überschreibt alles.', importMerge: 'Zusammenführen', importReplace: 'Ersetzen', importCancel: 'Abbrechen', importSummary: 'Hinzugefügt: {added}. Schon vorhanden: {dupes}. Wegen des Limits übersprungen: {skipped}.', exportData: 'Daten exportieren', importData: 'Daten importieren', importInvalid: 'Diese Datei ist kein Export von Minimal-StartPage.', },
+  fr: { importTitle: 'Importer les données', importBody: 'Fusionner ajoute les nouveaux liens, lieux et fuseaux et garde ce que vous avez. Remplacer écrase tout.', importMerge: 'Fusionner', importReplace: 'Remplacer', importCancel: 'Annuler', importSummary: 'Ajoutés : {added}. Déjà présents : {dupes}. Ignorés à cause de la limite : {skipped}.', exportData: 'Exporter les données', importData: 'Importer les données', importInvalid: 'Ce fichier n’est pas un export de Minimal-StartPage.', },
+  es: { importTitle: 'Importar datos', importBody: 'Combinar añade los nuevos enlaces, lugares y zonas horarias y conserva lo que ya tienes. Reemplazar sobrescribe todo.', importMerge: 'Combinar', importReplace: 'Reemplazar', importCancel: 'Cancelar', importSummary: 'Añadidos: {added}. Ya estaban: {dupes}. Omitidos por el límite: {skipped}.', exportData: 'Exportar datos', importData: 'Importar datos', importInvalid: 'Este archivo no es una exportación de Minimal-StartPage.', },
+  zh: { importTitle: '导入数据', importBody: '合并会添加新的链接、地点和时区，并保留现有内容。替换会覆盖全部内容。', importMerge: '合并', importReplace: '替换', importCancel: '取消', importSummary: '已添加：{added}。已存在：{dupes}。因上限跳过：{skipped}。', exportData: '导出数据', importData: '导入数据', importInvalid: '此文件不是 Minimal-StartPage 的导出文件。', }
 }
 const tintCycleText = {
   en: { tintCycle: 'Change colour' }, nl: { tintCycle: 'Kleur wisselen' }, de: { tintCycle: 'Farbe wechseln' },
@@ -963,6 +963,11 @@ const applySettingsText = () => {
   settingsFields.resetSettings.textContent = t.resetSettings
   document.getElementById('export-data').textContent = t.exportData
   document.getElementById('import-data').textContent = t.importData
+  document.getElementById('import-title').textContent = t.importTitle
+  document.getElementById('import-body').textContent = t.importBody
+  document.getElementById('import-merge').textContent = t.importMerge
+  document.getElementById('import-replace').textContent = t.importReplace
+  document.getElementById('import-cancel').textContent = t.importCancel
   settingsFields.resetData.textContent = t.resetData
   document.getElementById('settings-close').setAttribute('aria-label', t.close)
   document.getElementById('forecast-close').setAttribute('aria-label', t.close)
@@ -1055,7 +1060,7 @@ document.getElementById('settings-close').addEventListener('click', closeSetting
 settings.addEventListener('click', (e) => { if (e.target === settings) closeSettings() })
 
 document.addEventListener('keydown', (e) => {
-  const open = [helpWindow, ipWindow, linksWindow, zonesWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
+  const open = [importWindow, helpWindow, ipWindow, linksWindow, zonesWindow, forecastDialog, manageWindow, settings].find((d) => !d.hidden) || null
   if (!open) {
     if (e.key === '?' && !isTyping(e.target) && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault()
@@ -1068,6 +1073,7 @@ document.addEventListener('keydown', (e) => {
     else if (open === ipWindow) closeIpWindow()
     else if (open === linksWindow) closeLinks()
     else if (open === zonesWindow) closeZones()
+    else if (open === importWindow) closeImport()
     else if (open === forecastDialog) closeForecast()
     else if (open === manageWindow) closeManage()
     else if (!advancedBlock.hidden) setAdvanced(false)
@@ -1249,6 +1255,79 @@ document.getElementById('export-data').addEventListener('click', (e) => {
   setTimeout(() => URL.revokeObjectURL(url), 40000)
 })
 const importFile = document.getElementById('import-file')
+const importWindow = document.getElementById('import-window')
+let pendingImport = null
+// Two links are the same link when host and path match; case, a leading www. and a trailing slash do not count.
+// The query stays, so deep links with different parameters remain separate.
+const normalizeUrl = (url) => {
+  try {
+    const u = new URL(url)
+    return `${u.hostname.toLowerCase().replace(/^www\./, '')}${u.pathname.replace(/\/+$/, '')}${u.search}`
+  } catch {
+    return String(url).trim().toLowerCase()
+  }
+}
+// Merge keeps what is there and adds what is new. A duplicate is skipped, so the existing entry (and its title) stays.
+const mergeImport = (payload) => {
+  const result = { added: 0, dupes: 0, skipped: 0 }
+  const data = payload.data || {}
+  const listOf = (value) => (Array.isArray(value) ? value : [])
+
+  const linkKeys = new Set(links.map((link) => normalizeUrl(link.url)))
+  listOf(data.links).forEach((link) => {
+    if (!isValidLink(link)) return
+    const key = normalizeUrl(link.url)
+    if (linkKeys.has(key)) { result.dupes++; return }
+    if (links.length >= LINK_LIMIT) { result.skipped++; return }
+    links = [...links, { title: link.title, url: link.url, description: typeof link.description === 'string' ? link.description : '' }]
+    linkKeys.add(key)
+    result.added++
+  })
+  saveLinks()
+
+  const aiKeys = new Set(askAiList.map((item) => normalizeUrl(item.url)))
+  listOf(data.askAiList).forEach((item) => {
+    if (!item || typeof item.title !== 'string' || !safeUrl(item.url)) return
+    const key = normalizeUrl(item.url)
+    if (aiKeys.has(key)) { result.dupes++; return }
+    if (askAiList.length >= ASK_AI_LIMIT) { result.skipped++; return }
+    askAiList = [...askAiList, { key: '', title: item.title, url: item.url }]
+    aiKeys.add(key)
+    result.added++
+  })
+  saveAskAi()
+
+  listOf(data.zones).forEach((zone) => {
+    if (typeof zone !== 'string' || !zone) return
+    if (zones.includes(zone)) { result.dupes++; return }
+    if (zones.length >= 5) { result.skipped++; return }
+    zones = [...zones, zone]
+    result.added++
+  })
+  saveZones()
+
+  listOf(data.weatherPlaces).forEach((place) => {
+    if (!place || typeof place.label !== 'string') return
+    if (extraPlaces.some((p) => p.label === place.label)) { result.dupes++; return }
+    if (extraPlaces.length >= PLACE_LIMIT) { result.skipped++; return }
+    extraPlaces = [...extraPlaces, place]
+    result.added++
+  })
+  savePlaces()
+
+  // Preferences stay as they are; the import only fills what is not set here yet.
+  Object.entries(payload.settings || {}).forEach(([key, value]) => {
+    if (EXPORT_SETTINGS.includes(key) && typeof value === 'string' && localStorage.getItem(key) === null) writeKey(key, value)
+  })
+  return result
+}
+const closeImport = () => { importWindow.hidden = true; pendingImport = null }
+const replaceImport = (payload) => {
+  clearKeys([...EXPORT_SETTINGS, ...EXPORT_DATA])
+  Object.entries(payload.settings).forEach(([key, value]) => { if (EXPORT_SETTINGS.includes(key) && typeof value === 'string') writeKey(key, value) })
+  Object.entries(payload.data).forEach(([key, value]) => { if (EXPORT_DATA.includes(key)) writeKey(key, JSON.stringify(value)) })
+  location.reload()
+}
 document.getElementById('import-data').addEventListener('click', () => importFile.click())
 importFile.addEventListener('change', async () => {
   const file = importFile.files[0]
@@ -1260,12 +1339,20 @@ importFile.addEventListener('change', async () => {
     alert(t.importInvalid)
     return
   }
-  if (!confirm(t.importConfirm)) return
-  clearKeys([...EXPORT_SETTINGS, ...EXPORT_DATA])
-  Object.entries(payload.settings).forEach(([key, value]) => { if (EXPORT_SETTINGS.includes(key) && typeof value === 'string') writeKey(key, value) })
-  Object.entries(payload.data).forEach(([key, value]) => { if (EXPORT_DATA.includes(key)) writeKey(key, JSON.stringify(value)) })
+  pendingImport = payload
+  importWindow.hidden = false
+  importWindow.querySelector('.settings-panel').focus()
+})
+document.getElementById('import-merge').addEventListener('click', () => {
+  const result = mergeImport(pendingImport)
+  const summary = t.importSummary.replace('{added}', result.added).replace('{dupes}', result.dupes).replace('{skipped}', result.skipped)
+  closeImport()
+  alert(summary)
   location.reload()
 })
+document.getElementById('import-replace').addEventListener('click', () => replaceImport(pendingImport))
+document.getElementById('import-cancel').addEventListener('click', closeImport)
+importWindow.addEventListener('click', (e) => { if (e.target === importWindow) closeImport() })
 
 // Older visits may still have a stored greeting name; remove it.
 try { localStorage.removeItem('greetName') } catch {}

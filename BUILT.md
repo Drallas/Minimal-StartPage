@@ -15,3 +15,4 @@ What is in the page now. The open items are in [PLANNED.md](PLANNED.md), and the
 - Pages: Minimal and Standard presets in the settings, plus Personal when the choices match neither. They change only the display options; weather and the IP address are never changed by a preset.
 - Privacy: everything is off by default. Only weather and the IP address send data, and a one-line note sits under the IP-address location option in the advanced settings.
 - Phones: the bottom controls sit above the browser's bar; the colour and wallpaper buttons are adjusted for touch.
+- Import: a choice between Merge (the default; new items added, links matched by address, existing items kept) and Replace. The import reports how many were added, were already there, or were skipped by a limit.
