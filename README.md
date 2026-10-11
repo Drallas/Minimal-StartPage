@@ -18,23 +18,54 @@
 <table>
   <tr>
     <td align="center">
-      <img src="assets/screenshot_wallpaper.webp" width="800" alt="Wallpaper mode"/>
+      <img src="assets/screenshot_light.webp" width="800" alt="Standard, light theme"/>
       <br/>
-      <sub><b>Wallpaper mode</b></sub>
+      <sub><b>Standard page, light theme</b></sub>
     </td>
   </tr>
+</table>
+
+<table>
   <tr>
-    <td align="center">
-      <img src="assets/screenshot_light.png" width="800" alt="Light theme"/>
-      <br/>
-      <sub><b>Light theme</b></sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="assets/screenshot_dark.png" width="800" alt="Dark theme"/>
+    <td align="center" width="20%">
+      <img src="assets/screenshot_dark.webp" width="150" alt="Dark theme"/>
       <br/>
       <sub><b>Dark theme</b></sub>
+    </td>
+    <td align="center" width="20%">
+      <img src="assets/screenshot_dunes.webp" width="150" alt="Pink dunes"/>
+      <br/>
+      <sub><b>Pink dunes</b></sub>
+    </td>
+    <td align="center" width="20%">
+      <img src="assets/screenshot_mountains.webp" width="150" alt="Mountain haze"/>
+      <br/>
+      <sub><b>Mountain haze</b></sub>
+    </td>
+    <td align="center" width="20%">
+      <img src="assets/screenshot_tint_blue.webp" width="150" alt="Blue tint"/>
+      <br/>
+      <sub><b>Blue tint</b></sub>
+    </td>
+    <td align="center" width="20%">
+      <img src="assets/screenshot_tint_warm.webp" width="150" alt="Warm tint, dark theme"/>
+      <br/>
+      <sub><b>Warm tint, dark theme</b></sub>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/screenshot_phone.webp" width="260" alt="Standard page on a phone"/>
+      <br/>
+      <sub><b>On a phone</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/screenshot_help.webp" width="360" alt="The Help window"/>
+      <br/>
+      <sub><b>The Help window</b></sub>
     </td>
   </tr>
 </table>
