@@ -53,7 +53,7 @@ searchForm.addEventListener('submit', (e) => {
 })
 
 // Clock: click the time to cycle through 24-hour, 12-hour (AM/PM) and full time (with ticking seconds
-// and blinking colons). Hover shows the time zone.
+// and still colons). Hover shows the time zone.
 const clockModes = ['24', '12', 'full']
 let clockMode = '24'
 try {
