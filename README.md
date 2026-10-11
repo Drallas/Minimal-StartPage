@@ -71,7 +71,7 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **Search.** Type a query and press Enter, or click the magnifier. It opens in the same tab; under **Advanced** you can choose a new tab instead. The icon on the left shows the search engine; click it to switch between DuckDuckGo (the default), Kagi, Brave and Google. Your choice is remembered.
 
-- **Clock.** The time sits above the search bar, with the date underneath. Click the time to cycle through 24-hour, 12-hour (AM/PM) and full time with seconds. Hover over the time to see your time zone and its UTC offset.
+- **Clock.** The time sits above the search bar, with the date underneath. Click the time to cycle through 24-hour, 12-hour (AM/PM) and full time with seconds, or choose the format under **Advanced**. The colons stay still. Hover over the time to see your time zone and its UTC offset.
 
 - **Time zones.** Optional. A small clock icon above the time opens up to five extra time zones, each with its UTC offset and a day difference when it is not today. **Edit time zones** in that window is where you change them.
 
@@ -89,7 +89,7 @@ Each option can still be changed on its own. When your choices match neither pag
 
 - **Background.** The round button at the bottom right steps through the backgrounds: none, then each wallpaper you have switched on, and back again. The button at the bottom left changes the background colour in steps. In Data beheren, the Background tab shows the wallpapers and lets you switch each one on or off. The tint can be switched off, and the background adapts to light and dark mode.
 
-- **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages and the privacy note. **Advanced** opens the rest, grouped into Weather, Display, Search, AI shortcuts, Background and Privacy. Under **Language** in the Advanced settings you can choose the page language; **Automatic** follows your browser. The **Help** button opens a guide to every feature. Press `Esc` to close.
+- **Settings and help.** Open the settings with the gear at the top right, or press `?`. The basic view has the pages and the privacy note. **Advanced** opens the rest, grouped into Weather, Show, Time format, Date, Search, AI shortcuts, Background and Language. Under **Language** in the Advanced settings you can choose the page language; **Automatic** follows your browser. The **Help** button opens a guide to every feature. Press `Esc` to close.
 
 - **Phones.** The bottom controls sit above the browser's bar, and the layout fits landscape phones too.
 
