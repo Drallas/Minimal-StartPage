@@ -27,30 +27,20 @@
 
 <table>
   <tr>
-    <td align="center" width="20%">
-      <img src="assets/screenshot_dark.webp" width="150" alt="Dark theme"/>
-      <br/>
-      <sub><b>Dark theme</b></sub>
-    </td>
-    <td align="center" width="20%">
+    <td align="center" width="33%">
       <img src="assets/screenshot_dunes.webp" width="150" alt="Pink dunes"/>
       <br/>
       <sub><b>Pink dunes</b></sub>
     </td>
-    <td align="center" width="20%">
+    <td align="center" width="33%">
       <img src="assets/screenshot_mountains.webp" width="150" alt="Mountain haze"/>
       <br/>
       <sub><b>Mountain haze</b></sub>
     </td>
-    <td align="center" width="20%">
+    <td align="center" width="33%">
       <img src="assets/screenshot_tint_blue.webp" width="150" alt="Blue tint"/>
       <br/>
       <sub><b>Blue tint</b></sub>
-    </td>
-    <td align="center" width="20%">
-      <img src="assets/screenshot_tint_warm.webp" width="150" alt="Warm tint, dark theme"/>
-      <br/>
-      <sub><b>Warm tint, dark theme</b></sub>
     </td>
   </tr>
 </table>
