@@ -119,7 +119,7 @@ Nothing leaves the page unless you switch on one of these, or add your own AI sh
 
 - **Extra places** on the weather send their name to [Open-Meteo](https://open-meteo.com) to find them.
 
-- **Custom AI shortcuts** load their icon from the [DuckDuckGo](https://duckduckgo.com) icon service when the page opens, which sees the site's name. Shortcuts without an icon show their name.
+- **Custom AI shortcuts** load their icon from their own website (`/favicon.ico`) when the page opens, so that site sees your visit. Shortcuts without an icon show their name.
 
 - **Your IP address** is only looked up when you press the check button in IP details, or when the weather uses it. It asks [ipapi.co](https://ipapi.co).
 
