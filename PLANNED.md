@@ -4,7 +4,7 @@ What is still to be built. The finished work is in [BUILT.md](BUILT.md); the rea
 
 ## Wallpapers
 
-- Five curated wallpapers, checked against the text colours in light and dark mode. Waiting for the images. Until then the list in Data beheren holds three gradient placeholders; replacing one means giving it an image.
+- Check the four wallpapers against the text colours in light and dark mode, and decide on the photo credits.
 - Uploading a visitor's own photo: not decided. See [docs/Wallpapers.md](docs/Wallpapers.md).
 
 ## More permanent links

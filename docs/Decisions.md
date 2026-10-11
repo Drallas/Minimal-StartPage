@@ -15,6 +15,6 @@
 - Dialogs open with the panel focused, not a button, so nothing looks selected.
 - The background button is a cycle, not an on/off switch: none, then each wallpaper that is switched on. The first press from the default photo goes to none, so the plain page is always one press away.
 - The colour is a button on every screen, with the same steps as the phone. The slider is hidden everywhere, so one control does one thing.
-- Wallpapers are a list in Data beheren, with a switch each. The three placeholders are off by default, so visitors see only the photo until one is switched on or given an image.
+- Wallpapers are a list in Data beheren, with a switch each. The photo and the three new ones are on by default; a switch turns one off for good.
 - The quote sits in the page column, so it always comes after the AI shortcuts on a phone and never over them.
 - The README stays short and airy; the questions people ask go to docs/FAQ.md, which the README links to.

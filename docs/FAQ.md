@@ -34,9 +34,11 @@ Press the round button at the bottom right until it shows **No background**. You
 
 ---
 
-## Why are there placeholders for the wallpapers?
+## Which wallpapers are there, and how do I add one?
 
-The real photos are not added yet. The three placeholders are gradients, so the button and the list already work. To use a photo later, give a wallpaper an image in `script.js`; the rest stays the same.
+There are four: the misty forest that the page started with, a snow tree, pink dunes and mountains in the haze. Each press of the round button at the bottom right goes to the next one that is switched on, and turns off again after the last. Switch one off in Data beheren, under Background.
+
+To add a photo, put three sizes (800, 1280 and 2000 pixels wide) and a small thumbnail in `assets`, and add an entry to the `wallpapers` list in `script.js`.
 
 ---
 

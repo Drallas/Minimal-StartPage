@@ -373,12 +373,12 @@ const tintText = {
   zh: { tintToggle: '背景色调（滑块）' }
 }
 const bgTitleText = {
-  en: { wallNote: 'Each press of the background button goes to the next one that is on.', wallNext: 'Next background', wallNone: 'No background', wallPhoto: 'Misty forest', wallPlaceholder: 'Placeholder', wallOn: 'On', tabWallpaper: 'Background' },
-  nl: { wallNote: 'Elke druk op de achtergrondknop gaat naar de volgende die aan staat.', wallNext: 'Volgende achtergrond', wallNone: 'Geen achtergrond', wallPhoto: 'Mistig bos', wallPlaceholder: 'Placeholder', wallOn: 'Aan', tabWallpaper: 'Achtergrond' },
-  de: { wallNote: 'Jeder Druck auf die Hintergrund-Schaltfläche wechselt zum nächsten eingeschalteten Hintergrund.', wallNext: 'Nächster Hintergrund', wallNone: 'Kein Hintergrund', wallPhoto: 'Nebliger Wald', wallPlaceholder: 'Platzhalter', wallOn: 'An', tabWallpaper: 'Hintergrund' },
-  fr: { wallNote: 'Chaque pression sur le bouton du fond passe au fond suivant activé.', wallNext: 'Fond suivant', wallNone: 'Aucun fond', wallPhoto: 'Forêt brumeuse', wallPlaceholder: 'Espace réservé', wallOn: 'Activé', tabWallpaper: 'Fond' },
-  es: { wallNote: 'Cada pulsación del botón de fondo pasa al siguiente fondo activado.', wallNext: 'Siguiente fondo', wallNone: 'Sin fondo', wallPhoto: 'Bosque brumoso', wallPlaceholder: 'Marcador', wallOn: 'Activado', tabWallpaper: 'Fondo' },
-  zh: { wallNote: '每次点击背景按钮，会切换到下一个已开启的背景。', wallNext: '下一个背景', wallNone: '无背景', wallPhoto: '雾中的森林', wallPlaceholder: '占位', wallOn: '开启', tabWallpaper: '背景' }
+  en: { wallSnow: 'Snow tree', wallDunes: 'Pink dunes', wallMountains: 'Mountain haze', wallNote: 'Each press of the background button goes to the next one that is on.', wallNext: 'Next background', wallNone: 'No background', wallPhoto: 'Misty forest', wallOn: 'On', tabWallpaper: 'Background' },
+  nl: { wallSnow: 'Sneeuwboom', wallDunes: 'Roze duinen', wallMountains: 'Bergen in de mist', wallNote: 'Elke druk op de achtergrondknop gaat naar de volgende die aan staat.', wallNext: 'Volgende achtergrond', wallNone: 'Geen achtergrond', wallPhoto: 'Mistig bos', wallOn: 'Aan', tabWallpaper: 'Achtergrond' },
+  de: { wallSnow: 'Schneebaum', wallDunes: 'Rosa Dünen', wallMountains: 'Berge im Dunst', wallNote: 'Jeder Druck auf die Hintergrund-Schaltfläche wechselt zum nächsten eingeschalteten Hintergrund.', wallNext: 'Nächster Hintergrund', wallNone: 'Kein Hintergrund', wallPhoto: 'Nebliger Wald', wallOn: 'An', tabWallpaper: 'Hintergrund' },
+  fr: { wallSnow: 'Arbre sous la neige', wallDunes: 'Dunes roses', wallMountains: 'Montagnes dans la brume', wallNote: 'Chaque pression sur le bouton du fond passe au fond suivant activé.', wallNext: 'Fond suivant', wallNone: 'Aucun fond', wallPhoto: 'Forêt brumeuse', wallOn: 'Activé', tabWallpaper: 'Fond' },
+  es: { wallSnow: 'Árbol en la nieve', wallDunes: 'Dunas rosas', wallMountains: 'Montañas en la bruma', wallNote: 'Cada pulsación del botón de fondo pasa al siguiente fondo activado.', wallNext: 'Siguiente fondo', wallNone: 'Sin fondo', wallPhoto: 'Bosque brumoso', wallOn: 'Activado', tabWallpaper: 'Fondo' },
+  zh: { wallSnow: '雪中的树', wallDunes: '粉色沙丘', wallMountains: '薄雾中的群山', wallNote: '每次点击背景按钮，会切换到下一个已开启的背景。', wallNext: '下一个背景', wallNone: '无背景', wallPhoto: '雾中的森林', wallOn: '开启', tabWallpaper: '背景' }
 }
 const pageText = {
   en: { secPage: 'Page', presetMinimal: 'Minimal', presetStandard: 'Standard', presetCustom: 'Personal' },
@@ -1876,38 +1876,35 @@ window.onload = () => {
 }
 
 // Background: a cycle of wallpapers. The button steps through 'none' and every wallpaper switched on in
-// Data beheren. The placeholders are gradients until real images exist: give one a thumb and src to use a photo.
+// Data beheren.
 const wallpaper = document.getElementById('wallpaper')
 const wallpaperToggle = document.getElementById('wallpaper-toggle')
 const wallpaperThumb = wallpaperToggle.querySelector('span')
 // Local copies in three sizes, so a phone does not download the largest one.
-const wallpaperSizes = [
-  { width: 800, url: 'assets/wallpaper-800.jpg' },
-  { width: 1280, url: 'assets/wallpaper-1280.jpg' },
-  { width: 2000, url: 'assets/wallpaper-2000.jpg' },
-]
+const wallpaperWidths = [800, 1280, 2000]
 const wantedWidth = window.innerWidth * (window.devicePixelRatio || 1)
-const wallpaperUrl = (wallpaperSizes.find((s) => s.width >= wantedWidth) || wallpaperSizes[wallpaperSizes.length - 1]).url
+const wallpaperWidth = wallpaperWidths.find((w) => w >= wantedWidth) || wallpaperWidths[wallpaperWidths.length - 1]
+// Each photo is a base name: assets/<base>-800.jpg, -1280.jpg and -2000.jpg, plus assets/<base>-thumb.jpg.
 const wallpapers = [
-  { id: 'photo', src: wallpaperUrl, thumb: 'assets/wallpaper-thumb.jpg', on: true },
-  { id: 'placeholder-1', src: null, css: 'linear-gradient(160deg, #dfe4e7, #9aa6ad)', on: false },
-  { id: 'placeholder-2', src: null, css: 'linear-gradient(200deg, #ece6da, #b9ad97)', on: false },
-  { id: 'placeholder-3', src: null, css: 'linear-gradient(135deg, #34424a, #11181c)', on: false },
-]
+  { id: 'photo', base: 'wallpaper', name: 'wallPhoto', on: true },
+  { id: 'snow', base: 'wallpaper-snow', name: 'wallSnow', on: true },
+  { id: 'dunes', base: 'wallpaper-dunes', name: 'wallDunes', on: true },
+  { id: 'mountains', base: 'wallpaper-mountains', name: 'wallMountains', on: true },
+].map((item) => ({ ...item, src: `assets/${item.base}-${wallpaperWidth}.jpg`, thumb: `assets/${item.base}-thumb.jpg` }))
 // Switched on or off in Data beheren; a wallpaper without a saved switch keeps its default.
 let wallpaperSwitches = {}
 try { wallpaperSwitches = JSON.parse(localStorage.getItem('wallpaperEnabled') || '{}') || {} } catch {}
 const isOn = (item) => (item.id in wallpaperSwitches ? Boolean(wallpaperSwitches[item.id]) : item.on)
 const findWallpaper = (id) => wallpapers.find((item) => item.id === id) || null
-const labelOf = (item) => (item.src ? t.wallPhoto : `${t.wallPlaceholder} ${wallpapers.indexOf(item)}`)
-const paintOf = (item) => (item.src ? `url("${item.src}")` : item.css)
+const labelOf = (item) => t[item.name]
+const paintOf = (item) => `url("${item.src}")`
 let wallpaperChoice = 'photo'
 let wallpaperOn = true
 
 const applyWallpaper = (choice) => {
   const item = findWallpaper(choice)
   wallpaper.style.backgroundImage = item ? paintOf(item) : ''
-  wallpaperThumb.style.backgroundImage = item ? (item.thumb ? `url("${item.thumb}")` : item.css) : ''
+  wallpaperThumb.style.backgroundImage = item ? `url("${item.thumb}")` : ''
   root.toggleAttribute('data-wallpaper-on', Boolean(item))
   wallpaperToggle.setAttribute('aria-pressed', String(Boolean(item)))
   wallpaperToggle.title = t.wallNext
@@ -1943,7 +1940,7 @@ const renderWallpapers = () => {
   wallpaperList.replaceChildren(...wallpapers.map((item) => {
     const row = el('div', 'wallpaper-row')
     const swatch = el('span', 'wallpaper-swatch')
-    swatch.style.backgroundImage = item.thumb ? `url("${item.thumb}")` : item.css
+    swatch.style.backgroundImage = `url("${item.thumb}")`
     const box = Object.assign(document.createElement('input'), { type: 'checkbox', checked: isOn(item) })
     box.dataset.wallpaper = item.id
     const switchLabel = el('label', 'wallpaper-switch')
