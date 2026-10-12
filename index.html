@@ -165,19 +165,13 @@
             </select>
           </label>
         </section>
-        <section class="adv-group danger">
+        <section class="adv-group reset-group">
           <p class="location-title" id="sec-reset">Reset</p>
-          <div class="reset-item">
-            <p class="reset-note" id="reset-settings-note">Sets all settings back to their defaults; your data stays.</p>
-            <button type="button" id="reset-settings" class="ghost-button">Reset settings</button>
-          </div>
-        </section>
-        <section class="adv-group danger">
-          <p class="location-title" id="sec-data">Data</p>
-          <div class="reset-item">
-            <p class="reset-note" id="reset-data-note">Removes your own links, AI shortcuts, time zones, city and extra places.</p>
-            <button type="button" id="reset-backup" class="ghost-button">Manage data</button>
-            <button type="button" id="reset-data" class="ghost-button">Delete my data</button>
+          <p class="reset-intro" id="reset-intro"></p>
+          <button type="button" id="reset-backup" class="ghost-button">Manage data</button>
+          <div class="reset-boxes">
+            <div class="danger-box"><button type="button" id="reset-settings" class="ghost-button">Reset settings</button></div>
+            <div class="danger-box"><button type="button" id="reset-data" class="ghost-button">Delete my data</button></div>
           </div>
         </section>
       </div>
