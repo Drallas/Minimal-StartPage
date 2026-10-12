@@ -1,6 +1,6 @@
 # Built
 
-What is in the page now. The open items are in [PLANNED.md](PLANNED.md), and the reasoning behind choices is in [docs/Decisions.md](docs/Decisions.md).
+What is in the page now. The open items and the reasoning behind the choices are in [Development](Development.md). What changed per version is in the [changelog](changelog/README.md).
 
 - Clock: 24-hour, 12-hour and full time with seconds, chosen in Advanced or by clicking the time; the colons stay still. The time in the time zones follows the same choice.
 - Date: long or short, chosen in Advanced or by clicking the date. The short date's order follows the browser unless a choice is made (day-month-year, month-day-year or year-month-day). Minimal leaves the date out; Advanced can show it again.
