@@ -1974,6 +1974,33 @@ html[data-quote-off] #quote {
   margin-top: 6px;
 }
 
+/* Limits: green while there is room, blue with the word "full" at the limit. The add buttons turn blue too. */
+.limit-count::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: middle;
+}
+
+.limit-count.has-room {
+  color: #3fb573;
+}
+
+.limit-count.is-full {
+  color: #5b9cf6;
+}
+
+button.is-full:disabled {
+  border-color: #5b9cf6;
+  color: #5b9cf6;
+  opacity: 1;
+  cursor: default;
+}
+
 /* Resetting throws data away: a red heading and red boxes around each reset button. */
 .adv-group.reset-group {
   grid-column: 1 / -1;
