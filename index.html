@@ -191,6 +191,7 @@
         <button type="button" role="tab" class="manage-tab-button" data-tab="ai" id="tab-ai" aria-controls="section-ai">AI</button>
         <button type="button" role="tab" class="manage-tab-button" data-tab="weather" id="tab-weather" aria-controls="section-weather">Weather</button>
         <button type="button" role="tab" class="manage-tab-button" data-tab="wallpapers" id="tab-wallpapers" aria-controls="section-wallpapers">Background</button>
+        <button type="button" role="tab" class="manage-tab-button" data-tab="backup" id="tab-backup" aria-controls="section-backup">Backup</button>
       </div>
       <section class="manage-section" data-tab="links" id="section-links" role="tabpanel" aria-labelledby="tab-links" tabindex="0" hidden>
       <div class="links-list" id="links-list"></div>
@@ -256,11 +257,14 @@
         <p class="manage-note" id="wallpaper-note"></p>
         <div id="wallpaper-list"></div>
       </section>
-      <div class="manage-io">
+      <section class="manage-section" data-tab="backup" id="section-backup" role="tabpanel" aria-labelledby="tab-backup" tabindex="0" hidden>
+        <p class="manage-note" id="backup-note"></p>
+        <div class="manage-io">
           <button type="button" id="export-data" class="ghost-button">Export data</button>
           <button type="button" id="import-data" class="ghost-button">Import data</button>
           <input type="file" id="import-file" accept="application/json,.json" hidden>
-      </div>
+        </div>
+      </section>
     </div>
   </div>
       <div class="settings" id="import-window" hidden>
