@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4. The date is DD-MM-YYYY.
-const APP_VERSION = '1.4'
+const APP_VERSION = '1.4.1'
 const APP_UPDATED = '12-10-2026'
 const searchForm = document.getElementById('searchform')
 const searchBox = document.getElementById('search')
@@ -849,8 +849,7 @@ const renderPlaceChips = () => {
     return chip
   })
   // How many of the extra places are in use, out of the five allowed.
-  const count = limitText(extraPlaces.length, PLACE_LIMIT)
-  box.replaceChildren(...chips, ...(count.full ? [el('span', 'limit-count is-full', count.text)] : []))
+  box.replaceChildren(...chips)
 }
 
 // Extra places in time-zone order, the same order as the time zones: earliest UTC offset first.

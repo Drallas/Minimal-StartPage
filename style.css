@@ -1215,12 +1215,6 @@ html[data-quote-off] #quote {
 }
 
 /* The count of extra places, after the chips in the forecast. */
-.forecast-places .limit-count {
-  align-self: center;
-  font-size: 12px;
-  color: var(--color-fg-2);
-}
-
 .forecast-foot .ghost-button {
   flex: none;
   margin: 0;
@@ -1977,21 +1971,6 @@ html[data-quote-off] #quote {
 /* Action buttons use greys only: a darker grey when something can be done, a lighter, dimmed grey when not.
    Only text buttons with a verb (Save, Add) are "action" buttons; arrows and icons stay as before.
    The counters keep a soft colour: green while there is room, blue with the word "full" at the limit. */
-.limit-count::before {
-  content: '';
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  vertical-align: middle;
-}
-
-
-.limit-count.is-full {
-  color: #7d9dc4;
-}
 
 /* At the limit the add field is greyed out and says why, centred in the field. */
 input.limit-full:disabled {
