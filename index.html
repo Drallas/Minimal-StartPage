@@ -193,7 +193,6 @@
         <button type="button" role="tab" class="manage-tab-button" data-tab="wallpapers" id="tab-wallpapers" aria-controls="section-wallpapers">Background</button>
       </div>
       <section class="manage-section" data-tab="links" id="section-links" role="tabpanel" aria-labelledby="tab-links" tabindex="0" hidden>
-      <p class="manage-note limit-count" id="links-count"></p>
       <div class="links-list" id="links-list"></div>
       <form class="link-form" id="link-form">
         <p class="link-form-title" id="link-form-title">Add link</p>
@@ -212,10 +211,9 @@
       </section>
       <section class="manage-section" data-tab="zones" id="section-zones" role="tabpanel" aria-labelledby="tab-zones" tabindex="0" hidden>
       <p class="zones-local" id="zones-local"></p>
-      <p class="manage-note limit-count" id="zones-count"></p>
       <div id="zones-list"></div>
       <form class="city-form" id="zone-form">
-        <label for="zone-input" id="zone-label">Add a time zone (up to five)</label>
+        <label for="zone-input" id="zone-label">Add a time zone</label>
         <div class="city-row">
           <input type="text" id="zone-input" list="zone-options" autocomplete="off">
           <button type="submit" id="zone-add-btn" class="ghost-button action">Add</button>
@@ -225,7 +223,6 @@
       </form>
       </section>
       <section class="manage-section" data-tab="ai" id="section-ai" role="tabpanel" aria-labelledby="tab-ai" tabindex="0" hidden>
-      <p class="manage-note limit-count" id="ai-count"></p>
       <ul class="ai-list" id="ai-list"></ul>
       <form class="link-form" id="ai-form">
         <p class="link-form-title" id="ai-form-title">Add shortcut</p>
@@ -244,7 +241,6 @@
       </section>
       <section class="manage-section" data-tab="weather" id="section-weather" role="tabpanel" aria-labelledby="tab-weather" tabindex="0" hidden>
         <p class="manage-note" id="weather-own"></p>
-        <p class="manage-note limit-count" id="place-count"></p>
         <ul class="place-list" id="place-list"></ul>
         <form class="city-form" id="place-form">
           <label for="place-input" id="lbl-place">Add a city</label>
