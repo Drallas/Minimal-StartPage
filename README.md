@@ -59,6 +59,22 @@
 
 ---
 
+## Screenshots
+
+The start page, with its clock, search and wallpaper:
+
+![The start page](docs/images/start-page.png)
+
+Advanced settings, grouped. The reset options sit at the bottom, in red, with a backup step first:
+
+![Advanced settings](docs/images/settings-advanced.png)
+
+Manage data: your links, time zones, AI shortcuts and weather places, each with a count. A green count means there is room for one more; blue with "full" means the limit is reached:
+
+![Manage data](docs/images/manage-data.png)
+
+Help explains every option in the page itself, in six languages.
+
 ## Features
 
 Everything is optional. The settings start with a choice of page:
