@@ -1974,6 +1974,14 @@ html[data-quote-off] #quote {
   margin-top: 6px;
 }
 
+/* Version and last update, bottom right of the settings panel. */
+.app-version {
+  margin: 20px 0 0;
+  text-align: right;
+  font-size: 11px;
+  color: var(--color-fg-2);
+}
+
 /* Long labels wrap inside the button instead of spilling over its border. */
 .adv-group .ghost-button {
   height: auto;
