@@ -2013,6 +2013,7 @@ button.action:disabled {
 .reset-boxes {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
   margin-top: 8px;
 }
@@ -2025,10 +2026,11 @@ button.action:disabled {
 }
 
 .danger-box .ghost-button {
-  min-height: 28px;
-  padding: 4px 10px;
-  font-size: 12px;
+  height: 32px;
+  min-height: 0;
+  padding: 0 14px;
   border: none;
+  white-space: nowrap;
 }
 
 /* Version and last update, bottom right of the settings panel. */
