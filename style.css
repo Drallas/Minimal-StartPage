@@ -2024,6 +2024,38 @@ button.action:disabled {
   white-space: nowrap;
 }
 
+/* The first-visit hint: a small card under the top-right icons, gone after one click. */
+.first-hint {
+  position: fixed;
+  top: 52px;
+  right: 16px;
+  z-index: 50;
+  max-width: 260px;
+  padding: 12px 36px 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-panel, #faf8f4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--color-fg-1);
+}
+
+.first-hint[hidden] {
+  display: none;
+}
+
+.first-hint-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  border: none;
+  background: none;
+  color: var(--color-fg-2);
+  font-size: 16px;
+  cursor: pointer;
+}
+
 /* Version and last update, bottom right of the settings panel. */
 .app-version {
   margin: 20px 0 0;
