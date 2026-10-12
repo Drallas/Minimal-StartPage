@@ -47,6 +47,10 @@ Every option, in groups. Weather, Show, Time format, Date, Search, AI shortcuts,
 
 ## Manage data
 
-Your links, time zones, AI shortcuts and weather places. Each list shows its add form; at the limit that form says so, for example "5 of 5 · full", and the add button is greyed out.
+Your links, time zones, AI shortcuts, weather places and backgrounds, each on its own tab. Each list shows its add form; at the limit that form says so in the field, for example "5 of 5 · full", and the add button is greyed out.
 
 ![Manage data](images/manage-data.png)
+
+The last tab, Backup, holds export and import. Export saves your settings and data to a file on your computer; import loads such a file and either merges it with what you have or replaces everything.
+
+![Backup tab](images/manage-backup.png)
