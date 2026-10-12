@@ -6,6 +6,7 @@ The version shown at the bottom of the settings is the release number. Changes b
 
 | Version | What it was about | File |
 | --- | --- | --- |
+| 1.5 | Quick start with a red arrow to the search engine, first-visit hint, reset buttons, changelog link | [v1.5.md](v1.5.md) |
 | 1.4 | Limits in the add field, button states, backup tab, reset section, version in the app, hint | [v1.4.md](v1.4.md) |
 | 1.3 | Clock and date in Advanced, Minimal without date, phone layout, icons | [v1.3.md](v1.3.md) |
 | 1.2 | AI shortcuts as a checklist, new-tab options, limits, phone layout | [v1.2.md](v1.2.md) |
