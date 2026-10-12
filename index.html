@@ -77,13 +77,6 @@
       </div>
       <div class="settings-actions">
         <button type="button" id="advanced-toggle" aria-expanded="false" aria-controls="advanced">Advanced</button>
-        <div class="reset-row" id="reset-row" hidden>
-          <button type="button" id="reset-settings" class="ghost-button">Reset settings</button>
-          <div class="reset-item">
-            <p class="reset-note" id="reset-data-note">Removes your own links, AI shortcuts, time zones, city and extra places.</p>
-            <button type="button" id="reset-data" class="ghost-button">Delete my data</button>
-          </div>
-        </div>
         <button type="button" id="manage-open">Manage</button>
         <button type="button" id="ip-open">IP details</button>
       </div>
@@ -171,6 +164,20 @@
               <option value="zh">中文</option>
             </select>
           </label>
+        </section>
+        <section class="adv-group">
+          <p class="location-title" id="sec-reset">Reset</p>
+          <div class="reset-item">
+            <p class="reset-note" id="reset-settings-note">Sets all settings back to their defaults; your data stays.</p>
+            <button type="button" id="reset-settings" class="ghost-button">Reset settings</button>
+          </div>
+        </section>
+        <section class="adv-group">
+          <p class="location-title" id="sec-data">Data</p>
+          <div class="reset-item">
+            <p class="reset-note" id="reset-data-note">Removes your own links, AI shortcuts, time zones, city and extra places.</p>
+            <button type="button" id="reset-data" class="ghost-button">Delete my data</button>
+          </div>
         </section>
       </div>
     </div>
