@@ -1890,6 +1890,11 @@ html[data-quote-off] #quote {
   margin-top: 16px;
 }
 
+/* A select in a setting row never grows wider than the row. */
+.setting select {
+  max-width: 100%;
+}
+
 /* The grid below would otherwise override the hidden attribute. */
 .advanced[hidden],
 .presets[hidden] {
@@ -1957,6 +1962,25 @@ html[data-quote-off] #quote {
   gap: 0 12px;
 }
 
+/* The data reset has a short line above its button, so the button says only what it does. */
+.reset-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 360px;
+}
+
+.reset-note {
+  margin: 16px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-fg-2);
+}
+
+.reset-item .ghost-button {
+  margin-top: 6px;
+}
+
 .settings-actions .reset-row[hidden] {
   display: none;
 }
@@ -1970,10 +1994,25 @@ html[data-quote-off] #quote {
   text-align: left;
 }
 
-/* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
+/* Phones: the advanced settings use two columns for the short checkbox groups, and a select group takes the full width.
+   The help stays in one column. */
 @media (max-width: 600px) {
   .advanced {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 16px;
+  }
+
+  .adv-group:has(select) {
+    grid-column: 1 / -1;
+  }
+
+  .setting select {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .setting {
+    min-width: 0;
   }
 
   .settings-panel.is-wide,

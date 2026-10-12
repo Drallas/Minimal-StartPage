@@ -79,7 +79,10 @@
         <button type="button" id="advanced-toggle" aria-expanded="false" aria-controls="advanced">Advanced</button>
         <div class="reset-row" id="reset-row" hidden>
           <button type="button" id="reset-settings" class="ghost-button">Reset settings</button>
-          <button type="button" id="reset-data" class="ghost-button">Delete my links, AI shortcuts and places</button>
+          <div class="reset-item">
+            <p class="reset-note" id="reset-data-note">Removes your own links, AI shortcuts, time zones, city and extra places.</p>
+            <button type="button" id="reset-data" class="ghost-button">Delete my data</button>
+          </div>
         </div>
         <button type="button" id="manage-open">Manage</button>
         <button type="button" id="ip-open">IP details</button>
@@ -129,13 +132,13 @@
           <label class="setting"><input type="checkbox" id="set-date"> <span id="lbl-date-on">Show the date</span></label>
           <label class="setting"><span id="lbl-date-style">Show</span>
             <select id="set-date-style" class="lang-select">
-              <option value="long">Long, e.g. Sunday 11 October</option>
-              <option value="short">Short, in numbers</option>
+              <option value="long">Long</option>
+              <option value="short">Short</option>
             </select>
           </label>
-          <label class="setting"><span id="lbl-date-order">Order of the short date</span>
+          <label class="setting"><span id="lbl-date-order">Order</span>
             <select id="set-date-order" class="lang-select">
-              <option value="auto">Automatic, from your browser</option>
+              <option value="auto">Automatic</option>
               <option value="dmy">Day-month-year</option>
               <option value="mdy">Month-day-year</option>
               <option value="ymd">Year-month-day</option>

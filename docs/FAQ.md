@@ -57,7 +57,7 @@ The window shows the next six hours and the next seven days. For the full pictur
 
 ## Where did my links and places go?
 
-They are only in this browser. Export your data first from the Advanced settings, and import it on another device or after a reset. "Reset settings" brings back the defaults, and "Delete my links, AI shortcuts and places" asks first before it removes your own.
+They are only in this browser. Export your data first from the Advanced settings, and import it on another device or after a reset. "Reset settings" brings back the defaults, and "Delete my data" asks first before it removes your own.
 
 ---
 
