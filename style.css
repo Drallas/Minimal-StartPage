@@ -1974,8 +1974,8 @@ html[data-quote-off] #quote {
   margin-top: 6px;
 }
 
-/* Limits and add buttons share one meaning: green when something can still be added, grey when it cannot.
-   Only text buttons with a verb (Save, Add) are "action" buttons; arrows and icons stay grey as before. */
+/* Limits and action buttons use greys only: a darker grey when something can be done, a lighter, dimmed grey when not.
+   Only text buttons with a verb (Save, Add) are "action" buttons; arrows and icons stay as before. The only colour is a faint green dot on a counter with room. */
 .limit-count::before {
   content: '';
   display: inline-block;
@@ -1987,8 +1987,9 @@ html[data-quote-off] #quote {
   vertical-align: middle;
 }
 
-.limit-count.has-room {
-  color: #3fb573;
+.limit-count.has-room::before {
+  background: #3fb573;
+  opacity: 0.55;
 }
 
 .limit-count.is-full {
@@ -1996,8 +1997,8 @@ html[data-quote-off] #quote {
 }
 
 button.action:not(:disabled) {
-  border-color: #3fb573;
-  color: #3fb573;
+  border-color: var(--color-fg-2);
+  color: var(--color-fg-1);
 }
 
 button.action:disabled {
