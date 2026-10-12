@@ -1,0 +1,46 @@
+name: Set app version from release
+
+# When a release is published, the release tag becomes the app version (1.4 for v1.4),
+# and the date of the release becomes the "last updated" date in the app.
+# Minor numbers (1.4.1, 1.4.2 …) are still set by hand in script.js between releases.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  set-version:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.release.tag_name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Write the release version and date into script.js
+        run: |
+          VERSION="${TAG#v}"
+          case "$VERSION" in
+            ""|*[!0-9.]*) echo "Unexpected tag: $TAG"; exit 1 ;;
+          esac
+          UPDATED=$(TZ=Europe/Amsterdam date +%d-%m-%Y)
+          sed -i -E "s/^const APP_VERSION = '[^']*'/const APP_VERSION = '${VERSION}'/" script.js
+          sed -i -E "s/^const APP_UPDATED = '[^']*'/const APP_UPDATED = '${UPDATED}'/" script.js
+          grep -q "^const APP_VERSION = '${VERSION}'" script.js || { echo "Could not set APP_VERSION"; exit 1; }
+          grep -q "^const APP_UPDATED = '${UPDATED}'" script.js || { echo "Could not set APP_UPDATED"; exit 1; }
+
+      - name: Commit and push to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add script.js
+          if git diff --cached --quiet; then
+            echo "Version already set to ${TAG}"
+            exit 0
+          fi
+          git commit -m "Set app version to ${TAG}"
+          git push origin HEAD:main
