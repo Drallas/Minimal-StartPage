@@ -30,6 +30,7 @@ The one place for how the page is built, why it is built that way, what is still
 ## Settings
 
 - Settings save straight away; there is no save button.
+- A Quick start window (basic settings, Help and the first-visit card) shows the search engine icon with a red arrow, the AI links and the three pages. Its search bar picture is made by `tests/screenshots.js`, so the arrow must be placed again if the search bar changes size.
 - A first-visit hint points to the gear and the ? key. It shows only while nothing is stored yet, and goes for good on the first click, the first ? or when settings open.
 - The IP address is a button in the basic settings (IP details), not a setting: it is looked up only on request or when the weather needs it.
 - Page presets: Minimal and Standard, chosen in the settings. They switch display options only; the IP address is never changed by a preset. Weather is part of the presets only as a switch-off: no preset turns it on, since weather sends the IP address.
