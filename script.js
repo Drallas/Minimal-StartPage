@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4. The date is DD-MM-YYYY.
-const APP_VERSION = '1.3.13'
+const APP_VERSION = '1.3.14'
 const APP_UPDATED = '12-10-2026'
 const searchForm = document.getElementById('searchform')
 const searchBox = document.getElementById('search')
