@@ -2208,8 +2208,24 @@ button.action:disabled {
     gap: 4px 16px;
   }
 
-  .adv-group:has(select) {
+  .adv-group:has(select),
+  .adv-group:has(#city-form) {
     grid-column: 1 / -1;
+  }
+
+  /* The place field takes the row; Save stays beside it. */
+  .city-row {
+    width: 100%;
+  }
+
+  .city-row input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+  }
+
+  .city-row .ghost-button {
+    flex: none;
   }
 
   .setting select {
