@@ -1,12 +1,12 @@
 # Changelog
 
-What changed in the page, per version. Each file lists the highlights, what was fixed and what was still open at the time. The releases themselves, with their downloads, are on [GitHub](https://github.com/Drallas/Minimal-StartPage/releases).
+What changed in the app, per version: what the visitor sees and what the page does. Changes to the repository, the README and the documentation are left out. The releases themselves, with their downloads, are on [GitHub](https://github.com/Drallas/Minimal-StartPage/releases).
 
 The version shown at the bottom of the settings is the release number. Changes between two releases get a third number (1.4.1, 1.4.2 …), and those are listed in the file of the release they belong to.
 
 | Version | What it was about | File |
 | --- | --- | --- |
-| 1.4 | Backup tab, version and date in the app, reset section, action states, limits in the add field | [v1.4.md](v1.4.md) |
+| 1.4 | Limits in the add field, button states, backup tab, reset section, version in the app, hint | [v1.4.md](v1.4.md) |
 | 1.3 | Clock and date in Advanced, Minimal without date, phone layout, icons | [v1.3.md](v1.3.md) |
 | 1.2 | AI shortcuts as a checklist, new-tab options, limits, phone layout | [v1.2.md](v1.2.md) |
 | 1.1 | Standard as default, import that merges, Links window, language choice | [v1.1.md](v1.1.md) |
