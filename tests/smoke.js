@@ -64,8 +64,14 @@ const emptyForecast = {
   await page.waitForSelector('#search');
 
   console.log('Settings');
+  check(await page.isVisible('#first-hint'), 'the first-visit hint shows on a first visit');
   await openSettings();
   check(await isOpen('#settings'), 'settings open from the gear button');
+  check(!(await page.isVisible('#first-hint')), 'the hint is gone once settings are opened');
+  await page.reload();
+  await page.waitForSelector('#search');
+  check(!(await page.isVisible('#first-hint')), 'the hint does not come back after a reload');
+  await openSettings();
   await page.click('#settings-close');
   check(!(await isOpen('#settings')), 'settings close with the close button');
 
