@@ -8,28 +8,36 @@ The page has three kinds of background: a picture, or no picture with a soft col
 
 <table>
   <tr>
-    <td align="center" width="25%">
-      <img src="../assets/screenshot_light.webp" width="170" alt="Misty forest"/>
+    <td align="center" width="50%">
+      <img src="../assets/screenshot_light.webp" width="340" alt="Misty forest"/>
       <br/>
       <sub><b>Misty forest</b></sub>
     </td>
-    <td align="center" width="25%">
-      <img src="../assets/screenshot_dunes.webp" width="170" alt="Pink dunes"/>
+    <td align="center" width="50%">
+      <img src="../assets/screenshot_dunes.webp" width="340" alt="Pink dunes"/>
       <br/>
       <sub><b>Pink dunes</b></sub>
     </td>
-    <td align="center" width="25%">
-      <img src="../assets/screenshot_mountains.webp" width="170" alt="Mountain haze"/>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="../assets/screenshot_mountains.webp" width="340" alt="Mountain haze"/>
       <br/>
       <sub><b>Mountain haze</b></sub>
     </td>
-    <td align="center" width="25%">
-      <img src="../assets/screenshot_tint_blue.webp" width="170" alt="No image, blue tint"/>
+    <td align="center" width="50%">
+      <img src="../assets/screenshot_tint_blue.webp" width="340" alt="No image, blue tint"/>
       <br/>
       <sub><b>No image, blue tint</b></sub>
     </td>
   </tr>
 </table>
+
+## Basic settings
+
+The first view: the three pages (Minimal, Standard and Personal), the Advanced link, Manage data and IP details. The reset options are not here; they sit at the bottom of Advanced.
+
+![Basic settings](images/settings-basic.png)
 
 ## Advanced settings
 
