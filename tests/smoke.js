@@ -75,6 +75,25 @@ const emptyForecast = {
   await page.click('#settings-close');
   check(!(await isOpen('#settings')), 'settings close with the close button');
 
+  console.log('Quick start');
+  await page.evaluate(() => { localStorage.clear(); localStorage.setItem('lang', 'en'); });
+  await page.reload();
+  await page.waitForSelector('#search');
+  await page.click('#first-hint-quick');
+  check(await isOpen('#quickstart'), 'the quick start opens from the first-visit card');
+  check(!(await page.isVisible('#first-hint')), 'the first-visit card is gone once the quick start opens');
+  await page.click('#quickstart-done');
+  check(!(await isOpen('#quickstart')), 'the quick start closes with its OK button');
+  await page.reload();
+  await page.waitForSelector('#search');
+  check(!(await page.isVisible('#first-hint')), 'the card stays away after the quick start was read');
+  await openSettings();
+  await page.click('#quickstart-open');
+  check(await isOpen('#quickstart'), 'the quick start opens from the basic settings');
+  await page.keyboard.press('Escape');
+  check(!(await isOpen('#quickstart')), 'Escape closes the quick start');
+  await page.evaluate(() => { document.getElementById('settings').hidden = true; });
+
   console.log('Export and import');
   await page.evaluate(() => localStorage.setItem('links', JSON.stringify([
     { title: 'Example', url: 'https://example.com/', description: '' },

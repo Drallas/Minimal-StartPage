@@ -30,6 +30,13 @@ const exampleLinks = [
   await page.reload();
   await page.waitForTimeout(400);
 
+  // The search bar as the quick start shows it: the search form with 8 px around it, saved in assets/.
+  const bar = await page.locator('#searchform').boundingBox();
+  await page.screenshot({
+    path: path.resolve(__dirname, '..', 'assets', 'quickstart-search.png'),
+    clip: { x: bar.x - 8, y: bar.y - 8, width: bar.width + 16, height: bar.height + 16 },
+  });
+
   const panel = (id) => page.locator(`#${id} .settings-panel`);
 
   await page.click('#settings-button');

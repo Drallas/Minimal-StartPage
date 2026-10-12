@@ -64,6 +64,7 @@
   </div>
   <div class="first-hint" id="first-hint" role="status" hidden>
     <span id="first-hint-text"></span>
+    <a href="#" id="first-hint-quick" class="first-hint-link"></a>
     <button type="button" id="first-hint-close" class="first-hint-close" aria-label="Close">×</button>
   </div>
   <div class="settings" id="settings" hidden>
@@ -84,6 +85,7 @@
         <button type="button" id="manage-open">Manage</button>
         <button type="button" id="ip-open">IP details</button>
       </div>
+      <p class="quick-row"><a href="#" id="quickstart-open" class="quick-link"></a></p>
       <div class="advanced" id="advanced" hidden>
         <section class="adv-group">
           <p class="location-title" id="sec-weather">Weather</p>
@@ -180,6 +182,37 @@
         </section>
       </div>
       <p class="app-version"><span id="app-version"></span> · <a id="changelog-link" href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md" target="_blank" rel="noopener"></a></p>
+    </div>
+  </div>
+
+  <div class="settings" id="quickstart" hidden>
+    <div class="settings-panel quickstart-panel" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="quickstart-title">
+      <div class="settings-head">
+        <h2 id="quickstart-title">Quick start</h2>
+        <button type="button" id="quickstart-close" class="settings-close" aria-label="Close">×</button>
+      </div>
+      <h3 class="quick-head" id="quickstart-engine-head">Change search engine</h3>
+      <div class="quick-shot">
+        <div class="quick-shot-img">
+          <img src="assets/quickstart-search.png" width="376" height="64" alt="">
+          <svg class="quick-arrow" viewBox="0 0 376 64" aria-hidden="true">
+            <line x1="88" y1="-20" x2="50" y2="18"/>
+            <path d="M58.9 16.4 L50 18 L51.6 9.1"/>
+            <rect x="66" y="-50" width="78" height="22" rx="11" class="quick-tag"/>
+            <text x="105" y="-35" text-anchor="middle" id="quickstart-click"></text>
+          </svg>
+        </div>
+      </div>
+      <p class="quick-text" id="quickstart-engine-text"></p>
+      <h3 class="quick-head" id="quickstart-more-head">More from your page</h3>
+      <div class="quick-cards">
+        <div class="quick-card"><b id="quickstart-ai-head"></b><span id="quickstart-ai-text"></span></div>
+        <div class="quick-card"><b id="quickstart-page-head"></b><span id="quickstart-page-text"></span></div>
+      </div>
+      <div class="quick-foot">
+        <span class="quick-note" id="quickstart-note"></span>
+        <button type="button" id="quickstart-done" class="ghost-button">OK</button>
+      </div>
     </div>
   </div>
 
@@ -338,6 +371,7 @@
         <h2 id="help-title">Help</h2>
         <button type="button" id="help-close" class="settings-close" aria-label="Close">×</button>
       </div>
+      <p class="quick-row"><a href="#" id="help-quickstart" class="quick-link"></a></p>
       <div class="help-body" id="help-body"></div>
     </div>
   </div>
