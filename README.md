@@ -15,6 +15,10 @@
 
 ---
 
+## Look and feel
+
+The page is meant to stay quiet. Behind the search is a picture of misty trees, pink dunes or mountain haze, or no picture at all, just a soft colour. Each press on the round button bottom right moves to the next picture, and the button bottom left changes the background colour. Nothing else moves, so the picture is the only thing that changes.
+
 <table>
   <tr>
     <td align="center">
@@ -32,30 +36,9 @@
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td align="center" width="25%">
-      <img src="assets/screenshot_light.webp" width="170" alt="Misty forest"/>
-      <br/>
-      <sub><b>Misty forest</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="assets/screenshot_dunes.webp" width="170" alt="Pink dunes"/>
-      <br/>
-      <sub><b>Pink dunes</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="assets/screenshot_mountains.webp" width="170" alt="Mountain haze"/>
-      <br/>
-      <sub><b>Mountain haze</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="assets/screenshot_tint_blue.webp" width="170" alt="No image, blue tint"/>
-      <br/>
-      <sub><b>No image, blue tint</b></sub>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <a href="docs/Screenshots.md"><strong>More screenshots, and the backgrounds in detail</strong></a>
+</p>
 
 ---
 

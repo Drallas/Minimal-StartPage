@@ -1989,9 +1989,18 @@ html[data-quote-off] #quote {
 }
 
 
-.limit-count.is-full,
-.city-msg.limit-full {
+.limit-count.is-full {
   color: #7d9dc4;
+}
+
+/* At the limit the add field is greyed out and says why, centred in the field. */
+input.limit-full:disabled {
+  text-align: center;
+}
+
+input.limit-full:disabled::placeholder {
+  color: #7d9dc4;
+  opacity: 1;
 }
 
 button.action:not(:disabled) {

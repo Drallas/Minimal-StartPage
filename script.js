@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4. The date is DD-MM-YYYY.
-const APP_VERSION = '1.3.11'
+const APP_VERSION = '1.3.13'
 const APP_UPDATED = '12-10-2026'
 const searchForm = document.getElementById('searchform')
 const searchBox = document.getElementById('search')
@@ -612,16 +612,16 @@ let current = null
 // Extra places next to the own one: five at most, shown as chips in the forecast window.
 const PLACE_LIMIT = 5
 const ZONE_LIMIT = 5
-// At the limit, the add form says so with the count, e.g. "5 of 5 · full". Below the limit nothing is shown.
+// At the limit, the add field is greyed out and says so in its own middle, e.g. "5 of 5 · full", shown as its placeholder.
 const limitText = (count, max) => {
   const full = count >= max
   return { full, text: full ? t.limitFull.replaceAll('{n}', max) : '' }
 }
-const limitCount = (id, count, max) => {
-  const el = document.getElementById(id)
+const limitCount = (fieldId, count, max) => {
+  const field = document.getElementById(fieldId)
   const { full, text } = limitText(count, max)
-  if (full) { el.textContent = text; el.classList.add('limit-full') }
-  else if (el.classList.contains('limit-full')) { el.textContent = ''; el.classList.remove('limit-full') }
+  field.placeholder = text
+  field.classList.toggle('limit-full', full)
 }
 let extraPlaces = []
 try {
@@ -864,7 +864,7 @@ const renderPlaces = () => {
   sortPlaces()
   document.getElementById('weather-own').textContent = `${t.placeOwn}: ${current ? current.place.label : t.placeNone}`
   const full = extraPlaces.length >= PLACE_LIMIT
-  limitCount('place-msg', extraPlaces.length, PLACE_LIMIT)
+  limitCount('place-input', extraPlaces.length, PLACE_LIMIT)
   document.getElementById('place-input').disabled = full
   document.getElementById('place-add').disabled = full
   document.getElementById('place-list').replaceChildren(...extraPlaces.map((place, index) => {
@@ -1585,7 +1585,7 @@ const renderZones = () => {
   const rows = zoneRows(now, true)
   zonesList.replaceChildren(...(rows.length ? rows : [el('p', 'zones-empty', t.zonesEmpty)]))
   const full = zones.length >= ZONE_LIMIT
-  limitCount('zone-msg', zones.length, ZONE_LIMIT)
+  limitCount('zone-input', zones.length, ZONE_LIMIT)
   renderPreview()
   zoneInput.disabled = full
   zoneAddButton.disabled = full
@@ -1863,7 +1863,7 @@ const renderLinks = () => {
   linksOwnBox.replaceChildren(...(ownRows.length ? ownRows : [el('p', 'zones-empty', t.linksEmpty)]))
 
   const full = links.length >= LINK_LIMIT && editing === null
-  limitCount('link-msg', links.length, LINK_LIMIT)
+  limitCount('link-name', links.length, LINK_LIMIT)
   linkName.disabled = full
   linkUrl.disabled = full
   linkDesc.disabled = full
@@ -2015,7 +2015,7 @@ const aiButton = (label, glyph, onClick, disabled = false) => {
 // At the limit the add form is greyed out and says why; editing an existing shortcut stays possible.
 const syncAiLimit = () => {
   const full = askAiList.length >= ASK_AI_LIMIT && aiEditing === null
-  limitCount('ai-msg', askAiList.length, ASK_AI_LIMIT)
+  limitCount('ai-name', askAiList.length, ASK_AI_LIMIT)
   aiName.disabled = full
   aiUrl.disabled = full
   renderAiCatalog()
