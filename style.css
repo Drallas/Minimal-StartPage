@@ -1974,6 +1974,25 @@ html[data-quote-off] #quote {
   margin-top: 6px;
 }
 
+/* Resetting throws data away, so both reset groups get a red frame and a red heading. */
+.adv-group.danger {
+  padding: 12px 14px 14px;
+  border: 1px solid #e5484d;
+  border-radius: 8px;
+}
+
+.adv-group.danger > .location-title {
+  color: #e5484d;
+}
+
+/* Version and last update, bottom right of the settings panel. */
+.app-version {
+  margin: 20px 0 0;
+  text-align: right;
+  font-size: 11px;
+  color: var(--color-fg-2);
+}
+
 /* Long labels wrap inside the button instead of spilling over its border. */
 .adv-group .ghost-button {
   height: auto;
