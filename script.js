@@ -1,6 +1,6 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4. The date is DD-MM-YYYY.
-const APP_VERSION = '1.3.5'
+const APP_VERSION = '1.3.6'
 const APP_UPDATED = '12-10-2026'
 const searchForm = document.getElementById('searchform')
 const searchBox = document.getElementById('search')
@@ -869,7 +869,6 @@ const renderPlaces = () => {
   limitCount('place-count', extraPlaces.length, PLACE_LIMIT)
   document.getElementById('place-input').disabled = full
   document.getElementById('place-add').disabled = full
-  document.getElementById('place-add').classList.toggle('is-full', full)
   if (full) placeMsg.textContent = t.placeLimit
   else if (placeMsg.textContent === t.placeLimit) placeMsg.textContent = ''
   document.getElementById('place-list').replaceChildren(...extraPlaces.map((place, index) => {
@@ -1594,7 +1593,6 @@ const renderZones = () => {
   renderPreview()
   zoneInput.disabled = full
   zoneAddButton.disabled = full
-  zoneAddButton.classList.toggle('is-full', full)
   zoneMsg.textContent = full ? t.zonesMax : ''
 }
 
@@ -1875,7 +1873,6 @@ const renderLinks = () => {
   linkUrl.disabled = full
   linkDesc.disabled = full
   linkSave.disabled = full
-  linkSave.classList.toggle('is-full', full)
   linkMsg.textContent = full ? t.linksFull : ''
 }
 
@@ -2029,7 +2026,6 @@ const syncAiLimit = () => {
   aiUrl.disabled = full
   renderAiCatalog()
   document.getElementById('ai-save').disabled = full
-  document.getElementById('ai-save').classList.toggle('is-full', full)
   if (full) aiMsg.textContent = t.aiMax
   else if (aiMsg.textContent === t.aiMax) aiMsg.textContent = ''
 }
