@@ -1961,6 +1961,15 @@ html[data-quote-off] #quote {
   display: none;
 }
 
+/* Long labels wrap inside the button instead of spilling over its border. */
+.settings-actions .reset-row .ghost-button {
+  height: auto;
+  min-height: 32px;
+  padding: 6px 14px;
+  line-height: 1.3;
+  text-align: left;
+}
+
 /* Phones: one column in the advanced settings and the help, with the window scrolling as needed. */
 @media (max-width: 600px) {
   .advanced {
