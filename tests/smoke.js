@@ -77,6 +77,7 @@ const emptyForecast = {
   await page.reload();
   await openSettings();
   await page.click('#manage-open');
+  await page.click('#tab-backup');
   const [download] = await Promise.all([page.waitForEvent('download'), page.click('#export-data')]);
   const exportFile = path.join(TMP, 'export.json');
   await download.saveAs(exportFile);
@@ -89,6 +90,7 @@ const emptyForecast = {
   await page.reload();
   await openSettings();
   await page.click('#manage-open');
+  await page.click('#tab-backup');
   let [chooser] = await Promise.all([page.waitForEvent('filechooser'), page.click('#import-data')]);
   await chooser.setFiles(exportFile);
   await page.waitForSelector('#import-window:not([hidden])');
@@ -104,6 +106,7 @@ const emptyForecast = {
   await page.reload();
   await openSettings();
   await page.click('#manage-open');
+  await page.click('#tab-backup');
   chooser = (await Promise.all([page.waitForEvent('filechooser'), page.click('#import-data')]))[0];
   await chooser.setFiles(exportFile);
   await page.waitForSelector('#import-window:not([hidden])');
@@ -119,6 +122,7 @@ const emptyForecast = {
   await page.waitForTimeout(500);
   await openSettings();
   await page.click('#manage-open');
+  await page.click('#tab-backup');
   chooser = (await Promise.all([page.waitForEvent('filechooser'), page.click('#import-data')]))[0];
   await chooser.setFiles(bad);
   await page.waitForTimeout(400);
