@@ -128,6 +128,7 @@ Short notes, one topic each:
 
 - [docs/FAQ.md](docs/FAQ.md): questions and answers about the page.
 - [docs/Screenshots.md](docs/Screenshots.md): the settings and data windows, as pictures.
+- [docs/Versions.md](docs/Versions.md): how the version number is set, and what happens at a release.
 - [BUILT.md](BUILT.md): what the page does now.
 - [PLANNED.md](PLANNED.md): what is still to be built.
 - [docs/Decisions.md](docs/Decisions.md): the choices made, and why.
