@@ -1988,11 +1988,9 @@ html[data-quote-off] #quote {
   vertical-align: middle;
 }
 
-.limit-count.has-room {
-  color: #6fa98a;
-}
 
-.limit-count.is-full {
+.limit-count.is-full,
+.city-msg.limit-full {
   color: #7d9dc4;
 }
 
