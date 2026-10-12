@@ -1,4 +1,22 @@
-# Decisions
+# Development
+
+The one place for how the page is built, why it is built that way, what is still open, and how a release is made. What changed in each version is in the [changelog](changelog/README.md); what the page does now is in [Built](Built.md).
+
+## How the page is built
+
+- Plain HTML, CSS and JavaScript, with no build step. GitHub Pages serves the files as they are.
+- `script.js` holds the logic and the translations. `quotes.js` holds the quote pool.
+- Tests: `tests/smoke.js` runs 17 checks in Chromium (Playwright), with all outside services mocked. Run them from the `tests` folder with `npm test`.
+- Screenshots: `tests/screenshots.js` takes the pictures in `docs/images` from the page, so they show the current version.
+
+## How a change is made
+
+- Work happens on a branch, and each change goes in through a pull request.
+- Every change to the app bumps the version: the last number goes up. Documentation-only changes do not bump it.
+- A release is made on GitHub with a whole version as tag (`v1.5`). The workflow `.github/workflows/set-version.yml` then sets the version and the date in the app, and retakes the screenshots.
+- After a release: write the file in `docs/changelog/`, for example `v1.5.md`, and add a row to its index.
+
+## Decisions
 
 ## Links and lists
 
@@ -20,6 +38,7 @@
 - The resets sit at the bottom of Advanced, under one heading. Both reset buttons have a red frame; Manage data sits beside them without one, because it does not destroy anything.
 - Export and import have their own Backup tab, the last one in Manage data, with a short explanation.
 - The version and the date of the last change sit at the bottom right of the basic settings.
+- The version line links to the changelog on GitHub, so what changed and why is one click away.
 
 ## Look and buttons
 
@@ -47,3 +66,40 @@
 
 - TypeScript: deferred until the split of script.js is done. The middle step without a build is JSDoc types with `// @ts-check`, checked in CI.
 - Uploading a visitor's own photo: see docs/Wallpapers.md.
+
+## Open items
+
+What is still to be built. The finished work is in [Built](Built.md); the reasoning is in this page.
+
+## Wallpapers
+
+- Check the four wallpapers against the text colours in light and dark mode, and decide on the photo credits.
+- Uploading a visitor's own photo: not decided. See [docs/Wallpapers.md](docs/Wallpapers.md).
+
+## More permanent links
+
+Candidates and the open question: [docs/Permanent-links.md](docs/Permanent-links.md).
+
+## Accessibility
+
+- Keyboard: every control in the settings, Manage data and Help can be reached and used with the keyboard alone, in a sensible order, and Escape closes each window.
+- Screen readers: the labels, the states (full, greyed out, reset) and the new messages are announced, checked with a screen reader on at least one desktop and one phone.
+- Colour contrast: the grey text, the dimmed buttons and the blue and green limit states, and the red reset frame, checked against the WCAG AA minimum in light and dark mode.
+- Focus: the focus ring is visible on every control in both themes.
+
+## Help
+
+- A keyboard shortcut list in the Help guide, once the shortcuts are settled.
+
+## Code structure
+
+- Before splitting anything, add tests for the behaviour that exists now: limits, import and export, the new-tab options, the reset confirmation and the layout on phones.
+- Move the translations and the icons out of `script.js` into their own files. This is the lowest-risk step and makes the file much shorter.
+- Then split the logic (search, weather, links, AI shortcuts, settings) into separate modules. The shared state and the load order in `script.js` make this the risky part, so do it only with the tests in place.
+- Not decided: whether a build step or plain ES modules is the right fit for a page without a build.
+- Move the static data (the time zone list, the AI catalog, the page presets) out of `script.js` into its own file, next to `quotes.js`.
+- Not decided: TypeScript. A middle step without a build is JSDoc types with `// @ts-check`, checked in CI with `tsc --checkJs`. Decide after the split.
+
+## Translations
+
+- Check the German, French, Spanish and Chinese wording of the Help, the settings and the new messages with a native speaker.

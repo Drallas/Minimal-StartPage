@@ -128,12 +128,11 @@ Short notes, one topic each:
 
 - [docs/FAQ.md](docs/FAQ.md): questions and answers about the page.
 - [docs/Screenshots.md](docs/Screenshots.md): the settings and data windows, as pictures.
-- [docs/Versions.md](docs/Versions.md): how the version number is set, and what happens at a release.
-- [BUILT.md](BUILT.md): what the page does now.
-- [PLANNED.md](PLANNED.md): what is still to be built.
-- [docs/Decisions.md](docs/Decisions.md): the choices made, and why.
 - [docs/Wallpapers.md](docs/Wallpapers.md): the wallpaper set and the upload question.
 - [docs/Permanent-links.md](docs/Permanent-links.md): the permanent links and the candidates.
+- [docs/Built.md](docs/Built.md): what the page does now.
+- [docs/Development.md](docs/Development.md): how it is built, the decisions and why, what is still open, and how a release is made.
+- [docs/changelog/README.md](docs/changelog/README.md): what changed in each version.
 - [Installation.md](Installation.md): how to install a copy.
 
 ---
