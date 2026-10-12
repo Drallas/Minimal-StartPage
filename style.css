@@ -1955,13 +1955,6 @@ html[data-quote-off] #quote {
   border-color: var(--color-fg-2);
 }
 
-/* The resets sit in the action row beside Advanced, and only show while Advanced is open. */
-.settings-actions .reset-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 12px;
-}
-
 /* The data reset has a short line above its button, so the button says only what it does. */
 .reset-item {
   display: flex;
@@ -1971,7 +1964,7 @@ html[data-quote-off] #quote {
 }
 
 .reset-note {
-  margin: 16px 0 0;
+  margin: 0;
   font-size: 12px;
   line-height: 1.4;
   color: var(--color-fg-2);
@@ -1981,12 +1974,8 @@ html[data-quote-off] #quote {
   margin-top: 6px;
 }
 
-.settings-actions .reset-row[hidden] {
-  display: none;
-}
-
 /* Long labels wrap inside the button instead of spilling over its border. */
-.settings-actions .reset-row .ghost-button {
+.adv-group .ghost-button {
   height: auto;
   min-height: 32px;
   padding: 6px 14px;
