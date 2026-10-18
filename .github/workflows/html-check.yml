@@ -12,5 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate index.html
-        run: npx --yes html-validate@10.17.0 index.html
+      - name: Install the validator
+        # Installed in its own folder: npx --yes crashes on this npm version when it resolves the package.
+        run: |
+          mkdir -p "$RUNNER_TEMP/validator"
+          cd "$RUNNER_TEMP/validator"
+          npm init -y > /dev/null
+          npm install --no-audit --no-fund --legacy-peer-deps html-validate@10.17.0
+      - name: Validate index.html and homepage.html
+        run: "$RUNNER_TEMP/validator/node_modules/.bin/html-validate index.html homepage.html"
