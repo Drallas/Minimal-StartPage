@@ -8,229 +8,356 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <style>
     :root {
-      --bg: #f6f4ef;
-      --panel: #fbfaf7;
-      --ink: #2b2a27;
-      --muted: #6b6860;
-      --line: #dcd5ca;
-      --soft: rgba(127, 127, 127, 0.10);
-      --accent: #2b2a27;
+      --bg: #f5f3ee;
+      --panel: #ffffff;
+      --ink: #1f1e1b;
+      --muted: #67645c;
+      --line: #e2dccf;
+      --soft: #ebe7de;
+      --accent: #1f1e1b;
+      --accent-ink: #f5f3ee;
+      --red: #e5484d;
+      --shadow: 0 1px 2px rgba(31, 30, 27, 0.06), 0 18px 40px -18px rgba(31, 30, 27, 0.25);
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #141619;
-        --panel: #1c1f24;
+        --bg: #111317;
+        --panel: #1a1d22;
         --ink: #ecebe8;
         --muted: #9a9890;
-        --line: #2a3340;
-        --soft: rgba(127, 127, 127, 0.14);
+        --line: #2a303a;
+        --soft: #20242b;
         --accent: #ecebe8;
+        --accent-ink: #111317;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 40px -18px rgba(0, 0, 0, 0.7);
       }
     }
     :root[data-theme="dark"] {
-      --bg: #141619;
-      --panel: #1c1f24;
+      --bg: #111317;
+      --panel: #1a1d22;
       --ink: #ecebe8;
       --muted: #9a9890;
-      --line: #2a3340;
-      --soft: rgba(127, 127, 127, 0.14);
+      --line: #2a303a;
+      --soft: #20242b;
       --accent: #ecebe8;
+      --accent-ink: #111317;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 40px -18px rgba(0, 0, 0, 0.7);
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       background: var(--bg);
       color: var(--ink);
       font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; }
-    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
-    header.top {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 22px 0; gap: 16px; flex-wrap: wrap;
-    }
-    .brand { font-weight: 600; letter-spacing: 0.01em; text-decoration: none; }
-    nav a { margin-left: 18px; color: var(--muted); text-decoration: none; font-size: 15px; }
-    nav a:hover { color: var(--ink); }
+    img { display: block; max-width: 100%; height: auto; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 6px; }
 
-    .hero { padding: 56px 0 36px; text-align: center; }
-    .hero h1 {
-      font-size: clamp(32px, 5vw, 52px);
-      line-height: 1.15; margin: 0 auto 16px; max-width: 760px; font-weight: 600;
+    /* Header */
+    header.top {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
     }
-    .hero p.lead { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0 auto 28px; }
+    header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; text-decoration: none; letter-spacing: -0.01em; }
+    .brand svg { width: 22px; height: 22px; }
+    nav { display: flex; gap: 4px; align-items: center; }
+    nav a {
+      color: var(--muted); text-decoration: none; font-size: 15px;
+      padding: 8px 12px; border-radius: 999px;
+    }
+    nav a:hover { color: var(--ink); background: var(--soft); }
+    nav a.nav-cta { color: var(--ink); background: var(--soft); }
+
+    /* Hero */
+    .hero { padding: 72px 0 64px; text-align: center; position: relative; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; color: var(--muted);
+      padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel);
+      margin: 0 0 24px;
+    }
+    .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--red); display: inline-block; }
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.04; letter-spacing: -0.035em; font-weight: 700;
+      max-width: 860px; margin: 0 auto 20px;
+    }
+    .hero .lead { font-size: 19px; color: var(--muted); max-width: 600px; margin: 0 auto 32px; }
     .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn {
-      display: inline-block; padding: 12px 22px; border-radius: 10px;
-      border: 1px solid var(--line); text-decoration: none; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 22px; border-radius: 12px;
+      border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+      text-decoration: none; font-weight: 550; font-size: 15px;
+      transition: transform .15s ease, box-shadow .15s ease;
     }
-    .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 
-    .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 44px; }
-    .shots figure { margin: 0; }
-    .shots img { width: 100%; height: auto; border-radius: 14px; display: block; border: 1px solid var(--line); }
-    .flush { margin: 0; }
-    .links { margin: 16px 0 0; }
-    .bg { margin: 0; }
-    figcaption { color: var(--muted); font-size: 14px; margin-top: 8px; text-align: center; }
+    .stage {
+      margin: 64px auto 0; max-width: 980px; position: relative;
+      border-radius: 22px; padding: 28px;
+      background: linear-gradient(160deg, var(--soft), var(--bg));
+      border: 1px solid var(--line);
+    }
+    .shots { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: end; }
+    .shots figure { margin: 0; text-align: left; }
+    .shots img { width: 100%; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .shots figure:last-child img { transform: translateY(-14px); }
+    figcaption { color: var(--muted); font-size: 13px; margin-top: 10px; letter-spacing: 0.02em; }
 
-    section { padding: 56px 0; }
-    section h2 { font-size: 28px; font-weight: 600; margin: 0 0 8px; }
-    section > .wrap > p.intro { color: var(--muted); margin: 0 0 28px; max-width: 680px; }
+    /* Sections */
+    section { padding: 88px 0; }
+    section.alt { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .kicker { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 0 0 12px; font-weight: 600; }
+    section h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; letter-spacing: -0.025em; font-weight: 700; margin: 0 0 14px; max-width: 720px; }
+    .intro { color: var(--muted); font-size: 17px; margin: 0 0 40px; max-width: 640px; }
+    .intro.flush { margin: 0; }
 
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-    .card h3 { font-size: 17px; margin: 0 0 6px; font-weight: 600; }
+    .card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 24px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .icon {
+      width: 40px; height: 40px; border-radius: 11px; background: var(--soft);
+      display: grid; place-items: center; margin-bottom: 18px; color: var(--ink);
+    }
+    .icon svg { width: 20px; height: 20px; }
+    .card h3 { font-size: 17px; margin: 0 0 6px; font-weight: 600; letter-spacing: -0.01em; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
 
-    .wide { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
-    .wide img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
-    .frame { background: var(--soft); border-radius: 16px; padding: 14px; }
+    .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .tier { border: 1px solid var(--line); border-radius: 18px; padding: 26px; background: var(--bg); position: relative; }
+    .tier .name { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .tier h3 { font-size: 24px; margin: 6px 0 8px; letter-spacing: -0.02em; }
+    .tier p { margin: 0; color: var(--muted); font-size: 15px; }
+    .tier.default { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+    .tier.default p, .tier.default .name { color: var(--accent-ink); opacity: .75; }
+    .tag { position: absolute; top: 22px; right: 22px; font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid currentColor; opacity: .8; }
 
-    .backgrounds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .backgrounds img { width: 100%; height: auto; border-radius: 12px; display: block; }
-    .backgrounds figcaption { font-size: 13px; }
+    .wide { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .frame { background: var(--soft); border-radius: 22px; padding: 28px; border: 1px solid var(--line); }
+    .frame img { border-radius: 12px; box-shadow: var(--shadow); }
+    .links { margin: 24px 0 0; font-size: 15px; }
+    .links a { color: var(--ink); font-weight: 550; text-underline-offset: 3px; }
+    .pill-list { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill-list li { font-size: 14px; padding: 6px 12px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); }
 
-    .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
-    .steps li { counter-increment: step; display: flex; gap: 14px; align-items: flex-start; }
+    .backgrounds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .backgrounds figure { margin: 0; }
+    .backgrounds img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; border: 1px solid var(--line); }
+    .backgrounds figcaption { margin-top: 8px; }
+
+    .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .steps li { counter-increment: step; background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
     .steps li::before {
-      content: counter(step); flex: none; width: 28px; height: 28px; border-radius: 50%;
-      background: var(--accent); color: var(--bg); display: grid; place-items: center;
-      font-size: 14px; font-weight: 600;
+      content: counter(step); display: grid; place-items: center;
+      width: 32px; height: 32px; border-radius: 10px;
+      background: var(--accent); color: var(--accent-ink); font-size: 14px; font-weight: 650;
+      margin-bottom: 18px;
     }
-    .steps p { margin: 0; color: var(--muted); }
+    .steps strong { display: block; font-size: 17px; margin-bottom: 4px; }
+    .steps p { margin: 0; color: var(--muted); font-size: 15px; }
 
-    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+    .final { text-align: center; padding: 96px 0 88px; }
+    .final h2 { margin-left: auto; margin-right: auto; }
+    .final .intro { margin-left: auto; margin-right: auto; margin-bottom: 32px; }
+
+    footer { border-top: 1px solid var(--line); padding: 32px 0 44px; color: var(--muted); font-size: 14px; }
     footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     footer a { color: var(--muted); }
+    footer a:hover { color: var(--ink); }
 
-    @media (max-width: 800px) {
-      .grid { grid-template-columns: 1fr 1fr; }
-      .wide { grid-template-columns: 1fr; }
+    @media (max-width: 900px) {
+      .grid, .tiers, .steps { grid-template-columns: 1fr 1fr; }
+      .tiers .tier:last-child { grid-column: 1 / -1; }
+      .wide { grid-template-columns: 1fr; gap: 32px; }
       .backgrounds { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 560px) {
-      .shots, .grid { grid-template-columns: 1fr; }
-      nav a { margin-left: 12px; }
-      .hero { padding-top: 36px; }
+    @media (max-width: 620px) {
+      .grid, .tiers, .steps, .shots { grid-template-columns: 1fr; }
+      .shots figure:last-child img { transform: none; }
+      .tiers .tier:last-child { grid-column: auto; }
+      nav a:not(.nav-cta) { display: none; }
+      .hero { padding: 48px 0 40px; }
+      .stage { padding: 14px; margin-top: 44px; }
+      section { padding: 64px 0; }
+      .backgrounds { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="top">
-      <a class="brand" href="homepage.html">Minimal-StartPage</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="homepage.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6" fill="currentColor"/><circle cx="12" cy="12" r="3.2" style="fill:var(--bg)"/></svg>
+        Minimal-StartPage
+      </a>
       <nav>
-        <a href="index.html">Open it</a>
-        <a href="Installation.md">Install</a>
-        <a href="docs/Screenshots.md">Screenshots</a>
+        <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md">Install</a>
+        <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">Screenshots</a>
         <a href="https://github.com/Drallas/Minimal-StartPage">GitHub</a>
+        <a class="nav-cta" href="index.html">Open it</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
+  <main>
     <div class="hero">
-      <h1>A start page that stays out of your way.</h1>
-      <p class="lead">Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.</p>
-      <div class="cta">
-        <a class="btn primary" href="index.html">Open the start page</a>
-        <a class="btn" href="Installation.md">Install a copy</a>
+      <div class="wrap">
+        <p class="eyebrow"><i></i>No account, no tracking, no build step</p>
+        <h1>A start page that stays out of your way.</h1>
+        <p class="lead">Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.</p>
+        <div class="cta">
+          <a class="btn primary" href="index.html">Open the start page
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn" href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md">Install a copy</a>
+        </div>
       </div>
-      <div class="shots">
-        <figure>
-          <img src="assets/screenshot_light.webp" width="800" height="500" alt="The start page in the light theme, with the clock and the search bar in the middle">
-          <figcaption>Light</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/screenshot_dark.webp" width="800" height="500" alt="The start page in the dark theme">
-          <figcaption>Dark</figcaption>
-        </figure>
-      </div>
-    </div>
-  </div>
-
-  <section>
-    <div class="wrap">
-      <h2>Quiet by default</h2>
-      <p class="intro">Three pages, from the bare search to every option. You start with the one that suits you, and change it whenever you like.</p>
-      <div class="grid">
-        <div class="card"><h3>Minimal</h3><p>Search, the clock and the colour button. Nothing else.</p></div>
-        <div class="card"><h3>Standard</h3><p>Adds the date and your links. The default for a new visitor.</p></div>
-        <div class="card"><h3>Advanced</h3><p>Every option, in groups, with a backup tab for your own data.</p></div>
+      <div class="wrap">
+        <div class="stage">
+          <div class="shots">
+            <figure>
+              <img src="assets/screenshot_light.webp" width="800" height="500" alt="The start page in the light theme, with the clock and the search bar in the middle">
+              <figcaption>Light</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/screenshot_dark.webp" width="800" height="500" alt="The start page in the dark theme">
+              <figcaption>Dark</figcaption>
+            </figure>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section>
-    <div class="wrap">
-      <h2>Pick your search engine right in the bar</h2>
-      <p class="intro">Each click on the icon in the search bar moves to the next engine: DuckDuckGo, Kagi, Brave or Google. Your choice is remembered.</p>
-      <div class="wide">
+    <section>
+      <div class="wrap">
+        <p class="kicker">Choose your level</p>
+        <h2>Quiet by default. Three pages, from bare search to every option.</h2>
+        <p class="intro">You start with the one that suits you, and change it whenever you like from the gear in the top right.</p>
+        <div class="tiers">
+          <div class="tier"><span class="name">Page 1</span><h3>Minimal</h3><p>Search, the clock and the colour button. Nothing else.</p></div>
+          <div class="tier default"><span class="name">Page 2</span><h3>Standard</h3><p>Adds the date and your links. The default for a new visitor.</p><span class="tag">Default</span></div>
+          <div class="tier"><span class="name">Page 3</span><h3>Advanced</h3><p>Every option, in groups, with a backup tab for your own data.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt">
+      <div class="wrap wide">
+        <div>
+          <p class="kicker">Search</p>
+          <h2>Pick your search engine right in the bar.</h2>
+          <p class="intro flush">Each click on the icon moves to the next engine: DuckDuckGo, Kagi, Brave or Google. Your choice is remembered. Under Manage data you can also add up to five AI shortcuts, or your own address.</p>
+        </div>
         <div class="frame"><img src="assets/quickstart-search.png" alt="The search bar with the engine icon on the left" width="376" height="64"></div>
-        <div>
-          <p class="intro flush">Each click on the icon moves to the next engine. Under Manage data you can also add up to five AI shortcuts, or your own address.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="kicker">Features</p>
+        <h2>Everything you need, nothing you do not.</h2>
+        <p class="intro">The page is built around a few clear choices.</p>
+        <div class="grid">
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></div>
+            <h3>Your links</h3><p>Up to fifteen of your own, next to the permanent ones, in a window or a hover list.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg></div>
+            <h3>Time zones</h3><p>Up to five, sorted by UTC offset, shown behind a globe next to the date.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.5A3.5 3.5 0 0 0 7 18z"/></svg></div>
+            <h3>Weather, if you want it</h3><p>Off by default. From your IP address or a city you pick, with a forecast on click.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 16l5-5 4 4 2-2 7 7"/><circle cx="9" cy="9" r="1.5"/></svg></div>
+            <h3>Backgrounds</h3><p>Photos, a plain page, or a soft colour. One press on the round button changes it.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg></div>
+            <h3>Six languages</h3><p>English, Dutch, German, French, Spanish and Chinese. It follows your browser.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div>
+            <h3>Backup in one file</h3><p>Export your settings and data to a file, and import it on another device.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="wrap">
-      <h2>Everything you need, nothing you do not</h2>
-      <p class="intro">The page is built around a few clear choices.</p>
-      <div class="grid">
-        <div class="card"><h3>Your links</h3><p>Up to fifteen of your own, next to the permanent ones, in a window or a hover list.</p></div>
-        <div class="card"><h3>Time zones</h3><p>Up to five, sorted by UTC offset, shown behind a globe next to the date.</p></div>
-        <div class="card"><h3>Weather, if you want it</h3><p>Off by default. From your IP address or a city you pick, with a forecast on click.</p></div>
-        <div class="card"><h3>Backgrounds</h3><p>Photos, a plain page, or a soft colour. One press on the round button changes it.</p></div>
-        <div class="card"><h3>Six languages</h3><p>English, Dutch, German, French, Spanish and Chinese. It follows your browser.</p></div>
-        <div class="card"><h3>Backup in one file</h3><p>Export your settings and data to a file, and import it on another device.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>Private by design</h2>
-      <p class="intro">Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.</p>
-      <div class="wide">
+    <section class="alt">
+      <div class="wrap wide">
+        <div>
+          <p class="kicker">Privacy</p>
+          <h2>Private by design.</h2>
+          <p class="intro flush">Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.</p>
+          <ul class="pill-list">
+            <li>No account</li>
+            <li>No analytics</li>
+            <li>Data stays local</li>
+          </ul>
+          <p class="links"><a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">More screenshots</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">Questions and answers</a></p>
+        </div>
         <div class="frame"><img src="docs/images/manage-data.png" alt="The Manage data panel, with links, time zones, AI shortcuts and weather places" width="640" height="420"></div>
-        <div>
-          <p class="intro flush">Manage data holds your links, time zones, AI shortcuts and weather places, each with its own tab. Export a backup from the Backup tab before you reset anything.</p>
-          <p class="links"><a href="docs/Screenshots.md">More screenshots</a> · <a href="docs/FAQ.md">Questions and answers</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="kicker">Wallpapers</p>
+        <h2>Wallpapers, or none at all.</h2>
+        <p class="intro">A misty forest, pink dunes, mountain haze, or a plain page with a soft colour. Switch the ones you want on in Manage data.</p>
+        <div class="backgrounds">
+          <figure><img src="assets/screenshot_light.webp" alt="Misty forest" width="170" height="100"><figcaption>Misty forest</figcaption></figure>
+          <figure><img src="assets/screenshot_dunes.webp" alt="Pink dunes" width="170" height="100"><figcaption>Pink dunes</figcaption></figure>
+          <figure><img src="assets/screenshot_mountains.webp" alt="Mountain haze" width="170" height="100"><figcaption>Mountain haze</figcaption></figure>
+          <figure><img src="assets/screenshot_tint_blue.webp" alt="No image, blue tint" width="170" height="100"><figcaption>No image, blue tint</figcaption></figure>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="wrap">
-      <h2>Wallpapers, or none at all</h2>
-      <p class="intro">A misty forest, pink dunes, mountain haze, or a plain page with a soft colour. Switch the ones you want on in Manage data.</p>
-      <div class="backgrounds">
-        <figure class="bg"><img src="assets/screenshot_light.webp" alt="Misty forest" width="170" height="100"><figcaption>Misty forest</figcaption></figure>
-        <figure class="bg"><img src="assets/screenshot_dunes.webp" alt="Pink dunes" width="170" height="100"><figcaption>Pink dunes</figcaption></figure>
-        <figure class="bg"><img src="assets/screenshot_mountains.webp" alt="Mountain haze" width="170" height="100"><figcaption>Mountain haze</figcaption></figure>
-        <figure class="bg"><img src="assets/screenshot_tint_blue.webp" alt="No image, blue tint" width="170" height="100"><figcaption>No image, blue tint</figcaption></figure>
+    <section class="alt">
+      <div class="wrap">
+        <p class="kicker">Get started</p>
+        <h2>Start in a minute.</h2>
+        <p class="intro">No account, no build step, no install needed to try it.</p>
+        <ol class="steps">
+          <li><strong>Open it.</strong><p>Use the online version and bookmark it, or set it as your homepage.</p></li>
+          <li><strong>Choose a page.</strong><p>Minimal, Standard or Advanced, from the gear in the top right, or press ?.</p></li>
+          <li><strong>Make it yours.</strong><p>Add your links, a city for the weather if you want it, and your AI shortcuts under Manage data.</p></li>
+        </ol>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="wrap">
-      <h2>Start in a minute</h2>
-      <p class="intro">No account, no build step, no install needed to try it.</p>
-      <ol class="steps">
-        <li><div><strong>Open it.</strong><p>Use the online version and bookmark it, or set it as your homepage.</p></div></li>
-        <li><div><strong>Choose a page.</strong><p>Minimal, Standard or Advanced, from the gear in the top right, or press ?.</p></div></li>
-        <li><div><strong>Make it yours.</strong><p>Add your links, a city for the weather if you want it, and your AI shortcuts under Manage data.</p></div></li>
-      </ol>
-    </div>
-  </section>
+    <section class="final">
+      <div class="wrap">
+        <h2>Keep the page quiet. Make it yours.</h2>
+        <p class="intro">Free, open source and yours to change.</p>
+        <div class="cta">
+          <a class="btn primary" href="index.html">Open the start page</a>
+          <a class="btn" href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md">Install a copy</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="wrap">
       <span>MIT licence. Made by Drallas. Inspired by <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; this is a full rebuild.</span>
-      <span><a href="https://github.com/Drallas/Minimal-StartPage">Source on GitHub</a> · <a href="docs/changelog/README.md">Changelog</a></span>
+      <span><a href="https://github.com/Drallas/Minimal-StartPage">Source on GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Changelog</a></span>
     </div>
   </footer>
 </body>
