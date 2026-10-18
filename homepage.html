@@ -107,11 +107,16 @@
       background: linear-gradient(160deg, var(--soft), var(--bg));
       border: 1px solid var(--line);
     }
-    .shots { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: end; }
+    .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
     .shots figure { margin: 0; text-align: left; }
     .shots img { width: 100%; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow); }
-    .shots figure:last-child img { transform: translateY(-14px); }
     figcaption { color: var(--muted); font-size: 13px; margin-top: 10px; letter-spacing: 0.02em; }
+    a.zoom { display: block; border-radius: 14px; cursor: zoom-in; transition: transform .2s ease, box-shadow .2s ease; }
+    a.zoom:hover { transform: scale(1.025); box-shadow: var(--shadow); }
+    a.zoom img { transition: none; }
+    dialog#zoom { border: 0; padding: 0; background: transparent; max-width: min(96vw, 1200px); max-height: 96vh; cursor: zoom-out; }
+    dialog#zoom::backdrop { background: rgba(10, 10, 12, 0.82); }
+    dialog#zoom img { width: 100%; height: auto; border-radius: 14px; display: block; }
 
     /* Sections */
     section { padding: 88px 0; }
@@ -185,8 +190,7 @@
     }
     @media (max-width: 620px) {
       .grid, .tiers, .steps, .shots { grid-template-columns: 1fr; }
-      .shots figure:last-child img { transform: none; }
-      .tiers .tier:last-child { grid-column: auto; }
+        .tiers .tier:last-child { grid-column: auto; }
       nav a:not(.nav-cta) { display: none; }
       .hero { padding: 48px 0 40px; }
       .stage { padding: 14px; margin-top: 44px; }
@@ -228,11 +232,11 @@
         <div class="stage">
           <div class="shots">
             <figure>
-              <img src="assets/screenshot_light.webp" width="800" height="500" alt="The start page in the light theme, with the clock and the search bar in the middle">
+              <a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" width="800" height="500" alt="The start page in the light theme, with the clock and the search bar in the middle"></a>
               <figcaption>Light</figcaption>
             </figure>
             <figure>
-              <img src="assets/screenshot_dark.webp" width="800" height="500" alt="The start page in the dark theme">
+              <a class="zoom" href="assets/screenshot_dark.webp"><img src="assets/screenshot_dark.webp" width="800" height="500" alt="The start page in the dark theme"></a>
               <figcaption>Dark</figcaption>
             </figure>
           </div>
@@ -321,10 +325,10 @@
         <h2>Wallpapers, or none at all.</h2>
         <p class="intro">A misty forest, pink dunes, mountain haze, or a plain page with a soft colour. Switch the ones you want on in Manage data.</p>
         <div class="backgrounds">
-          <figure><img src="assets/screenshot_light.webp" alt="Misty forest" width="170" height="100"><figcaption>Misty forest</figcaption></figure>
-          <figure><img src="assets/screenshot_dunes.webp" alt="Pink dunes" width="170" height="100"><figcaption>Pink dunes</figcaption></figure>
-          <figure><img src="assets/screenshot_mountains.webp" alt="Mountain haze" width="170" height="100"><figcaption>Mountain haze</figcaption></figure>
-          <figure><img src="assets/screenshot_tint_blue.webp" alt="No image, blue tint" width="170" height="100"><figcaption>No image, blue tint</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" alt="Misty forest" width="170" height="100"></a><figcaption>Misty forest</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_dunes.webp"><img src="assets/screenshot_dunes.webp" alt="Pink dunes" width="170" height="100"></a><figcaption>Pink dunes</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_mountains.webp"><img src="assets/screenshot_mountains.webp" alt="Mountain haze" width="170" height="100"></a><figcaption>Mountain haze</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_tint_blue.webp"><img src="assets/screenshot_tint_blue.webp" alt="No image, blue tint" width="170" height="100"></a><figcaption>No image, blue tint</figcaption></figure>
         </div>
       </div>
     </section>
@@ -354,11 +358,26 @@
     </section>
   </main>
 
+  <dialog id="zoom"><img src="assets/screenshot_light.webp" alt=""></dialog>
+
   <footer>
     <div class="wrap">
       <span>MIT licence. Made by Drallas. Inspired by <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; this is a full rebuild.</span>
       <span><a href="https://github.com/Drallas/Minimal-StartPage">Source on GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Changelog</a></span>
     </div>
   </footer>
+  <script>
+    const zoom = document.getElementById('zoom')
+    const zoomImg = zoom.querySelector('img')
+    // A click on a screenshot opens the full-size image; the link still works without script.
+    document.querySelectorAll('a.zoom').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault()
+      zoomImg.src = link.href
+      zoomImg.alt = link.querySelector('img').alt
+      zoom.showModal()
+    }))
+    // Any click on the open image or backdrop closes it; Escape does too.
+    zoom.addEventListener('click', () => zoom.close())
+  </script>
 </body>
 </html>
