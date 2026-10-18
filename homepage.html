@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minimal-StartPage: a quiet start page that stays out of your way</title>
+  <meta name="description" content="A minimal start page with search, a clock and optional weather, links and AI shortcuts. Nothing leaves the page unless you switch it on.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --panel: #fbfaf7;
+      --ink: #2b2a27;
+      --muted: #6b6860;
+      --line: #dcd5ca;
+      --soft: rgba(127, 127, 127, 0.10);
+      --accent: #2b2a27;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #141619;
+        --panel: #1c1f24;
+        --ink: #ecebe8;
+        --muted: #9a9890;
+        --line: #2a3340;
+        --soft: rgba(127, 127, 127, 0.14);
+        --accent: #ecebe8;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #141619;
+      --panel: #1c1f24;
+      --ink: #ecebe8;
+      --muted: #9a9890;
+      --line: #2a3340;
+      --soft: rgba(127, 127, 127, 0.14);
+      --accent: #ecebe8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    header.top {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 0; gap: 16px; flex-wrap: wrap;
+    }
+    .brand { font-weight: 600; letter-spacing: 0.01em; text-decoration: none; }
+    nav a { margin-left: 18px; color: var(--muted); text-decoration: none; font-size: 15px; }
+    nav a:hover { color: var(--ink); }
+
+    .hero { padding: 56px 0 36px; text-align: center; }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.15; margin: 0 auto 16px; max-width: 760px; font-weight: 600;
+    }
+    .hero p.lead { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0 auto 28px; }
+    .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 22px; border-radius: 10px;
+      border: 1px solid var(--line); text-decoration: none; font-weight: 500;
+    }
+    .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+    .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 44px; }
+    .shots figure { margin: 0; }
+    .shots img { width: 100%; height: auto; border-radius: 14px; display: block; border: 1px solid var(--line); }
+    .flush { margin: 0; }
+    .links { margin: 16px 0 0; }
+    .bg { margin: 0; }
+    figcaption { color: var(--muted); font-size: 14px; margin-top: 8px; text-align: center; }
+
+    section { padding: 56px 0; }
+    section h2 { font-size: 28px; font-weight: 600; margin: 0 0 8px; }
+    section > .wrap > p.intro { color: var(--muted); margin: 0 0 28px; max-width: 680px; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+    .card h3 { font-size: 17px; margin: 0 0 6px; font-weight: 600; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .wide { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+    .wide img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
+    .frame { background: var(--soft); border-radius: 16px; padding: 14px; }
+
+    .backgrounds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .backgrounds img { width: 100%; height: auto; border-radius: 12px; display: block; }
+    .backgrounds figcaption { font-size: 13px; }
+
+    .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+    .steps li { counter-increment: step; display: flex; gap: 14px; align-items: flex-start; }
+    .steps li::before {
+      content: counter(step); flex: none; width: 28px; height: 28px; border-radius: 50%;
+      background: var(--accent); color: var(--bg); display: grid; place-items: center;
+      font-size: 14px; font-weight: 600;
+    }
+    .steps p { margin: 0; color: var(--muted); }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .wide { grid-template-columns: 1fr; }
+      .backgrounds { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .shots, .grid { grid-template-columns: 1fr; }
+      nav a { margin-left: 12px; }
+      .hero { padding-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="homepage.html">Minimal-StartPage</a>
+      <nav>
+        <a href="index.html">Open it</a>
+        <a href="Installation.md">Install</a>
+        <a href="docs/Screenshots.md">Screenshots</a>
+        <a href="https://github.com/Drallas/Minimal-StartPage">GitHub</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>A start page that stays out of your way.</h1>
+      <p class="lead">Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.</p>
+      <div class="cta">
+        <a class="btn primary" href="index.html">Open the start page</a>
+        <a class="btn" href="Installation.md">Install a copy</a>
+      </div>
+      <div class="shots">
+        <figure>
+          <img src="assets/screenshot_light.webp" width="800" height="500" alt="The start page in the light theme, with the clock and the search bar in the middle">
+          <figcaption>Light</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/screenshot_dark.webp" width="800" height="500" alt="The start page in the dark theme">
+          <figcaption>Dark</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>Quiet by default</h2>
+      <p class="intro">Three pages, from the bare search to every option. You start with the one that suits you, and change it whenever you like.</p>
+      <div class="grid">
+        <div class="card"><h3>Minimal</h3><p>Search, the clock and the colour button. Nothing else.</p></div>
+        <div class="card"><h3>Standard</h3><p>Adds the date and your links. The default for a new visitor.</p></div>
+        <div class="card"><h3>Advanced</h3><p>Every option, in groups, with a backup tab for your own data.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Pick your search engine right in the bar</h2>
+      <p class="intro">Each click on the icon in the search bar moves to the next engine: DuckDuckGo, Kagi, Brave or Google. Your choice is remembered.</p>
+      <div class="wide">
+        <div class="frame"><img src="assets/quickstart-search.png" alt="The search bar with the engine icon on the left" width="376" height="64"></div>
+        <div>
+          <p class="intro flush">Each click on the icon moves to the next engine. Under Manage data you can also add up to five AI shortcuts, or your own address.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Everything you need, nothing you do not</h2>
+      <p class="intro">The page is built around a few clear choices.</p>
+      <div class="grid">
+        <div class="card"><h3>Your links</h3><p>Up to fifteen of your own, next to the permanent ones, in a window or a hover list.</p></div>
+        <div class="card"><h3>Time zones</h3><p>Up to five, sorted by UTC offset, shown behind a globe next to the date.</p></div>
+        <div class="card"><h3>Weather, if you want it</h3><p>Off by default. From your IP address or a city you pick, with a forecast on click.</p></div>
+        <div class="card"><h3>Backgrounds</h3><p>Photos, a plain page, or a soft colour. One press on the round button changes it.</p></div>
+        <div class="card"><h3>Six languages</h3><p>English, Dutch, German, French, Spanish and Chinese. It follows your browser.</p></div>
+        <div class="card"><h3>Backup in one file</h3><p>Export your settings and data to a file, and import it on another device.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Private by design</h2>
+      <p class="intro">Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.</p>
+      <div class="wide">
+        <div class="frame"><img src="docs/images/manage-data.png" alt="The Manage data panel, with links, time zones, AI shortcuts and weather places" width="640" height="420"></div>
+        <div>
+          <p class="intro flush">Manage data holds your links, time zones, AI shortcuts and weather places, each with its own tab. Export a backup from the Backup tab before you reset anything.</p>
+          <p class="links"><a href="docs/Screenshots.md">More screenshots</a> · <a href="docs/FAQ.md">Questions and answers</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Wallpapers, or none at all</h2>
+      <p class="intro">A misty forest, pink dunes, mountain haze, or a plain page with a soft colour. Switch the ones you want on in Manage data.</p>
+      <div class="backgrounds">
+        <figure class="bg"><img src="assets/screenshot_light.webp" alt="Misty forest" width="170" height="100"><figcaption>Misty forest</figcaption></figure>
+        <figure class="bg"><img src="assets/screenshot_dunes.webp" alt="Pink dunes" width="170" height="100"><figcaption>Pink dunes</figcaption></figure>
+        <figure class="bg"><img src="assets/screenshot_mountains.webp" alt="Mountain haze" width="170" height="100"><figcaption>Mountain haze</figcaption></figure>
+        <figure class="bg"><img src="assets/screenshot_tint_blue.webp" alt="No image, blue tint" width="170" height="100"><figcaption>No image, blue tint</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Start in a minute</h2>
+      <p class="intro">No account, no build step, no install needed to try it.</p>
+      <ol class="steps">
+        <li><div><strong>Open it.</strong><p>Use the online version and bookmark it, or set it as your homepage.</p></div></li>
+        <li><div><strong>Choose a page.</strong><p>Minimal, Standard or Advanced, from the gear in the top right, or press ?.</p></div></li>
+        <li><div><strong>Make it yours.</strong><p>Add your links, a city for the weather if you want it, and your AI shortcuts under Manage data.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>MIT licence. Made by Drallas. Inspired by <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; this is a full rebuild.</span>
+      <span><a href="https://github.com/Drallas/Minimal-StartPage">Source on GitHub</a> · <a href="docs/changelog/README.md">Changelog</a></span>
+    </div>
+  </footer>
+</body>
+</html>
