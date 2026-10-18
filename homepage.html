@@ -74,6 +74,11 @@
     }
     nav a:hover { color: var(--ink); background: var(--soft); }
     nav a.nav-cta { color: var(--ink); background: var(--soft); }
+    .lang-select {
+      font: inherit; font-size: 14px; color: var(--muted); background: transparent;
+      border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; margin-left: 6px; cursor: pointer;
+    }
+    .lang-select:hover { color: var(--ink); }
 
     /* Hero */
     .hero { padding: 72px 0 64px; text-align: center; position: relative; }
@@ -159,6 +164,7 @@
 
     .backgrounds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .backgrounds figure { margin: 0; }
+    .backgrounds a.zoom { border-radius: 16px; }
     .backgrounds img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; border: 1px solid var(--line); }
     .backgrounds figcaption { margin-top: 8px; }
 
@@ -190,7 +196,7 @@
     }
     @media (max-width: 620px) {
       .grid, .tiers, .steps, .shots { grid-template-columns: 1fr; }
-        .tiers .tier:last-child { grid-column: auto; }
+      .tiers .tier:last-child { grid-column: auto; }
       nav a:not(.nav-cta) { display: none; }
       .hero { padding: 48px 0 40px; }
       .stage { padding: 14px; margin-top: 44px; }
@@ -207,10 +213,19 @@
         Minimal-StartPage
       </a>
       <nav>
-        <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md">Install</a>
-        <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">Screenshots</a>
+        <a data-i18n="install" href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md">Install</a>
+        <a data-i18n="screenshots" href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">Screenshots</a>
         <a href="https://github.com/Drallas/Minimal-StartPage">GitHub</a>
-        <a class="nav-cta" href="index.html">Open it</a>
+        <a class="nav-cta" data-i18n="open" href="index.html">Open it</a>
+        <select id="lang-select" class="lang-select">
+          <option value="auto" data-i18n="auto">Auto</option>
+          <option value="nl">Nederlands</option>
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="zh">中文</option>
+        </select>
       </nav>
     </div>
   </header>
@@ -218,26 +233,26 @@
   <main>
     <div class="hero">
       <div class="wrap">
-        <p class="eyebrow"><i></i>No account, no tracking, no build step</p>
-        <h1>A start page that stays out of your way.</h1>
-        <p class="lead">Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.</p>
+        <p class="eyebrow"><i></i><span data-i18n="eyebrow">No account, no tracking, no build step</span></p>
+        <h1 data-i18n="h1">A start page that stays out of your way.</h1>
+        <p class="lead" data-i18n="lead">Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.</p>
         <div class="cta">
-          <a class="btn primary" href="index.html">Open the start page
+          <a class="btn primary" href="index.html"><span data-i18n="cta_open">Open the start page</span>
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a class="btn" href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md">Install a copy</a>
+          <a class="btn" href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md" data-i18n="cta_install">Install a copy</a>
         </div>
       </div>
       <div class="wrap">
         <div class="stage">
           <div class="shots">
             <figure>
-              <a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" width="800" height="500" alt="The start page in the light theme, with the clock and the search bar in the middle"></a>
-              <figcaption>Light</figcaption>
+              <a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" width="800" height="500" data-i18n-alt="light_alt" alt="The start page in the light theme, with the clock and the search bar in the middle"></a>
+              <figcaption data-i18n="light_cap">Light</figcaption>
             </figure>
             <figure>
-              <a class="zoom" href="assets/screenshot_dark.webp"><img src="assets/screenshot_dark.webp" width="800" height="500" alt="The start page in the dark theme"></a>
-              <figcaption>Dark</figcaption>
+              <a class="zoom" href="assets/screenshot_dark.webp"><img src="assets/screenshot_dark.webp" width="800" height="500" data-i18n-alt="dark_alt" alt="The start page in the dark theme"></a>
+              <figcaption data-i18n="dark_cap">Dark</figcaption>
             </figure>
           </div>
         </div>
@@ -246,13 +261,13 @@
 
     <section>
       <div class="wrap">
-        <p class="kicker">Choose your level</p>
-        <h2>Quiet by default. Three pages, from bare search to every option.</h2>
-        <p class="intro">You start with the one that suits you, and change it whenever you like from the gear in the top right.</p>
+        <p class="kicker" data-i18n="tiers_kicker">Choose your level</p>
+        <h2 data-i18n="tiers_h2">Quiet by default. Three pages, from bare search to every option.</h2>
+        <p class="intro" data-i18n="tiers_intro">You start with the one that suits you, and change it whenever you like from the gear in the top right.</p>
         <div class="tiers">
-          <div class="tier"><span class="name">Page 1</span><h3>Minimal</h3><p>Search, the clock and the colour button. Nothing else.</p></div>
-          <div class="tier default"><span class="name">Page 2</span><h3>Standard</h3><p>Adds the date and your links. The default for a new visitor.</p><span class="tag">Default</span></div>
-          <div class="tier"><span class="name">Page 3</span><h3>Advanced</h3><p>Every option, in groups, with a backup tab for your own data.</p></div>
+          <div class="tier"><span class="name" data-i18n="tier1_name">Page 1</span><h3 data-i18n="tier1_h">Minimal</h3><p data-i18n="tier1_p">Search, the clock and the colour button. Nothing else.</p></div>
+          <div class="tier default"><span class="name" data-i18n="tier2_name">Page 2</span><h3 data-i18n="tier2_h">Standard</h3><p data-i18n="tier2_p">Adds the date and your links. The default for a new visitor.</p><span class="tag" data-i18n="tag">Default</span></div>
+          <div class="tier"><span class="name" data-i18n="tier3_name">Page 3</span><h3 data-i18n="tier3_h">Advanced</h3><p data-i18n="tier3_p">Every option, in groups, with a backup tab for your own data.</p></div>
         </div>
       </div>
     </section>
@@ -260,43 +275,43 @@
     <section class="alt">
       <div class="wrap wide">
         <div>
-          <p class="kicker">Search</p>
-          <h2>Pick your search engine right in the bar.</h2>
-          <p class="intro flush">Each click on the icon moves to the next engine: DuckDuckGo, Kagi, Brave or Google. Your choice is remembered. Under Manage data you can also add up to five AI shortcuts, or your own address.</p>
+          <p class="kicker" data-i18n="search_kicker">Search</p>
+          <h2 data-i18n="search_h2">Pick your search engine right in the bar.</h2>
+          <p class="intro flush" data-i18n="search_p">Each click on the icon moves to the next engine: DuckDuckGo, Kagi, Brave or Google. Your choice is remembered. Under Manage data you can also add up to five AI shortcuts, or your own address.</p>
         </div>
-        <div class="frame"><img src="assets/quickstart-search.png" alt="The search bar with the engine icon on the left" width="376" height="64"></div>
+        <div class="frame"><img src="assets/quickstart-search.png" width="376" height="64" data-i18n-alt="search_alt" alt="The search bar with the engine icon on the left"></div>
       </div>
     </section>
 
     <section>
       <div class="wrap">
-        <p class="kicker">Features</p>
-        <h2>Everything you need, nothing you do not.</h2>
-        <p class="intro">The page is built around a few clear choices.</p>
+        <p class="kicker" data-i18n="features_kicker">Features</p>
+        <h2 data-i18n="features_h2">Everything you need, nothing you do not.</h2>
+        <p class="intro" data-i18n="features_intro">The page is built around a few clear choices.</p>
         <div class="grid">
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></div>
-            <h3>Your links</h3><p>Up to fifteen of your own, next to the permanent ones, in a window or a hover list.</p>
+            <h3 data-i18n="f1_h">Your links</h3><p data-i18n="f1_p">Up to fifteen of your own, next to the permanent ones, in a window or a hover list.</p>
           </div>
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg></div>
-            <h3>Time zones</h3><p>Up to five, sorted by UTC offset, shown behind a globe next to the date.</p>
+            <h3 data-i18n="f2_h">Time zones</h3><p data-i18n="f2_p">Up to five, sorted by UTC offset, shown behind a globe next to the date.</p>
           </div>
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.5A3.5 3.5 0 0 0 7 18z"/></svg></div>
-            <h3>Weather, if you want it</h3><p>Off by default. From your IP address or a city you pick, with a forecast on click.</p>
+            <h3 data-i18n="f3_h">Weather, if you want it</h3><p data-i18n="f3_p">Off by default. From your IP address or a city you pick, with a forecast on click.</p>
           </div>
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 16l5-5 4 4 2-2 7 7"/><circle cx="9" cy="9" r="1.5"/></svg></div>
-            <h3>Backgrounds</h3><p>Photos, a plain page, or a soft colour. One press on the round button changes it.</p>
+            <h3 data-i18n="f4_h">Backgrounds</h3><p data-i18n="f4_p">Photos, a plain page, or a soft colour. One press on the round button changes it.</p>
           </div>
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg></div>
-            <h3>Six languages</h3><p>English, Dutch, German, French, Spanish and Chinese. It follows your browser.</p>
+            <h3 data-i18n="f5_h">Six languages</h3><p data-i18n="f5_p">English, Dutch, German, French, Spanish and Chinese. It follows your browser.</p>
           </div>
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div>
-            <h3>Backup in one file</h3><p>Export your settings and data to a file, and import it on another device.</p>
+            <h3 data-i18n="f6_h">Backup in one file</h3><p data-i18n="f6_p">Export your settings and data to a file, and import it on another device.</p>
           </div>
         </div>
       </div>
@@ -305,68 +320,352 @@
     <section class="alt">
       <div class="wrap wide">
         <div>
-          <p class="kicker">Privacy</p>
-          <h2>Private by design.</h2>
-          <p class="intro flush">Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.</p>
+          <p class="kicker" data-i18n="privacy_kicker">Privacy</p>
+          <h2 data-i18n="privacy_h2">Private by design.</h2>
+          <p class="intro flush" data-i18n="privacy_p">Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.</p>
           <ul class="pill-list">
-            <li>No account</li>
-            <li>No analytics</li>
-            <li>Data stays local</li>
+            <li data-i18n="pill1">No account</li>
+            <li data-i18n="pill2">No analytics</li>
+            <li data-i18n="pill3">Data stays local</li>
           </ul>
-          <p class="links"><a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">More screenshots</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">Questions and answers</a></p>
+          <p class="links" data-i18n-html="links_html"><a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">More screenshots</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">Questions and answers</a></p>
         </div>
-        <div class="frame"><img src="docs/images/manage-data.png" alt="The Manage data panel, with links, time zones, AI shortcuts and weather places" width="640" height="420"></div>
+        <div class="frame"><img src="docs/images/manage-data.png" width="640" height="420" data-i18n-alt="privacy_alt" alt="The Manage data panel, with links, time zones, AI shortcuts and weather places"></div>
       </div>
     </section>
 
     <section>
       <div class="wrap">
-        <p class="kicker">Wallpapers</p>
-        <h2>Wallpapers, or none at all.</h2>
-        <p class="intro">A misty forest, pink dunes, mountain haze, or a plain page with a soft colour. Switch the ones you want on in Manage data.</p>
+        <p class="kicker" data-i18n="wall_kicker">Wallpapers</p>
+        <h2 data-i18n="wall_h2">Wallpapers, or none at all.</h2>
+        <p class="intro" data-i18n="wall_p">A misty forest, pink dunes, mountain haze, or a plain page with a soft colour. Switch the ones you want on in Manage data.</p>
         <div class="backgrounds">
-          <figure><a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" alt="Misty forest" width="170" height="100"></a><figcaption>Misty forest</figcaption></figure>
-          <figure><a class="zoom" href="assets/screenshot_dunes.webp"><img src="assets/screenshot_dunes.webp" alt="Pink dunes" width="170" height="100"></a><figcaption>Pink dunes</figcaption></figure>
-          <figure><a class="zoom" href="assets/screenshot_mountains.webp"><img src="assets/screenshot_mountains.webp" alt="Mountain haze" width="170" height="100"></a><figcaption>Mountain haze</figcaption></figure>
-          <figure><a class="zoom" href="assets/screenshot_tint_blue.webp"><img src="assets/screenshot_tint_blue.webp" alt="No image, blue tint" width="170" height="100"></a><figcaption>No image, blue tint</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_light.webp"><img src="assets/screenshot_light.webp" width="170" height="100" data-i18n-alt="cap_forest" alt="Misty forest"></a><figcaption data-i18n="cap_forest">Misty forest</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_dunes.webp"><img src="assets/screenshot_dunes.webp" width="170" height="100" data-i18n-alt="cap_dunes" alt="Pink dunes"></a><figcaption data-i18n="cap_dunes">Pink dunes</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_mountains.webp"><img src="assets/screenshot_mountains.webp" width="170" height="100" data-i18n-alt="cap_mountains" alt="Mountain haze"></a><figcaption data-i18n="cap_mountains">Mountain haze</figcaption></figure>
+          <figure><a class="zoom" href="assets/screenshot_tint_blue.webp"><img src="assets/screenshot_tint_blue.webp" width="170" height="100" data-i18n-alt="cap_blue" alt="No image, blue tint"></a><figcaption data-i18n="cap_blue">No image, blue tint</figcaption></figure>
         </div>
       </div>
     </section>
 
     <section class="alt">
       <div class="wrap">
-        <p class="kicker">Get started</p>
-        <h2>Start in a minute.</h2>
-        <p class="intro">No account, no build step, no install needed to try it.</p>
+        <p class="kicker" data-i18n="start_kicker">Get started</p>
+        <h2 data-i18n="start_h2">Start in a minute.</h2>
+        <p class="intro" data-i18n="start_p">No account, no build step, no install needed to try it.</p>
         <ol class="steps">
-          <li><strong>Open it.</strong><p>Use the online version and bookmark it, or set it as your homepage.</p></li>
-          <li><strong>Choose a page.</strong><p>Minimal, Standard or Advanced, from the gear in the top right, or press ?.</p></li>
-          <li><strong>Make it yours.</strong><p>Add your links, a city for the weather if you want it, and your AI shortcuts under Manage data.</p></li>
+          <li><strong data-i18n="s1_h">Open it.</strong><p data-i18n="s1_p">Use the online version and bookmark it, or set it as your homepage.</p></li>
+          <li><strong data-i18n="s2_h">Choose a page.</strong><p data-i18n="s2_p">Minimal, Standard or Advanced, from the gear in the top right, or press ?.</p></li>
+          <li><strong data-i18n="s3_h">Make it yours.</strong><p data-i18n="s3_p">Add your links, a city for the weather if you want it, and your AI shortcuts under Manage data.</p></li>
         </ol>
       </div>
     </section>
 
     <section class="final">
       <div class="wrap">
-        <h2>Keep the page quiet. Make it yours.</h2>
-        <p class="intro">Free, open source and yours to change.</p>
+        <h2 data-i18n="final_h2">Keep the page quiet. Make it yours.</h2>
+        <p class="intro" data-i18n="final_p">Free, open source and yours to change.</p>
         <div class="cta">
-          <a class="btn primary" href="index.html">Open the start page</a>
-          <a class="btn" href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md">Install a copy</a>
+          <a class="btn primary" href="index.html" data-i18n="cta_open">Open the start page</a>
+          <a class="btn" href="https://github.com/Drallas/Minimal-StartPage/blob/main/Installation.md" data-i18n="cta_install">Install a copy</a>
         </div>
       </div>
     </section>
   </main>
 
-  <dialog id="zoom"><img src="assets/screenshot_light.webp" alt=""></dialog>
-
   <footer>
     <div class="wrap">
-      <span>MIT licence. Made by Drallas. Inspired by <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; this is a full rebuild.</span>
-      <span><a href="https://github.com/Drallas/Minimal-StartPage">Source on GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Changelog</a></span>
+      <span data-i18n-html="footer_html">MIT licence. Made by Drallas. Inspired by <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; this is a full rebuild.</span>
+      <span data-i18n-html="footer_links"><a href="https://github.com/Drallas/Minimal-StartPage">Source on GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Changelog</a></span>
     </div>
   </footer>
+
+  <dialog id="zoom"><img src="assets/screenshot_light.webp" alt=""></dialog>
+
   <script>
+    const LANGS = ['nl', 'en', 'de', 'fr', 'es', 'zh']
+    const text = {
+      en: {
+        title: "Minimal-StartPage: a quiet start page that stays out of your way",
+        description: "A minimal start page with search, a clock and optional weather, links and AI shortcuts. Nothing leaves the page unless you switch it on.",
+        install: "Install", screenshots: "Screenshots", open: "Open it", auto: "Auto", lang: "Language",
+        eyebrow: "No account, no tracking, no build step",
+        h1: "A start page that stays out of your way.",
+        lead: "Search, a clock, and optional weather, links and AI shortcuts. Everything beyond the search is switched on by you, and nothing leaves the page unless you ask it to.",
+        cta_open: "Open the start page", cta_install: "Install a copy",
+        light_alt: "The start page in the light theme, with the clock and the search bar in the middle", light_cap: "Light",
+        dark_alt: "The start page in the dark theme", dark_cap: "Dark",
+        tiers_kicker: "Choose your level",
+        tiers_h2: "Quiet by default. Three pages, from bare search to every option.",
+        tiers_intro: "You start with the one that suits you, and change it whenever you like from the gear in the top right.",
+        tier1_name: "Page 1", tier1_h: "Minimal", tier1_p: "Search, the clock and the colour button. Nothing else.",
+        tier2_name: "Page 2", tier2_h: "Standard", tier2_p: "Adds the date and your links. The default for a new visitor.", tag: "Default",
+        tier3_name: "Page 3", tier3_h: "Advanced", tier3_p: "Every option, in groups, with a backup tab for your own data.",
+        search_kicker: "Search", search_h2: "Pick your search engine right in the bar.",
+        search_p: "Each click on the icon moves to the next engine: DuckDuckGo, Kagi, Brave or Google. Your choice is remembered. Under Manage data you can also add up to five AI shortcuts, or your own address.",
+        search_alt: "The search bar with the engine icon on the left",
+        features_kicker: "Features", features_h2: "Everything you need, nothing you do not.", features_intro: "The page is built around a few clear choices.",
+        f1_h: "Your links", f1_p: "Up to fifteen of your own, next to the permanent ones, in a window or a hover list.",
+        f2_h: "Time zones", f2_p: "Up to five, sorted by UTC offset, shown behind a globe next to the date.",
+        f3_h: "Weather, if you want it", f3_p: "Off by default. From your IP address or a city you pick, with a forecast on click.",
+        f4_h: "Backgrounds", f4_p: "Photos, a plain page, or a soft colour. One press on the round button changes it.",
+        f5_h: "Six languages", f5_p: "English, Dutch, German, French, Spanish and Chinese. It follows your browser.",
+        f6_h: "Backup in one file", f6_p: "Export your settings and data to a file, and import it on another device.",
+        privacy_kicker: "Privacy", privacy_h2: "Private by design.",
+        privacy_p: "Your choices live in your browser. Weather sends your IP address to ipapi.co, or the city you choose to Open-Meteo, only while weather is on. Extra places send their name to Open-Meteo. Custom AI shortcuts load their icon from their own site. Nothing else leaves the page.",
+        pill1: "No account", pill2: "No analytics", pill3: "Data stays local",
+        links_html: '<a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">More screenshots</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">Questions and answers</a>',
+        privacy_alt: "The Manage data panel, with links, time zones, AI shortcuts and weather places",
+        wall_kicker: "Wallpapers", wall_h2: "Wallpapers, or none at all.",
+        wall_p: "A misty forest, pink dunes, mountain haze, or a plain page with a soft colour. Switch the ones you want on in Manage data.",
+        cap_forest: "Misty forest", cap_dunes: "Pink dunes", cap_mountains: "Mountain haze", cap_blue: "No image, blue tint",
+        start_kicker: "Get started", start_h2: "Start in a minute.", start_p: "No account, no build step, no install needed to try it.",
+        s1_h: "Open it.", s1_p: "Use the online version and bookmark it, or set it as your homepage.",
+        s2_h: "Choose a page.", s2_p: "Minimal, Standard or Advanced, from the gear in the top right, or press ?.",
+        s3_h: "Make it yours.", s3_p: "Add your links, a city for the weather if you want it, and your AI shortcuts under Manage data.",
+        final_h2: "Keep the page quiet. Make it yours.", final_p: "Free, open source and yours to change.",
+        footer_html: 'MIT licence. Made by Drallas. Inspired by <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; this is a full rebuild.',
+        footer_links: '<a href="https://github.com/Drallas/Minimal-StartPage">Source on GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Changelog</a>'
+      },
+      nl: {
+        title: "Minimal-StartPage: een rustige startpagina die je met rust laat",
+        description: "Een minimale startpagina met zoeken, een klok en optioneel weer, links en AI-snelkoppelingen. Niets verlaat de pagina tenzij je dat aanzet.",
+        install: "Installeren", screenshots: "Screenshots", open: "Openen", auto: "Automatisch", lang: "Taal",
+        eyebrow: "Geen account, geen tracking, geen buildstap",
+        h1: "Een startpagina die je met rust laat.",
+        lead: "Zoeken, een klok, en optioneel weer, links en AI-snelkoppelingen. Alles naast het zoeken zet jij zelf aan, en niets verlaat de pagina tenzij jij dat vraagt.",
+        cta_open: "Open de startpagina", cta_install: "Installeer een eigen kopie",
+        light_alt: "De startpagina in het lichte thema, met de klok en de zoekbalk in het midden", light_cap: "Licht",
+        dark_alt: "De startpagina in het donkere thema", dark_cap: "Donker",
+        tiers_kicker: "Kies je niveau",
+        tiers_h2: "Rustig standaard. Drie pagina’s, van alleen zoeken tot alle opties.",
+        tiers_intro: "Je begint met de pagina die bij je past, en wisselt wanneer je wilt via het tandwiel rechtsboven.",
+        tier1_name: "Pagina 1", tier1_h: "Minimaal", tier1_p: "Zoeken, de klok en de kleurknop. Verder niets.",
+        tier2_name: "Pagina 2", tier2_h: "Standaard", tier2_p: "Voegt de datum en je links toe. De standaard voor een nieuwe bezoeker.", tag: "Standaard",
+        tier3_name: "Pagina 3", tier3_h: "Geavanceerd", tier3_p: "Alle opties, in groepen, met een tabblad Backup voor je eigen gegevens.",
+        search_kicker: "Zoeken", search_h2: "Kies je zoekmachine direct in de balk.",
+        search_p: "Elke klik op het icoon gaat naar de volgende zoekmachine: DuckDuckGo, Kagi, Brave of Google. Je keuze blijft bewaard. Onder Data beheren kun je ook tot vijf AI-snelkoppelingen toevoegen, of je eigen adres.",
+        search_alt: "De zoekbalk met het zoekmachine-icoon links",
+        features_kicker: "Kenmerken", features_h2: "Alles wat je nodig hebt, niets wat je niet doet.", features_intro: "De pagina is gebouwd rond een paar duidelijke keuzes.",
+        f1_h: "Je links", f1_p: "Tot vijftien van je eigen, naast de vaste links, in een venster of een zweeflijst.",
+        f2_h: "Tijdzones", f2_p: "Tot vijf, gesorteerd op UTC-verschil, achter een wereldbol naast de datum.",
+        f3_h: "Weer, als je wilt", f3_p: "Standaard uit. Op basis van je IP-adres of een plaats die je kiest, met een verwachting bij klik.",
+        f4_h: "Achtergronden", f4_p: "Foto’s, een effen pagina, of een zachte kleur. Eén druk op de ronde knop wisselt die.",
+        f5_h: "Zes talen", f5_p: "Engels, Nederlands, Duits, Frans, Spaans en Chinees. Het volgt je browser.",
+        f6_h: "Backup in één bestand", f6_p: "Exporteer je instellingen en gegevens naar een bestand, en importeer dat op een ander apparaat.",
+        privacy_kicker: "Privacy", privacy_h2: "Privé door ontwerp.",
+        privacy_p: "Je keuzes blijven in je browser. Weer stuurt je IP-adres naar ipapi.co, of de plaats die je kiest naar Open-Meteo, alleen als het weer aanstaat. Extra plaatsen sturen hun naam naar Open-Meteo. Eigen AI-snelkoppelingen laden hun icoon van hun eigen site. Verder verlaat niets de pagina.",
+        pill1: "Geen account", pill2: "Geen analytics", pill3: "Gegevens blijven lokaal",
+        links_html: '<a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">Meer screenshots</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">Vragen en antwoorden</a>',
+        privacy_alt: "Het paneel Data beheren, met links, tijdzones, AI-snelkoppelingen en weerplaatsen",
+        wall_kicker: "Achtergronden", wall_h2: "Achtergronden, of helemaal geen.",
+        wall_p: "Een mistig bos, roze duinen, bergnevel, of een effen pagina met een zachte kleur. Zet de gewenste aan bij Data beheren.",
+        cap_forest: "Mistig bos", cap_dunes: "Roze duinen", cap_mountains: "Bergnevel", cap_blue: "Geen afbeelding, blauwe tint",
+        start_kicker: "Aan de slag", start_h2: "Binnen een minuut aan de slag.", start_p: "Geen account, geen buildstap, geen installatie nodig om het uit te proberen.",
+        s1_h: "Open hem.", s1_p: "Gebruik de online versie en zet hem in je bladwijzers, of stel hem in als je startpagina.",
+        s2_h: "Kies een pagina.", s2_p: "Minimaal, Standaard of Geavanceerd, via het tandwiel rechtsboven, of druk op ?.",
+        s3_h: "Maak hem van jou.", s3_p: "Voeg je links toe, een plaats voor het weer als je wilt, en je AI-snelkoppelingen onder Data beheren.",
+        final_h2: "Houd de pagina rustig. Maak hem van jou.", final_p: "Gratis, open source en van jou om aan te passen.",
+        footer_html: 'MIT-licentie. Gemaakt door Drallas. Geïnspireerd door <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; dit is een volledige herbouw.',
+        footer_links: '<a href="https://github.com/Drallas/Minimal-StartPage">Broncode op GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Wijzigingen</a>'
+      },
+      de: {
+        title: "Minimal-StartPage: eine ruhige Startseite, die dich in Ruhe lässt",
+        description: "Eine minimale Startseite mit Suche, Uhr und optionalem Wetter, Links und KI-Verknüpfungen. Nichts verlässt die Seite, solange du es nicht einschaltest.",
+        install: "Installieren", screenshots: "Screenshots", open: "Öffnen", auto: "Automatisch", lang: "Sprache",
+        eyebrow: "Kein Konto, kein Tracking, kein Build-Schritt",
+        h1: "Eine Startseite, die dich in Ruhe lässt.",
+        lead: "Suche, eine Uhr und optional Wetter, Links und KI-Verknüpfungen. Alles neben der Suche schaltest du selbst ein, und nichts verlässt die Seite, außer du bittest darum.",
+        cta_open: "Startseite öffnen", cta_install: "Eine eigene Kopie installieren",
+        light_alt: "Die Startseite im hellen Design, mit Uhr und Suchleiste in der Mitte", light_cap: "Hell",
+        dark_alt: "Die Startseite im dunklen Design", dark_cap: "Dunkel",
+        tiers_kicker: "Wähle deine Stufe",
+        tiers_h2: "Ruhig als Standard. Drei Seiten, von der reinen Suche bis zu allen Optionen.",
+        tiers_intro: "Du startest mit der Seite, die zu dir passt, und wechselst jederzeit über das Zahnrad oben rechts.",
+        tier1_name: "Seite 1", tier1_h: "Minimal", tier1_p: "Suche, Uhr und Farbknopf. Sonst nichts.",
+        tier2_name: "Seite 2", tier2_h: "Standard", tier2_p: "Fügt Datum und deine Links hinzu. Der Standard für neue Besucher.", tag: "Standard",
+        tier3_name: "Seite 3", tier3_h: "Erweitert", tier3_p: "Alle Optionen, in Gruppen, mit einem Backup-Tab für deine eigenen Daten.",
+        search_kicker: "Suche", search_h2: "Wähle deine Suchmaschine direkt in der Leiste.",
+        search_p: "Jeder Klick auf das Symbol wechselt zur nächsten Suchmaschine: DuckDuckGo, Kagi, Brave oder Google. Deine Wahl wird gemerkt. Unter Daten verwalten kannst du außerdem bis zu fünf KI-Verknüpfungen oder eine eigene Adresse hinzufügen.",
+        search_alt: "Die Suchleiste mit dem Suchmaschinen-Symbol links",
+        features_kicker: "Funktionen", features_h2: "Alles, was du brauchst, nichts, was du nicht willst.", features_intro: "Die Seite ist um ein paar klare Entscheidungen herum gebaut.",
+        f1_h: "Deine Links", f1_p: "Bis zu fünfzehn eigene neben den festen Links, in einem Fenster oder einer Hover-Liste.",
+        f2_h: "Zeitzonen", f2_p: "Bis zu fünf, sortiert nach UTC-Abweichung, hinter einem Globus neben dem Datum.",
+        f3_h: "Wetter, wenn du willst", f3_p: "Standardmäßig aus. Aus deiner IP-Adresse oder einem Ort, den du wählst, mit Vorhersage per Klick.",
+        f4_h: "Hintergründe", f4_p: "Fotos, eine schlichte Seite oder eine sanfte Farbe. Ein Druck auf den runden Knopf wechselt sie.",
+        f5_h: "Sechs Sprachen", f5_p: "Englisch, Niederländisch, Deutsch, Französisch, Spanisch und Chinesisch. Sie folgt deinem Browser.",
+        f6_h: "Backup in einer Datei", f6_p: "Exportiere deine Einstellungen und Daten in eine Datei und importiere sie auf einem anderen Gerät.",
+        privacy_kicker: "Datenschutz", privacy_h2: "Privat by Design.",
+        privacy_p: "Deine Entscheidungen bleiben in deinem Browser. Das Wetter sendet deine IP-Adresse an ipapi.co bzw. den gewählten Ort an Open-Meteo, nur wenn das Wetter aktiv ist. Zusätzliche Orte senden ihren Namen an Open-Meteo. Eigene KI-Verknüpfungen laden ihr Symbol von der eigenen Seite. Sonst verlässt nichts die Seite.",
+        pill1: "Kein Konto", pill2: "Keine Analyse", pill3: "Daten bleiben lokal",
+        links_html: '<a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">Weitere Screenshots</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">Fragen und Antworten</a>',
+        privacy_alt: "Das Panel Daten verwalten mit Links, Zeitzonen, KI-Verknüpfungen und Wetterorten",
+        wall_kicker: "Hintergründe", wall_h2: "Hintergründe, oder gar keine.",
+        wall_p: "Ein nebliger Wald, rosa Dünen, Bergdunst oder eine schlichte Seite mit sanfter Farbe. Schalte die gewünschten unter Daten verwalten ein.",
+        cap_forest: "Nebliger Wald", cap_dunes: "Rosa Dünen", cap_mountains: "Bergdunst", cap_blue: "Kein Bild, blauer Ton",
+        start_kicker: "Loslegen", start_h2: "In einer Minute startklar.", start_p: "Kein Konto, kein Build-Schritt, keine Installation nötig, um es auszuprobieren.",
+        s1_h: "Öffne sie.", s1_p: "Nutze die Online-Version und setze ein Lesezeichen, oder stelle sie als Startseite ein.",
+        s2_h: "Wähle eine Seite.", s2_p: "Minimal, Standard oder Erweitert, über das Zahnrad oben rechts, oder drücke ?.",
+        s3_h: "Mach sie zu deiner.", s3_p: "Füge deine Links hinzu, einen Ort für das Wetter, falls gewünscht, und deine KI-Verknüpfungen unter Daten verwalten.",
+        final_h2: "Halte die Seite ruhig. Mach sie zu deiner.", final_p: "Kostenlos, Open Source und zum Anpassen.",
+        footer_html: 'MIT-Lizenz. Gemacht von Drallas. Inspiriert von <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; dies ist ein vollständiger Neubau.',
+        footer_links: '<a href="https://github.com/Drallas/Minimal-StartPage">Quellcode auf GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Änderungsprotokoll</a>'
+      },
+      fr: {
+        title: "Minimal-StartPage : une page d’accueil calme qui vous laisse tranquille",
+        description: "Une page d’accueil minimale avec recherche, horloge et météo facultative, liens et raccourcis IA. Rien ne quitte la page sauf si vous l’activez.",
+        install: "Installer", screenshots: "Captures", open: "Ouvrir", auto: "Auto", lang: "Langue",
+        eyebrow: "Sans compte, sans suivi, sans étape de compilation",
+        h1: "Une page d’accueil qui vous laisse tranquille.",
+        lead: "La recherche, une horloge, et en option la météo, des liens et des raccourcis IA. Tout ce qui dépasse la recherche, c’est vous qui l’activez, et rien ne quitte la page sans votre demande.",
+        cta_open: "Ouvrir la page d’accueil", cta_install: "Installer une copie",
+        light_alt: "La page d’accueil en thème clair, avec l’horloge et la barre de recherche au centre", light_cap: "Clair",
+        dark_alt: "La page d’accueil en thème sombre", dark_cap: "Sombre",
+        tiers_kicker: "Choisissez votre niveau",
+        tiers_h2: "Calme par défaut. Trois pages, de la recherche seule à toutes les options.",
+        tiers_intro: "Vous commencez avec la page qui vous convient, et vous changez quand vous voulez via l’engrenage en haut à droite.",
+        tier1_name: "Page 1", tier1_h: "Minimal", tier1_p: "La recherche, l’horloge et le bouton de couleur. Rien d’autre.",
+        tier2_name: "Page 2", tier2_h: "Standard", tier2_p: "Ajoute la date et vos liens. La valeur par défaut pour un nouveau visiteur.", tag: "Par défaut",
+        tier3_name: "Page 3", tier3_h: "Avancé", tier3_p: "Toutes les options, par groupes, avec un onglet Sauvegarde pour vos données.",
+        search_kicker: "Recherche", search_h2: "Choisissez votre moteur de recherche directement dans la barre.",
+        search_p: "Chaque clic sur l’icône passe au moteur suivant : DuckDuckGo, Kagi, Brave ou Google. Votre choix est mémorisé. Sous Gérer les données, vous pouvez aussi ajouter jusqu’à cinq raccourcis IA, ou votre propre adresse.",
+        search_alt: "La barre de recherche avec l’icône du moteur à gauche",
+        features_kicker: "Fonctions", features_h2: "Tout ce dont vous avez besoin, rien de superflu.", features_intro: "La page repose sur quelques choix clairs.",
+        f1_h: "Vos liens", f1_p: "Jusqu’à quinze à vous, à côté des liens permanents, dans une fenêtre ou une liste au survol.",
+        f2_h: "Fuseaux horaires", f2_p: "Jusqu’à cinq, triés par décalage UTC, derrière un globe à côté de la date.",
+        f3_h: "La météo, si vous voulez", f3_p: "Désactivée par défaut. D’après votre adresse IP ou une ville choisie, avec les prévisions au clic.",
+        f4_h: "Fonds d’écran", f4_p: "Photos, page unie ou couleur douce. Une pression sur le bouton rond change le fond.",
+        f5_h: "Six langues", f5_p: "Anglais, néerlandais, allemand, français, espagnol et chinois. Elle suit votre navigateur.",
+        f6_h: "Sauvegarde dans un fichier", f6_p: "Exportez vos réglages et données dans un fichier, et importez-le sur un autre appareil.",
+        privacy_kicker: "Confidentialité", privacy_h2: "Privée par conception.",
+        privacy_p: "Vos choix restent dans votre navigateur. La météo envoie votre adresse IP à ipapi.co, ou la ville choisie à Open-Meteo, uniquement lorsqu’elle est activée. Les lieux supplémentaires envoient leur nom à Open-Meteo. Les raccourcis IA personnels chargent leur icône depuis leur propre site. Rien d’autre ne quitte la page.",
+        pill1: "Pas de compte", pill2: "Pas d’analyse", pill3: "Données locales",
+        links_html: '<a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">Plus de captures</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">Questions et réponses</a>',
+        privacy_alt: "Le panneau Gérer les données, avec liens, fuseaux, raccourcis IA et lieux météo",
+        wall_kicker: "Fonds d’écran", wall_h2: "Des fonds d’écran, ou aucun.",
+        wall_p: "Une forêt dans la brume, des dunes roses, des montagnes embrumées, ou une page unie avec une couleur douce. Activez ceux que vous voulez dans Gérer les données.",
+        cap_forest: "Forêt dans la brume", cap_dunes: "Dunes roses", cap_mountains: "Montagnes embrumées", cap_blue: "Sans image, teinte bleue",
+        start_kicker: "Pour commencer", start_h2: "Prêt en une minute.", start_p: "Pas de compte, pas d’étape de compilation, pas d’installation pour l’essayer.",
+        s1_h: "Ouvrez-la.", s1_p: "Utilisez la version en ligne et ajoutez-la à vos favoris, ou définissez-la comme page d’accueil.",
+        s2_h: "Choisissez une page.", s2_p: "Minimal, Standard ou Avancé, via l’engrenage en haut à droite, ou appuyez sur ?.",
+        s3_h: "Personnalisez-la.", s3_p: "Ajoutez vos liens, une ville pour la météo si vous voulez, et vos raccourcis IA dans Gérer les données.",
+        final_h2: "Gardez la page calme. Rendez-la vôtre.", final_p: "Gratuite, open source et à adapter à votre guise.",
+        footer_html: 'Licence MIT. Créée par Drallas. Inspirée de <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a> ; ceci est une refonte complète.',
+        footer_links: '<a href="https://github.com/Drallas/Minimal-StartPage">Code source sur GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Journal des modifications</a>'
+      },
+      es: {
+        title: "Minimal-StartPage: una página de inicio tranquila que te deja en paz",
+        description: "Una página de inicio mínima con búsqueda, reloj y tiempo opcional, enlaces y accesos de IA. Nada sale de la página a menos que lo actives.",
+        install: "Instalar", screenshots: "Capturas", open: "Abrir", auto: "Automático", lang: "Idioma",
+        eyebrow: "Sin cuenta, sin seguimiento, sin paso de compilación",
+        h1: "Una página de inicio que te deja en paz.",
+        lead: "Búsqueda, un reloj y, si quieres, el tiempo, enlaces y accesos de IA. Todo lo que va más allá de la búsqueda lo activas tú, y nada sale de la página salvo que lo pidas.",
+        cta_open: "Abrir la página de inicio", cta_install: "Instalar una copia propia",
+        light_alt: "La página de inicio en el tema claro, con el reloj y la barra de búsqueda en el centro", light_cap: "Claro",
+        dark_alt: "La página de inicio en el tema oscuro", dark_cap: "Oscuro",
+        tiers_kicker: "Elige tu nivel",
+        tiers_h2: "Tranquila por defecto. Tres páginas, desde solo búsqueda hasta todas las opciones.",
+        tiers_intro: "Empiezas con la página que mejor te encaja y la cambias cuando quieras desde el engranaje de arriba a la derecha.",
+        tier1_name: "Página 1", tier1_h: "Mínimo", tier1_p: "Búsqueda, reloj y el botón de color. Nada más.",
+        tier2_name: "Página 2", tier2_h: "Estándar", tier2_p: "Añade la fecha y tus enlaces. El valor por defecto para un visitante nuevo.", tag: "Por defecto",
+        tier3_name: "Página 3", tier3_h: "Avanzado", tier3_p: "Todas las opciones, en grupos, con una pestaña de copia de seguridad para tus datos.",
+        search_kicker: "Búsqueda", search_h2: "Elige tu buscador directamente en la barra.",
+        search_p: "Cada clic en el icono pasa al siguiente buscador: DuckDuckGo, Kagi, Brave o Google. Tu elección se recuerda. En Gestionar datos también puedes añadir hasta cinco accesos de IA, o tu propia dirección.",
+        search_alt: "La barra de búsqueda con el icono del buscador a la izquierda",
+        features_kicker: "Funciones", features_h2: "Todo lo que necesitas, nada que no quieras.", features_intro: "La página se basa en unas pocas decisiones claras.",
+        f1_h: "Tus enlaces", f1_p: "Hasta quince propios, junto a los fijos, en una ventana o en una lista al pasar el ratón.",
+        f2_h: "Zonas horarias", f2_p: "Hasta cinco, ordenadas por desfase UTC, detrás de un globo junto a la fecha.",
+        f3_h: "El tiempo, si lo quieres", f3_p: "Desactivado por defecto. Según tu IP o una ciudad que elijas, con previsión al hacer clic.",
+        f4_h: "Fondos", f4_p: "Fotos, una página lisa o un color suave. Una pulsación en el botón redondo cambia el fondo.",
+        f5_h: "Seis idiomas", f5_p: "Inglés, neerlandés, alemán, francés, español y chino. Sigue el idioma del navegador.",
+        f6_h: "Copia en un archivo", f6_p: "Exporta tus ajustes y datos a un archivo e impórtalo en otro dispositivo.",
+        privacy_kicker: "Privacidad", privacy_h2: "Privada por diseño.",
+        privacy_p: "Tus elecciones se quedan en tu navegador. El tiempo envía tu IP a ipapi.co, o la ciudad que elijas a Open-Meteo, y solo mientras esté activado. Los lugares extra envían su nombre a Open-Meteo. Los accesos de IA propios cargan su icono desde su propio sitio. Nada más sale de la página.",
+        pill1: "Sin cuenta", pill2: "Sin analítica", pill3: "Datos en local",
+        links_html: '<a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">Más capturas</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">Preguntas y respuestas</a>',
+        privacy_alt: "El panel Gestionar datos, con enlaces, zonas horarias, accesos de IA y lugares del tiempo",
+        wall_kicker: "Fondos", wall_h2: "Fondos, o ninguno.",
+        wall_p: "Un bosque con niebla, dunas rosas, montañas neblinosas, o una página lisa con un color suave. Activa los que quieras en Gestionar datos.",
+        cap_forest: "Bosque con niebla", cap_dunes: "Dunas rosas", cap_mountains: "Neblina de montaña", cap_blue: "Sin imagen, tono azul",
+        start_kicker: "Empieza", start_h2: "Lista en un minuto.", start_p: "Sin cuenta, sin paso de compilación y sin instalación para probarla.",
+        s1_h: "Ábrela.", s1_p: "Usa la versión en línea y guárdala en marcadores, o ponla como página de inicio.",
+        s2_h: "Elige una página.", s2_p: "Mínimo, Estándar o Avanzado, desde el engranaje de arriba a la derecha, o pulsa ?.",
+        s3_h: "Hazla tuya.", s3_p: "Añade tus enlaces, una ciudad para el tiempo si quieres, y tus accesos de IA en Gestionar datos.",
+        final_h2: "Mantén la página tranquila. Hazla tuya.", final_p: "Gratis, de código abierto y para cambiarla a tu gusto.",
+        footer_html: 'Licencia MIT. Hecha por Drallas. Inspirada en <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>; esta es una reescritura completa.',
+        footer_links: '<a href="https://github.com/Drallas/Minimal-StartPage">Código en GitHub</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">Registro de cambios</a>'
+      },
+      zh: {
+        title: "Minimal-StartPage：一个安静、不打扰你的起始页",
+        description: "一个极简起始页，包含搜索、时钟、可选天气、链接和 AI 快捷方式。除非你主动开启，否则不会向外发送任何内容。",
+        install: "安装", screenshots: "截图", open: "打开", auto: "自动", lang: "语言",
+        eyebrow: "无需账户，无跟踪，无需构建",
+        h1: "一个不打扰你的起始页。",
+        lead: "搜索、时钟，以及可选的天气、链接和 AI 快捷方式。搜索之外的功能都由你自己开启，除非你要求，否则页面不会向外发送任何内容。",
+        cta_open: "打开起始页", cta_install: "安装自己的副本",
+        light_alt: "浅色主题的起始页，中间是时钟和搜索栏", light_cap: "浅色",
+        dark_alt: "深色主题的起始页", dark_cap: "深色",
+        tiers_kicker: "选择你的级别",
+        tiers_h2: "默认安静。三个页面，从纯搜索到全部选项。",
+        tiers_intro: "你可以从最适合你的页面开始，随时通过右上角的齿轮切换。",
+        tier1_name: "第 1 页", tier1_h: "极简", tier1_p: "搜索、时钟和颜色按钮，仅此而已。",
+        tier2_name: "第 2 页", tier2_h: "标准", tier2_p: "增加日期和你的链接，是新访客的默认页面。", tag: "默认",
+        tier3_name: "第 3 页", tier3_h: "高级", tier3_p: "所有选项，分组排列，并带有用于你个人数据的备份标签页。",
+        search_kicker: "搜索", search_h2: "直接在搜索栏中选择搜索引擎。",
+        search_p: "每次点击图标会切换到下一个搜索引擎：DuckDuckGo、Kagi、Brave 或 Google。你的选择会被记住。在“管理数据”中，你还可以添加最多五个 AI 快捷方式，或你自己的地址。",
+        search_alt: "搜索栏，左侧是搜索引擎图标",
+        features_kicker: "功能", features_h2: "你需要的一切，没有多余的东西。", features_intro: "页面围绕几个清晰的选择来构建。",
+        f1_h: "你的链接", f1_p: "最多可添加十五个自定义链接，与固定链接并列，以窗口或悬停列表显示。",
+        f2_h: "时区", f2_p: "最多五个，按 UTC 偏移量排序，显示在日期旁边的地球仪后面。",
+        f3_h: "天气，如果你需要", f3_p: "默认关闭。根据你的 IP 地址或你选择的城市显示，点击即可查看预报。",
+        f4_h: "背景", f4_p: "照片、纯色页面或柔和的颜色。按一下圆形按钮即可切换。",
+        f5_h: "六种语言", f5_p: "英语、荷兰语、德语、法语、西班牙语和中文。自动跟随你的浏览器。",
+        f6_h: "单文件备份", f6_p: "将设置和数据导出为一个文件，并在另一台设备上导入。",
+        privacy_kicker: "隐私", privacy_h2: "设计上的隐私保护。",
+        privacy_p: "你的选择保存在你的浏览器中。开启天气时，IP 地址会发送到 ipapi.co；你选择的城市会发送到 Open-Meteo。额外地点会把名称发送到 Open-Meteo。自定义 AI 快捷方式会从其自身网站加载图标。除此之外，不会有任何内容离开页面。",
+        pill1: "无需账户", pill2: "无分析统计", pill3: "数据保存在本地",
+        links_html: '<a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/Screenshots.md">更多截图</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/FAQ.md">常见问题</a>',
+        privacy_alt: "“管理数据”面板，包含链接、时区、AI 快捷方式和天气地点",
+        wall_kicker: "背景", wall_h2: "背景图，或者完全不要。",
+        wall_p: "薄雾森林、粉色沙丘、山间薄雾，或带柔和颜色的纯色页面。在“管理数据”中开启你想要的背景。",
+        cap_forest: "薄雾森林", cap_dunes: "粉色沙丘", cap_mountains: "山间薄雾", cap_blue: "无图片，蓝色色调",
+        start_kicker: "开始使用", start_h2: "一分钟即可上手。", start_p: "无需账户、无需构建步骤，也无需安装即可试用。",
+        s1_h: "打开它。", s1_p: "使用在线版本并加入书签，或将其设为你的主页。",
+        s2_h: "选择页面。", s2_p: "通过右上角的齿轮选择极简、标准或高级，或按 ?。",
+        s3_h: "让它属于你。", s3_p: "添加你的链接、天气城市（如需要），以及在“管理数据”中设置你的 AI 快捷方式。",
+        final_h2: "保持页面安静，让它成为你的。", final_p: "免费、开源，你可以随意修改。",
+        footer_html: 'MIT 许可证。由 Drallas 制作。灵感来自 <a href="https://github.com/Nimplex/Minimal-StartPage">Nimplex/Minimal-StartPage</a>；这是一次完整重构。',
+        footer_links: '<a href="https://github.com/Drallas/Minimal-StartPage">GitHub 源代码</a> · <a href="https://github.com/Drallas/Minimal-StartPage/blob/main/docs/changelog/README.md">更新日志</a>'
+      }
+    }
+
+    const langSelect = document.getElementById('lang-select')
+    // The same choice as the start page: a language picked there or here, else the browser language.
+    const savedLang = () => { try { return localStorage.getItem('lang') } catch { return null } }
+    const pickedLang = () => (LANGS.includes(savedLang()) ? savedLang() : (navigator.language || 'en').slice(0, 2).toLowerCase())
+
+    const applyLang = () => {
+      const lang = LANGS.includes(pickedLang()) ? pickedLang() : 'en'
+      const t = text[lang]
+      document.documentElement.lang = lang
+      document.title = t.title
+      document.querySelector('meta[name="description"]').content = t.description
+      langSelect.setAttribute('aria-label', t.lang)
+      document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] })
+      document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t[el.dataset.i18nHtml] })
+      document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.alt = t[el.dataset.i18nAlt] })
+      langSelect.value = LANGS.includes(savedLang()) ? savedLang() : 'auto'
+    }
+
+    langSelect.addEventListener('change', () => {
+      try {
+        if (langSelect.value === 'auto') localStorage.removeItem('lang')
+        else localStorage.setItem('lang', langSelect.value)
+      } catch {}
+      applyLang()
+    })
+    applyLang()
+
     const zoom = document.getElementById('zoom')
     const zoomImg = zoom.querySelector('img')
     // A click on a screenshot opens the full-size image; the link still works without script.
