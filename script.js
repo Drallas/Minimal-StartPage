@@ -1,7 +1,7 @@
 const root = document.documentElement
 // The last number goes up with every change; a release gets the next version number, such as 1.4. The date is DD-MM-YYYY.
-const APP_VERSION = '1.5.2'
-const APP_UPDATED = '18-10-2026'
+const APP_VERSION = '1.5.3'
+const APP_UPDATED = '23-10-2026'
 const searchForm = document.getElementById('searchform')
 const searchBox = document.getElementById('search')
 const engineButton = document.getElementById('engine')
@@ -344,12 +344,12 @@ const manageText = {
   zh: { linkUp: '上移', linkDown: '下移', manageOpen: '管理数据', tabBackup: '备份', backupNote: '导出会把你的设置、链接、AI 快捷方式、时区和天气地点保存到电脑上的一个文件。导入会加载该文件：合并会添加新内容并保留现有内容；替换会覆盖全部。重置或删除数据前，请先备份。', tabLinks: '链接', tabZones: '时区', tabAi: 'AI', tabWeather: '天气', placeLabel: '添加城市', placeAdd: '添加', placeOwn: '你的地点', placeNone: '还没有地点', placeDuplicate: '已在列表中', placeRemove: '移除' }
 }
 const footerText = {
-  en: { pre: 'Vibe coded with', post: 'by Drallas', title: 'View the README on GitHub' },
-  nl: { pre: 'Gemaakt met', post: 'door Drallas', title: 'Bekijk de README op GitHub' },
-  de: { pre: 'Gebaut mit', post: 'von Drallas', title: 'README auf GitHub ansehen' },
-  fr: { pre: 'Créé avec', post: 'par Drallas', title: 'Voir le README sur GitHub' },
-  es: { pre: 'Hecho con', post: 'por Drallas', title: 'Ver el README en GitHub' },
-  zh: { pre: '用', post: '由 Drallas 制作', title: '在 GitHub 上查看 README' }
+  en: { pre: 'Vibe coded with', post: 'by a4ds5t', title: 'View the README on GitHub' },
+  nl: { pre: 'Gemaakt met', post: 'door a4ds5t', title: 'Bekijk de README op GitHub' },
+  de: { pre: 'Gebaut mit', post: 'von a4ds5t', title: 'README auf GitHub ansehen' },
+  fr: { pre: 'Créé avec', post: 'par a4ds5t', title: 'Voir le README sur GitHub' },
+  es: { pre: 'Hecho con', post: 'por a4ds5t', title: 'Ver el README en GitHub' },
+  zh: { pre: '用', post: '由 a4ds5t 制作', title: '在 GitHub 上查看 README' }
 }
 const dataText = {
   en: { langSection: 'Language', langAuto: 'Automatic', importTitle: 'Import data', importBody: 'Merging adds new links, places and time zones and keeps what you have. Replacing overwrites everything.', importMerge: 'Merge', importReplace: 'Replace', importCancel: 'Cancel', importSummary: 'Added: {added}. Already there: {dupes}. Skipped because of the limit: {skipped}.', exportData: 'Export data', importData: 'Import data', importInvalid: 'This file is not a Minimal-StartPage export.', },
