@@ -16,7 +16,7 @@ This needs an internet connection, but nothing else.
 
 Use this if you want the page to work offline, or if you want to change it yourself. You do not need admin rights or extra software.
 
-**Step 1: download the files.** Go to the [releases page](https://github.com/Drallas/Minimal-StartPage/releases/latest) and click **Source code (zip)** under the latest release. That is the tested, stable version. (The green **Code** button on the main page also has a **Download ZIP**, which gives the newest version, but that one may not be released yet.)
+**Step 1: download the files.** Go to the [releases page](https://github.com/a4ds5t/Minimal-StartPage/releases/latest) and click **Source code (zip)** under the latest release. That is the tested, stable version. (The green **Code** button on the main page also has a **Download ZIP**, which gives the newest version, but that one may not be released yet.)
 
 **Step 2: unzip the file.**
 - **Windows:** right-click the downloaded ZIP and choose **Extract All…**.
@@ -50,7 +50,7 @@ Download the ZIP again and replace the old folder with the new one. Your choices
 If you already work with Git, clone the repository:
 
 ```bash
-git clone https://github.com/Drallas/Minimal-StartPage.git
+git clone https://github.com/a4ds5t/Minimal-StartPage.git
 ```
 
 Open `index.html` in the folder, or use the `file:///` address from Option 2 as your homepage. To get the latest changes later, run `git pull` inside the folder.
