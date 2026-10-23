@@ -1,6 +1,6 @@
 # Changelog
 
-What changed in the app, per version: what the visitor sees and what the page does. Changes to the repository, the README and the documentation are left out. The releases themselves, with their downloads, are on [GitHub](https://github.com/Drallas/Minimal-StartPage/releases).
+What changed in the app, per version: what the visitor sees and what the page does. Changes to the repository, the README and the documentation are left out. The releases themselves, with their downloads, are on [GitHub](https://github.com/a4ds5t/Minimal-StartPage/releases).
 
 The version shown at the bottom of the settings is the release number. Changes between two releases get a third number (1.4.1, 1.4.2 …), and those are listed in the file of the release they belong to.
 
